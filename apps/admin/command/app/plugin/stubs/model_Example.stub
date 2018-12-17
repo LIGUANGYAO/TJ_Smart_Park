@@ -1,0 +1,9 @@
+<?php
+// {%title%}插件前台模型
+
+namespace app\{%name%}\model;
+use app\common\model\Base;
+
+class Example extends Base {
+
+}

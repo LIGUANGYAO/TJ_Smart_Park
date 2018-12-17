@@ -1,0 +1,9 @@
+<?php
+// {%title%}插件逻辑层
+
+namespace app\{%name%}\logic;
+use app\common\logic\Base as BaseLogic;
+
+class Example extends BaseLogic {
+
+}

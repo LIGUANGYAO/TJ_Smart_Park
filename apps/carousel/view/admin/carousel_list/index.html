@@ -1,0 +1,17 @@
+{extend name="$_admin_public_base_"/}
+{block name="style"}
+<link href="__LIBS__/daterangepicker/daterangepicker-bs3.css" type="text/css" rel="stylesheet">
+{/block}
+
+{block name="main"}
+<form class="form" id="search-form" method="get" action="{:url('admin/attachment/index')}">
+    {include file="$search_template_path" /}
+</form>
+    {include file="carousel_list/ajax_index"/}
+{/block}
+
+{block name="script"}
+<script type="text/javascript" src="__LIBS__/artTemplate/template.js"></script>
+<script type="text/javascript" src="__LIBS__/daterangepicker/moment.min.js"></script>
+<script type="text/javascript" src="__LIBS__/daterangepicker/daterangepicker.js"></script>
+{/block}
