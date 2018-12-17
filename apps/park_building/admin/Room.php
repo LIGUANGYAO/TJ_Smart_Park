@@ -29,6 +29,8 @@ class Room extends Admin
      * 租赁状态
      */
     protected $statusType;
+
+    protected $roomType;
     /**
      * @var
      * 装修类型
@@ -55,16 +57,24 @@ class Room extends Admin
             1 => '未租',
             2 => '已租',
         ];
+        $this->roomType = [
+            1 => '办公',
+            2 => '商铺',
+            3 => '自用',
+            4 => '会议室',
+            5 => '苗圃',
+            6 => '展览室',
+        ];
         $this->decoration = [
             1 => '毛坯',
             2 => '简装',
         ];
         $floors = Db::name('ParkRoom')->column('floor');
-        $this->floors = \array_combine($floors,$floors);
+        $this->floors = \array_combine($floors, $floors);
         $this->roomModel = new ParkRoom();
         $this->buildData = Db::name('ParkBuilding')
             //只显示启用的楼宇
-            ->where('status',1)
+            ->where('status', 1)
             ->column('id,title');
     }
 
@@ -77,9 +87,9 @@ class Room extends Admin
         return (new Iframe())
             ->setMetaTitle('房源列表')
             ->search([
-                ['name'=>'status','type'=>'select','title'=>'租赁状态','options'=>$this->statusType],
+                ['name' => 'status', 'type' => 'select', 'title' => '租赁状态', 'options' => $this->statusType],
                 ['name' => 'building_id', 'type' => 'select', 'title' => '楼宇', 'options' => $this->buildData],
-                ['name'=>'floor','type'=>'select','title'=>'楼层','options'=>$this->floors]
+                ['name' => 'floor', 'type' => 'select', 'title' => '楼层', 'options' => $this->floors]
             ])
             ->content($this->grid());
     }
@@ -91,23 +101,26 @@ class Room extends Admin
      */
     public function grid()
     {
-        list($data_list, $total) = $this->roomModel->search('status,building_id,floor')->getListByPage([], true, 'create_time desc');
+        list($data_list, $total) = $this->roomModel
+            ->search('status,building_id,floor')
+            ->getListByPage([], true, 'create_time desc');
 
-        $content= builder('list')
+        $content = builder('list')
             ->addTopButton('addnew', ['model' => 'ParkRoom'])
             ->addTopButton('delete', ['model' => 'ParkRoom'])
             ->setSearch('请输入关键字')
-            ->keyListItem('building_text', '楼宇')
+            ->keyListItem('building_id', '楼宇','callback','getBuildingNameById')
             ->keyListItem('floor', '楼层')
             ->keyListItem('room_number', '房间号')
             ->keyListItem('area', '面积')
             ->keyListItem('unit_price', '单价')
             ->keyListItem('property_price', '物业费')
             ->keyListItem('aircon_price', '空调费')
+            ->keyListItem('type_text', '房间类型')
             ->keyListItem('decoration_text', '装修')
             ->keyListItem('enterprise_id', '入驻企业')
             ->keyListItem('status_text', '状态')
-            ->keyListItem('room_img','封面','picture')
+            ->keyListItem('room_img', '封面', 'picture')
             ->keyListItem('right_button', '操作', 'btn')
             ->setListPrimaryKey('id')
             ->setListData($data_list)// 数据列表
@@ -133,9 +146,9 @@ class Room extends Admin
         if (IS_POST) {
             $data = \input('param.');
             //先不做数据校验
-            if ($this->roomModel->editData($data)){
+            if ($this->roomModel->editData($data)) {
                 $this->success($title . '成功', \url('index'));
-            }else{
+            } else {
                 $this->error($this->roomModel->getError());
             }
         } else {
@@ -145,7 +158,7 @@ class Room extends Admin
                 'status' => 1
             ];
 
-            if ($id>0){
+            if ($id > 0) {
                 $info = ParkRoom::get($id);
                 if (empty($info)) {
                     $this->error($this->buildingModel->getError());
@@ -154,13 +167,14 @@ class Room extends Admin
 
             $return = builder('form')
                 ->addFormItem('id', 'hidden', 'ID', 'ID')
-                ->addFormItem('building_id', 'select', '楼宇', '请选择楼宇',$this->buildData)
-                ->addFormItem('floor','text','楼层','请输入数字','','data-rule="number" data-tip="请输入数字"')
-                ->addFormItem('room_number','text','房间号','请输入数字','','data-rule="number" data-tip="请输入数字"')
-                ->addFormItem('area','text','房间面积','*平方米')
-                ->addFormItem('unit_price','text','房租','*元/平方米')
-                ->addFormItem('property_price','text','物业费','*元/平方米')
-                ->addFormItem('aircon_price','text','空调费','*元/平方米')
+                ->addFormItem('building_id', 'select', '楼宇', '请选择楼宇', $this->buildData)
+                ->addFormItem('floor', 'text', '楼层', '请输入数字', '', 'data-rule="number" data-tip="请输入数字"')
+                ->addFormItem('room_number', 'text', '房间号', '请输入数字', '', 'data-rule="number" data-tip="请输入数字"')
+                ->addFormItem('area', 'text', '房间面积', '*平方米')
+                ->addFormItem('unit_price', 'text', '房租', '*元/平方米')
+                ->addFormItem('property_price', 'text', '物业费', '*元/平方米')
+                ->addFormItem('aircon_price', 'text', '空调费', '*元/平方米')
+                ->addFormItem('type', 'select', '房间类型', '', $this->roomType)
                 ->addFormItem('decoration', 'radio', '装修', '', $this->decoration)
                 ->addFormItem('status', 'radio', '状态', '', [1 => '已租', 2 => '未租'])
                 ->addFormItem('room_img', 'picture', '封面', '上传房间的图片')

@@ -18,19 +18,6 @@ use think\Db;
  */
 class ParkRoom extends Base
 {
-
-    /**
-     * @param $value
-     * @param $data
-     * @return string
-     * 获取楼宇名称
-     */
-    public function getBuildingTextAttr($value, $data)
-    {
-        $status = Db::name('ParkBuilding')->column('id,title');
-        return isset($status[$data['status']]) ? $status[$data['status']] : '未知';
-    }
-
     /**
      * @param $value
      * @param $data
@@ -62,13 +49,17 @@ class ParkRoom extends Base
     }
 
 
-    /**
-     * @param $value
-     * @param $data
-     * 获取企业名称
-     */
-    public function getEnterpriseTextAttr($value, $data)
+    public function getTypeTextAttr($value, $data)
     {
+        $status = [
+            1 => '办公',
+            2 => '商铺',
+            3 => '自用',
+            4 => '会议室',
+            5 => '苗圃',
+            6 => '展览室',
+        ];
 
+        return isset($status[$data['status']]) ? $status[$data['status']] : '未知';
     }
 }

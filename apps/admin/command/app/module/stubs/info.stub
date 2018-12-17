@@ -1,12 +1,12 @@
 {
     "name":"{%name%}",
     "title":"{%title%}",
-    "description":"QnnPHP应用描述",
+    "description":"EacooPHP应用描述",
     "author":"未知",
     "admin_manage_into":"",
     "version":"1.0.0",
     "dependences":{
-        "core":"1.3.0",
+        "core":"1.2.4",
         "plugins":{
 
         },
@@ -14,5 +14,5 @@
 
         }
     },
-    "database_prefix":"qnn_"
+    "database_prefix":"eacoo_"
 }

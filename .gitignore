@@ -1,3 +1,4 @@
+/plugins/
 .idea
 .env
 composer.lock

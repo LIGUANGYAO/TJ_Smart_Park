@@ -1,7 +1,13 @@
 <?php
-
+// +----------------------------------------------------------------------
+// | Copyright (c) 2017-2018 https://www.eacoophp.com, All rights reserved.         
+// +----------------------------------------------------------------------
+// | [EacooPHP] 并不是自由软件,可免费使用,未经许可不能去掉EacooPHP相关版权。
+// | 禁止在EacooPHP整体或任何部分基础上发展任何派生、修改或第三方版本用于重新分发
+// +----------------------------------------------------------------------
+// | Author:  心云间、凝听 <981248356@qq.com>
+// +----------------------------------------------------------------------
 namespace app\common\layout;
-
 use app\common\controller\Base;
 use think\Exception;
 
@@ -11,8 +17,7 @@ use think\Exception;
  * Class layout
  * @package common\layout
  */
-class Iframe extends Base
-{
+class Iframe extends Base {
 
     protected $metaTitle; // 页面标题
     protected $tips; // 页面提示文字
@@ -45,8 +50,7 @@ class Iframe extends Base
     protected $pluginName;
     protected $preQueryConnector;
 
-    public function _initialize()
-    {
+    public function _initialize() {
         parent::_initialize();
 
         $this->pluginName = null;
@@ -54,8 +58,8 @@ class Iframe extends Base
             $this->pluginName = input('param._plugin');
         }
         //参数前缀连接符
-        $this->preQueryConnector = SERVER_SOFTWARE_TYPE == 'nginx' ? '&' : '?';
-
+        $this->preQueryConnector = SERVER_SOFTWARE_TYPE=='nginx' ? '&' : '?';
+        
     }
 
     /**
@@ -63,8 +67,7 @@ class Iframe extends Base
      * @param $title 标题文本
      * @return $this
      */
-    public function setMetaTitle($meta_title)
-    {
+    public function setMetaTitle($meta_title) {
         $this->metaTitle = $meta_title;
         return $this;
     }
@@ -74,8 +77,7 @@ class Iframe extends Base
      * @param $title 标题文本
      * @return $this
      */
-    public function setPageTips($content, $type = 'info')
-    {
+    public function setPageTips($content,$type='info') {
         $this->tips = $content;
         return $this;
     }
@@ -104,13 +106,13 @@ class Iframe extends Base
      * @date   2018-09-24
      * @author 心云间、凝听 <981248356@qq.com>
      */
-    public function search($searchFields = [], $template = '')
+    public function search($searchFields = [],$template = '')
     {
         if (IS_AJAX) return $this;
-        $this->assign('searchFields', $searchFields);
+        $this->assign('searchFields',$searchFields);
 
-        if ($template == '') {
-            $template = APP_PATH . '/common/view/layout/iframe/search.html';
+        if ($template=='') {
+            $template = APP_PATH.'/common/view/layout/iframe/search.html';
         }
         $this->addRow($this->fetch($template));
         return $this;
@@ -169,14 +171,14 @@ class Iframe extends Base
     {
         if (!IS_AJAX) {
             $items = [
-                'meta_title' => $this->metaTitle,//页面标题
-                'tips' => $this->tips,// 页面提示说明
-                'content' => $this->build(),
+                'meta_title'  => $this->metaTitle,//页面标题
+                'tips'        => $this->tips,// 页面提示说明
+                'content'     => $this->build(),
             ];
 
-            $templateFile = APP_PATH . '/common/view/layout/iframe/content.html';
+            $templateFile = APP_PATH.'/common/view/layout/iframe/content.html';
             return $this->fetch($templateFile, $items);
-        }
+        } 
     }
 
     /**
