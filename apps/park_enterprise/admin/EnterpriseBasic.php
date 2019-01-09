@@ -81,7 +81,7 @@ class EnterpriseBasic extends Admin
         $content = (new BuilderList())
             ->addTopButton('addnew')
             ->addTopButton('self',$del)
-            ->setSearch('请输入关键字')
+            ->setSearch('请输入企业名')
             ->keyListItem('id', 'ID')
             ->keyListItem('enterprise_name', '企业名称')
             ->keyListItem('build_id', '所在楼宇', 'callback', 'getBuildingNameById')
@@ -91,7 +91,6 @@ class EnterpriseBasic extends Admin
             ->setListData($data_list)// 数据列表
             ->setListPage($total)// 数据列表分页
             ->addRightButton('self', ['title' => '查看', 'class' => 'btn btn-info btn-xs', 'href' => url('edit', ['id' => '__data_id__'])])
-            ->addRightButton('self', ['title' => '续租', 'class' => 'btn btn-success btn-xs', 'href' => url('renewal', ['id' => '__data_id__'])])
             ->addRightButton('self', ['title' => '退租', 'class' => 'btn btn-warning confirm btn-xs', 'href' => url('out', ['id' => '__data_id__'])])
 
             ->fetch();
@@ -101,7 +100,7 @@ class EnterpriseBasic extends Admin
             ->search([
                 ['name' => 'keyword',
                     'type' => 'text',
-                    'extra_attr' => 'placeholder="请输入关键字"',
+                    'extra_attr' => 'placeholder="请输入企业名"',
                 ]
             ])
             ->content($content);
