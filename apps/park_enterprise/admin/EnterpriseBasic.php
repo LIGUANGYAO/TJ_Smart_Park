@@ -21,6 +21,8 @@ use app\park_enterprise\model\ParkEnterpriseOtherInfo;
 use app\park_enterprise\model\ParkEnterpriseQichachaBasicInfo;
 use app\park_enterprise\model\ParkEnterpriseQichachaEmployeesInfo;
 use app\park_enterprise\model\ParkEnterpriseQichachaStockInfo;
+use app\park_incubation\model\ParkIncubationList;
+use app\park_incubation\model\ParkIncubationVisitLog;
 use app\student_innovation\model\StudentInnovation;
 use think\Db;
 
@@ -69,9 +71,16 @@ class EnterpriseBasic extends Admin
                 'keyword_condition' => 'enterprise_name',
             ])
             ->getListByPage([], true, 'create_time desc');
-
+        $del = [
+            'icon' => 'fa fa-remove',
+            'title' => '删除',
+            'class' => 'btn btn-danger ajax-table-btn confirm btn-sm',
+            'confirm-info' => '该操作会清空该企业所有相关数据,请谨慎操作',
+            'href' => url('del')
+        ];
         $content = (new BuilderList())
             ->addTopButton('addnew')
+            ->addTopButton('self',$del)
             ->setSearch('请输入关键字')
             ->keyListItem('id', 'ID')
             ->keyListItem('enterprise_name', '企业名称')
@@ -82,7 +91,9 @@ class EnterpriseBasic extends Admin
             ->setListData($data_list)// 数据列表
             ->setListPage($total)// 数据列表分页
             ->addRightButton('self', ['title' => '查看', 'class' => 'btn btn-info btn-xs', 'href' => url('edit', ['id' => '__data_id__'])])
-            ->addRightButton('self', ['title' => '删除', 'class' => 'btn btn-danger confirm btn-xs', 'confirm-info' => '删除后不可恢复,谨慎操作!', 'href' => url('del', ['id' => '__data_id__'])])
+            ->addRightButton('self', ['title' => '续租', 'class' => 'btn btn-success btn-xs', 'href' => url('renewal', ['id' => '__data_id__'])])
+            ->addRightButton('self', ['title' => '退租', 'class' => 'btn btn-warning confirm btn-xs', 'href' => url('out', ['id' => '__data_id__'])])
+
             ->fetch();
 
         return (new Iframe())
@@ -242,7 +253,7 @@ class EnterpriseBasic extends Admin
                 Db::name('ParkRoom')
                     ->where('building_id', 'eq', $data['build_id'])
                     ->where('room_number', 'in', $room_ids)
-                    ->setField(['room_status' => 2, 'enterprise_id' => $data['id']]);
+                    ->setField(['room_status' => 2, 'enterprise_id' => $data['enterprise_id']]);
 
                 //2,录入大学生创业表
                 //检测该模块是否安装并启用
@@ -275,7 +286,7 @@ class EnterpriseBasic extends Admin
                 //4,生成财务代理合同
                 if ($data['kuaiji_daili'] == 1) {
                     $daliContractInfo = [
-                        'enterprise_id' => $data['id'],
+                        'enterprise_id' => $data['enterprise_id'],
                         'kjdlfy' => $data['kjdlfy'],
                         'numbering' => \getKuaijiContractNumbering(),
                         'kjdl_s_day' => $data['kjdl_s_day'],
@@ -285,11 +296,15 @@ class EnterpriseBasic extends Admin
                 }
 
                 //5,孵化企业生成走访列表
-
-
-
-
-
+                $isParkIncubationInstall = \check_install_module_my('park_incubation');
+                if ($isParkIncubationInstall && ($data['fuhua'] == 1)) {
+                    $incubationData = [
+                        'enterprise_id' => $data['enterprise_id'],
+                        'enterprise_name' => $data['enterprise_name'],
+                    ];
+                    ParkIncubationList::create($incubationData);
+                }
+                
                 $this->success('添加企业成功');
             } else {
 //====================================================显示添加企业的空页面=================================================
@@ -612,6 +627,12 @@ class EnterpriseBasic extends Admin
 
             //9,如果是大学生创业,还需删除大学生创业列表中的数据
             StudentInnovation::destroy(['enterprise_id' => $enterprise_id]);
+            
+            //10.如果是孵化企业,删除孵化企业列表和走访记录中的数据
+            ParkIncubationList::destroy(['enterprise_id' => $enterprise_id]);
+            ParkIncubationVisitLog::destroy(['enterprise_id' => $enterprise_id]);
+
+            //11,租房合同手动删除
 
             $this->success('删除成功');
         }

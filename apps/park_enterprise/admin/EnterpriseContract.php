@@ -144,7 +144,7 @@ class EnterpriseContract extends Admin
             ->getListByPage([], true, 'create_time desc');
         $content = (new BuilderList())
             ->addTopButton('addnew')
-            ->addTopButton('delete')
+            ->addTopButton('delete',['model'=>'ParkEnterpriseContract'])
             ->setSearch('请输入关键字')
             ->keyListItem('id', 'ID')
             ->keyListItem('enterprise_name', '企业名称')
