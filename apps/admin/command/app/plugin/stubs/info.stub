@@ -1,7 +1,7 @@
 {
     "name":"{%name%}",
     "title":"{%title%}",
-    "description":"EacooPHP插件描述",
+    "description":"QnnPHP插件描述",
     "author":"未知",
     "admin_manage_into":"",
     "version":"1.0.0",
@@ -14,5 +14,5 @@
 
         }
     },
-    "database_prefix":"eacoo_"
+    "database_prefix":"qnn_"
 }

@@ -21,7 +21,7 @@ class Example extends Home {
      */
     public function index() {
 
-        $this->pageInfo('首页','index');
+        $this->pageInfo('首页', 'List');
 
         return $this->fetch();
     }

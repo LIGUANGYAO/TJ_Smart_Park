@@ -1,0 +1,18 @@
+{
+    "name":"park_activity",
+    "title":"智慧园区--活动模块",
+    "description":"智慧园区的活动管理模块",
+    "author":"xpwsgg",
+    "admin_manage_into":"",
+    "version":"1.0.0",
+    "dependences":{
+        "core":"1.3.0",
+        "plugins":{
+
+        },
+        "modules":{
+
+        }
+    },
+    "database_prefix":"qnn_"
+}

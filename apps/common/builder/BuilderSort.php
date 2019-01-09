@@ -8,6 +8,7 @@
 // | Author:  心云间、凝听 <981248356@qq.com>
 // +----------------------------------------------------------------------
 namespace app\common\Builder;
+
 use think\Db;
 
 /**
@@ -15,7 +16,8 @@ use think\Db;
  * @package app\admin\builder
  * @author 心云间、凝听 <981248356@qq.com>
  */
-class BuilderSort extends Builder {
+class BuilderSort extends Builder
+{
     private $_meta_title;                  // 页面标题
     private $_list;
     private $_buttonList;
@@ -28,21 +30,25 @@ class BuilderSort extends Builder {
      * @param $title 标题文本
      * @return $this
      */
-    public function setMetaTitle($meta_title) {
+    public function setMetaTitle($meta_title)
+    {
         $this->_meta_title = $meta_title;
         return $this;
     }
+
     /**
      * 设置额外功能代码
      * @param $extra_html 额外功能代码
      * @return $this
      */
-    public function setExtraHtml($extra_html) {
+    public function setExtraHtml($extra_html)
+    {
         $this->_extra_html = $extra_html;
         return $this;
     }
 
-    public function setListData($list) {
+    public function setListData($list)
+    {
         $this->_list = $list;
         return $this;
     }
@@ -52,25 +58,26 @@ class BuilderSort extends Builder {
         $this->_buttonList[] = ['title' => $title, 'attr' => $attr];
         return $this;
     }
-   
+
     /**
      * [addButton description]
-     * @param  string     $type  按钮类型
-     * @param  string     $title [description]
-     * @param  string     $url   [description]
+     * @param  string $type 按钮类型
+     * @param  string $title [description]
+     * @param  string $url [description]
      * @date   2017-08-03
      * @author 心云间、凝听 <981248356@qq.com>
      */
-    public function addButton($type='submit',$title='',$url=''){
+    public function addButton($type = 'submit', $title = '', $url = '')
+    {
         switch ($type) {
             case 'submit'://确认按钮
-                if ($url!= '') {
+                if ($url != '') {
                     $this->setPostUrl($url);
                 }
                 if ($title == '') {
-                    $title ='确定';
+                    $title = '确定';
                 }
-                
+
                 $attr = [];
                 $attr['class'] = "btn btn-primary submit sort_confirm";
                 //$attr['class']="radius ud-button bg-color-blue submit {$ajax_submit} ud-shadow";
@@ -79,7 +86,7 @@ class BuilderSort extends Builder {
                 break;
             case 'back'://返回
                 if ($title == '') {
-                    $title ='返回';
+                    $title = '返回';
                 }
                 $attr = [];
                 $attr['onclick'] = 'javascript:history.back(-1);return false;';
@@ -88,11 +95,11 @@ class BuilderSort extends Builder {
                 break;
             case 'link'://链接
                 if ($title == '') {
-                    $title ='按钮';
+                    $title = '按钮';
                 }
-                $attr['onclick'] = 'javascript:location.href=\''.$url.'\';return false;';
+                $attr['onclick'] = 'javascript:location.href=\'' . $url . '\';return false;';
                 break;
-            
+
             default:
                 # code...
                 break;
@@ -105,16 +112,18 @@ class BuilderSort extends Builder {
      * @param $url 提交地址
      * @return $this
      */
-    public function setPostUrl($post_url) {
+    public function setPostUrl($post_url)
+    {
         $this->_post_url = $post_url;
         return $this;
     }
 
-    public function fetch($template_name='sortbuilder',$vars =[], $replace ='', $config = '') {
+    public function fetch($template_name = 'sortbuilder', $vars = [], $replace = '', $config = '')
+    {
         //设置post_url默认值
-        $this->_post_url=$this->_post_url? $this->_post_url : url(MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME);
+        $this->_post_url = $this->_post_url ? $this->_post_url : url(MODULE_NAME . '/' . CONTROLLER_NAME . '/' . ACTION_NAME);
         //编译按钮的属性
-        foreach($this->_buttonList as &$e) {
+        foreach ($this->_buttonList as &$e) {
             $e['attr'] = $this->compileHtmlAttr($e['attr']);
         }
         unset($e);
@@ -124,7 +133,7 @@ class BuilderSort extends Builder {
         $this->assign('list', $this->_list);
         $this->assign('buttonList', $this->_buttonList);
         $this->assign('post_url', $this->_post_url);
-        $templateFile = APP_PATH.'/common/view/builder/'.$template_name.'.html';
+        $templateFile = APP_PATH . '/common/view/builder/' . $template_name . '.html';
         return parent::fetch($templateFile);
     }
 
@@ -136,13 +145,14 @@ class BuilderSort extends Builder {
      * @date   2018-02-01
      * @author 心云间、凝听 <981248356@qq.com>
      */
-    public function doSort($table, $ids) {
+    public function doSort($table, $ids)
+    {
         $ids = explode(',', $ids);
         $res = 0;
-        foreach ($ids as $key=>$value){
-            $res += Db::name($table)->where(['id'=>$value])->setField('sort', $key+1);
+        foreach ($ids as $key => $value) {
+            $res += Db::name($table)->where(['id' => $value])->setField('sort', $key + 1);
         }
-        if($res) {
+        if ($res) {
             $this->success('排序成功');
         } else {
             $this->error('排序失败');

@@ -1,7 +1,7 @@
   <aside class="main-sidebar sidebar-wrapper">
     <section class="sidebar" id="sidebar">
       <!-- Sidebar user panel -->
-      <div class="user-panel">
+      <!--<div class="user-panel">
         <div class="pull-left image">
          <a href="{:url('admin/AdminUser/profile',['uid'=>$current_user['uid']])}" class="opentab" tab-name="navtab-collapse-profile" data-selftabhtml="个人资料"><img src="{$current_user.avatar|root_full_path|default='/static/assets/img/default-avatar.svg'}" class="img-circle" style="width: 100%;max-width: 45px;height: auto;" alt=""></a>
         </div>
@@ -9,7 +9,7 @@
           <p><a href="{:url('user/User/profile',['uid'=>$current_user['uid']])}" class="opentab" tab-title='个人资料' tab-name="navtab-collapse-profile">{$current_user.nickname}</a></p>
           <i class="fa fa-circle text-success"></i> [<span class="loginout f12">退出</span>]
         </div>
-      </div>
+      </div>-->
       <ul class="sidebar-menu" id="sidebar-menus">
        
       </ul>
@@ -17,7 +17,7 @@
   </aside>
 
   <script id="sidebar_menus" type="text/html">
-    <li class="header">MAIN NAVIGATION</li>
+    <li class="header">菜单栏</li>
     <% for (var i = 0; i < data.length; i ++) { %>
         <% var vo = data[i]; %>
         <% var child = data[i]._child; %>
@@ -50,10 +50,11 @@
          <% } %>
       </li>
     <% } %>
-    <li class="header">LABELS</li>
+    <!--交流社区-->
+    <!--<li class="header">LABELS</li>
     <li><a href="https://forum.eacoophp.com" target="_blank"><i class="fa fa-circle-o text-red"></i> <span>交流社区</span></a></li>
     <li><a href="https://www.kancloud.cn/youpzt/eacoo" target="_blank"><i class="fa fa-circle-o text-yellow"></i> <span>开发文档</span></a></li>
-    <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>联系我们</span></a></li>
+    <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>联系我们</span></a></li>-->
 
     <% if (data.length==0) { %>
         <div class="no-data-div">

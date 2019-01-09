@@ -1,0 +1,17 @@
+{
+    "name": "park_enterprise",
+    "title": "智慧园区--企业模块",
+    "description": "智慧园区的企业管理模块",
+    "author": "xpwsgg",
+    "admin_manage_into": "",
+    "version": "1.0.0",
+    "dependences": {
+        "core": "1.3.0",
+        "plugins": {
+        },
+        "modules": {
+            "park_building": "1.0.0"
+        }
+    },
+    "database_prefix": "qnn_"
+}

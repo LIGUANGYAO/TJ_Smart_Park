@@ -43,17 +43,17 @@
       <div class="col-md-5">
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">官方动态</h3>
+            <h3 class="box-title">最新动态</h3>
           </div>
           <!-- /.box-header -->
           <div class="box-body pt-0" id="eacoo_news">
             <table class="table table-condensed f14">
               <tbody>
-              {volist name="eacoo_news_list.data" id="row"}
+              <!--{volist name="eacoo_news_list.data" id="row"}
                   <tr>
                     <td><a href="{$row.href}" target="_blank">{$row.title}</a></td>
                   </tr>
-              {/volist}
+              {/volist}-->
               </tbody>
             </table>
           </div>
@@ -73,7 +73,7 @@
     {php}if(config('attachment_options.driver')=='local' || !config('attachment_options.driver')){{/php}
       var eacooadmin_localdriver_tip = sessionStorage.getItem('eacooadmin_localdriver_tip');
       if (eacooadmin_localdriver_tip!=1) {
-          parent.layer.alert('欢迎使用EacooPHP系统，请优先配置/开启 上传驱动（Tip:前往插件市场安装对象存储服务插件） ，让您的数据更安全可靠，数据掌握在自己手中。<br/>如因未配置/开启 对象云存储服务，造成的数据丢失，由您自行负责！！快去配置吧~<br/>', {icon: 6,btn: ['去配置','不再提醒'],
+          parent.layer.alert('欢迎使用QnnPHP系统，请优先配置/开启 上传驱动（Tip:前往插件市场安装对象存储服务插件） ，让您的数据更安全可靠，数据掌握在自己手中。<br/>如因未配置/开启 对象云存储服务，造成的数据丢失，由您自行负责！！快去配置吧~<br/>', {icon: 6,btn: ['去配置','不再提醒'],
           yes: function(index, layero){
             parent.layer.closeAll();
             redirect('{:url("admin/config/attachmentoption")}');
@@ -81,9 +81,9 @@
           btn2: function(index, layero){
               var storage_data = 1;
               sessionStorage.setItem('eacooadmin_localdriver_tip',storage_data);
-          }}); 
+          }});
       }
-      
+
     {php}}{/php}
   })
 </script>

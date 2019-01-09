@@ -1,0 +1,16 @@
+{
+	"name":"Alisms",
+	"title":"阿里云短信",
+	"description":"通过阿里短信接口发送短信，官网：https://www.aliyun.com/product/sms",
+	"author":"xpwsgg",
+	"admin_manage_into":"",
+	"version":"1.0.1",
+	"dependences":{
+		"plugins":{
+
+		},
+		"modules":{
+
+		}
+	}
+}

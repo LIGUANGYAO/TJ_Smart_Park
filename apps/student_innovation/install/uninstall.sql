@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS `tj_student_innovation`;

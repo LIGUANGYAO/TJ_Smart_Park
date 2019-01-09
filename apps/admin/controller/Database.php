@@ -1,71 +1,67 @@
 <?php
 // 数据库控制器
-// +----------------------------------------------------------------------
-// | Copyright (c) 2016-2018 https://www.eacoophp.com, All rights reserved.         
-// +----------------------------------------------------------------------
-// | [EacooPHP] 并不是自由软件,可免费使用,未经许可不能去掉EacooPHP相关版权。
-// | 禁止在EacooPHP整体或任何部分基础上发展任何派生、修改或第三方版本用于重新分发
-// +----------------------------------------------------------------------
-// | Author:  心云间、凝听 <981248356@qq.com>
-// +----------------------------------------------------------------------
+
 
 namespace app\admin\controller;
+
 use think\Db;
 use eacoo\Database as DatabaseModel;
 
-class Database extends Admin {
+class Database extends Admin
+{
     /**
      * 数据库备份/还原列表
      * @param  String $type import-还原，export-备份
      * @author 麦当苗儿 <zuojiazi@vip.qq.com>
      */
-    public function index($type = 'export') {
+    public function index($type = 'export')
+    {
         switch ($type) {
-        /* 数据还原 */
-        case 'import':
-            //列出备份文件列表
-            $path = config('data_backup_path');
-            if (!is_dir($path)) {
-                mkdir($path, 0755, true);
-            }
-            $path = realpath($path);
-            $flag = \FilesystemIterator::KEY_AS_FILENAME;
-            $glob = new \FilesystemIterator($path, $flag);
-
-            $list = [];
-            foreach ($glob as $name => $file) {
-                if (preg_match('/^\d{8,8}-\d{6,6}-\d+\.sql(?:\.gz)?$/', $name)) {
-                    $name = sscanf($name, '%4s%2s%2s-%2s%2s%2s-%d');
-
-                    $date = "{$name[0]}-{$name[1]}-{$name[2]}";
-                    $time = "{$name[3]}:{$name[4]}:{$name[5]}";
-                    $part = $name[6];
-
-                    if (isset($list["{$date} {$time}"])) {
-                        $info         = $list["{$date} {$time}"];
-                        $info['part'] = max($info['part'], $part);
-                        $info['size'] = $info['size'] + $file->getSize();
-                    } else {
-                        $info['part'] = $part;
-                        $info['size'] = $file->getSize();
-                    }
-                    $extension        = strtoupper(pathinfo($file->getFilename(), PATHINFO_EXTENSION));
-                    $info['compress'] = ($extension === 'SQL') ? '-' : $extension;
-                    $info['time']     = strtotime("{$date} {$time}");
-
-                    $list["{$date} {$time}"] = $info;
+            /* 数据还原 */
+            case 'import':
+                //列出备份文件列表
+                $path = config('data_backup_path');
+                if (!is_dir($path)) {
+                    mkdir($path, 0755, true);
                 }
-            }
-            $title = '数据还原';
-            break;
-        /* 数据备份 */
-        case 'export':
-            $list  = Db::query('SHOW TABLE STATUS');
-            $list  = array_map('array_change_key_case', $list);
-            $title = '数据备份';
-            break;
-        default:
-            $this->error('参数错误！');
+                $path = realpath($path);
+                $flag = \FilesystemIterator::KEY_AS_FILENAME;
+                $glob = new \FilesystemIterator($path, $flag);
+
+                $list = [];
+                foreach ($glob as $name => $file) {
+                    if (preg_match('/^\d{8,8}-\d{6,6}-\d+\.sql(?:\.gz)?$/', $name)) {
+                        $name = sscanf($name, '%4s%2s%2s-%2s%2s%2s-%d');
+
+                        $date = "{$name[0]}-{$name[1]}-{$name[2]}";
+                        $time = "{$name[3]}:{$name[4]}:{$name[5]}";
+                        $part = $name[6];
+
+                        if (isset($list["{$date} {$time}"])) {
+                            $info = $list["{$date} {$time}"];
+                            $info['part'] = max($info['part'], $part);
+                            $info['size'] = $info['size'] + $file->getSize();
+                        } else {
+                            $info['part'] = $part;
+                            $info['size'] = $file->getSize();
+                        }
+                        $extension = strtoupper(pathinfo($file->getFilename(), PATHINFO_EXTENSION));
+                        $info['compress'] = ($extension === 'SQL') ? '-' : $extension;
+                        $info['time'] = strtotime("{$date} {$time}");
+
+                        $list["{$date} {$time}"] = $info;
+                    }
+                }
+                $title = '数据还原';
+                break;
+            /* 数据备份 */
+            case 'export':
+                $list = Db::query('SHOW TABLE STATUS');
+                $list = array_map('array_change_key_case', $list);
+                $title = '数据备份';
+                break;
+            default:
+                $this->error('参数错误！');
         }
         //渲染模板
         $this->assign('meta_title', $title);
@@ -78,11 +74,12 @@ class Database extends Admin {
      * @param  String $tables 表名
      * @author 麦当苗儿 <zuojiazi@vip.qq.com>
      */
-    public function optimize($tables = null) {
+    public function optimize($tables = null)
+    {
         if ($tables) {
             if (is_array($tables)) {
                 $tables = implode('`,`', $tables);
-                $list   = Db::query("OPTIMIZE TABLE `{$tables}`");
+                $list = Db::query("OPTIMIZE TABLE `{$tables}`");
 
                 if ($list) {
                     $this->success("数据表优化完成！");
@@ -107,11 +104,12 @@ class Database extends Admin {
      * @param  String $tables 表名
      * @author 麦当苗儿 <zuojiazi@vip.qq.com>
      */
-    public function repair($tables = null) {
+    public function repair($tables = null)
+    {
         if ($tables) {
             if (is_array($tables)) {
                 $tables = implode('`,`', $tables);
-                $list   = Db::query("REPAIR TABLE `{$tables}`");
+                $list = Db::query("REPAIR TABLE `{$tables}`");
 
                 if ($list) {
                     $this->success("数据表修复完成！");
@@ -136,7 +134,8 @@ class Database extends Admin {
      * @param  Integer $time 备份时间
      * @author 麦当苗儿 <zuojiazi@vip.qq.com>
      */
-    public function delBackup($time = 0) {
+    public function delBackup($time = 0)
+    {
         if ($time) {
             $name = date('Ymd-His', $time) . '-*.sql*';
             $path = realpath(config('data_backup_path')) . DIRECTORY_SEPARATOR . $name;
@@ -153,12 +152,13 @@ class Database extends Admin {
 
     /**
      * 备份数据库
-     * @param  String  $tables 表名
-     * @param  Integer $id     表ID
-     * @param  Integer $start  起始行数
+     * @param  String $tables 表名
+     * @param  Integer $id 表ID
+     * @param  Integer $start 起始行数
      * @author 麦当苗儿 <zuojiazi@vip.qq.com>
      */
-    public function export($tables = null, $id = null, $start = null) {
+    public function export($tables = null, $id = null, $start = null)
+    {
         if (IS_POST && !empty($tables) && is_array($tables)) {
             //初始化
             $path = config('data_backup_path');
@@ -167,11 +167,11 @@ class Database extends Admin {
             }
             //读取备份配置
             $config = array(
-                'path'     => realpath($path) . DIRECTORY_SEPARATOR, 
-                'part'     => config('data_backup_part_size'), 
-                'compress' => config('data_backup_compress'), 
-                'level'    => config('data_backup_compress_level')
-                );
+                'path' => realpath($path) . DIRECTORY_SEPARATOR,
+                'part' => config('data_backup_part_size'),
+                'compress' => config('data_backup_compress'),
+                'level' => config('data_backup_compress_level')
+            );
             //检查是否有正在执行的任务
             $lock = "{$config['path']}backup.lock";
             if (is_file($lock)) {
@@ -187,9 +187,9 @@ class Database extends Admin {
             session('backup_config', $config);
             //生成备份文件信息
             $file = [
-                'name' => date('Ymd-His',$this->request->time()),
+                'name' => date('Ymd-His', $this->request->time()),
                 'part' => 1
-                ];
+            ];
             session('backup_file', $file);
             //缓存要备份的表
             session('backup_tables', $tables);
@@ -206,7 +206,7 @@ class Database extends Admin {
             $tables = session('backup_tables');
             //备份指定表
             $Database = new DatabaseModel(session('backup_file'), session('backup_config'));
-            $start    = $Database->backup($tables[$id], $start);
+            $start = $Database->backup($tables[$id], $start);
             if (false === $start) {
                 //出错
                 $this->error('备份出错！');
@@ -224,7 +224,7 @@ class Database extends Admin {
                     $this->success('备份完成！');
                 }
             } else {
-                $tab  = array('id' => $id, 'start' => $start[0]);
+                $tab = array('id' => $id, 'start' => $start[0]);
                 $rate = floor(100 * ($start[0] / $start[1]));
                 $this->success("正在备份...({$rate}%)", '', array('tab' => $tab));
             }
@@ -238,18 +238,19 @@ class Database extends Admin {
      * 还原数据库
      * @author 麦当苗儿 <zuojiazi@vip.qq.com>
      */
-    public function import($time = 0, $part = null, $start = null) {
+    public function import($time = 0, $part = null, $start = null)
+    {
         if (is_numeric($time) && is_null($part) && is_null($start)) {
             //初始化
             //获取备份文件信息
-            $name  = date('Ymd-His', $time) . '-*.sql*';
-            $path  = realpath(config('data_backup_path')) . DIRECTORY_SEPARATOR . $name;
+            $name = date('Ymd-His', $time) . '-*.sql*';
+            $path = realpath(config('data_backup_path')) . DIRECTORY_SEPARATOR . $name;
             $files = glob($path);
-            $list  = [];
+            $list = [];
             foreach ($files as $name) {
-                $basename        = basename($name);
-                $match           = sscanf($basename, '%4s%2s%2s-%2s%2s%2s-%d');
-                $gz              = preg_match('/^\d{8,8}-\d{6,6}-\d+\.sql.gz$/', $basename);
+                $basename = basename($name);
+                $match = sscanf($basename, '%4s%2s%2s-%2s%2s%2s-%d');
+                $gz = preg_match('/^\d{8,8}-\d{6,6}-\d+\.sql.gz$/', $basename);
                 $list[$match[6]] = array($match[6], $name, $gz);
             }
             ksort($list);

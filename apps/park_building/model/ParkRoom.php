@@ -24,7 +24,7 @@ class ParkRoom extends Base
      * @return mixed|string
      * 获取状态的中文字符
      */
-    public function getStatusTextAttr($value, $data)
+    public function getRoomStatusTextAttr($value, $data)
     {
         $status = [
             1 => '未租',

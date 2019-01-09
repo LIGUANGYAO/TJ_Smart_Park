@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS `qnn_park_enterprise_bank_info`;
+DROP TABLE IF EXISTS `qnn_park_enterprise_contact_info`;
+DROP TABLE IF EXISTS `qnn_park_enterprise_entry_info`;
+DROP TABLE IF EXISTS `qnn_park_enterprise_other_info`;
+DROP TABLE IF EXISTS `qnn_park_enterprise_qichacha_basic_info`;
+DROP TABLE IF EXISTS `qnn_park_enterprise_qichacha_employees_info`;
+DROP TABLE IF EXISTS `qnn_park_enterprise_qichacha_stock_info`;
+DROP TABLE IF EXISTS `qnn_park_enterprise_contract`;
+DROP TABLE IF EXISTS `qnn_park_enterprise_kuaiji_contract`;

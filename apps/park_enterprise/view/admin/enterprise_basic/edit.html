@@ -1,0 +1,1222 @@
+{extend name="$_admin_public_base_"/}
+{block name="style"}
+
+{/block}
+
+{block name="main"}
+<section class="content pt-5">
+    <div class="box box-solid eacoo-box">
+        <!-- Tab导航 -->
+
+        <div class="box-body">
+            <div class="builder formbuilder-box">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- Custom Tabs -->
+                        <div class="nav-tabs-custom">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#tab_1" data-toggle="tab">基本信息</a></li>
+                                <li><a href="#tab_2" data-toggle="tab">联系信息</a></li>
+                                <li><a href="#tab_3" data-toggle="tab">银行信息</a></li>
+                                <li><a href="#tab_4" data-toggle="tab">其他信息</a></li>
+                                <li><a href="#tab_5" data-toggle="tab">入驻信息</a></li>
+                            </ul>
+
+                            <form class="form-horizontal" method="post"
+                                  action="{:url('park_enterprise/EnterpriseBasic/edit')}">
+                                <input type="hidden" name="id" value="{$basic_info.id ?? ''}">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tab_1">
+                                        <div class="box-body">
+                                            <div class="form-group">
+                                                <label for="Name" class="col-sm-2 control-label">
+                                                    企业名称:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="Name"
+                                                           name="enterprise_name"
+                                                           placeholder="如果使用企查查,请输入完整企业名称!"
+                                                           value="{$basic_info.enterprise_name ?? ''}">
+                                                    <!--如果开启企查查功能则出现该按钮-->
+                                                    {if $qcc_config['status'] eq 1}
+                                                    <button type="button" class="btn btn-info pull-left" id="qcc">
+                                                        从企查查获取基本数据
+                                                    </button>
+                                                    {/if}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="CreditCode" class="col-sm-2 control-label">
+                                                    社会统一信用代码:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="CreditCode"
+                                                           name="credit_code"
+                                                           placeholder="" value="{$basic_info.credit_code ?? ''}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="RegistCapi" class="col-sm-2 control-label">
+                                                    注册资本:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="RegistCapi"
+                                                           name="regist_capi"
+                                                           placeholder="" value="{$basic_info.regist_capi ?? ''}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="TermStart" class="col-sm-2 control-label">
+                                                    营业开始日期:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="TermStart"
+                                                           name="term_start"
+                                                           placeholder="" value="{$basic_info.term_start ?? ''}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="TeamEnd" class="col-sm-2 control-label">
+                                                    营业结束日期:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="TeamEnd" name="team_end"
+                                                           placeholder="" value="{$basic_info.team_end ?? ''}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="Address" class="col-sm-2 control-label">
+                                                    注册地址:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="Address" name="address"
+                                                           placeholder="" value="{$basic_info.address ?? ''}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="OperName" class="col-sm-2 control-label">
+                                                    法人名:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="OperName"
+                                                           name="oper_name"
+                                                           placeholder="" value="{$basic_info.oper_name ?? ''}">
+                                                </div>
+                                            </div>
+
+                                            {empty name="stock_info"}
+                                            <div class="form-group">
+                                                <label for="StockName" class="col-sm-2 control-label">
+                                                    股东:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="StockName"
+                                                           name="stock_name[]"
+                                                           placeholder="" value="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="StockType" class="col-sm-2 control-label">
+                                                    股东类型:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="StockType"
+                                                           name="stock_type[]"
+                                                           placeholder="" value="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="StockPercent" class="col-sm-2 control-label">
+                                                    出资比例:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="StockPercent"
+                                                           name="stock_percent[]"
+                                                           placeholder="" value="">
+                                                </div>
+                                            </div>
+                                            {else /}
+                                            {foreach $stock_info as $si}
+                                            <div id="stock_info_div">
+                                                <div class="form-group">
+                                                    <label for="StockName" class="col-sm-2 control-label">
+                                                        股东:
+                                                    </label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" id="StockName"
+                                                               name="stock_name[]"
+                                                               placeholder="" value="{$si.stock_name}">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="StockType" class="col-sm-2 control-label">
+                                                        股东类型:
+                                                    </label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" id="StockType"
+                                                               name="stock_type[]"
+                                                               placeholder="" value="{$si.stock_type}">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="StockPercent" class="col-sm-2 control-label">
+                                                        出资比例:
+                                                    </label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" id="StockPercent"
+                                                               name="stock_percent[]"
+                                                               placeholder="" value="{$si.stock_percent}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {/foreach}
+                                            {/empty}
+
+                                            {notempty name="employee_info"}
+                                            {foreach $employee_info as $ei}
+                                            <div class="form-group">
+                                                <label for="Employees" class="col-sm-2 control-label">
+                                                    主要人员:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="Employees"
+                                                           name="employees[]"
+                                                           placeholder="姓名" value="{$ei.employee_name}"
+                                                           style="width: 30%;">
+                                                    <input type="text" class="form-control" id="Employees_job"
+                                                           name="employees_job[]"
+                                                           placeholder="职务" value="{$ei.employees_job}"
+                                                           style="width: 30%;">
+                                                </div>
+                                            </div>
+                                            {/foreach}
+                                            {else /}
+                                            <div class="form-group">
+                                                <label for="Employees" class="col-sm-2 control-label">
+                                                    主要人员:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="Employees"
+                                                           name="employees[]"
+                                                           placeholder="姓名" value="" style="width: 30%;">
+                                                    <input type="text" class="form-control" id="Employees_job"
+                                                           name="employees_job[]"
+                                                           placeholder="职务" value="" style="width: 30%;">
+                                                </div>
+                                            </div>
+                                            {/notempty}
+
+                                            <div class="form-group">
+                                                <label for="Scope" class="col-sm-2 control-label">
+                                                    经营范围:
+                                                </label>
+                                                <div class="col-sm-10">
+                                    <textarea type="text" class="form-control" id="Scope" name="scope"
+                                              placeholder="" value="">{$basic_info.scope ?? ''}</textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="description" class="col-sm-2 control-label">
+                                                    业务介绍:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <textarea name="description" id="description" cols="60" rows="10">{$basic_info.description ?? ''}</textarea>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="" class="col-sm-2 control-label">
+                                                    企业LOGO:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    {:widget('common/upload/picture',[$logo])}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="" class="col-sm-2 control-label">
+                                                    营业执照:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    {:widget('common/upload/picture',[$yyzz])}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="" class="col-sm-2 control-label">
+                                                    法人身份证照片:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    {:widget('common/upload/picture',[$frsfzzp])}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="" class="col-sm-2 control-label">
+                                                    其它证书:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    {:widget('common/upload/picture',[$qtzs])}
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!-- /.tab-pane -->
+                                    <div class="tab-pane" id="tab_2">
+                                        <div class="box-body">
+                                            <div class="form-group">
+                                                <label for="contact" class="col-sm-2 control-label">
+                                                    联系人:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="contact" name="contact"
+                                                           placeholder="" value="{$contact_info.contact ?? ''}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="phone" class="col-sm-2 control-label">
+                                                    联系电话:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="phone" name="phone"
+                                                           placeholder="" value="{$contact_info.phone ?? ''}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="email" class="col-sm-2 control-label">
+                                                    邮箱:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="email" class="form-control" id="email" name="email"
+                                                           placeholder="" value="{$contact_info.email ?? ''}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="qq" class="col-sm-2 control-label">
+                                                    QQ:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="number" class="form-control" id="qq" name="qq"
+                                                           placeholder="" value="{$contact_info.qq ?? ''}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="wechat" class="col-sm-2 control-label">
+                                                    微信:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="wechat" name="wechat"
+                                                           placeholder="" value="{$contact_info.wechat ?? ''}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="contact_address" class="col-sm-2 control-label">
+                                                    联系地址:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="contact_address"
+                                                           name="contact_address"
+                                                           placeholder="" value="{$contact_info.contact_address ?? ''}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="" class="col-sm-2 control-label">
+                                                    负责人身份证:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    {:widget('common/upload/picture',[$fzrsfz])}
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!-- /.tab-pane -->
+                                    <div class="tab-pane" id="tab_3">
+                                        <div class="form-body">
+                                            <div class="form-group">
+                                                <label for="bank_name" class="col-sm-2 control-label">
+                                                    银行名称:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="bank_name"
+                                                           name="bank_name"
+                                                           placeholder="" value="{$bank_info.bank_name ?? ''}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="bank_address" class="col-sm-2 control-label">
+                                                    开户行:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="bank_address"
+                                                           name="bank_address"
+                                                           placeholder="" value="{$bank_info.bank_address ?? ''}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="bank_account" class="col-sm-2 control-label">
+                                                    账户:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="bank_account"
+                                                           name="bank_account"
+                                                           placeholder="" value="{$bank_info.bank_account ?? ''}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="caiwufzr" class="col-sm-2 control-label">
+                                                    财务负责人:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="caiwufzr"
+                                                           name="caiwufzr"
+                                                           placeholder="" value="{$bank_info.caiwufzr ?? ''}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="caiwufzr_tel" class="col-sm-2 control-label">
+                                                    财务负责人电话:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="caiwufzr_tel"
+                                                           name="caiwufzr_tel"
+                                                           placeholder="" value="{$bank_info.caiwufzr_tel ?? ''}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="caiwufzr_email" class="col-sm-2 control-label">
+                                                    财务负责人邮箱:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="caiwufzr_email"
+                                                           name="caiwufzr_email"
+                                                           placeholder="" value="{$bank_info.caiwufzr_email ?? ''}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.tab-pane -->
+
+                                    <div class="tab-pane" id="tab_4">
+                                        <div class="form-group">
+                                            <label for="enterprise_type" class="col-sm-2 control-label">
+                                                企业类别:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <select class="form-control select2" style="width: 50%;"
+                                                        name="enterprise_type"
+                                                        id="enterprise_type">
+                                                    {empty name="other_info"}
+                                                    <option value="0" selected>请选择企业类别</option>
+                                                    <option value="1">国内合资</option>
+                                                    <option value="2">私营</option>
+                                                    <option value="3">个人独资</option>
+                                                    <option value="4">合伙</option>
+                                                    <option value="5">外资</option>
+                                                    {else /}
+                                                    <option value="1" {if $other_info.enterprise_type eq 1}selected{
+                                                    /if}>国内合资</option>
+                                                    <option value="2" {if $other_info.enterprise_type eq 2}selected{
+                                                    /if}>私营</option>
+                                                    <option value="3" {if $other_info.enterprise_type eq 3}selected{
+                                                    /if}>个人独资</option>
+                                                    <option value="4" {if $other_info.enterprise_type eq 4}selected{
+                                                    /if}>合伙</option>
+                                                    <option value="5" {if $other_info.enterprise_type eq 5}selected{
+                                                    /if}>外资</option>
+                                                    {/empty}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="enterprise_category" class="col-sm-2 control-label">
+                                                行业分类:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <select class="form-control select2" style="width: 50%;"
+                                                        name="enterprise_category"
+                                                        id="enterprise_category">
+                                                    {empty name="other_info"}
+                                                    <option value="0" selected>请选择行业分类</option>
+                                                    <option value="1">智慧交通</option>
+                                                    <option value="2">智慧医疗</option>
+                                                    <option value="3">电子信息</option>
+                                                    <option value="4">新材料</option>
+                                                    <option value="5">新型数字化</option>
+                                                    <option value="6">新能源及环保</option>
+                                                    <option value="7">高新技术服务业</option>
+                                                    <option value="8">其他</option>
+                                                    {else /}
+                                                    <option value="1" {if $other_info.enterprise_category eq 1}selected{
+                                                    /if}>智慧交通</option>
+                                                    <option value="2" {if $other_info.enterprise_category eq 2}selected{
+                                                    /if}>智慧医疗</option>
+                                                    <option value="3" {if $other_info.enterprise_category eq 3}selected{
+                                                    /if}>电子信息</option>
+                                                    <option value="4" {if $other_info.enterprise_category eq 4}selected{
+                                                    /if}>新材料</option>
+                                                    <option value="5" {if $other_info.enterprise_category eq 5}selected{
+                                                    /if}>新型数字化</option>
+                                                    <option value="6" {if $other_info.enterprise_category eq 6}selected{
+                                                    /if}>新能源及环保</option>
+                                                    <option value="7" {if $other_info.enterprise_category eq 7}selected{
+                                                    /if}>高新技术服务业</option>
+                                                    <option value="8" {if $other_info.enterprise_category eq 8}selected{
+                                                    /if}>其他</option>
+                                                    {/empty}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">
+                                                经营状态:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <label>
+                                                    <input type="radio" name="enterprise_status" value="1"
+                                                           class="minimal" checked>
+                                                    经营
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="enterprise_status" value="2"
+                                                           class="minimal" {notempty name="$other_info"
+                                                           }{$other_info.enterprise_status==2?'checked':''}{/notempty}>
+                                                    歇业
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="enterprise_status" value="3"
+                                                           class="minimal" {notempty name="$other_info"
+                                                           }{$other_info.enterprise_status==3?'checked':''}{/notempty}>
+                                                    注销
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="enterprise_status" value="4"
+                                                           class="minimal" {notempty name="$other_info"
+                                                           }{$other_info.enterprise_status==4?'checked':''}{/notempty}>
+                                                    吊销
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="enterprise_status" value="5"
+                                                           class="minimal" {notempty name="$other_info"
+                                                           }{$other_info.enterprise_status==5?'checked':''}{/notempty}>
+                                                    迁出
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">
+                                                企业评级:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <label>
+                                                    <input type="radio" name="enterprise_rate" value="1" class="minimal"
+                                                           checked>
+                                                    A级
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="enterprise_rate" value="2" class="minimal"
+                                                           {notempty name="$other_info"
+                                                           }{$other_info.enterprise_rate==2?'checked':''}{/notempty}>
+                                                    B级
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="enterprise_rate" value="3" class="minimal"
+                                                           {notempty name="$other_info"
+                                                           }{$other_info.enterprise_rate==3?'checked':''}{/notempty}>
+                                                    C级
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="enterprise_rate" value="4" class="minimal"
+                                                           {notempty name="$other_info"
+                                                           }{$other_info.enterprise_rate==4?'checked':''}{/notempty}>
+                                                    D级
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="enterprise_rate" value="5" class="minimal"
+                                                           {notempty name="$other_info"
+                                                           }{$other_info.enterprise_rate==5?'checked':''}{/notempty}>
+                                                    E级
+                                                </label>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">
+                                                大学生创业:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                {empty name="$other_info"}
+                                                <label>
+                                                    <input type="radio" name="student_innovation" value="1"
+                                                           class="minimal">
+                                                    是
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="student_innovation" value="0"
+                                                           class="minimal" checked>
+                                                    否
+                                                </label>
+                                                {else /}
+                                                <label>
+                                                    <input type="radio" name="student_innovation" value="1"
+                                                           class="minimal"
+                                                           {$other_info.student_innovation==1?'checked':''}>
+                                                    是
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="student_innovation" value="0"
+                                                           class="minimal"
+                                                           {$other_info.student_innovation==0?'checked':''}>
+                                                    否
+                                                </label>
+                                                {/empty}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">
+                                                校友创业:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                {empty name="$other_info"}
+                                                <label>
+                                                    <input type="radio" name="schoolmate_innovation" value="1"
+                                                           class="minimal">
+                                                    是
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="schoolmate_innovation" value="0"
+                                                           class="minimal" checked>
+                                                    否
+                                                </label>
+                                                {else /}
+                                                <label>
+                                                    <input type="radio" name="schoolmate_innovation" value="1"
+                                                           class="minimal"
+                                                           {$other_info.schoolmate_innovation==1?'checked':''}>
+                                                    是
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="schoolmate_innovation" value="0"
+                                                           class="minimal"
+                                                           {$other_info.schoolmate_innovation==0?'checked':''}>
+                                                    否
+                                                </label>
+                                                {/empty}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">
+                                                高新技术企业:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                {empty name="$other_info"}
+                                                <label>
+                                                    <input type="radio" name="high_tech" value="1" class="minimal">
+                                                    是
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="high_tech" value="0" class="minimal"
+                                                           checked>
+                                                    否
+                                                </label>
+                                                {else /}
+                                                <label>
+                                                    <input type="radio" name="high_tech" value="1" class="minimal"
+                                                           {$other_info.high_tech==1?'checked':''}>
+                                                    是
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="high_tech" value="0" class="minimal"
+                                                           {$other_info.high_tech==0?'checked':''}>
+                                                    否
+                                                </label>
+                                                {/empty}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">
+                                                是否软件企业:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                {empty name="$other_info"}
+                                                <label>
+                                                    <input type="radio" name="soft_tech" value="1" class="minimal">
+                                                    是
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="soft_tech" value="0" class="minimal"
+                                                           checked>
+                                                    否
+                                                </label>
+                                                {else /}
+                                                <label>
+                                                    <input type="radio" name="soft_tech" value="1" class="minimal"
+                                                           {$other_info.soft_tech==1?'checked':''}>
+                                                    是
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="soft_tech" value="0" class="minimal"
+                                                           {$other_info.soft_tech==0?'checked':''}>
+                                                    否
+                                                </label>
+                                                {/empty}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">
+                                                上海市专精特新企业:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                {empty name="$other_info"}
+                                                <label>
+                                                    <input type="radio" name="new_new" value="1" class="minimal">
+                                                    是
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="new_new" value="0" class="minimal"
+                                                           checked>
+                                                    否
+                                                </label>
+                                                {else /}
+                                                <label>
+                                                    <input type="radio" name="new_new" value="1" class="minimal"
+                                                           {$other_info.new_new==1?'checked':''}>
+                                                    是
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="new_new" value="0" class="minimal"
+                                                           {$other_info.new_new==0?'checked':''}>
+                                                    否
+                                                </label>
+                                                {/empty}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">
+                                                普陀区小巨人企业:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                {empty name="$other_info"}
+                                                <label>
+                                                    <input type="radio" name="putuo_juren" value="1" class="minimal">
+                                                    是
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="putuo_juren" value="0" class="minimal"
+                                                           checked>
+                                                    否
+                                                </label>
+                                                {else /}
+                                                <label>
+                                                    <input type="radio" name="putuo_juren" value="1" class="minimal"
+                                                           {$other_info.putuo_juren==1?'checked':''}>
+                                                    是
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="putuo_juren" value="0" class="minimal"
+                                                           {$other_info.putuo_juren==0?'checked':''}>
+                                                    否
+                                                </label>
+                                                {/empty}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">
+                                                上海市小巨人企业:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                {empty name="$other_info"}
+                                                <label>
+                                                    <input type="radio" name="shanghai_juren" value="1" class="minimal">
+                                                    是
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="shanghai_juren" value="0" class="minimal"
+                                                           checked>
+                                                    否
+                                                </label>
+                                                {else /}
+                                                <label>
+                                                    <input type="radio" name="shanghai_juren" value="1" class="minimal"
+                                                           {$other_info.shanghai_juren==1?'checked':''}>
+                                                    是
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="shanghai_juren" value="0" class="minimal"
+                                                           {$other_info.shanghai_juren==0?'checked':''}>
+                                                    否
+                                                </label>
+                                                {/empty}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">
+                                                是否孵化企业:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                {empty name="$other_info"}
+                                                <label>
+                                                    <input type="radio" name="fuhua" value="1" class="minimal">
+                                                    是
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="fuhua" value="0" class="minimal" checked>
+                                                    否
+                                                </label>
+                                                {else /}
+                                                <label>
+                                                    <input type="radio" name="fuhua" value="1" class="minimal"
+                                                           {$other_info.fuhua==1?'checked':''}>
+                                                    是
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="fuhua" value="0" class="minimal"
+                                                           {$other_info.fuhua==0?'checked':''}>
+                                                    否
+                                                </label>
+                                                {/empty}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.tab-pane -->
+
+                                    <div class="tab-pane" id="tab_5">
+                                        <div class="form-group">
+                                            <label for="build_list" class="col-sm-2 control-label">
+                                                楼宇:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <select class="form-control select2" style="width: 50%;" name="build_id"
+                                                        id="build_id">
+                                                    {empty name="entry_info"}
+                                                    <option value="0" selected>请选择楼宇</option>
+                                                    {foreach $build_list as $bl}
+                                                    <option value="{$bl.id}">{$bl.title}</option>
+                                                    {/foreach}
+                                                    {else /}
+                                                    {foreach $build_list as $bl}
+                                                    <option value="{$bl.id}" {if $entry_info.build_id eq
+                                                            $bl.id}selected{
+                                                    /if}>{$bl.title}</option>
+                                                    {/foreach}
+                                                    {/empty}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="room_number" class="col-sm-2 control-label">
+                                                房间号:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="room_number"
+                                                       name="room_number"
+                                                       placeholder="例如:1101|1102"
+                                                       value="{$entry_info.room_number ?? ''}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="margin" class="col-sm-2 control-label">
+                                                保证金:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="margin" name="margin"
+                                                       placeholder="单位:元" value="{$entry_info.margin ?? ''}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="rent_period" class="col-sm-2 control-label">
+                                                房租交费周期:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <select class="form-control select2" style="width: 50%;"
+                                                        name="rent_period"
+                                                        id="rent_period">
+                                                    {empty name="entry_info"}
+                                                    <option value="1">季度缴</option>
+                                                    <option value="2">半年缴</option>
+                                                    <option value="3" selected>一年缴</option>
+                                                    <option value="4">二年缴</option>
+                                                    <option value="5">三年缴</option>
+                                                    <option value="6">五年缴</option>
+                                                    {else /}
+                                                    <option value="1" {if $entry_info.rent_period eq 1}selected{
+                                                    /if}>季度缴</option>
+                                                    <option value="2" {if $entry_info.rent_period eq 2}selected{
+                                                    /if}>半年缴</option>
+                                                    <option value="3" {if $entry_info.rent_period eq 3}selected{
+                                                    /if}>一年缴</option>
+                                                    <option value="4" {if $entry_info.rent_period eq 4}selected{
+                                                    /if}>二年缴</option>
+                                                    <option value="5" {if $entry_info.rent_period eq 5}selected{
+                                                    /if}>三年缴</option>
+                                                    <option value="6" {if $entry_info.rent_period eq 6}selected{
+                                                    /if}>五年缴</option>
+                                                    {/empty}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="rent" class="col-sm-2 control-label">
+                                                房租单价:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="rent" name="rent"
+                                                       placeholder="单位:元" value="{$entry_info.rent ?? ''}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="paid_day" class="col-sm-2 control-label">
+                                                支付时间:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input type="date" class="form-control" id="paid_day" name="paid_day"
+                                                       placeholder="" value="{$entry_info.paid_day ?? ''}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="contract_period" class="col-sm-2 control-label">
+                                                合同期限:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <select class="form-control select2" style="width: 50%;"
+                                                        name="contract_period"
+                                                        id="contract_period">
+                                                    {empty name="entry_info"}
+                                                    <option value="1" selected>一年</option>
+                                                    <option value="2">二年</option>
+                                                    <option value="3">三年</option>
+                                                    <option value="4">四年</option>
+                                                    <option value="5">五年</option>
+                                                    {else /}
+                                                    <option value="1" {if $entry_info.contract_period eq 1}selected{
+                                                    /if}>一年</option>
+                                                    <option value="2" {if $entry_info.contract_period eq 2}selected{
+                                                    /if}>二年</option>
+                                                    <option value="3" {if $entry_info.contract_period eq 3}selected{
+                                                    /if}>三年</option>
+                                                    <option value="4" {if $entry_info.contract_period eq 4}selected{
+                                                    /if}>四年</option>
+                                                    <option value="5" {if $entry_info.contract_period eq 5}selected{
+                                                    /if}>五年</option>
+                                                    {/empty}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="zuilin_period" class="col-sm-2 control-label">
+                                                租赁期限:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <select class="form-control select2" style="width: 50%;"
+                                                        name="zuilin_period"
+                                                        id="zuilin_period">
+                                                    {empty name="entry_info"}
+                                                    <option value="1">一年</option>
+                                                    <option value="2">二年</option>
+                                                    <option value="3" selected>三年</option>
+                                                    <option value="4">四年</option>
+                                                    <option value="5">五年</option>
+                                                    {else /}
+                                                    <option value="1" {if $entry_info.zuilin_period eq 1}selected{
+                                                    /if}>一年</option>
+                                                    <option value="2" {if $entry_info.zuilin_period eq 2}selected{
+                                                    /if}>二年</option>
+                                                    <option value="3" {if $entry_info.zuilin_period eq 3}selected{
+                                                    /if}>三年</option>
+                                                    <option value="4" {if $entry_info.zuilin_period eq 4}selected{
+                                                    /if}>四年</option>
+                                                    <option value="5" {if $entry_info.zuilin_period eq 5}selected{
+                                                    /if}>五年</option>
+                                                    {/empty}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="start_day" class="col-sm-2 control-label">
+                                                合同生效日期:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input type="date" class="form-control" id="start_day" name="start_day"
+                                                       placeholder="" value="{$entry_info.start_day ?? ''}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="end_day" class="col-sm-2 control-label">
+                                                合同结束日期:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input type="date" class="form-control" id="end_day" name="end_day"
+                                                       placeholder="" value="{$entry_info.end_day ?? ''}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="fuwufei_period" class="col-sm-2 control-label">
+                                                服务费支付周期:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="fuwufei_period"
+                                                       name="fuwufei_period"
+                                                       placeholder="单位:月" value="{$entry_info.fuwufei_period ?? ''}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="aircon_period" class="col-sm-2 control-label">
+                                                空调费支付周期:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="aircon_period"
+                                                       name="aircon_period"
+                                                       placeholder="单位:月" value="{$entry_info.aircon_period ?? ''}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="key_deposit" class="col-sm-2 control-label">
+                                                钥匙押金:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="key_deposit"
+                                                       name="key_deposit"
+                                                       placeholder="单位:元" value="{$entry_info.key_deposit ?? ''}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="mailbox_deposit" class="col-sm-2 control-label">
+                                                信箱押金:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="mailbox_deposit"
+                                                       name="mailbox_deposit"
+                                                       placeholder="单位:元" value="{$entry_info.mailbox_deposit ?? ''}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="owner_name" class="col-sm-2 control-label">
+                                                出租方公司名称:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="owner_name"
+                                                       name="owner_name"
+                                                       placeholder="同济科技园" value="{$entry_info.owner_name ?? ''}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="owner_address" class="col-sm-2 control-label">
+                                                出租方联系地址:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="owner_address"
+                                                       name="owner_address"
+                                                       placeholder="" value="{$entry_info.owner_address ?? ''}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="owner_tel" class="col-sm-2 control-label">
+                                                出租方联系电话:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="owner_tel" name="owner_tel"
+                                                       placeholder="" value="{$entry_info.owner_tel ?? ''}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">
+                                                会计代理:
+                                            </label>
+                                            <div class="col-sm-10">
+                                                {empty name="entry_info"}
+                                                <label>
+                                                    <input type="radio" name="kuaiji_daili" value="1"
+                                                           class="minimal kjdl_radio">
+                                                    是
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="kuaiji_daili" value="0"
+                                                           class="minimal kjdl_radio"
+                                                           checked>
+                                                    否
+                                                </label>
+                                                {else /}
+                                                <label>
+                                                    <input type="radio" name="kuaiji_daili" value="1"
+                                                           class="minimal kjdl_radio"
+                                                           {$entry_info.kuaiji_daili==1?'checked':''}>
+                                                    是
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="kuaiji_daili" value="0"
+                                                           class="minimal kjdl_radio"
+                                                           {$entry_info.kuaiji_daili==0?'checked':''}>
+                                                    否
+                                                </label>
+                                                {/empty}
+                                            </div>
+                                        </div>
+
+                                        <div id="kjdl">
+                                            <div class="form-group">
+                                                <label for="kjdlfy" class="col-sm-2 control-label">
+                                                    会计代理费用:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="kjdlfy" name="kjdlfy"
+                                                           placeholder="单位:元" value="{$entry_info.kjdlfy ?? ''}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="kjdl_s_day" class="col-sm-2 control-label">
+                                                    会计代理合同生效日期:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="date" class="form-control" id="kjdl_s_day"
+                                                           name="kjdl_s_day"
+                                                           placeholder="" value="{$entry_info.kjdl_s_day ?? ''}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="kjdl_e_day" class="col-sm-2 control-label">
+                                                    会计代理合同结束日期:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="date" class="form-control" id="kjdl_e_day"
+                                                           name="kjdl_e_day"
+                                                           placeholder="" value="{$entry_info.kjdl_e_day ?? ''}">
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-md-10 col-xs-offset-2 mt-10 tc">
+                                                <!--添加企业后不给修改-->
+                                                {empty name="$entry_info.enterprise_id"}
+                                                <div class="col-md-3 col-xs-6">
+                                                    <button class="btn btn-block btn-primary" type="submit">确定</button>
+                                                </div>
+                                                {/empty}
+                                                <div class="col-md-3 col-xs-6">
+                                                    <button onclick="javascript:history.back(-1);return false;"
+                                                            class="btn btn-block btn-default return">返回
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.tab-pane -->
+
+                                </div>
+                                <!-- /.tab-content -->
+                            </form>
+                        </div>
+                        <!-- nav-tabs-custom -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{/block}
+
+{block name="script"}
+<script type="text/javascript">
+    // 从企查查接口获取数据
+    $('#qcc').click(function () {
+        var name = $("#enterprise-name").val();
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            url: "{:url('park_enterprise/Qichacha/index')}",
+            data: {
+                keyword: name
+            },
+            success: function (data) {
+                var data = JSON.parse(data);
+                if (data.Status == 200) {
+                    console.log(data);
+                    //填充页面数据
+                } else {
+                    layer.alert('获取失败,请检查企查查参数配置或者企业名称');
+                }
+            }
+        })
+    });
+
+    //会计代理div的默认值
+    var KjdlValue = $('input[name="kuaiji_daili"]:checked').val();
+    if (KjdlValue == 0) {
+        $("#kjdl").hide();
+    }
+    if (KjdlValue == 1) {
+        $("#kjdl").show();
+    }
+
+
+    //控制会计代理div的显示和隐藏
+    $(".kjdl_radio").click(function () {
+        var KjdlValue = $('input[name="kuaiji_daili"]:checked').val();
+        if (KjdlValue == 1) {
+            $("#kjdl").show();
+        }
+        if (KjdlValue == 0) {
+            $("#kjdl").hide();
+        }
+    });
+
+
+    //修改input框长度
+    /*var Input = $('input,textarea');
+    Input.css('width', '50%');*/
+
+</script>
+{/block}

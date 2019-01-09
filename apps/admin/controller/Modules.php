@@ -123,7 +123,7 @@ class Modules extends Admin {
                         ->addFormItem('id', 'hidden', 'ID', 'ID')
                         ->setExtraItems($options) //直接设置表单数据
                         ->setFormData($app)
-                        ->addButton('submit')->addButton('back')    // 设置表单按钮
+                        ->addButton('submit')// 设置表单按钮
                         ->fetch();
                 return Iframe()
                         ->setMetaTitle('设置-'.$app['title'])  //设置页面标题

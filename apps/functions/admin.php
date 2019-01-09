@@ -17,7 +17,8 @@ use app\common\logic\Action as ActionLogic;
  * @return integer 0-未登录，大于0-当前登录用户ID
  * @author 心云间、凝听 <981248356@qq.com>
  */
-function is_admin_login() {
+function is_admin_login()
+{
     return AdminUserLogic::isLogin();
 }
 
@@ -26,11 +27,12 @@ function is_admin_login() {
  * @return boolean true-管理员，false-非管理员
  * @author 心云间、凝听 <981248356@qq.com>
  */
-function is_administrator($uid = null) {
+function is_administrator($uid = null)
+{
     $uid = is_null($uid) ? is_admin_login() : $uid;
-    if ($uid==1) {
+    if ($uid == 1) {
         return true;
-    } elseif ($uid>1) {
+    } elseif ($uid > 1) {
         if (in_array($uid, get_administrators())) {
             return true;
         }
@@ -57,9 +59,9 @@ function get_administrators()
  * @date   2017-10-17
  * @author 心云间、凝听 <981248356@qq.com>
  */
-function get_user_groups($uid='')
+function get_user_groups($uid = '')
 {
-    if ($uid>0) {
+    if ($uid > 0) {
         $auth = new \org\util\Auth();
         return $auth->getGroups($uid);
     }
@@ -71,41 +73,42 @@ function get_user_groups($uid='')
  * @param  integer $id 用户ID
  * @return array  用户信息
  */
-function get_adminuser_info($uid) {
-    if ($uid>0) {
+function get_adminuser_info($uid)
+{
+    if ($uid > 0) {
         return AdminUserLogic::info($uid);
     }
     return false;
-    
+
 }
 
 /**
  * 获取当前用户登录的角色的标识
  * @return int 角色id
-  * @return 
+ * @return
  */
-function get_admin_role($field='id')
+function get_admin_role($field = 'id')
 {
     $user = session('admin_login_auth');
     if (empty($user)) {
         return 0;
     } else {
-        if ($field=='id') {
+        if ($field == 'id') {
             return session('admin_activation_auth_sign') == data_auth_sign($user) ? $user['auth_group'] : 0;
-        } else{
+        } else {
             $role_info = [];
             if (session('admin_activation_auth_sign') == data_auth_sign($user)) {
                 if (!empty($user['auth_group'])) {
                     foreach ($user['auth_group'] as $key => $val) {
-                        $role_info[] = db('AuthGroup')->where(['id'=>$key])->field($field)->find();
+                        $role_info[] = db('AuthGroup')->where(['id' => $key])->field($field)->find();
                     }
                 }
-                
-                
+
+
             }
-            
+
         }
-        
+
     }
     return $role_info;
 }
