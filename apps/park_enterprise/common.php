@@ -83,9 +83,9 @@ if (!function_exists('getEnterpriseNameByEnterpriseId')) {
         $name = Db::name('ParkEnterpriseQichachaBasicInfo')
             ->where('id', 'eq', $enterprise_id)
             ->value('enterprise_name');
-        if (empty($name)){
+        if (empty($name)) {
             return '未知企业';
-        }else{
+        } else {
             return $name;
         }
     }
@@ -137,5 +137,27 @@ if (!function_exists('getKuaijiContractNumbering')) {
         $num2 = substr((1000 + $num + 1), 1);
         $numbering = 'CWDL' . date('Y') . $num2;
         return $numbering;
+    }
+}
+
+if (!function_exists('getEnterpriseStatusText')) {
+    /**
+     * @param $status
+     * @return string
+     * 返回企业的入驻状态
+     */
+    function getEnterpriseStatusText($status)
+    {
+        switch ($status) {
+            case 1:
+                return '正常';
+                break;
+            case 2:
+                return '已退租';
+                break;
+            default:
+                return '未知状态';
+                break;
+        }
     }
 }

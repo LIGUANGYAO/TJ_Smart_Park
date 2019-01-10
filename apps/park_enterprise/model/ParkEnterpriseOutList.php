@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: xpwsg
- * Date: 2019/1/2
- * Time: 15:42
+ * Date: 2019/1/10
+ * Time: 14:46
  */
 
 namespace app\park_enterprise\model;
@@ -12,11 +12,11 @@ namespace app\park_enterprise\model;
 use app\common\model\Base;
 
 /**
- * Class ParkEnterpriseEntryInfo
+ * Class ParkEnterpriseOutList
  * @package app\park_enterprise\model
- * 入驻信息模型
+ * 退租企业模型
  */
-class ParkEnterpriseEntryInfo extends Base
+class ParkEnterpriseOutList extends Base
 {
 
 }

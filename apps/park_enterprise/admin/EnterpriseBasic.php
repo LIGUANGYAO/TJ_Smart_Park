@@ -19,6 +19,7 @@ use app\park_enterprise\model\ParkEnterpriseContract;
 use app\park_enterprise\model\ParkEnterpriseEntryInfo;
 use app\park_enterprise\model\ParkEnterpriseKuaijiContract;
 use app\park_enterprise\model\ParkEnterpriseOtherInfo;
+use app\park_enterprise\model\ParkEnterpriseOutList;
 use app\park_enterprise\model\ParkEnterpriseQichachaBasicInfo;
 use app\park_enterprise\model\ParkEnterpriseQichachaEmployeesInfo;
 use app\park_enterprise\model\ParkEnterpriseQichachaStockInfo;
@@ -72,6 +73,7 @@ class EnterpriseBasic extends Admin
                 'keyword_condition' => 'enterprise_name',
             ])
             ->getListByPage([], true, 'create_time desc');
+        //删除按钮属性
         $del = [
             'icon' => 'fa fa-remove',
             'title' => '删除',
@@ -87,6 +89,7 @@ class EnterpriseBasic extends Admin
             ->keyListItem('enterprise_name', '企业名称')
             ->keyListItem('build_id', '所在楼宇', 'callback', 'getBuildingNameById')
             ->keyListItem('room_number', '房间号')
+            ->keyListItem('enterprise_status', '企业状态', 'callback', 'getEnterpriseStatusText')
             ->keyListItem('create_time', '创建时间')
             ->keyListItem('right_button', '操作', 'btn')
             ->setListData($data_list)// 数据列表
@@ -742,8 +745,68 @@ class EnterpriseBasic extends Admin
             ->content($content);
     }
 
+    /**
+     * @return \app\common\layout\Content
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     * 企业退租操作
+     */
     public function out()
     {
+        $enterprise_id = \input('id');
+        $lastest_contract_info = Db::name('ParkEnterpriseContract')
+            ->where('enterprise_id', 'eq', $enterprise_id)
+            ->order('create_time desc')
+            ->find();
+        $entry_info = Db::name('ParkEnterpriseEntryInfo')
+            ->where('enterprise_id', 'eq', $enterprise_id)
+            ->find();
+        $entry_info['start_day'] = $lastest_contract_info['start_day'];
+        $entry_info['end_day'] = $lastest_contract_info['end_day'];
+        $entry_info['enterprise_name'] = $lastest_contract_info['enterprise_name'];
+        $buildList = Db::name('ParkBuilding')
+            ->where('status', 1)
+            ->column('id,title');
 
+        if (IS_POST) {
+            $param = \input('param.');
+            $outModel = new ParkEnterpriseOutList();
+            if ($outModel->save($param)) {
+                //在基本信息里标记一下
+                Db::name('ParkEnterpriseQichachaBasicInfo')
+                    ->where('id', 'eq', $enterprise_id)
+                    ->setField('enterprise_status', 2);
+                $this->success('退租操作成功!', \url('park_enterprise/enterprise_basic/index'));
+            } else {
+                $this->error('退租操作失败');
+            }
+        } else {
+            $content = (new BuilderForm())
+                ->addFormItem('id', 'hidden', 'ID')
+                ->addFormItem('enterprise_id', 'hidden', '企业ID')
+                ->addFormItem('enterprise_name', 'text', '企业名称')
+                ->addFormItem('build_id', 'select', '楼宇', '', $buildList)
+                ->addFormItem('room_number', 'text', '房间号')
+                ->addFormItem('start_day', 'text', '合同生效日期', '最新一份合同生效日期')
+                ->addFormItem('end_day', 'text', '合同结束日期', '最新一份合同到期日期')
+                ->addFormItem('margin', 'margin', '房租保证金', '入驻时缴纳的保证金')
+                ->addFormItem('key_deposit', 'text', '钥匙押金', '入住时缴纳的钥匙押金')
+                ->addFormItem('mailbox_deposit', 'text', '信箱押金', '入住时缴纳的信箱押金')
+                ->addFormItem('return_contract', 'select', '是否回收合同', '', [1 => '是', 2 => '否'])
+                ->addFormItem('out_day', 'text', '退租日期')
+                ->addFormItem('out_money', 'text', '退租金额')
+                ->addFormItem('out_hander', 'text', '操作人')
+                ->addFormItem('out_confirmor', 'text', '确认人')
+                ->addFormItem('marks', 'textarea', '备注')
+                ->setFormData($entry_info)
+                ->addButton('submit')
+                ->addButton('back')
+                ->fetch();
+
+            return (new Iframe())
+                ->setMetaTitle('退租操作')
+                ->content($content);
+        }
     }
 }
