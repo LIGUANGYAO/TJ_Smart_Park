@@ -132,19 +132,13 @@ class EnterpriseContract extends Admin
      */
     public function grid()
     {
-        $renew = [
-            'title' => '续约',
-            'class' => 'btn btn-info btn-xs',
-            'href' => url('renew', ['id' => '__data_id__'])
-        ];
-
         $search_setting = $this->buildModelSearchSetting();
         list($data_list, $total) = $this->contractModel
             ->search($search_setting)
             ->getListByPage([], true, 'create_time desc');
         $content = (new BuilderList())
             ->addTopButton('addnew')
-            ->addTopButton('delete',['model'=>'ParkEnterpriseContract'])
+            ->addTopButton('delete', ['model' => 'ParkEnterpriseContract'])
             ->setSearch('请输入关键字')
             ->keyListItem('id', 'ID')
             ->keyListItem('enterprise_name', '企业名称')
@@ -157,9 +151,9 @@ class EnterpriseContract extends Admin
             ->keyListItem('end_day', '结束日期')
             ->keyListItem('expiration', '是否到期', 'array', $this->expirationText)
             ->keyListItem('jiaofei_period', '缴费周期', 'array', $this->jiaofeiPeriodText)
-            ->keyListItem('continuous', '是否续签合同', 'array', $this->continuousText)
-            ->keyListItem('withdraw', '是否退租', 'array', $this->withdrawText)
-            ->keyListItem('withdraw_money', '退租金额')
+//            ->keyListItem('continuous', '是否续签合同', 'array', $this->continuousText)
+//            ->keyListItem('withdraw', '是否退租', 'array', $this->withdrawText)
+//            ->keyListItem('withdraw_money', '退租金额')
             ->keyListItem('right_button', '操作', 'btn')
             ->setListData($data_list)
             ->setListPage($total)
@@ -188,7 +182,7 @@ class EnterpriseContract extends Admin
     /**
      * @return \app\common\layout\Content
      * @throws \think\exception\DbException
-     * 新增/编辑合同
+     * 新增/编辑租房合同
      */
     public function edit($id = 0)
     {
@@ -198,7 +192,7 @@ class EnterpriseContract extends Admin
             $param = \input('param.');
             //todo数据校验
             if ($this->contractModel->editData($param)) {
-                $this->success($title . '成功',\url('index'));
+                $this->success($title . '成功', \url('index'));
             } else {
                 $this->error($title . '失败');
             }
@@ -219,8 +213,8 @@ class EnterpriseContract extends Admin
                 ->addFormItem('start_day', 'datetime', '合同生效日期')
                 ->addFormItem('end_day', 'datetime', '合同结束日期')
                 ->addFormItem('fangzu_pic', 'pictures', '房租合同', '上传合同图片')
-                ->addFormItem('caiwudaili_pic', 'pictures', '财务代理合同', '上传合同图片')
-                ->addFormItem('numbering', 'text', '合同编号','手动输入合同编号')
+//                ->addFormItem('caiwudaili_pic', 'pictures', '财务代理合同', '上传合同图片')
+                ->addFormItem('numbering', 'text', '合同编号', '手动输入合同编号')
                 ->addFormItem('contractor', 'text', '合同签订人')
                 ->addFormItem('contractor_tel', 'text', '签订人电话')
                 ->addFormItem('handler', 'text', '操作人')

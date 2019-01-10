@@ -39,11 +39,11 @@
                                                            placeholder="如果使用企查查,请输入完整企业名称!"
                                                            value="{$basic_info.enterprise_name ?? ''}">
                                                     <!--如果开启企查查功能则出现该按钮-->
-                                                    {if $qcc_config['status'] eq 1}
+                                                    {notempty name="$qcc_config"}
                                                     <button type="button" class="btn btn-info pull-left" id="qcc">
                                                         从企查查获取基本数据
                                                     </button>
-                                                    {/if}
+                                                    {/notempty}
                                                 </div>
                                             </div>
 

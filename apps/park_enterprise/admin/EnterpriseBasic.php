@@ -10,6 +10,7 @@ namespace app\park_enterprise\admin;
 
 
 use app\admin\controller\Admin;
+use app\common\builder\BuilderForm;
 use app\common\builder\BuilderList;
 use app\common\layout\Iframe;
 use app\park_enterprise\model\ParkEnterpriseBankInfo;
@@ -80,8 +81,8 @@ class EnterpriseBasic extends Admin
         ];
         $content = (new BuilderList())
             ->addTopButton('addnew')
-            ->addTopButton('self',$del)
-            ->setSearch('请输入企业名')
+            ->addTopButton('self', $del)
+            ->setSearch('请输入企业名称')
             ->keyListItem('id', 'ID')
             ->keyListItem('enterprise_name', '企业名称')
             ->keyListItem('build_id', '所在楼宇', 'callback', 'getBuildingNameById')
@@ -91,8 +92,8 @@ class EnterpriseBasic extends Admin
             ->setListData($data_list)// 数据列表
             ->setListPage($total)// 数据列表分页
             ->addRightButton('self', ['title' => '查看', 'class' => 'btn btn-info btn-xs', 'href' => url('edit', ['id' => '__data_id__'])])
+            ->addRightButton('self', ['title' => '续约', 'class' => 'btn btn-success btn-xs', 'href' => url('renewal', ['id' => '__data_id__'])])
             ->addRightButton('self', ['title' => '退租', 'class' => 'btn btn-warning confirm btn-xs', 'href' => url('out', ['id' => '__data_id__'])])
-
             ->fetch();
 
         return (new Iframe())
@@ -303,7 +304,7 @@ class EnterpriseBasic extends Admin
                     ];
                     ParkIncubationList::create($incubationData);
                 }
-                
+
                 $this->success('添加企业成功');
             } else {
 //====================================================显示添加企业的空页面=================================================
@@ -626,7 +627,7 @@ class EnterpriseBasic extends Admin
 
             //9,如果是大学生创业,还需删除大学生创业列表中的数据
             StudentInnovation::destroy(['enterprise_id' => $enterprise_id]);
-            
+
             //10.如果是孵化企业,删除孵化企业列表和走访记录中的数据
             ParkIncubationList::destroy(['enterprise_id' => $enterprise_id]);
             ParkIncubationVisitLog::destroy(['enterprise_id' => $enterprise_id]);
@@ -635,5 +636,114 @@ class EnterpriseBasic extends Admin
 
             $this->success('删除成功');
         }
+    }
+
+
+    /**
+     * @return \app\common\layout\Content
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     * 续约房租/财务代理合同
+     * 如果需要更新企业的入驻信息,也在这里进行
+     */
+    public function renewal()
+    {
+        if (IS_POST) {
+            $param = \input('param.');
+
+            if ($param['contract_type'] == 1) {
+                //房租合同
+                $contractModel = new ParkEnterpriseContract();
+                $old_contract_info = Db::name('ParkEnterpriseContract')
+                    ->where('enterprise_id', 'eq', $param['enterprise_id'])
+                    ->find();
+                $contractData = [
+                    'enterprise_id' => $param['enterprise_id'],
+                    'enterprise_name' => $param['enterprise_name'],
+                    'total_fee' => $param['total_fee'],
+                    'real_fee' => $param['real_fee'],
+                    'numbering' => \getFangZuContractNumbering($old_contract_info['build_id']),
+                    'build_id' => $old_contract_info['build_id'],
+                    'room_number' => $old_contract_info['room_number'],
+                    'margin' => 0,
+                    'contract_type' => 1,
+                    'paid_day' => $param['paid_day'],
+                    'start_day' => $param['start_day'],
+                    'end_day' => $param['start_day'],
+                    'contract_period' => $param['contract_period'],
+                    'jiaofei_period' => $param['jiaofei_period'],
+                    'marks' => $param['marks'],
+                    'fangzu_pic' => $param['pictures'],
+                    'contractor' => $param['contractor'],
+                    'contractor_tel' => $param['contractor_tel'],
+                    'handler' => $param['handler'],
+                    'issuer' => $param['issuer'],
+                    'confirmor' => $param['confirmor']
+
+                ];
+                if ($contractModel->save($contractData)) {
+                    $this->success('房租合同续约成功', \url('park_enterprise/enterprise_contract/index'));
+                } else {
+                    $this->error('房租合同续约失败');
+                }
+            } else {
+                //财务代理合同
+                $caiwudailiModel = new ParkEnterpriseKuaijiContract();
+
+                $caiwuData = [
+                    'enterprise_id' => $param['enterprise_id'],
+                    'kjdlfy' => $param['real_fee'],
+                    'numbering' => \getKuaijiContractNumbering(),
+                    'kjdl_s_day' => $param['start_day'],
+                    'kjdl_e_day' => $param['end_day'],
+                    'picture' => $param['pictures'],
+                    'marks' => $param['marks'],
+                ];
+                if ($caiwudailiModel->save($caiwuData)) {
+                    $this->success('财务代理合同续约成功', \url('park_enterprise/enterprise_cwdl_contract/index'));
+                } else {
+                    $this->error('财务代理合同续约失败');
+                }
+            }
+        }
+        $enterprise_id = \input('id');
+        $enterprise_name = \getEnterpriseNameByEnterpriseId($enterprise_id);
+        $info = [
+            'enterprise_id' => $enterprise_id,
+            'enterprise_name' => $enterprise_name,
+        ];
+        $content = (new BuilderForm())
+            ->addFormItem('enterprise_id', 'hidden', 'ID')
+            ->addFormItem('enterprise_name', 'text', '企业名称')
+            ->addFormItem('contract_type', 'select', '项目名称', '', [1 => '租房合同', '2' => '财务代理合同'])
+            ->addFormItem('total_fee', 'text', '费用')
+            ->addFormItem('real_fee', 'text', '实际费用')
+            ->addFormItem('paid_day', 'text', '支付时间')
+            ->addFormItem('contract_period', 'select', '合同期限', '', [1 => '一年', 2 => '二年', 3 => '三年', 4 => '四年', 5 => '五年'])
+            ->addFormItem('jiaofei_period', 'select', '缴费周期', '', [1 => '季度缴', 2 => '半年缴', 3 => '一年缴', 4 => '二年缴', 5 => '三年缴', 6 => '五年缴'])
+            ->addFormItem('start_day', 'text', '合同生效日期')
+            ->addFormItem('end_day', 'text', '合同结束日期')
+            ->addFormItem('marks', 'textarea', '备注')
+            ->addFormItem('pictures', 'pictures', '合同图片')
+            ->addFormItem('contractor', 'text', '合同签订人')
+            ->addFormItem('contractor_tel', 'text', '合同签订人电话')
+            ->addFormItem('handler', 'text', '操作人')
+            ->addFormItem('issuer', 'text', '开票人')
+            ->addFormItem('confirmor', 'text', '确认人')
+            ->setFormData($info)
+            ->addButton('submit')
+            ->addButton('back')
+            ->fetch();
+
+        return (new Iframe())
+            ->setMetaTitle('合同续约')
+            ->content($content);
+    }
+
+    public function out()
+    {
+
     }
 }
