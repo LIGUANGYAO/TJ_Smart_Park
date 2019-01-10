@@ -18,6 +18,7 @@ class ParkEnterpriseQichachaBasicInfo extends Base
      * @param $data
      * @return mixed|string
      * 返回企业入驻状态
+     * exm,为什么不起作用!!!
      */
     public function getEnterpriseStatusTextAttr($value, $data)
     {

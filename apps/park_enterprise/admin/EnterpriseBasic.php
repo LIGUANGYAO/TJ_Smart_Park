@@ -308,6 +308,9 @@ class EnterpriseBasic extends Admin
                     ParkIncubationList::create($incubationData);
                 }
 
+
+                //6,数据写入软件企业列表
+
                 $this->success('添加企业成功');
             } else {
 //====================================================显示添加企业的空页面=================================================
