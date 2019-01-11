@@ -121,7 +121,7 @@ class EnterpriseBasic extends Admin
     {
         $enterprise_id = \input('id', 0);
         //企查查配置
-        $qcc_config = get_plugin_config('qichacha');
+        $qcc_config = get_plugin_config('Qichacha');
         $modelA = new ParkEnterpriseQichachaBasicInfo();
         $modelB = new ParkEnterpriseQichachaStockInfo();
         $modelC = new ParkEnterpriseQichachaEmployeesInfo();
