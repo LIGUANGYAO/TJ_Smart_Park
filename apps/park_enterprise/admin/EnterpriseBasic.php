@@ -25,13 +25,14 @@ use app\park_enterprise\model\ParkEnterpriseQichachaEmployeesInfo;
 use app\park_enterprise\model\ParkEnterpriseQichachaStockInfo;
 use app\park_incubation\model\ParkIncubationList;
 use app\park_incubation\model\ParkIncubationVisitLog;
+use app\software_enterprise\model\ParkSoftEnterpriseList;
 use app\student_innovation\model\StudentInnovation;
 use think\Db;
 
 /**
  * Class EnterpriseBasic
  * @package app\park_enterprise\admin
- * 录入企业信息
+ * 录入企业信息,新增企业会关联各种数据表,所以禁止修改操作,所以修改企业信息逻辑代码没有实现一部分功能,如果需要,自行补充
  */
 class EnterpriseBasic extends Admin
 {
@@ -308,9 +309,18 @@ class EnterpriseBasic extends Admin
                     ParkIncubationList::create($incubationData);
                 }
 
-
                 //6,数据写入软件企业列表
+                $isSoftEnterpriseInstall = \check_install_module_my('software_enterprise');
+                if ($isSoftEnterpriseInstall && ($data['soft_tech'] == 1)) {
+                    $softData = [
+                        'enterprise_id' => $data['enterprise_id'],
+                        'enterprise_name' => $data['enterprise_name'],
+                    ];
+                    ParkSoftEnterpriseList::create($softData);
+                }
 
+                //7,数据写入高新企业数据表
+                //todo
                 $this->success('添加企业成功');
             } else {
 //====================================================显示添加企业的空页面=================================================

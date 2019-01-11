@@ -1,18 +1,17 @@
 {
-    "name":"software_enterprise",
-    "title":"software_enterprise",
-    "description":"QnnPHP应用描述",
-    "author":"未知",
-    "admin_manage_into":"",
-    "version":"1.0.0",
-    "dependences":{
-        "core":"1.3.0",
-        "plugins":{
-
-        },
-        "modules":{
-
-        }
+  "name": "software_enterprise",
+  "title": "智慧园区--软件企业管理模块",
+  "description": "智慧园区的软件企业管理模块",
+  "author": "xpwsgg",
+  "admin_manage_into": "",
+  "version": "1.0.0",
+  "dependences": {
+    "core": "1.3.0",
+    "plugins": {
     },
-    "database_prefix":"qnn_"
+    "modules": {
+      "park_enterprise": "1.0.0"
+    }
+  },
+  "database_prefix": "qnn_"
 }
