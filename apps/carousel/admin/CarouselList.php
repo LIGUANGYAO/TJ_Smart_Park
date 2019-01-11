@@ -85,6 +85,7 @@ class CarouselList extends Admin
             ->setSearch('请输入关键字')
             ->keyListItem('id', 'ID')
             ->keyListItem('position', '轮播位', 'callback', 'getCarouselPositionNameById')
+            ->keyListItem('module', '所属模块', 'callback', 'getModuleNameByModuleId')
             ->keyListItem('pic_path', '图片地址', 'picture')
             ->keyListItem('pic_url', '图片链接')
             ->keyListItem('pic_content', '文字介绍')
@@ -112,12 +113,15 @@ class CarouselList extends Admin
     public function edit($id = 0)
     {
         $title = $id > 0 ? '编辑' : '新增';
+        $moduleList = Db::name('Modules')
+            ->where('status', 'eq', 1)
+            ->column('id,title');
         if (IS_POST) {
             $data = \input('param.');
             //todo数据校验
 
             if ($this->listModel->editData($data)) {
-                $this->success($title . '成功', \url('List'));
+                $this->success($title . '成功', \url('index'));
             } else {
                 $this->error($this->listModel->getError());
             }
@@ -138,6 +142,7 @@ class CarouselList extends Admin
             $return = (new BuilderForm())
                 ->addFormItem('id', 'hidden', 'ID')
                 ->addFormItem('position', 'select', '轮播位', '请选择轮播位', $this->carouselPosition)
+                ->addFormItem('module', 'select', '所属模块', '请选择模块', $moduleList)
                 ->addFormItem('pic_path', 'picture', '轮播图', '请选择轮播图')
                 ->addFormItem('pic_url', 'text', '图片链接', '请输入图片链接地址')
                 ->addFormItem('pic_content', 'text', '描述', '请输入文字描述')
