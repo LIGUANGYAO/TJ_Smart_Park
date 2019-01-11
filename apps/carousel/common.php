@@ -16,3 +16,17 @@ if (!function_exists('getCarouselPositionNameById')) {
         return $name;
     }
 }
+
+if (!function_exists('getModuleNameByModuleId')){
+    /**
+     * @param $module_id
+     * @return mixed
+     * 根据模块ID获取模块名称
+     */
+    function getModuleNameByModuleId($module_id){
+        $module_name = Db::name('Modules')
+            ->where('id', $module_id)
+            ->value('title');
+        return $module_name;
+    }
+}
