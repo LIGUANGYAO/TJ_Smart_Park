@@ -57,6 +57,7 @@ class Module extends AppBase
                     ['name' => 'logic_Example', 'pathname' => '/logic/Example.php'],
                     ['name' => 'common', 'pathname' => '/common.php'],
                     ['name' => 'config', 'pathname' => '/config.php'],
+                    ['name' => 'logo', 'pathname' => '/static/logo.jpeg'],
                 ];
                 foreach ($write_files as $key => $row) {
                     $this->writeToFile('module', $row['name'], $data, $moduleDir . $row['pathname']);
