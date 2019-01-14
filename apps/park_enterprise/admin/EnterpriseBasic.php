@@ -13,6 +13,7 @@ use app\admin\controller\Admin;
 use app\common\builder\BuilderForm;
 use app\common\builder\BuilderList;
 use app\common\layout\Iframe;
+use app\high_tech_enterprise\model\HighTechEnterpriseList;
 use app\park_enterprise\model\ParkEnterpriseBankInfo;
 use app\park_enterprise\model\ParkEnterpriseContactInfo;
 use app\park_enterprise\model\ParkEnterpriseContract;
@@ -320,7 +321,14 @@ class EnterpriseBasic extends Admin
                 }
 
                 //7,数据写入高新企业数据表
-                //todo
+                $isHighTechInstall = \check_install_module_my('high_tech_enterprise');
+                if ($isHighTechInstall && ($data['high_tech'] == 1)) {
+                    $techData = [
+                        'enterprise_id' => $data['enterprise_id'],
+                        'enterprise_name' => $data['enterprise_name'],
+                    ];
+                    HighTechEnterpriseList::create($techData);
+                }
                 $this->success('添加企业成功');
             } else {
 //====================================================显示添加企业的空页面=================================================
