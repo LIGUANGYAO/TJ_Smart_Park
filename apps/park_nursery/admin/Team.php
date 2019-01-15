@@ -92,7 +92,7 @@ class Team extends Admin
             ->search([
                 ['name' => 'build_id', 'type' => 'select', 'title' => '楼宇', 'options' => $this->buildList],
                 ['name' => 'floor', 'type' => 'select', 'title' => '楼层', 'options' => $this->floors],
-                ['name' => 'keyword', 'type' => 'text', 'extra_attr' => 'placeholder="请输入企业名"'],
+                ['name' => 'keyword', 'type' => 'text', 'extra_attr' => 'placeholder="请输入团队名称"'],
             ])
             ->content($content);
     }

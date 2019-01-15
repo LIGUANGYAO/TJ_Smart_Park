@@ -71,12 +71,14 @@ class Nursery extends Admin
     public function index()
     {
         list($data_list, $total) = $this->nurseryModel
-            ->search('build_id,floor,station_status')
+            ->search([
+                'keyword_condition' => 'team_name',
+            ])
             ->getListByPage([], true, 'create_time desc');
         $content = (new BuilderList())
             ->addTopButton('addnew')
-            ->addTopButton('resume')
-            ->addTopButton('forbid')
+//            ->addTopButton('resume')
+//            ->addTopButton('forbid')
             ->addTopButton('delete')
             ->setSearch('请输入关键字')
             ->keyListItem('build_id', '楼宇', 'callback', 'getBuildingNameById')
@@ -85,6 +87,7 @@ class Nursery extends Admin
             ->keyListItem('station_fee', '工位费')
             ->keyListItem('station_deposit', '押金')
             ->keyListItem('station_status', '工位状态', 'array', $this->statusType)
+            ->keyListItem('team_name', '团队名称')
             ->keyListItem('marks', '备注')
             ->keyListItem('right_button', '操作', 'btn')
             ->setListData($data_list)// 数据列表
@@ -99,6 +102,7 @@ class Nursery extends Admin
                 ['name' => 'build_id', 'type' => 'select', 'title' => '楼宇', 'options' => $this->buildList],
                 ['name' => 'floor', 'type' => 'select', 'title' => '楼层', 'options' => $this->floors],
                 ['name' => 'station_status', 'type' => 'select', 'title' => '苗圃状态', 'options' => $this->statusType],
+                ['name'=>'keyword','type'=>'text','extra_attr' => 'placeholder="请输入企业名"']
             ])
             ->content($content);
     }
