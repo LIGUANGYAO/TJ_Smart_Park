@@ -59,10 +59,9 @@ class Team extends Admin
      */
     public function index()
     {
-        list($data_list, $total) = $this->teamModel->search([
-            ['name' => 'build_id', 'type' => 'select', 'title' => '楼宇', 'options' => $this->buildList],
-            ['name' => 'floor', 'type' => 'select', 'title' => '楼层', 'options' => $this->floors],
-            ['name' => 'keyword', 'type' => 'text', 'extra_attr' => 'placeholder="请输入企业名"'],
+        list($data_list, $total) = $this->teamModel
+            ->search([
+            'keyword_condition' => 'name',
         ])
             ->getListByPage([], true, 'create_time desc');
         $content = (new BuilderList())
@@ -87,6 +86,11 @@ class Team extends Admin
 
         return (new Iframe())
             ->setMetaTitle('苗圃团队列表')
+            ->search([
+                ['name' => 'build_id', 'type' => 'select', 'title' => '楼宇', 'options' => $this->buildList],
+                ['name' => 'floor', 'type' => 'select', 'title' => '楼层', 'options' => $this->floors],
+                ['name' => 'keyword', 'type' => 'text', 'extra_attr' => 'placeholder="请输入企业名"'],
+            ])
             ->content($content);
     }
 

@@ -70,11 +70,9 @@ class Nursery extends Admin
      */
     public function index()
     {
-        list($data_list, $total) = $this->nurseryModel->search([
-            ['name' => 'build_id', 'type' => 'select', 'title' => '楼宇', 'options' => $this->buildList],
-            ['name' => 'floor', 'type' => 'select', 'title' => '楼层', 'options' => $this->floors],
-            ['name' => 'status', 'type' => 'select', 'title' => '苗圃状态', 'options' => $this->statusType],
-        ])->getListByPage([], true, 'create_time desc');
+        list($data_list, $total) = $this->nurseryModel
+            ->search('build_id,floor,station_status')
+            ->getListByPage([], true, 'create_time desc');
         $content = (new BuilderList())
             ->addTopButton('addnew')
             ->addTopButton('resume')
@@ -88,6 +86,7 @@ class Nursery extends Admin
             ->keyListItem('station_deposit', '押金')
             ->keyListItem('station_status', '工位状态', 'array', $this->statusType)
             ->keyListItem('marks', '备注')
+            ->keyListItem('right_button', '操作', 'btn')
             ->setListData($data_list)// 数据列表
             ->setListPage($total)// 数据列表分页
             ->addRightButton('edit')
@@ -96,6 +95,11 @@ class Nursery extends Admin
 
         return (new Iframe())
             ->setMetaTitle('苗圃工位列表')
+            ->search([
+                ['name' => 'build_id', 'type' => 'select', 'title' => '楼宇', 'options' => $this->buildList],
+                ['name' => 'floor', 'type' => 'select', 'title' => '楼层', 'options' => $this->floors],
+                ['name' => 'station_status', 'type' => 'select', 'title' => '苗圃状态', 'options' => $this->statusType],
+            ])
             ->content($content);
     }
 
