@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS `qnn_park_investment_list`;

@@ -1,0 +1,17 @@
+{
+  "name": "park_investment",
+  "title": "智慧园区--投资管理",
+  "description": "智慧园区的投资管理模块",
+  "author": "xpwsgg",
+  "admin_manage_into": "",
+  "version": "1.0.0",
+  "dependences": {
+    "core": "1.3.0",
+    "plugins": {
+    },
+    "modules": {
+      "park_enterprise": "1.0.0"
+    }
+  },
+  "database_prefix": "qnn_"
+}

@@ -11,7 +11,7 @@
  Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 15/01/2019 10:26:41
+ Date: 15/01/2019 10:46:04
 */
 
 SET NAMES utf8mb4;
@@ -30,6 +30,7 @@ CREATE TABLE `qnn_park_nursery_list`  (
   `station_deposit` decimal(10, 2) NOT NULL DEFAULT 0.00 COMMENT '押金',
   `station_status` tinyint(1) NOT NULL COMMENT '工位状态:1=未租,2=已租,3=自用',
   `marks` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `team_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '入驻团队名称',
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
