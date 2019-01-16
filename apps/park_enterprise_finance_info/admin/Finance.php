@@ -77,10 +77,10 @@ class Finance extends Admin
             ->keyListItem('id', 'ID')
             ->keyListItem('enterprise_name', '企业名称')
             ->keyListItem('year', '年度')
-            ->keyListItem('income', '收入')
-            ->keyListItem('profit', '利润')
-            ->keyListItem('tax', '税收')
-            ->keyListItem('liabilities', '负债')
+            ->keyListItem('income', '收入(元)')
+            ->keyListItem('profit', '利润(元)')
+            ->keyListItem('tax', '税收(元)')
+            ->keyListItem('liabilities', '负债(元)')
             ->keyListItem('marks', '备注')
             ->keyListItem('right_button', '操作', 'btn')
             ->setListData($data_list)
@@ -119,18 +119,19 @@ class Finance extends Admin
         } else {
             $info = [
                 'year' => $this->year,
+                'liabilities' => 0.00,
             ];
             if ($id > 0) {
                 $info = ParkEnterpriseFinanceInfo::get($id);
             }
             $content = (new BuilderForm())
                 ->addFormItem('id', 'hidden', 'ID')
-                ->addFormItem('enterprise_name', 'select', '企业名称', '', $this->enterpriseList)
-                ->addFormItem('year', 'select', '年度', '', $this->yearList)
-                ->addFormItem('income', 'text', '收入')
-                ->addFormItem('profit', 'text', '利润')
-                ->addFormItem('tax', 'text', '税收')
-                ->addFormItem('liabilities', 'text', '负债')
+                ->addFormItem('enterprise_id', 'select', '企业名称', '请选择企业(企业管理中添加)', $this->enterpriseList)
+                ->addFormItem('year', 'text', '年度', '默认为本年度', $this->year)
+                ->addFormItem('income', 'text', '收入(元)','必须是数字,默认保留两位小数')
+                ->addFormItem('profit', 'text', '利润(元)','必须是数字,默认保留两位小数')
+                ->addFormItem('tax', 'text', '税收(元)','必须是数字,默认保留两位小数')
+                ->addFormItem('liabilities', 'text', '负债(元)','必须是数字,默认保留两位小数')
                 ->addFormItem('marks', 'textarea', '备注')
                 ->setFormData($info)
                 ->addButton('submit')
