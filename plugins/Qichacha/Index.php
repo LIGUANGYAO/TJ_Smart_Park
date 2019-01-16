@@ -19,12 +19,17 @@ use app\common\controller\Plugin;
  */
 class Index extends Plugin
 {
-
     /**
      * @var array 定义插件钩子
      */
     public $hooks = [
-        'qichacha'
+        'qichacha',
+        'qichachaTm',
+        'qichachaPatent',
+        'qichachaCertificate',
+        'qichachaWcopyright',
+        'qichachaScopyright',
+        'qichachaWebsite'
     ];
 
     /**
@@ -47,6 +52,7 @@ class Index extends Plugin
      * @param string $keyword
      * @return bool|string
      * 实现钩子方法
+     * 根据企业名称获取工商Master信息
      */
     public function qichacha($keyword = '')
     {
@@ -64,6 +70,35 @@ class Index extends Plugin
             $url = "http://api.qichacha.com/ECIV4/GetDetailsByName?key=$appkey&keyword=$keyword";
             $result = $this->qichacha_get($header, $url);
             return $result;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * @param string $keyword
+     * @return bool|string
+     * 全国商标查询--查询商标列表
+     * 请求参数：key=>'接口ApiKey',keyword=>'查询关键字（商标名称，商标注册号，申请人/代理人名称）'
+     */
+    public function qichachaTm($keyword = '')
+    {
+        $qichacha_config = $this->getConfig('Qichacha');
+        if ($qichacha_config['status']) {
+            $appkey = $qichacha_config['appKey'];
+            $secretKey = $qichacha_config['secretKey'];
+
+            $Timespan = \time();
+            $Token = \strtoupper(\md5($appkey . $Timespan . $secretKey));
+
+            $header[] = "Token: $Token";
+            $header[] = "Timespan: $Timespan";
+
+            $url = "http://api.qichacha.com/tm/Search?key=$appkey&keyword=$keyword";
+            $result = $this->qichacha_get($header, $url);
+            return $result;
+        } else {
+            return false;
         }
     }
 

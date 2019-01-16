@@ -1,10 +1,10 @@
 {
     "name":"Qichacha",
     "title":"企查查",
-    "description":"通过企查查接口获取企业Master信息,官网http://www.yjapi.cn",
+    "description":"通过企查查获取企业Master数据,商标,专利,著作权,网站,企业证书数据官网http://www.yjapi.cn",
     "author":"xpwsgg",
     "admin_manage_into":"",
-    "version":"1.0.2",
+    "version":"1.1.0",
     "dependences":{
         "plugins":{
 
