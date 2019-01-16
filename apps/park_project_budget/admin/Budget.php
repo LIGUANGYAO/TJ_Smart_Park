@@ -94,7 +94,7 @@ class Budget extends Admin
             if ($this->budgetModel->editData($param)) {
                 $this->success($title . '成功', \url('index'));
             } else {
-                $this->error($this->incubationModel->getError());
+                $this->error($this->budgetModel->getError());
             }
         } else {
             $info = [

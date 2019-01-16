@@ -10,6 +10,7 @@ namespace app\park_enterprise_finance_info\admin;
 
 
 use app\admin\controller\Admin;
+use app\common\builder\BuilderForm;
 use app\common\builder\BuilderList;
 use app\common\layout\Iframe;
 use app\park_enterprise_finance_info\model\ParkEnterpriseFinanceInfo;
@@ -98,8 +99,46 @@ class Finance extends Admin
             ->content($content);
     }
 
+    /**
+     * @param int $id
+     * @return \app\common\layout\Content
+     * @throws \think\exception\DbException
+     * 添加/编辑信息
+     */
     public function edit($id = 0)
     {
-
+        $title = $id > 0 ? '编辑' : '新增';
+        if (IS_POST) {
+            $param = \input();
+            $param['enterprise_name'] = \getEnterpriseNameByEnterpriseId($param['enterprise_id']);
+            if ($this->financeModel->editData($param)) {
+                $this->success($title . '成功', \url('index'));
+            } else {
+                $this->error($this->financeModel->getError());
+            }
+        } else {
+            $info = [
+                'year' => $this->year,
+            ];
+            if ($id > 0) {
+                $info = ParkEnterpriseFinanceInfo::get($id);
+            }
+            $content = (new BuilderForm())
+                ->addFormItem('id', 'hidden', 'ID')
+                ->addFormItem('enterprise_name', 'select', '企业名称', '', $this->enterpriseList)
+                ->addFormItem('year', 'select', '年度', '', $this->yearList)
+                ->addFormItem('income', 'text', '收入')
+                ->addFormItem('profit', 'text', '利润')
+                ->addFormItem('tax', 'text', '税收')
+                ->addFormItem('liabilities', 'text', '负债')
+                ->addFormItem('marks', 'textarea', '备注')
+                ->setFormData($info)
+                ->addButton('submit')
+                ->addButton('back')
+                ->fetch();
+            return (new Iframe())
+                ->setMetaTitle($title . '企业财务信息')
+                ->content($content);
+        }
     }
 }
