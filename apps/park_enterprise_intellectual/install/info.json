@@ -1,0 +1,18 @@
+{
+  "name": "park_enterprise_intellectual",
+  "title": "智慧园区--企业知识产品",
+  "description": "智慧园区的企业知识产品管理模块",
+  "author": "xpwsgg",
+  "admin_manage_into": "",
+  "version": "1.0.0",
+  "dependences": {
+    "core": "1.3.0",
+    "plugins": {
+      "Qichacha": "1.0.0"
+    },
+    "modules": {
+      "park_enterprise": "1.0.0"
+    }
+  },
+  "database_prefix": "qnn_"
+}

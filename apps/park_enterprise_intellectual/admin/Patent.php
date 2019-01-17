@@ -3,29 +3,29 @@
  * Created by PhpStorm.
  * User: xpwsg
  * Date: 2019/1/17
- * Time: 14:34
+ * Time: 11:12
  */
 
-namespace app\park_enterprise_intellectual_property\admin;
+namespace app\park_enterprise_intellectual\admin;
 
 
 use app\admin\controller\Admin;
 use app\common\builder\BuilderList;
 use app\common\layout\Iframe;
-use app\park_enterprise_intellectual_property\model\ParkEnterpriseWcopyrightList;
+use app\park_enterprise_intellectual\model\ParkEnterprisePatentList;
 
 /**
- * Class Wcopyright
+ * Class Patent
  * @package app\park_enterprise_intellectual_property\admin
- * 作品著作权控制器
+ * 企业专利控制器
  */
-class Wcopyright extends Admin
+class Patent extends Admin
 {
     /**
      * @var
-     * 作品著作权模型
+     * 专利模型
      */
-    protected $wModel;
+    protected $patentModel;
 
     /**
      *初始化
@@ -33,27 +33,27 @@ class Wcopyright extends Admin
     public function _initialize()
     {
         parent::_initialize();
-        $this->wModel = new ParkEnterpriseWcopyrightList();
+        $this->patentModel = new ParkEnterprisePatentList();
     }
 
     /**
      * @return \app\common\layout\Content
-     * 作品著作权列表
+     * 专利列表
      */
     public function index()
     {
-        list($data_list, $total) = $this->wModel
-            ->search(['keyword_condition' => 'enterprise_name'])
+        list($data_list, $total) = $this->patentModel
+            ->search([
+                'keyword_condition' => 'enterprise_name',
+            ])
             ->getListByPage([], true, 'create_time desc');
         $content = (new BuilderList())
             ->keyListItem('id', 'ID')
             ->keyListItem('enterprise_name', '企业名称')
-            ->keyListItem('title', '作品名称')
-            ->keyListItem('category', '类别')
-            ->keyListItem('register_no', '登记号')
-            ->keyListItem('publish_day', '首次发布日期')
-            ->keyListItem('finish_day', '创作完成日期')
-            ->keyListItem('register_day', '登记日期')
+            ->keyListItem('name', '名称')
+            ->keyListItem('type', '专利类型')
+            ->keyListItem('publication_number', '公开号')
+            ->keyListItem('publication_date', '公开日期')
             ->setPageTips('<code>数据来源于企查查,无需人工干预</code>')
             ->setListData($data_list)
             ->setListPage($total)

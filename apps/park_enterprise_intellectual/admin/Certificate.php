@@ -2,30 +2,30 @@
 /**
  * Created by PhpStorm.
  * User: xpwsg
- * Date: 2019/1/16
- * Time: 16:00
+ * Date: 2019/1/17
+ * Time: 13:55
  */
 
-namespace app\park_enterprise_intellectual_property\admin;
+namespace app\park_enterprise_intellectual\admin;
 
 
 use app\admin\controller\Admin;
 use app\common\builder\BuilderList;
 use app\common\layout\Iframe;
-use app\park_enterprise_intellectual_property\model\ParkEnterpriseTrademarkList;
+use app\park_enterprise_intellectual\model\ParkEnterpriseEcicertificationList;
 
 /**
- * Class Trademark
+ * Class Certificate
  * @package app\park_enterprise_intellectual_property\admin
- * 企业商标控制器
+ * 企业证书控制器
  */
-class Trademark extends Admin
+class Certificate extends Admin
 {
     /**
      * @var
-     * 商标模型
+     * 企业证书模型
      */
-    protected $tmModel;
+    protected $cerModel;
 
     /**
      *初始化
@@ -33,16 +33,16 @@ class Trademark extends Admin
     public function _initialize()
     {
         parent::_initialize();
-        $this->tmModel = new ParkEnterpriseTrademarkList();
+        $this->cerModel = new ParkEnterpriseEcicertificationList();
     }
 
     /**
      * @return \app\common\layout\Content
-     * 列表
+     * 证书列表
      */
     public function index()
     {
-        list($data_list, $total) = $this->tmModel
+        list($data_list, $total) = $this->cerModel
             ->search([
                 'keyword_condition' => 'enterprise_name',
             ])
@@ -50,19 +50,20 @@ class Trademark extends Admin
         $content = (new BuilderList())
             ->keyListItem('id', 'ID')
             ->keyListItem('enterprise_name', '企业名称')
-            ->keyListItem('image_url', '商标LOGO', 'callback', 'displayRemoteImage')
-            ->keyListItem('name', '商标名称')
-            ->keyListItem('tm_status', '状态')
-            ->keyListItem('app_date', '申请日期')
-            ->keyListItem('reg_no', '注册号')
-            ->keyListItem('intcis', '国际分类')
+            ->keyListItem('title', '证书名称')
+            ->keyListItem('type', '证书类型')
+            ->keyListItem('numbering', '证书编号')
+            ->keyListItem('start_date', '证书生效时间')
+            ->keyListItem('end_date', '证书截止日期')
             ->setPageTips('<code>数据来源于企查查,无需人工干预</code>')
             ->setListData($data_list)
             ->setListPage($total)
             ->fetch();
         return (new Iframe())
             ->search([
-                ['name' => 'keyword', 'type' => 'text', 'extra_attr' => 'placeholder="输入企业名称"']
+                ['name' => 'keyword',
+                    'type' => 'text',
+                    'extra_attr' => 'placeholder="输入企业名称"'],
             ])
             ->content($content);
     }

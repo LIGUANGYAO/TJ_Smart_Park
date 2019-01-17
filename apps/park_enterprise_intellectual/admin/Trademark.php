@@ -2,30 +2,30 @@
 /**
  * Created by PhpStorm.
  * User: xpwsg
- * Date: 2019/1/17
- * Time: 11:12
+ * Date: 2019/1/16
+ * Time: 16:00
  */
 
-namespace app\park_enterprise_intellectual_property\admin;
+namespace app\park_enterprise_intellectual\admin;
 
 
 use app\admin\controller\Admin;
 use app\common\builder\BuilderList;
 use app\common\layout\Iframe;
-use app\park_enterprise_intellectual_property\model\ParkEnterprisePatentList;
+use app\park_enterprise_intellectual\model\ParkEnterpriseTrademarkList;
 
 /**
- * Class Patent
+ * Class Trademark
  * @package app\park_enterprise_intellectual_property\admin
- * 企业专利控制器
+ * 企业商标控制器
  */
-class Patent extends Admin
+class Trademark extends Admin
 {
     /**
      * @var
-     * 专利模型
+     * 商标模型
      */
-    protected $patentModel;
+    protected $tmModel;
 
     /**
      *初始化
@@ -33,16 +33,16 @@ class Patent extends Admin
     public function _initialize()
     {
         parent::_initialize();
-        $this->patentModel = new ParkEnterprisePatentList();
+        $this->tmModel = new ParkEnterpriseTrademarkList();
     }
 
     /**
      * @return \app\common\layout\Content
-     * 专利列表
+     * 列表
      */
     public function index()
     {
-        list($data_list, $total) = $this->patentModel
+        list($data_list, $total) = $this->tmModel
             ->search([
                 'keyword_condition' => 'enterprise_name',
             ])
@@ -50,10 +50,12 @@ class Patent extends Admin
         $content = (new BuilderList())
             ->keyListItem('id', 'ID')
             ->keyListItem('enterprise_name', '企业名称')
-            ->keyListItem('name', '名称')
-            ->keyListItem('type', '专利类型')
-            ->keyListItem('publication_number', '公开号')
-            ->keyListItem('publication_date', '公开日期')
+            ->keyListItem('image_url', '商标LOGO', 'callback', 'displayRemoteImage')
+            ->keyListItem('name', '商标名称')
+            ->keyListItem('tm_status', '状态')
+            ->keyListItem('app_date', '申请日期')
+            ->keyListItem('reg_no', '注册号')
+            ->keyListItem('intcis', '国际分类')
             ->setPageTips('<code>数据来源于企查查,无需人工干预</code>')
             ->setListData($data_list)
             ->setListPage($total)

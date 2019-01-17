@@ -3,23 +3,23 @@
  * Created by PhpStorm.
  * User: xpwsg
  * Date: 2019/1/17
- * Time: 15:14
+ * Time: 14:55
  */
 
-namespace app\park_enterprise_intellectual_property\admin;
+namespace app\park_enterprise_intellectual\admin;
 
 
 use app\admin\controller\Admin;
 use app\common\builder\BuilderList;
 use app\common\layout\Iframe;
-use app\park_enterprise_intellectual_property\model\ParkEnterpriseWebsiteList;
+use app\park_enterprise_intellectual\model\ParkEnterpriseScopyrightList;
 
 /**
- * Class Website
+ * Class Scopyright
  * @package app\park_enterprise_intellectual_property\admin
- * 网站信息控制器
+ * 企业软件著作权控制器
  */
-class Website extends Admin
+class Scopyright extends Admin
 {
     /**
      *初始化
@@ -31,21 +31,23 @@ class Website extends Admin
 
     /**
      * @return \app\common\layout\Content
-     * 网站列表
+     * 软件著作权列表
      */
     public function index()
     {
-        list($data_list, $total) = (new ParkEnterpriseWebsiteList())
+        list($data_list, $total) = (new ParkEnterpriseScopyrightList())
             ->search(['keyword_condition' => 'enterprise_name'])
             ->getListByPage([], true, 'create_time desc');
         $content = (new BuilderList())
             ->keyListItem('id', 'ID')
             ->keyListItem('enterprise_name', '企业名称')
-            ->keyListItem('title', '标题')
-            ->keyListItem('home_site', '网址')
-            ->keyListItem('yuming', '域名')
-            ->keyListItem('beian', '备案')
-            ->keyListItem('s_day', '审核日期')
+            ->keyListItem('title', '软件全称')
+            ->keyListItem('shortname', '软件简称')
+            ->keyListItem('version_no', '版本号')
+            ->keyListItem('category', '类别')
+            ->keyListItem('publish_day', '发布日期')
+            ->keyListItem('register_no', '登记号')
+            ->keyListItem('register_aper_day', '登记批准日期')
             ->setPageTips('<code>数据来源于企查查,无需人工干预</code>')
             ->setListData($data_list)
             ->setListPage($total)
