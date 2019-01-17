@@ -108,7 +108,8 @@ class Index extends Plugin
      * 专利查询--公司专利多重查询
      * keyword=>关键字(公司名或keyNo)
      */
-    public function qichachaPatent($keyword = ''){
+    public function qichachaPatent($keyword = '')
+    {
         $qichacha_config = $this->getConfig('Qichacha');
         if ($qichacha_config['status']) {
             $appkey = $qichacha_config['appKey'];
@@ -127,6 +128,33 @@ class Index extends Plugin
             return false;
         }
     }
+
+    /**
+     * @param string $keyword
+     * @return bool|string
+     * 企业证书查询--企业证书查询
+     */
+    public function qichachaCertificate($keyword = '')
+    {
+        $qichacha_config = $this->getConfig('Qichacha');
+        if ($qichacha_config['status']) {
+            $appkey = $qichacha_config['appKey'];
+            $secretKey = $qichacha_config['secretKey'];
+
+            $Timespan = \time();
+            $Token = \strtoupper(\md5($appkey . $Timespan . $secretKey));
+
+            $header[] = "Token: $Token";
+            $header[] = "Timespan: $Timespan";
+
+            $url = "http://api.qichacha.com/ECICertification/SearchCertification?key=$appkey&searchKey=$keyword";
+            $result = $this->qichacha_get($header, $url);
+            return $result;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * @param $header
      * @param $url
