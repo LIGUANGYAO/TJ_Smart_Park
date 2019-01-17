@@ -11,6 +11,7 @@
       "Qichacha": "1.0.0"
     },
     "modules": {
+      "park_enterprise": "1.0.0"
     }
   },
   "database_prefix": "qnn_"
