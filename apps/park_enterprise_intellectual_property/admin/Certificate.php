@@ -55,6 +55,7 @@ class Certificate extends Admin
             ->keyListItem('numbering', '证书编号')
             ->keyListItem('start_date', '证书生效时间')
             ->keyListItem('end_date', '证书截止日期')
+            ->setPageTips('<code>数据来源于企查查,无需人工干预</code>')
             ->setListData($data_list)
             ->setListPage($total)
             ->fetch();

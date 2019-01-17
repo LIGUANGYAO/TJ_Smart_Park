@@ -54,6 +54,7 @@ class Patent extends Admin
             ->keyListItem('type', '专利类型')
             ->keyListItem('publication_number', '公开号')
             ->keyListItem('publication_date', '公开日期')
+            ->setPageTips('<code>数据来源于企查查,无需人工干预</code>')
             ->setListData($data_list)
             ->setListPage($total)
             ->fetch();

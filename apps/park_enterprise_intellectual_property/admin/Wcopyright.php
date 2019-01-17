@@ -54,6 +54,7 @@ class Wcopyright extends Admin
             ->keyListItem('publish_day', '首次发布日期')
             ->keyListItem('finish_day', '创作完成日期')
             ->keyListItem('register_day', '登记日期')
+            ->setPageTips('<code>数据来源于企查查,无需人工干预</code>')
             ->setListData($data_list)
             ->setListPage($total)
             ->fetch();

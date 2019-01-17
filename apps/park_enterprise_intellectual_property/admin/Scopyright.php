@@ -48,6 +48,7 @@ class Scopyright extends Admin
             ->keyListItem('publish_day', '发布日期')
             ->keyListItem('register_no', '登记号')
             ->keyListItem('register_aper_day', '登记批准日期')
+            ->setPageTips('<code>数据来源于企查查,无需人工干预</code>')
             ->setListData($data_list)
             ->setListPage($total)
             ->fetch();

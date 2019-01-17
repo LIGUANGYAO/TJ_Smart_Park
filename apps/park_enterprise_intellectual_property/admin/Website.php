@@ -46,6 +46,7 @@ class Website extends Admin
             ->keyListItem('yuming', '域名')
             ->keyListItem('beian', '备案')
             ->keyListItem('s_day', '审核日期')
+            ->setPageTips('<code>数据来源于企查查,无需人工干预</code>')
             ->setListData($data_list)
             ->setListPage($total)
             ->fetch();

@@ -56,6 +56,7 @@ class Trademark extends Admin
             ->keyListItem('app_date', '申请日期')
             ->keyListItem('reg_no', '注册号')
             ->keyListItem('intcis', '国际分类')
+            ->setPageTips('<code>数据来源于企查查,无需人工干预</code>')
             ->setListData($data_list)
             ->setListPage($total)
             ->fetch();
