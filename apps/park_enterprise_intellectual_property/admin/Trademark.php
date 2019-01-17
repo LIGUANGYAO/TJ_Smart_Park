@@ -10,14 +10,59 @@ namespace app\park_enterprise_intellectual_property\admin;
 
 
 use app\admin\controller\Admin;
+use app\common\builder\BuilderList;
+use app\common\layout\Iframe;
+use app\park_enterprise_intellectual_property\model\ParkEnterpriseTrademarkList;
 
+/**
+ * Class Trademark
+ * @package app\park_enterprise_intellectual_property\admin
+ * 企业商标控制器
+ */
 class Trademark extends Admin
 {
+    /**
+     * @var
+     * 商标模型
+     */
+    protected $tmModel;
+
+    /**
+     *初始化
+     */
+    public function _initialize()
+    {
+        parent::_initialize();
+        $this->tmModel = new ParkEnterpriseTrademarkList();
+    }
+
+    /**
+     * @return \app\common\layout\Content
+     * 列表
+     */
     public function index()
     {
-        $keyword = '苏州朗动网络科技有限公司';
-        $return = hook('qichachaTm', $keyword, true);
-        $data = \json_decode($return[0], true);
-        \halt($data);
+        list($data_list, $total) = $this->tmModel
+            ->search([
+                'keyword_condition' => 'enterprise_name',
+            ])
+            ->getListByPage([], true, 'create_time desc');
+        $content = (new BuilderList())
+            ->keyListItem('id', 'ID')
+            ->keyListItem('enterprise_name', '企业名称')
+            ->keyListItem('image_url', '商标LOGO', 'callback', 'displayRemoteImage')
+            ->keyListItem('name', '商标名称')
+            ->keyListItem('tm_status', '状态')
+            ->keyListItem('app_date', '申请日期')
+            ->keyListItem('reg_no', '注册号')
+            ->keyListItem('intcis', '国际分类')
+            ->setListData($data_list)
+            ->setListPage($total)
+            ->fetch();
+        return (new Iframe())
+            ->search([
+                ['name' => 'keyword', 'type' => 'text', 'extra_attr' => 'placeholder="输入企业名称"']
+            ])
+            ->content($content);
     }
 }

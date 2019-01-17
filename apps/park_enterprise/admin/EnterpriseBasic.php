@@ -24,6 +24,7 @@ use app\park_enterprise\model\ParkEnterpriseOutList;
 use app\park_enterprise\model\ParkEnterpriseQichachaBasicInfo;
 use app\park_enterprise\model\ParkEnterpriseQichachaEmployeesInfo;
 use app\park_enterprise\model\ParkEnterpriseQichachaStockInfo;
+use app\park_enterprise_intellectual_property\model\ParkEnterpriseTrademarkList;
 use app\park_incubation\model\ParkIncubationList;
 use app\park_incubation\model\ParkIncubationVisitLog;
 use app\software_enterprise\model\ParkSoftEnterpriseList;
@@ -329,6 +330,31 @@ class EnterpriseBasic extends Admin
                     ];
                     HighTechEnterpriseList::create($techData);
                 }
+                //8,添加企业的商标数据
+                $isZxcqInstall = \check_install_module_my('park_enterprise_intellectual_property');
+                if ($isZxcqInstall) {
+                    $qccReturn = hook('qichachaTm', $data['enterprise_name'], true);
+                    $qccData = \json_decode($qccReturn[0], true);
+                    if ($qccData['Status'] == 200) {
+                        $tmData = [];
+                        //组装商标数据
+                        foreach ($qccData['Result'] as $k => $v) {
+                            $tmData[$k]['enterprise_id'] = $data['enterprise_id'];
+                            $tmData[$k]['enterprise_name'] = $data['enterprise_name'];
+                            $tmData[$k]['image_url'] = $v['ImageUrl'];
+                            $tmData[$k]['name'] = $v['Name'];
+                            $tmData[$k]['tm_status'] = $v['Status'];
+                            $tmData[$k]['app_date'] = $v['AppDate'];
+                            $tmData[$k]['reg_no'] = $v['RegNo'];
+                            $tmData[$k]['intcis'] = $v['IntCls'];
+                        }
+                        $tmModel = new ParkEnterpriseTrademarkList();
+                        $tmModel->saveAll($tmData);
+                    }
+                }
+
+                //9,添加企业的专利信息
+                //todo
                 $this->success('添加企业成功');
             } else {
 //====================================================显示添加企业的空页面=================================================
