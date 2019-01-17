@@ -208,6 +208,32 @@ class Index extends Plugin
     }
 
     /**
+     * @param string $keyword
+     * @return bool|string
+     * 公司网站信息查询--网站信息查询
+     */
+    public function qichachaWebsite($keyword = '')
+    {
+        $qichacha_config = $this->getConfig('Qichacha');
+        if ($qichacha_config['status']) {
+            $appkey = $qichacha_config['appKey'];
+            $secretKey = $qichacha_config['secretKey'];
+
+            $Timespan = \time();
+            $Token = \strtoupper(\md5($appkey . $Timespan . $secretKey));
+
+            $header[] = "Token: $Token";
+            $header[] = "Timespan: $Timespan";
+
+            $url = "http://api.qichacha.com/WebSiteV4/GetCompanyWebSite?key=$appkey&searchKey=$keyword";
+            $result = $this->qichacha_get($header, $url);
+            return $result;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * @param $header
      * @param $url
      * @return bool|string

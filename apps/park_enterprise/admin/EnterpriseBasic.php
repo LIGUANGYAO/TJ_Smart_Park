@@ -29,6 +29,7 @@ use app\park_enterprise_intellectual_property\model\ParkEnterprisePatentList;
 use app\park_enterprise_intellectual_property\model\ParkEnterpriseScopyrightList;
 use app\park_enterprise_intellectual_property\model\ParkEnterpriseTrademarkList;
 use app\park_enterprise_intellectual_property\model\ParkEnterpriseWcopyrightList;
+use app\park_enterprise_intellectual_property\model\ParkEnterpriseWebsiteList;
 use app\park_incubation\model\ParkIncubationList;
 use app\park_incubation\model\ParkIncubationVisitLog;
 use app\software_enterprise\model\ParkSoftEnterpriseList;
@@ -382,7 +383,7 @@ class EnterpriseBasic extends Admin
                     $qccData = \json_decode($qccReturn[0], true);
                     if (!empty($qccData['Result'])) {
                         $cerData = [];
-                        //组装专利数据
+                        //组装企业证书数据
                         foreach ($qccData['Result'] as $k => $v) {
                             $cerData[$k]['enterprise_id'] = $data['enterprise_id'];
                             $cerData[$k]['enterprise_name'] = $data['enterprise_name'];
@@ -404,7 +405,7 @@ class EnterpriseBasic extends Admin
                     $qccData = \json_decode($qccReturn[0], true);
                     if (!empty($qccData['Result'])) {
                         $wData = [];
-                        //组装专利数据
+                        //组装作品著作权数据
                         foreach ($qccData['Result'] as $k => $v) {
                             $wData[$k]['enterprise_id'] = $data['enterprise_id'];
                             $wData[$k]['enterprise_name'] = $data['enterprise_name'];
@@ -425,7 +426,7 @@ class EnterpriseBasic extends Admin
                     $qccData = \json_decode($qccReturn[0], true);
                     if (!empty($qccData['Result'])) {
                         $cData = [];
-                        //组装专利数据
+                        //组装软件著作权数据
                         foreach ($qccData['Result'] as $k => $v) {
                             $cData[$k]['enterprise_id'] = $data['enterprise_id'];
                             $cData[$k]['enterprise_name'] = $data['enterprise_name'];
@@ -442,8 +443,26 @@ class EnterpriseBasic extends Admin
                     }
                 }
                 //13,添加网站数据
+                if ($isZxcqInstall) {
+                    $qccReturn = hook('qichachaWebsite', $data['enterprise_name'], true);
+                    $qccData = \json_decode($qccReturn[0], true);
+                    if (!empty($qccData['Result'])) {
+                        $webData = [];
+                        //组装网站数据
+                        foreach ($qccData['Result'] as $k => $v) {
+                            $webData[$k]['enterprise_id'] = $data['enterprise_id'];
+                            $webData[$k]['enterprise_name'] = $data['enterprise_name'];
+                            $webData[$k]['home_site'] = $v['HomeSite'];
+                            $webData[$k]['title'] = $v['Title'];
+                            $webData[$k]['yuming'] = $v['YuMing'];
+                            $webData[$k]['beian'] = $v['BeiAn'];
+                            $webData[$k]['s_day'] = $v['SDate'];
+                        }
+                        $webModel = new ParkEnterpriseWebsiteList();
+                        $webModel->saveAll($webData);
+                    }
+                }
 
-                //todo
                 $this->success('添加企业成功');
             } else {
 //====================================================显示添加企业的空页面=================================================
