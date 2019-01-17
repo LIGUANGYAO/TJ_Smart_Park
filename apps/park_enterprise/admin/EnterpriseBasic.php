@@ -27,6 +27,7 @@ use app\park_enterprise\model\ParkEnterpriseQichachaStockInfo;
 use app\park_enterprise_intellectual_property\model\ParkEnterpriseEcicertificationList;
 use app\park_enterprise_intellectual_property\model\ParkEnterprisePatentList;
 use app\park_enterprise_intellectual_property\model\ParkEnterpriseTrademarkList;
+use app\park_enterprise_intellectual_property\model\ParkEnterpriseWcopyrightList;
 use app\park_incubation\model\ParkIncubationList;
 use app\park_incubation\model\ParkIncubationVisitLog;
 use app\software_enterprise\model\ParkSoftEnterpriseList;
@@ -398,6 +399,26 @@ class EnterpriseBasic extends Admin
 
                     //11,添加作品著作权数据
 
+                if ($isZxcqInstall){
+                    $qccReturn = hook('qichachaWcopyright', '小米科技有限责任公司', true);
+                    $qccData = \json_decode($qccReturn[0], true);
+                    if (!empty($qccData['Result'])) {
+                        $wData = [];
+                        //组装专利数据
+                        foreach ($qccData['Result'] as $k => $v) {
+                            $wData[$k]['enterprise_id'] = 1;
+                            $wData[$k]['enterprise_name'] = '小米科技有限责任公司';
+                            $wData[$k]['category'] = $v['Category'];
+                            $wData[$k]['title'] = $v['Name'];
+                            $wData[$k]['publish_day'] = $v['PublishDate'];
+                            $wData[$k]['finish_day'] = $v['FinishDate'];
+                            $wData[$k]['register_no'] = $v['RegisterNo'];
+                            $wData[$k]['register_day'] = $v['RegisterDate'];
+                        }
+                        $wModel = new ParkEnterpriseWcopyrightList();
+                        $wModel->saveAll($wData);
+                    }
+                }
                     //12,添加软件著作权数据
 
                     //13,添加网站数据
