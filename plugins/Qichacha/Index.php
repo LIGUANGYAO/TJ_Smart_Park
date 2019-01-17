@@ -103,6 +103,31 @@ class Index extends Plugin
     }
 
     /**
+     * @param string $keyword
+     * @return bool|string
+     * 专利查询--公司专利多重查询
+     * keyword=>关键字(公司名或keyNo)
+     */
+    public function qichachaPatent($keyword = ''){
+        $qichacha_config = $this->getConfig('Qichacha');
+        if ($qichacha_config['status']) {
+            $appkey = $qichacha_config['appKey'];
+            $secretKey = $qichacha_config['secretKey'];
+
+            $Timespan = \time();
+            $Token = \strtoupper(\md5($appkey . $Timespan . $secretKey));
+
+            $header[] = "Token: $Token";
+            $header[] = "Timespan: $Timespan";
+
+            $url = "http://api.qichacha.com/PatentV4/SearchMultiPatents?key=$appkey&searchKey=$keyword";
+            $result = $this->qichacha_get($header, $url);
+            return $result;
+        } else {
+            return false;
+        }
+    }
+    /**
      * @param $header
      * @param $url
      * @return bool|string

@@ -24,6 +24,7 @@ use app\park_enterprise\model\ParkEnterpriseOutList;
 use app\park_enterprise\model\ParkEnterpriseQichachaBasicInfo;
 use app\park_enterprise\model\ParkEnterpriseQichachaEmployeesInfo;
 use app\park_enterprise\model\ParkEnterpriseQichachaStockInfo;
+use app\park_enterprise_intellectual_property\model\ParkEnterprisePatentList;
 use app\park_enterprise_intellectual_property\model\ParkEnterpriseTrademarkList;
 use app\park_incubation\model\ParkIncubationList;
 use app\park_incubation\model\ParkIncubationVisitLog;
@@ -354,6 +355,26 @@ class EnterpriseBasic extends Admin
                 }
 
                 //9,添加企业的专利信息
+                if ($isZxcqInstall) {
+                    $qccReturn = hook('qichachaPatent', $data['enterprise_name'], true);
+                    $qccData = \json_decode($qccReturn[0], true);
+                    if (!empty($qccData['Result'])) {
+                        $paData = [];
+                        //组装专利数据
+                        foreach ($qccData['Result'] as $k => $v) {
+                            $paData[$k]['enterprise_id'] = $data['enterprise_id'];
+                            $paData[$k]['enterprise_name'] = $data['enterprise_name'];
+                            $paData[$k]['type'] = $v['KindCode'];
+                            $paData[$k]['publication_number'] = $v['PublicationNumber'];
+                            $paData[$k]['publication_date'] = $v['PublicationDate'];
+                            $paData[$k]['name'] = $v['Title'];
+                        }
+                        $paModel = new ParkEnterprisePatentList();
+                        $paModel->saveAll($paData);
+                    }
+                }
+                //10,添加企业证书信息
+
                 //todo
                 $this->success('添加企业成功');
             } else {
