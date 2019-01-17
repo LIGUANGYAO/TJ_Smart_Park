@@ -43,9 +43,4 @@ CREATE TABLE `qnn_student_innovation`  (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
--- ----------------------------
--- Records of qnn_student_innovation
--- ----------------------------
-INSERT INTO `qnn_student_innovation` VALUES (1, '测试创业', '啦啦啦', '110', '本科', 20, '你大爷', '你二叔', 200.00, 100.00, '2018-12-18 16:57:25', '2018-12-18 17:55:54', 1, 3, '101', '2018-12-18 16:57:38', '2018-12-18 16:57:38', NULL);
-
 SET FOREIGN_KEY_CHECKS = 1;
