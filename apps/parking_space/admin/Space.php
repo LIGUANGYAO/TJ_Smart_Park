@@ -54,6 +54,7 @@ class Space extends Admin
             ->keyListItem('id', 'ID')
             ->keyListItem('numbering', '车位号')
             ->keyListItem('price', '价格')
+            ->keyListItem('space_status', '状态', 'array', [1 => '已租', 2 => '未租'])
             ->keyListItem('right_button', '操作', 'btn')
             ->setListData($data_list)
             ->setListPage($total)
@@ -90,7 +91,7 @@ class Space extends Admin
             }
         } else {
             $info = [
-
+                'space_status' => 2,
             ];
             if ($id > 0) {
                 $info = ParkingSpaceList::get($id);
@@ -99,6 +100,7 @@ class Space extends Admin
                 ->addFormItem('id', 'hidden', 'ID')
                 ->addFormItem('numbering', 'text', '车位号', '如A0001')
                 ->addFormItem('price', 'text', '价格', '请输入数字')
+                ->addFormItem('space_status', 'radio', '状态', '', [1 => '已租', 2 => '未租'])
                 ->setFormData($info)
                 ->addButton('submit')
                 ->addButton('back')

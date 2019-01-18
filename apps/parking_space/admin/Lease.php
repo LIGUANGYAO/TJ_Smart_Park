@@ -75,6 +75,7 @@ class Lease extends Admin
             ->keyListItem('amount', '总费用')
             ->keyListItem('period', '缴费周期', 'array', $this->period)
             ->keyListItem('pay_time', '缴费时间')
+            ->keyListItem('marks', '备注')
             ->keyListItem('right_button', '操作', 'btn')
             ->setListData($data_list)
             ->setListPage($total)

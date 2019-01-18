@@ -11,7 +11,7 @@
  Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 18/01/2019 14:26:26
+ Date: 18/01/2019 14:37:07
 */
 
 SET NAMES utf8mb4;
@@ -33,15 +33,11 @@ CREATE TABLE `qnn_parking_space_lease_list`  (
   `is_paid` tinyint(1) NULL DEFAULT 1 COMMENT '1=已缴费,2=未交费',
   `amount` decimal(10, 2) NULL DEFAULT NULL COMMENT '总费用',
   `lease_status` tinyint(1) NULL DEFAULT 2 COMMENT '1=到期,2=未到期',
+  `marks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '车位租赁列表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of qnn_parking_space_lease_list
--- ----------------------------
-INSERT INTO `qnn_parking_space_lease_list` VALUES (1, 'A0001', 1, '上海小炬华科技', '2019-01-18 14:22:48', '2019-02-28 14:20:40', 2, '2019-01-18 14:23:00', 1, 500.00, 2, '2019-01-18 14:23:19', '2019-01-18 14:23:19');
 
 -- ----------------------------
 -- Table structure for qnn_parking_space_list
@@ -56,10 +52,5 @@ CREATE TABLE `qnn_parking_space_list`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '车位列表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of qnn_parking_space_list
--- ----------------------------
-INSERT INTO `qnn_parking_space_list` VALUES (1, 'A0001', 144.00, 1, '2019-01-18 13:36:24', '2019-01-18 13:36:24');
 
 SET FOREIGN_KEY_CHECKS = 1;
