@@ -52,7 +52,9 @@ class Index extends Admin
      */
     public function index()
     {
-        list($data_list, $total) = $this->techModel->search(['keyword_condition' => 'enterprise_name',])->getListByPage([], true, 'create_time desc');
+        list($data_list, $total) = $this->techModel
+            ->search(['keyword_condition' => 'enterprise_name',])
+            ->getListByPage([], true, 'create_time desc');
         $content = (new BuilderList())
             ->addTopButton('addnew')
             ->addTopButton('delete')

@@ -8,7 +8,7 @@ return [
     'admin_menus' => [
         [
             'title' => '高新技术成果管理',
-            'name' => 'park/high_tech_project',
+            'name' => 'high_tech_project/Index',
             'icon' => '',
             'is_menu' => 1,
             'sub_menu' => [
