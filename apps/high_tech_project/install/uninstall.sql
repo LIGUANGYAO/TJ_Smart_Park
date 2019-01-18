@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS `qnn_high_tech_project_list`;
