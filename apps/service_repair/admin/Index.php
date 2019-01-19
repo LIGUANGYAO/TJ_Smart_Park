@@ -131,7 +131,7 @@ class Index extends Admin
                 ->addFormItem('content', 'textarea', '报修描述')
                 ->addFormItem('location', 'text', '公司所在地')
                 ->addFormItem('pic', 'text', '图片')
-                ->addFormItem('worker', 'select', '维修人员', '需在权限管理菜单中添加', $this->workerList)
+                ->addFormItem('worker', 'select', '维修人员', '需在权限管理->管理员中添加维修人员', $this->workerList)
                 ->addFormItem('status', 'radio', '报修状态', '', $this->repairStatus)
                 ->addFormItem('cost', 'text', '维修费')
                 ->addFormItem('evaluation', 'textarea', '用户反馈', '', '', 'readonly')
