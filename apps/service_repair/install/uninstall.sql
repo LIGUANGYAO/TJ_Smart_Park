@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS `qnn_service_repair_list`;
