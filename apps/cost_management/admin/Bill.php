@@ -91,6 +91,12 @@ class Bill extends Admin
             ->content($content);
     }
 
+    /**
+     * @param int $id
+     * @return \app\common\layout\Content
+     * @throws \think\exception\DbException
+     * 添加/编辑账单
+     */
     public function edit($id = 0)
     {
         $title = $id > 0 ? '编辑' : '新增';
