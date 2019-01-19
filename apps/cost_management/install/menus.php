@@ -32,19 +32,19 @@ return [
                 ],
                 [
                     'title' => '账单列表',
-                    'name' => 'cost_management/Payment/index',
+                    'name' => 'cost_management/Bill/index',
                     'is_menu' => 1,
                     'icon' => ''
                 ],
                 [
                     'title' => '添加账单',
-                    'name' => 'cost_management/Payment/edit',
+                    'name' => 'cost_management/Bill/edit',
                     'is_menu' => 0,
                     'icon' => ''
                 ],
                 [
                     'title' => '删除账单',
-                    'name' => 'cost_management/Payment/delete',
+                    'name' => 'cost_management/Bill/delete',
                     'is_menu' => 0,
                     'icon' => ''
                 ],
