@@ -20,7 +20,7 @@ return [
                 ],
                 [
                     'title' => '处理报修',
-                    'name' => 'service_repair/Index/do',
+                    'name' => 'service_repair/Index/edit',
                     'is_menu' => 0,
                     'icon' => ''
                 ],

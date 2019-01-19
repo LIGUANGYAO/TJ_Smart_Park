@@ -87,7 +87,6 @@ class Index extends Admin
         $html = '';
 //循环所有表
         foreach ($tables AS $k => $v) {
-            //$html .= '<p><h2>'. $v['TABLE_COMMENT'] . ' </h2>';
             $html .= '<table  border="1" cellspacing="0" cellpadding="0" align="center">';
             $html .= '<caption>' . $v['TABLE_NAME'] . '  ' . $v['TABLE_COMMENT'] . '</caption>';
             $html .= '<tbody><tr><th>字段名</th><th>数据类型</th><th>默认值</th>  

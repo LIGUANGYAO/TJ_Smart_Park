@@ -11,7 +11,7 @@
  Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 18/01/2019 08:37:26
+ Date: 19/01/2019 17:26:09
 */
 
 SET NAMES utf8mb4;
@@ -177,13 +177,14 @@ CREATE TABLE `qnn_admin`  (
   PRIMARY KEY (`uid`) USING BTREE,
   UNIQUE INDEX `uniq_username`(`username`) USING BTREE,
   INDEX `idx_email`(`email`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理员用户表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理员用户表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qnn_admin
 -- ----------------------------
 INSERT INTO `qnn_admin` VALUES (1, 'admin', '31b836d289cdfb8b6e20c2bab2b78756', '创始人', 'xpwsgg@163.com', '', 'http://cdn.eacoo.xin/attachment/static/assets/img/default-avatar.png', 2, '我很帅', 0, '127.0.0.1', '2019-01-16 08:39:31', '708967c6acdb6253ab47c7c59fd7761001dc4b0c', 1, '2018-11-26 17:15:57', '2018-11-28 16:21:29', 1);
 INSERT INTO `qnn_admin` VALUES (2, 'dtt123', '31b836d289cdfb8b6e20c2bab2b78756', '段婷婷', 'dtt@163.com', '17889898989', '', 0, '', 0, '127.0.0.1', '0001-01-01 00:00:00', '', 0, '2019-01-11 10:05:24', '2019-01-11 10:05:33', 1);
+INSERT INTO `qnn_admin` VALUES (3, 'lichao', '31b836d289cdfb8b6e20c2bab2b78756', '李超', 'lc@126.com', '17888888888', '', 1, '', 0, '127.0.0.1', '0001-01-01 00:00:00', '', 0, '2019-01-19 15:57:46', '2019-01-19 15:57:46', 1);
 
 -- ----------------------------
 -- Table structure for qnn_attachment
@@ -235,7 +236,7 @@ CREATE TABLE `qnn_auth_group`  (
   `rules` varchar(160) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '状态。1启用，0禁用',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户组表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户组表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qnn_auth_group
@@ -245,6 +246,7 @@ INSERT INTO `qnn_auth_group` VALUES (2, '管理员', '授权管理员', '1,6,18,
 INSERT INTO `qnn_auth_group` VALUES (3, '普通用户', '这是普通用户的权限', '1,3,8,10,11,94,95,96,97,98,99,41,42,43,44,38,39,40', 1);
 INSERT INTO `qnn_auth_group` VALUES (4, '客服', '客服处理订单发货', '1,27,28,29,7,4,52,53,54,55', 1);
 INSERT INTO `qnn_auth_group` VALUES (5, '孵化企业联络员', '孵化企业联络员', '198,199,200,201,202,203,204', 1);
+INSERT INTO `qnn_auth_group` VALUES (6, '维修部门', '负责处理入驻企业的报修', '', 1);
 
 -- ----------------------------
 -- Table structure for qnn_auth_group_access
@@ -262,6 +264,7 @@ CREATE TABLE `qnn_auth_group_access`  (
 -- ----------------------------
 INSERT INTO `qnn_auth_group_access` VALUES (1, 1, 1);
 INSERT INTO `qnn_auth_group_access` VALUES (2, 5, 1);
+INSERT INTO `qnn_auth_group_access` VALUES (3, 6, 1);
 
 -- ----------------------------
 -- Table structure for qnn_auth_rule
@@ -286,7 +289,7 @@ CREATE TABLE `qnn_auth_rule`  (
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '是否有效(0:无效,1:有效)',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uniq_name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 373 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '规则表（后台菜单）' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 474 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '规则表（后台菜单）' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qnn_auth_rule
@@ -365,14 +368,14 @@ INSERT INTO `qnn_auth_rule` VALUES (194, 'park_enterprise/EnterpriseContract/edi
 INSERT INTO `qnn_auth_rule` VALUES (195, 'park_enterprise/EnterpriseContract/del', '删除租房合同', 1, 'park_enterprise', 1, 189, '', '', 0, 'left', 0, 99, '2019-01-08 14:54:34', '2019-01-08 14:54:34', 1);
 INSERT INTO `qnn_auth_rule` VALUES (196, 'park_enterprise/EnterpriseCwdlContract/index', '财务代理合同', 1, 'park_enterprise', 1, 189, '', '', 1, 'left', 0, 99, '2019-01-08 14:54:34', '2019-01-08 14:54:34', 1);
 INSERT INTO `qnn_auth_rule` VALUES (197, 'park_enterprise/EnterpriseCwdlContract/edit', '添加财务代理合同', 1, 'park_enterprise', 1, 189, '', '', 0, 'left', 0, 99, '2019-01-08 14:54:34', '2019-01-08 14:54:34', 1);
-INSERT INTO `qnn_auth_rule` VALUES (198, 'park/incubation', '孵化企业管理', 1, 'park_incubation', 1, 0, '', '', 1, 'left', 0, 99, '2019-01-09 15:32:13', '2019-01-09 15:32:13', 1);
+INSERT INTO `qnn_auth_rule` VALUES (198, 'park/incubation', '孵化企业管理', 1, 'park_incubation', 1, 0, '', '', 1, 'left', 0, 99, '2019-01-18 10:30:59', '2019-01-09 15:32:13', 1);
 INSERT INTO `qnn_auth_rule` VALUES (199, 'park_incubation/Incubation/index', '孵化企业列表', 1, 'park_incubation', 1, 198, '', '', 1, 'left', 0, 99, '2019-01-09 15:32:13', '2019-01-09 15:32:13', 1);
 INSERT INTO `qnn_auth_rule` VALUES (200, 'park_incubation/Incubation/edit', '添加孵化企业', 1, 'park_incubation', 1, 198, '', '', 0, 'left', 0, 99, '2019-01-09 15:32:13', '2019-01-09 15:32:13', 1);
 INSERT INTO `qnn_auth_rule` VALUES (201, 'park_incubation/Incubation/del', '删除孵化企业', 1, 'park_incubation', 1, 198, '', '', 0, 'left', 0, 99, '2019-01-09 15:32:13', '2019-01-09 15:32:13', 1);
 INSERT INTO `qnn_auth_rule` VALUES (202, 'park_incubation/IncubationVisit/index', '走访记录', 1, 'park_incubation', 1, 198, '', '', 1, 'left', 0, 99, '2019-01-09 15:32:13', '2019-01-09 15:32:13', 1);
 INSERT INTO `qnn_auth_rule` VALUES (203, 'park_incubation/IncubationVisit/edit', '添加走访记录', 1, 'park_incubation', 1, 198, '', '', 0, 'left', 0, 99, '2019-01-09 15:32:13', '2019-01-09 15:32:13', 1);
 INSERT INTO `qnn_auth_rule` VALUES (204, 'park_incubation/IncubationVisit/del', '删除走访记录', 1, 'park_incubation', 1, 198, '', '', 0, 'left', 0, 99, '2019-01-09 15:32:13', '2019-01-09 15:32:13', 1);
-INSERT INTO `qnn_auth_rule` VALUES (205, 'carousel/index', '轮播图管理', 1, 'carousel', 1, 0, 'fa fa-picture-o', '', 1, 'left', 0, 99, '2019-01-11 13:32:07', '2019-01-11 13:32:07', 1);
+INSERT INTO `qnn_auth_rule` VALUES (205, 'carousel/index', '轮播图管理', 1, 'carousel', 1, 0, 'fa fa-picture-o', '', 1, 'left', 0, 99, '2019-01-18 09:47:40', '2019-01-11 13:32:07', 1);
 INSERT INTO `qnn_auth_rule` VALUES (206, 'admin/modules/config?name=carousel', '轮播图配置', 1, 'carousel', 1, 205, 'fa fa-cog ', '', 1, 'left', 0, 99, '2019-01-11 13:32:07', '2019-01-11 13:32:07', 1);
 INSERT INTO `qnn_auth_rule` VALUES (207, 'carousel/carousel_position/index', '轮播位设置', 1, 'carousel', 1, 205, 'fa fa-th-large', '', 1, 'left', 0, 99, '2019-01-11 13:32:07', '2019-01-11 13:32:07', 1);
 INSERT INTO `qnn_auth_rule` VALUES (208, 'carousel/carousel_list/index', '轮播图列表', 1, 'carousel', 1, 205, 'fa fa-file-image-o', '', 1, 'left', 0, 99, '2019-01-11 13:32:07', '2019-01-11 13:32:07', 1);
@@ -398,10 +401,6 @@ INSERT INTO `qnn_auth_rule` VALUES (242, 'park/investment', '投资管理', 1, '
 INSERT INTO `qnn_auth_rule` VALUES (243, 'park_investment/Investment/index', '投资列表', 1, 'park_investment', 1, 242, '', '', 1, 'left', 0, 99, '2019-01-15 11:53:05', '2019-01-15 11:53:05', 1);
 INSERT INTO `qnn_auth_rule` VALUES (244, 'park_investment/Investment/edit', '添加投资', 1, 'park_investment', 1, 242, '', '', 0, 'left', 0, 99, '2019-01-15 11:53:05', '2019-01-15 11:53:05', 1);
 INSERT INTO `qnn_auth_rule` VALUES (245, 'park_investment/Investment/del', '删除投资', 1, 'park_investment', 1, 242, '', '', 0, 'left', 0, 99, '2019-01-15 11:53:05', '2019-01-15 11:53:05', 1);
-INSERT INTO `qnn_auth_rule` VALUES (246, 'park/tech_project', '科技项目资金管理', 1, 'tech_project', 1, 0, '', '', 1, 'left', 0, 99, '2019-01-15 15:16:25', '2019-01-15 15:16:25', 1);
-INSERT INTO `qnn_auth_rule` VALUES (247, 'tech_project/Project/index', '科技项目资金列表', 1, 'tech_project', 1, 246, '', '', 1, 'left', 0, 99, '2019-01-15 15:16:25', '2019-01-15 15:16:25', 1);
-INSERT INTO `qnn_auth_rule` VALUES (248, 'tech_project/Project/edit', '添加科技项目', 1, 'tech_project', 1, 246, '', '', 0, 'left', 0, 99, '2019-01-15 15:16:25', '2019-01-15 15:16:25', 1);
-INSERT INTO `qnn_auth_rule` VALUES (249, 'tech_project/Project/delete', '删除科技项目', 1, 'tech_project', 1, 246, '', '', 0, 'left', 0, 99, '2019-01-15 15:16:26', '2019-01-15 15:16:26', 1);
 INSERT INTO `qnn_auth_rule` VALUES (254, 'park/project_budget', '项目预算管理', 1, 'park_project_budget', 1, 0, '', '', 1, 'left', 0, 99, '2019-01-16 09:46:34', '2019-01-16 09:46:34', 1);
 INSERT INTO `qnn_auth_rule` VALUES (255, 'park_project_budget/Budget/index', '项目预算列表', 1, 'park_project_budget', 1, 254, '', '', 1, 'left', 0, 99, '2019-01-16 09:46:34', '2019-01-16 09:46:34', 1);
 INSERT INTO `qnn_auth_rule` VALUES (256, 'park_project_budget/Budget/edit', '添加项目预算', 1, 'park_project_budget', 1, 254, '', '', 0, 'left', 0, 99, '2019-01-16 09:46:34', '2019-01-16 09:46:34', 1);
@@ -438,6 +437,33 @@ INSERT INTO `qnn_auth_rule` VALUES (369, 'student_innovation/innovation', '大�
 INSERT INTO `qnn_auth_rule` VALUES (370, 'student_innovation/innovation/index', '项目列表', 1, 'student_innovation', 1, 369, '', '', 1, 'left', 0, 99, '2019-01-18 08:34:32', '2019-01-18 08:34:32', 1);
 INSERT INTO `qnn_auth_rule` VALUES (371, 'student_innovation/innovation/edit', '添加/编辑项目', 1, 'student_innovation', 1, 369, '', '', 0, 'left', 0, 99, '2019-01-18 08:34:32', '2019-01-18 08:34:32', 1);
 INSERT INTO `qnn_auth_rule` VALUES (372, 'student_innovation/innovation/delete', '删除项目', 1, 'student_innovation', 1, 369, '', '', 0, 'left', 0, 99, '2019-01-18 08:34:32', '2019-01-18 08:34:32', 1);
+INSERT INTO `qnn_auth_rule` VALUES (377, 'park/tech_project', '科技项目资金管理', 1, 'tech_project', 1, 0, '', '', 1, 'left', 0, 99, '2019-01-18 10:54:02', '2019-01-18 10:54:02', 1);
+INSERT INTO `qnn_auth_rule` VALUES (378, 'tech_project/Project/index', '科技项目资金列表', 1, 'tech_project', 1, 377, '', '', 1, 'left', 0, 99, '2019-01-18 10:54:02', '2019-01-18 10:54:02', 1);
+INSERT INTO `qnn_auth_rule` VALUES (379, 'tech_project/Project/edit', '添加科技项目', 1, 'tech_project', 1, 377, '', '', 0, 'left', 0, 99, '2019-01-18 10:54:02', '2019-01-18 10:54:02', 1);
+INSERT INTO `qnn_auth_rule` VALUES (380, 'tech_project/Project/delete', '删除科技项目', 1, 'tech_project', 1, 377, '', '', 0, 'left', 0, 99, '2019-01-18 10:54:02', '2019-01-18 10:54:02', 1);
+INSERT INTO `qnn_auth_rule` VALUES (385, 'high_tech_project/Index', '高新技术成果管理', 1, 'high_tech_project', 1, 0, '', '', 1, 'left', 0, 99, '2019-01-18 10:57:18', '2019-01-18 10:57:18', 1);
+INSERT INTO `qnn_auth_rule` VALUES (386, 'high_tech_project/Index/index', '成果列表', 1, 'high_tech_project', 1, 385, '', '', 1, 'left', 0, 99, '2019-01-18 10:57:18', '2019-01-18 10:57:18', 1);
+INSERT INTO `qnn_auth_rule` VALUES (387, 'high_tech_project/Index/edit', '添加成果', 1, 'high_tech_project', 1, 385, '', '', 0, 'left', 0, 99, '2019-01-18 10:57:18', '2019-01-18 10:57:18', 1);
+INSERT INTO `qnn_auth_rule` VALUES (388, 'high_tech_project/Index/delete', '删除成果', 1, 'high_tech_project', 1, 385, '', '', 0, 'left', 0, 99, '2019-01-18 10:57:18', '2019-01-18 10:57:18', 1);
+INSERT INTO `qnn_auth_rule` VALUES (410, 'parking_space/Space', '停车位管理', 1, 'parking_space', 1, 0, 'fa fa-car', '', 1, 'left', 0, 99, '2019-01-18 14:29:51', '2019-01-18 14:29:51', 1);
+INSERT INTO `qnn_auth_rule` VALUES (411, 'parking_space/Space/index', '车位列表', 1, 'parking_space', 1, 410, '', '', 1, 'left', 0, 99, '2019-01-18 14:29:51', '2019-01-18 14:29:51', 1);
+INSERT INTO `qnn_auth_rule` VALUES (412, 'parking_space/Space/edit', '添加车位', 1, 'parking_space', 1, 410, '', '', 0, 'left', 0, 99, '2019-01-18 14:29:51', '2019-01-18 14:29:51', 1);
+INSERT INTO `qnn_auth_rule` VALUES (413, 'parking_space/Space/delete', '删除车位', 1, 'parking_space', 1, 410, '', '', 0, 'left', 0, 99, '2019-01-18 14:29:51', '2019-01-18 14:29:51', 1);
+INSERT INTO `qnn_auth_rule` VALUES (414, 'parking_space/Lease/index', '租赁管理', 1, 'parking_space', 1, 410, '', '', 1, 'left', 0, 99, '2019-01-18 14:29:51', '2019-01-18 14:29:51', 1);
+INSERT INTO `qnn_auth_rule` VALUES (415, 'parking_space/Lease/edit', '添加租赁', 1, 'parking_space', 1, 410, '', '', 0, 'left', 0, 99, '2019-01-18 14:29:52', '2019-01-18 14:29:52', 1);
+INSERT INTO `qnn_auth_rule` VALUES (416, 'parking_space/Lease/delete', '删除租赁', 1, 'parking_space', 1, 410, '', '', 0, 'left', 0, 99, '2019-01-18 14:29:52', '2019-01-18 14:29:52', 1);
+INSERT INTO `qnn_auth_rule` VALUES (423, 'home/plugin/execute?_plugin=DataDictionary&_controller=Index&_action=index', '数据库字典', 2, 'DataDictionary', 1, 10, 'fa fa-database', '', 1, 'left', 0, 99, '2019-01-18 16:16:08', '2019-01-18 16:16:08', 1);
+INSERT INTO `qnn_auth_rule` VALUES (459, 'cost_management/index', '费用账单管理', 1, 'cost_management', 1, 0, 'fa fa-money', '', 1, 'left', 0, 99, '2019-01-19 11:36:00', '2019-01-19 11:36:00', 1);
+INSERT INTO `qnn_auth_rule` VALUES (460, 'cost_management/Category/index', '收费项目', 1, 'cost_management', 1, 459, '', '', 1, 'left', 0, 99, '2019-01-19 11:36:00', '2019-01-19 11:36:00', 1);
+INSERT INTO `qnn_auth_rule` VALUES (461, 'cost_management/Category/edit', '添加项目', 1, 'cost_management', 1, 459, '', '', 0, 'left', 0, 99, '2019-01-19 11:36:00', '2019-01-19 11:36:00', 1);
+INSERT INTO `qnn_auth_rule` VALUES (462, 'cost_management/Category/delete', '删除项目', 1, 'cost_management', 1, 459, '', '', 0, 'left', 0, 99, '2019-01-19 11:36:00', '2019-01-19 11:36:00', 1);
+INSERT INTO `qnn_auth_rule` VALUES (463, 'cost_management/Bill/index', '账单列表', 1, 'cost_management', 1, 459, '', '', 1, 'left', 0, 99, '2019-01-19 11:36:00', '2019-01-19 11:36:00', 1);
+INSERT INTO `qnn_auth_rule` VALUES (464, 'cost_management/Bill/edit', '添加账单', 1, 'cost_management', 1, 459, '', '', 0, 'left', 0, 99, '2019-01-19 11:36:00', '2019-01-19 11:36:00', 1);
+INSERT INTO `qnn_auth_rule` VALUES (465, 'cost_management/Bill/delete', '删除账单', 1, 'cost_management', 1, 459, '', '', 0, 'left', 0, 99, '2019-01-19 11:36:01', '2019-01-19 11:36:01', 1);
+INSERT INTO `qnn_auth_rule` VALUES (470, 'service_repair/Index', '报修管理', 1, 'service_repair', 1, 0, 'fa fa-cog', '', 1, 'left', 0, 99, '2019-01-19 14:25:51', '2019-01-19 14:25:51', 1);
+INSERT INTO `qnn_auth_rule` VALUES (471, 'service_repair/Index/index', '报修列表', 1, 'service_repair', 1, 470, '', '', 1, 'left', 0, 99, '2019-01-19 14:25:51', '2019-01-19 14:25:51', 1);
+INSERT INTO `qnn_auth_rule` VALUES (472, 'service_repair/Index/do', '处理报修', 1, 'service_repair', 1, 470, '', '', 1, 'left', 0, 99, '2019-01-19 14:25:51', '2019-01-19 14:25:51', 1);
+INSERT INTO `qnn_auth_rule` VALUES (473, 'service_repair/Index/delete', '删除报修', 1, 'service_repair', 1, 470, '', '', 0, 'left', 0, 99, '2019-01-19 14:25:51', '2019-01-19 14:25:51', 1);
 
 -- ----------------------------
 -- Table structure for qnn_carousel_list
@@ -496,7 +522,7 @@ CREATE TABLE `qnn_config`  (
 -- Records of qnn_config
 -- ----------------------------
 INSERT INTO `qnn_config` VALUES (1, 'toggle_web_site', '站点开关', '1', '0:关闭\r\n1:开启', 1, 0, 'select', '站点关闭后将提示网站已关闭，不能正常访问', '2018-09-30 22:32:26', '2018-09-30 22:32:26', 1, 1);
-INSERT INTO `qnn_config` VALUES (2, 'web_site_title', '网站标题', 'QnnPHP快速开发框架', '', 6, 0, 'text', '网站标题前台显示标题', '2018-09-30 22:32:26', '2018-09-30 22:32:26', 2, 1);
+INSERT INTO `qnn_config` VALUES (2, 'web_site_title', '网站标题', '同济科技园', '', 6, 0, 'text', '网站标题前台显示标题', '2018-09-30 22:32:26', '2018-09-30 22:32:26', 2, 1);
 INSERT INTO `qnn_config` VALUES (4, 'web_site_logo', '网站LOGO', '4', '', 6, 0, 'picture', '网站LOGO', '2018-09-30 22:32:26', '2018-09-30 22:32:26', 4, 1);
 INSERT INTO `qnn_config` VALUES (5, 'web_site_description', 'SEO描述', '开源框架 QnnPHP ThinkPHP', '', 6, 1, 'textarea', '网站搜索引擎描述', '2018-09-30 22:32:26', '2018-09-30 22:32:26', 6, 1);
 INSERT INTO `qnn_config` VALUES (6, 'web_site_keyword', 'SEO关键字', 'QnnPHP是基于ThinkPHP5开发的一套轻量级WEB产品开发框架，追求高效，简单，灵活。', '', 6, 1, 'textarea', '网站搜索引擎关键字', '2018-09-30 22:32:26', '2018-09-30 22:32:26', 4, 1);
@@ -545,6 +571,51 @@ INSERT INTO `qnn_config` VALUES (61, 'redis', 'Redis配置', '{\"host\":\"127.0.
 INSERT INTO `qnn_config` VALUES (62, 'memcache', 'Memcache配置', '{\"host\":\"127.0.0.1\",\"port\":\"11211\"}', '', 9, 0, 'json', '以JSON格式保存', '2018-09-30 22:32:26', '2018-09-30 22:32:26', 99, 1);
 
 -- ----------------------------
+-- Table structure for qnn_cost_bill_list
+-- ----------------------------
+DROP TABLE IF EXISTS `qnn_cost_bill_list`;
+CREATE TABLE `qnn_cost_bill_list`  (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `bill_type` tinyint(1) NULL DEFAULT NULL COMMENT '费用类型',
+  `enterprise_id` int(11) NULL DEFAULT 0 COMMENT '企业iD',
+  `enterprise_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '其他' COMMENT '企业名称',
+  `bill_time` datetime(0) NULL DEFAULT NULL COMMENT '账单日期',
+  `bill_status` tinyint(1) NULL DEFAULT NULL COMMENT '账单状态1=已缴费,2=未交费',
+  `amount` decimal(10, 2) NULL DEFAULT NULL COMMENT '总费用',
+  `real_amount` decimal(10, 2) NULL DEFAULT NULL COMMENT '实际支付',
+  `marks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '水电等费用的账单列表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of qnn_cost_bill_list
+-- ----------------------------
+INSERT INTO `qnn_cost_bill_list` VALUES (1, 1, 1, '上海小炬华科技', '2019-01-19 00:00:00', 2, 2000.00, 1890.00, '啦啦啦', '2019-01-19 11:38:12', '2019-01-19 11:38:12');
+INSERT INTO `qnn_cost_bill_list` VALUES (2, 2, 0, '其他企业', '2019-01-18 00:00:00', 1, 1000.00, 1000.00, '会议室租借', '2019-01-19 11:41:15', '2019-01-19 11:41:48');
+
+-- ----------------------------
+-- Table structure for qnn_cost_category_list
+-- ----------------------------
+DROP TABLE IF EXISTS `qnn_cost_category_list`;
+CREATE TABLE `qnn_cost_category_list`  (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '项目名称',
+  `creator_id` int(5) NULL DEFAULT NULL COMMENT '创建人ID',
+  `status` tinyint(1) NULL DEFAULT 1 COMMENT '1=启用,2=禁用',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '费用项目列表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of qnn_cost_category_list
+-- ----------------------------
+INSERT INTO `qnn_cost_category_list` VALUES (1, '水费', 1, 1, '2019-01-19 10:48:41', '2019-01-19 10:48:41');
+INSERT INTO `qnn_cost_category_list` VALUES (2, '电费', 1, 1, '2019-01-19 10:49:58', '2019-01-19 10:49:58');
+
+-- ----------------------------
 -- Table structure for qnn_high_tech_enterprise_list
 -- ----------------------------
 DROP TABLE IF EXISTS `qnn_high_tech_enterprise_list`;
@@ -565,6 +636,22 @@ CREATE TABLE `qnn_high_tech_enterprise_list`  (
 -- Records of qnn_high_tech_enterprise_list
 -- ----------------------------
 INSERT INTO `qnn_high_tech_enterprise_list` VALUES (1, 5, '上海小菊花', '2019-01-14 11:05:30', '2019-02-03 11:05:32', 1, '啊啊啊啊呀', '2019-01-14 11:05:44', '2019-01-14 11:17:28');
+
+-- ----------------------------
+-- Table structure for qnn_high_tech_project_list
+-- ----------------------------
+DROP TABLE IF EXISTS `qnn_high_tech_project_list`;
+CREATE TABLE `qnn_high_tech_project_list`  (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `enterprise_id` int(11) NOT NULL COMMENT '企业ID',
+  `enterprise_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '企业名称',
+  `project` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '项目名称',
+  `project_time` datetime(0) NULL DEFAULT NULL COMMENT '立项时间',
+  `marks` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '高新技术成果转化列表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for qnn_hooks
@@ -686,7 +773,7 @@ CREATE TABLE `qnn_modules`  (
   `sort` tinyint(3) UNSIGNED NOT NULL DEFAULT 99 COMMENT '排序，值越小越靠前',
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '状态。0禁用，1启用',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 68 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '模块功能表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 84 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '模块功能表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qnn_modules
@@ -704,12 +791,16 @@ INSERT INTO `qnn_modules` VALUES (50, 'software_enterprise', '智慧园区--软�
 INSERT INTO `qnn_modules` VALUES (52, 'high_tech_enterprise', '智慧园区--高新企业模块', '智慧园区的高新企业管理模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-14 10:14:34', '2019-01-14 10:14:34', 99, 1);
 INSERT INTO `qnn_modules` VALUES (53, 'park_nursery', '智慧园区--苗圃模块', '智慧园区的苗圃管理模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-14 16:11:39', '2019-01-14 16:11:39', 99, 1);
 INSERT INTO `qnn_modules` VALUES (54, 'park_investment', '智慧园区--投资管理', '智慧园区的投资管理模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-15 11:53:05', '2019-01-15 11:53:05', 99, 1);
-INSERT INTO `qnn_modules` VALUES (55, 'tech_project', '智慧园区--科技项目投资模块', '智慧园区的科技项目投资管理模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-15 15:16:25', '2019-01-15 15:16:25', 99, 1);
 INSERT INTO `qnn_modules` VALUES (57, 'park_project_budget', '智慧园区--项目预算管理', '智慧园区的项目预算管理模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-16 09:46:34', '2019-01-16 09:46:34', 99, 1);
 INSERT INTO `qnn_modules` VALUES (58, 'park_enterprise_finance_info', '智慧园区--公司财务信息', '智慧园区的公司财务信息管理模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-16 11:11:49', '2019-01-16 11:11:49', 99, 1);
 INSERT INTO `qnn_modules` VALUES (60, 'park_financial_support', '智慧园区--财政扶持', '智慧园区的财政扶持管理模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-17 17:14:50', '2019-01-17 17:14:50', 99, 1);
 INSERT INTO `qnn_modules` VALUES (66, 'park_enterprise_intellectual', '智慧园区--企业知识产品', '智慧园区的企业知识产品管理模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-17 17:33:17', '2019-01-17 17:33:17', 99, 1);
 INSERT INTO `qnn_modules` VALUES (67, 'student_innovation', '智慧园区--大学生创业', '智慧园区大学生创业模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-18 08:34:32', '2019-01-18 08:34:32', 99, 1);
+INSERT INTO `qnn_modules` VALUES (69, 'tech_project', '智慧园区--科技项目投资模块', '智慧园区的科技项目投资管理模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-18 10:54:02', '2019-01-18 10:54:02', 99, 1);
+INSERT INTO `qnn_modules` VALUES (71, 'high_tech_project', '智慧园区--高新技术成果', '智慧园区的高新技术成果转化管理模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-18 10:57:18', '2019-01-18 10:57:18', 99, 1);
+INSERT INTO `qnn_modules` VALUES (75, 'parking_space', '智慧园区--停车位模块', '智慧园区的停车位管理模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-18 14:29:51', '2019-01-18 14:29:51', 99, 1);
+INSERT INTO `qnn_modules` VALUES (81, 'cost_management', '智慧园区--费用账单管理', '智慧园区的费用账单管理模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-19 11:36:00', '2019-01-19 11:36:00', 99, 1);
+INSERT INTO `qnn_modules` VALUES (83, 'service_repair', '智慧园区--报修管理', '智慧园区的报修管理模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-19 14:25:51', '2019-01-19 14:25:51', 99, 1);
 
 -- ----------------------------
 -- Table structure for qnn_nav
@@ -953,7 +1044,12 @@ CREATE TABLE `qnn_park_enterprise_finance_support`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '财政扶持列表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '财政扶持列表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of qnn_park_enterprise_finance_support
+-- ----------------------------
+INSERT INTO `qnn_park_enterprise_finance_support` VALUES (1, 1, '上海小炬华科技', '1000', '2000', '177.625', 1, '一个扶持', '2019-01-18 09:32:48', '2019-01-18 09:32:48');
 
 -- ----------------------------
 -- Table structure for qnn_park_enterprise_kuaiji_contract
@@ -1406,6 +1502,52 @@ INSERT INTO `qnn_park_soft_project_list` VALUES (1, 1, '上海小菊花网络科
 INSERT INTO `qnn_park_soft_project_list` VALUES (2, 1, '上海小菊花网络科技', '同济智慧园区', '2019-01-11 15:21:45', '急急急', '2019-01-11 15:21:49', '2019-01-11 15:21:49');
 
 -- ----------------------------
+-- Table structure for qnn_parking_space_lease_list
+-- ----------------------------
+DROP TABLE IF EXISTS `qnn_parking_space_lease_list`;
+CREATE TABLE `qnn_parking_space_lease_list`  (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '车位号',
+  `enterprise_id` int(11) NULL DEFAULT NULL COMMENT '企业id',
+  `enterprise_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '企业名称',
+  `s_date` datetime(0) NULL DEFAULT NULL COMMENT '租赁起始日',
+  `e_date` datetime(0) NULL DEFAULT NULL COMMENT '租赁到期日',
+  `period` tinyint(1) NULL DEFAULT NULL COMMENT '周期:1=月,2=半年,3=一年4=两年,5=三年,6=四年,7=五年,8=一次性',
+  `pay_time` datetime(0) NULL DEFAULT NULL COMMENT '缴费时间',
+  `is_paid` tinyint(1) NULL DEFAULT 1 COMMENT '1=已缴费,2=未交费',
+  `amount` decimal(10, 2) NULL DEFAULT NULL COMMENT '总费用',
+  `lease_status` tinyint(1) NULL DEFAULT 2 COMMENT '1=到期,2=未到期',
+  `marks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '车位租赁列表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of qnn_parking_space_lease_list
+-- ----------------------------
+INSERT INTO `qnn_parking_space_lease_list` VALUES (1, 'A0001', 1, '上海小炬华科技', '2019-01-18 14:22:48', '2019-02-28 14:20:40', 2, '2019-01-18 14:23:00', 1, 500.00, 2, 'hhh', '2019-01-18 14:23:19', '2019-01-18 14:36:08');
+
+-- ----------------------------
+-- Table structure for qnn_parking_space_list
+-- ----------------------------
+DROP TABLE IF EXISTS `qnn_parking_space_list`;
+CREATE TABLE `qnn_parking_space_list`  (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `numbering` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '车位号',
+  `price` decimal(10, 2) UNSIGNED NULL DEFAULT NULL COMMENT '费用',
+  `space_status` tinyint(1) NULL DEFAULT 2 COMMENT '1=已租,2=未租',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '车位列表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of qnn_parking_space_list
+-- ----------------------------
+INSERT INTO `qnn_parking_space_list` VALUES (1, 'A0001', 144.00, 1, '2019-01-18 13:36:24', '2019-01-18 14:34:48');
+
+-- ----------------------------
 -- Table structure for qnn_plugins
 -- ----------------------------
 DROP TABLE IF EXISTS `qnn_plugins`;
@@ -1425,7 +1567,7 @@ CREATE TABLE `qnn_plugins`  (
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '状态',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '插件表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '插件表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qnn_plugins
@@ -1434,6 +1576,7 @@ INSERT INTO `qnn_plugins` VALUES (3, 'ImageGallery', '幻灯片', '图片轮播�
 INSERT INTO `qnn_plugins` VALUES (5, 'Alisms', '阿里云短信', '通过阿里短信接口发送短信，官网：https://www.aliyun.com/product/sms', '{\"status\":\"1\",\"accessKeyId\":\"\",\"accessKeySecret\":\"\",\"signName\":\"\"}', 'xpwsgg', '1.0.1', '', 1, '2018-11-28 17:55:55', '2018-11-28 17:55:55', 99, 1);
 INSERT INTO `qnn_plugins` VALUES (7, 'qiniuoss', '七牛云储存', '实现七牛云存储，管理附件', '{\"enable\":1,\"bucket\":\"eacoomall-qiniu\",\"access_key_id\":\"\",\"access_key_secret\":\"\",\"root_path\":\"images\",\"domain\":\"http:\\/\\/img.eacoomall.com\",\"endpoint\":\"http:\\/\\/pamlntz0m.bkt.clouddn.com\",\"style\":[{\"name\":\"wap-thumb\"},{\"name\":\"small\"},{\"name\":\"medium\"},{\"name\":\"large\"}]}', 'yyyvy', '1.0.0', '', 1, '2018-11-29 15:05:31', '2018-11-29 15:05:31', 99, 1);
 INSERT INTO `qnn_plugins` VALUES (12, 'Qichacha', '企查查', '通过企查查获取企业Master数据,商标,专利,著作权,网站,企业证书数据官网http://www.yjapi.cn', '{\"status\":\"1\",\"appKey\":\"1768454120694ddba498dfd1c95d16a1\",\"secretKey\":\"002E95B913D601221F01AC7F2DDF99C6\"}', 'xpwsgg', '1.1.0', '', 1, '2019-01-16 17:16:51', '2019-01-16 17:18:15', 99, 1);
+INSERT INTO `qnn_plugins` VALUES (20, 'DataDictionary', '数据库字典', '数据库字典,丑是丑了点,又不是不能用!', '', 'xpwsgg', '1.0.0', '', 1, '2019-01-18 16:16:08', '2019-01-18 16:16:08', 99, 1);
 
 -- ----------------------------
 -- Table structure for qnn_postmeta
@@ -1508,6 +1651,37 @@ CREATE TABLE `qnn_rewrite`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '伪静态表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for qnn_service_repair_list
+-- ----------------------------
+DROP TABLE IF EXISTS `qnn_service_repair_list`;
+CREATE TABLE `qnn_service_repair_list`  (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `enterprise_id` int(11) NOT NULL COMMENT '企业ID',
+  `enterprise_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '企业名称',
+  `creator_id` int(11) NOT NULL COMMENT '报修人ID号',
+  `phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '报修人手机号',
+  `location` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '报修公司所在地址,自动生成',
+  `type` tinyint(1) NOT NULL COMMENT '1=水电,2=电器,3=办公设备,4=电梯,5=门禁,6=公共设施,7=物业设备,8=其他报修',
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '标题',
+  `content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '内容',
+  `pic` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '图片',
+  `publish_time` datetime(0) NOT NULL COMMENT '报修时间',
+  `status` tinyint(1) NOT NULL COMMENT '1=待处理,2=已派单,3=已完成|待评价,4=已关闭',
+  `worker` int(11) NULL DEFAULT NULL COMMENT '维修工id',
+  `cost` decimal(10, 2) NULL DEFAULT 0.00 COMMENT '费用',
+  `evaluation` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户评价',
+  `comment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '管理回复',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '报修列表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of qnn_service_repair_list
+-- ----------------------------
+INSERT INTO `qnn_service_repair_list` VALUES (1, 1, '上海小菊花网络科技', 1, '17867678789', '3号楼101|102室', 3, '打印机坏了', '如题', 'https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjr3quLovnfAhWMKnwKHTH1CC4QjRx6BAgBEAU&url=https%3A%2F%2Fbaike.baidu.com%2Fitem%2F%25E6%2589%2593%25E5%258D%25B0%25E6%259C%25BA&psig=AOvVaw22eV9DOZQVgSpuSFLqkY0J&ust=1547967402053433', '2019-01-19 14:57:00', 2, 3, 50.00, '师傅很棒棒', '', '2019-01-19 14:57:13', '2019-01-19 16:25:23');
+
+-- ----------------------------
 -- Table structure for qnn_student_innovation
 -- ----------------------------
 DROP TABLE IF EXISTS `qnn_student_innovation`;
@@ -1531,7 +1705,7 @@ CREATE TABLE `qnn_student_innovation`  (
   `update_time` datetime(0) NOT NULL COMMENT '更新时间',
   `files` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '附件',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for qnn_tech_project_list
@@ -1553,12 +1727,7 @@ CREATE TABLE `qnn_tech_project_list`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '科技项目资金信息列表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of qnn_tech_project_list
--- ----------------------------
-INSERT INTO `qnn_tech_project_list` VALUES (1, 1, '上海小炬华科技', 1, '小石头拖拉机', '2019-01-11 15:04:27', '2019-02-09 22:40:34', '淮安科教办', '1000000', '1000000000', '14,16,', '哈哈哈', '2019-01-15 15:42:52', '2019-01-15 15:42:52');
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '科技项目资金信息列表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for qnn_term_relationships
