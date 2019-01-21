@@ -112,7 +112,6 @@ class Index extends Admin
      */
     public function edit($id = 0)
     {
-        $info = ServiceRepairList::get($id);
         if (IS_POST) {
             $param = \input();
             if ($this->repairModel->editData($param)) {
