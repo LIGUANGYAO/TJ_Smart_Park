@@ -79,7 +79,7 @@ class Room extends Admin
             ->search([
                 ['name' => 'building_id', 'type' => 'select', 'title' => '所属楼宇', 'options' => $this->buildList],
                 ['name' => 'type', 'type' => 'select', 'title' => '实验室类别', 'options' => $this->laboType],
-                ['name' => 'type', 'type' => 'select', 'title' => '实验室状态', 'options' => [1 => '启用', 2 => '禁用']],
+                ['name' => 'status', 'type' => 'select', 'title' => '实验室状态', 'options' => [1 => '启用', 2 => '禁用']],
             ])
             ->content($content);
     }
