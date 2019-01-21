@@ -78,7 +78,7 @@ class Booking extends Admin
             ->keyListItem('handle_time', '处理时间')
             ->keyListItem('right_button', '操作', 'btn')
             ->addRightButton('edit')
-            ->addRightButton('delete')
+            ->addRightButton('delete', ['model' => 'ServiceMeetingRoomBookingList'])
             ->setListData($data_list)
             ->setListPage($total)
             ->fetch();
