@@ -4,7 +4,7 @@
 namespace app\service_laboratory\controller;
 use app\home\controller\Home;
 
-class Example extends Home {
+class Index extends Home {
 
     /**
      * 初始化
@@ -22,7 +22,11 @@ class Example extends Home {
     public function index() {
 
         $this->pageInfo('首页','index');
-
+        $logo = [
+            'name' => 'logo',
+            'value' => '',
+        ];
+        $this->assign('logo', $logo);
         return $this->fetch();
     }
 
