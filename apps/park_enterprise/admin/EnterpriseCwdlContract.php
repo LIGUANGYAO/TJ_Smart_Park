@@ -77,7 +77,7 @@ class EnterpriseCwdlContract extends Admin
             ->setListData($data_list)
             ->setListPage($total)
             ->addRightButton('edit')
-            ->addRightButton('delete')
+            ->addRightButton('delete',['model'=>'ParkEnterpriseKuaijiContract'])
             ->fetch();
         return $content;
     }
