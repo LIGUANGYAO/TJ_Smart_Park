@@ -144,7 +144,7 @@ class EnterpriseBasic extends Admin
             if (IS_POST) {
                 $data = \input();
 
-                $enterprise_name_count = $modelA->count('enterprise_name');
+                $enterprise_name_count = $modelA->where('enterprise_name', 'eq', $data['enterprise_name'])->count();
                 if ($enterprise_name_count > 0) {
                     $this->error('企业名已存在');
                 }
