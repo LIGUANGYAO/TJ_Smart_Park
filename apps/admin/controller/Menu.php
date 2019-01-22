@@ -81,8 +81,8 @@ class Menu extends Admin {
             ->keyListItem('status','状态','status')
             ->keyListItem('right_button', '操作', 'btn')
             ->setListPrimaryKey('id')
-            ->setListPage($total,false)
             ->setListData($menus)    // 数据列表
+            ->setListPage($total)
             ->setExtraHtml($extra_html)
             ->addRightButton('edit') // 添加编辑按钮
             ->addRightButton('forbid',['model'=>'auth_rule']) // 添加禁用按钮
@@ -127,7 +127,7 @@ class Menu extends Admin {
                 $pid       = (int)input('param.pid',false);
                 if ($pid>0) {
                     $pid_data  = $this->authRuleModel->where('pid',$pid)->field('depend_type,depend_flag')->find();
-                    $info = ['depend_type'=>pid_data['depend_type'],'depend_flag'=>$pid_data['depend_flag'],'pid'=>$pid,'is_menu'=>1,'sort'=>99,'status'=>1];
+                    $info = ['depend_type'=>$pid_data['depend_type'],'depend_flag'=>$pid_data['depend_flag'],'pid'=>$pid,'is_menu'=>1,'sort'=>99,'status'=>1];
                 } else{
                     
                     $info = ['depend_type'=>1,'is_menu'=>1,'sort'=>99,'status'=>1];
