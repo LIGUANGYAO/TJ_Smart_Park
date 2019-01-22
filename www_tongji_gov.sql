@@ -11,7 +11,7 @@
  Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 19/01/2019 17:26:09
+ Date: 22/01/2019 11:31:13
 */
 
 SET NAMES utf8mb4;
@@ -77,7 +77,7 @@ CREATE TABLE `qnn_action_log`  (
   `create_time` datetime(0) NOT NULL DEFAULT '0001-01-01 00:00:00' COMMENT '操作时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_uid`(`uid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统行为日志表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统行为日志表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qnn_action_log
@@ -113,6 +113,7 @@ INSERT INTO `qnn_action_log` VALUES (28, 1, 1, 1, 'admin', 'GET', '/admin.php?s=
 INSERT INTO `qnn_action_log` VALUES (29, 15, 1, 1, 'admin', 'GET', '/admin.php/admin/plugins/setstatus/status/forbid/ids/10.html', '{\"param\":[]}', '127.0.0.1', '改变数据状态', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2019-01-16 16:59:19');
 INSERT INTO `qnn_action_log` VALUES (30, 1, 1, 1, 'admin', 'GET', '/admin.php?s=/admin/login/index', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2019-01-17 09:04:11');
 INSERT INTO `qnn_action_log` VALUES (31, 16, 1, 1, 'admin', 'GET', '/admin.php/admin/modules/delapp/name/park_enterprise_intellectual_property.html', '{\"param\":[]}', '127.0.0.1', '删除模块', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2019-01-17 17:20:29');
+INSERT INTO `qnn_action_log` VALUES (32, 1, 1, 1, 'admin', 'GET', '/admin.php?s=/admin/login/index', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2019-01-21 08:31:52');
 
 -- ----------------------------
 -- Table structure for qnn_activity_apply_list
@@ -182,7 +183,7 @@ CREATE TABLE `qnn_admin`  (
 -- ----------------------------
 -- Records of qnn_admin
 -- ----------------------------
-INSERT INTO `qnn_admin` VALUES (1, 'admin', '31b836d289cdfb8b6e20c2bab2b78756', '创始人', 'xpwsgg@163.com', '', 'http://cdn.eacoo.xin/attachment/static/assets/img/default-avatar.png', 2, '我很帅', 0, '127.0.0.1', '2019-01-16 08:39:31', '708967c6acdb6253ab47c7c59fd7761001dc4b0c', 1, '2018-11-26 17:15:57', '2018-11-28 16:21:29', 1);
+INSERT INTO `qnn_admin` VALUES (1, 'admin', '31b836d289cdfb8b6e20c2bab2b78756', '创始人', 'xpwsgg@163.com', '', 'http://cdn.eacoo.xin/attachment/static/assets/img/default-avatar.png', 2, '我很帅', 0, '127.0.0.1', '2019-01-21 08:31:51', '3d3b4ab61b9c70ded38a759b5f95793544ec7cf3', 1, '2018-11-26 17:15:57', '2018-11-28 16:21:29', 1);
 INSERT INTO `qnn_admin` VALUES (2, 'dtt123', '31b836d289cdfb8b6e20c2bab2b78756', '段婷婷', 'dtt@163.com', '17889898989', '', 0, '', 0, '127.0.0.1', '0001-01-01 00:00:00', '', 0, '2019-01-11 10:05:24', '2019-01-11 10:05:33', 1);
 INSERT INTO `qnn_admin` VALUES (3, 'lichao', '31b836d289cdfb8b6e20c2bab2b78756', '李超', 'lc@126.com', '17888888888', '', 1, '', 0, '127.0.0.1', '0001-01-01 00:00:00', '', 0, '2019-01-19 15:57:46', '2019-01-19 15:57:46', 1);
 
@@ -289,7 +290,7 @@ CREATE TABLE `qnn_auth_rule`  (
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '是否有效(0:无效,1:有效)',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uniq_name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 474 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '规则表（后台菜单）' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 500 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '规则表（后台菜单）' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qnn_auth_rule
@@ -460,10 +461,24 @@ INSERT INTO `qnn_auth_rule` VALUES (462, 'cost_management/Category/delete', '删
 INSERT INTO `qnn_auth_rule` VALUES (463, 'cost_management/Bill/index', '账单列表', 1, 'cost_management', 1, 459, '', '', 1, 'left', 0, 99, '2019-01-19 11:36:00', '2019-01-19 11:36:00', 1);
 INSERT INTO `qnn_auth_rule` VALUES (464, 'cost_management/Bill/edit', '添加账单', 1, 'cost_management', 1, 459, '', '', 0, 'left', 0, 99, '2019-01-19 11:36:00', '2019-01-19 11:36:00', 1);
 INSERT INTO `qnn_auth_rule` VALUES (465, 'cost_management/Bill/delete', '删除账单', 1, 'cost_management', 1, 459, '', '', 0, 'left', 0, 99, '2019-01-19 11:36:01', '2019-01-19 11:36:01', 1);
-INSERT INTO `qnn_auth_rule` VALUES (470, 'service_repair/Index', '报修管理', 1, 'service_repair', 1, 0, 'fa fa-cog', '', 1, 'left', 0, 99, '2019-01-19 14:25:51', '2019-01-19 14:25:51', 1);
-INSERT INTO `qnn_auth_rule` VALUES (471, 'service_repair/Index/index', '报修列表', 1, 'service_repair', 1, 470, '', '', 1, 'left', 0, 99, '2019-01-19 14:25:51', '2019-01-19 14:25:51', 1);
-INSERT INTO `qnn_auth_rule` VALUES (472, 'service_repair/Index/do', '处理报修', 1, 'service_repair', 1, 470, '', '', 1, 'left', 0, 99, '2019-01-19 14:25:51', '2019-01-19 14:25:51', 1);
-INSERT INTO `qnn_auth_rule` VALUES (473, 'service_repair/Index/delete', '删除报修', 1, 'service_repair', 1, 470, '', '', 0, 'left', 0, 99, '2019-01-19 14:25:51', '2019-01-19 14:25:51', 1);
+INSERT INTO `qnn_auth_rule` VALUES (474, 'service_repair/Index', '报修管理', 1, 'service_repair', 1, 0, 'fa fa-cog', '', 1, 'left', 0, 99, '2019-01-19 17:29:15', '2019-01-19 17:29:15', 1);
+INSERT INTO `qnn_auth_rule` VALUES (475, 'service_repair/Index/index', '报修列表', 1, 'service_repair', 1, 474, '', '', 1, 'left', 0, 99, '2019-01-19 17:29:15', '2019-01-19 17:29:15', 1);
+INSERT INTO `qnn_auth_rule` VALUES (476, 'service_repair/Index/edit', '处理报修', 1, 'service_repair', 1, 474, '', '', 0, 'left', 0, 99, '2019-01-19 17:29:15', '2019-01-19 17:29:15', 1);
+INSERT INTO `qnn_auth_rule` VALUES (477, 'service_repair/Index/delete', '删除报修', 1, 'service_repair', 1, 474, '', '', 0, 'left', 0, 99, '2019-01-19 17:29:15', '2019-01-19 17:29:15', 1);
+INSERT INTO `qnn_auth_rule` VALUES (485, 'service_meeting_room/Room', '会议室管理', 1, 'service_meeting_room', 1, 0, '', '', 1, 'left', 0, 99, '2019-01-21 09:47:10', '2019-01-21 09:47:10', 1);
+INSERT INTO `qnn_auth_rule` VALUES (486, 'service_meeting_room/Room/index', '会议室列表', 1, 'service_meeting_room', 1, 485, '', '', 1, 'left', 0, 99, '2019-01-21 09:47:10', '2019-01-21 09:47:10', 1);
+INSERT INTO `qnn_auth_rule` VALUES (487, 'service_meeting_room/Room/edit', '添加会议室', 1, 'service_meeting_room', 1, 485, '', '', 0, 'left', 0, 99, '2019-01-21 09:47:10', '2019-01-21 09:47:10', 1);
+INSERT INTO `qnn_auth_rule` VALUES (488, 'service_meeting_room/Room/delete', '删除会议室', 1, 'service_meeting_room', 1, 485, '', '', 0, 'left', 0, 99, '2019-01-21 09:47:10', '2019-01-21 09:47:10', 1);
+INSERT INTO `qnn_auth_rule` VALUES (489, 'service_meeting_room/Booking/index', '预约管理', 1, 'service_meeting_room', 1, 485, '', '', 1, 'left', 0, 99, '2019-01-21 09:47:10', '2019-01-21 09:47:10', 1);
+INSERT INTO `qnn_auth_rule` VALUES (490, 'service_meeting_room/Booking/edit', '添加预约', 1, 'service_meeting_room', 1, 485, '', '', 0, 'left', 0, 99, '2019-01-21 09:47:10', '2019-01-21 09:47:10', 1);
+INSERT INTO `qnn_auth_rule` VALUES (491, 'service_meeting_room/Booking/delete', '删除预约', 1, 'service_meeting_room', 1, 485, '', '', 0, 'left', 0, 99, '2019-01-21 09:47:10', '2019-01-21 09:47:10', 1);
+INSERT INTO `qnn_auth_rule` VALUES (492, 'service_laboratory/Room', '实验室管理', 1, 'service_laboratory', 1, 0, '', '', 1, 'left', 0, 99, '2019-01-21 14:20:57', '2019-01-21 14:20:57', 1);
+INSERT INTO `qnn_auth_rule` VALUES (493, 'service_laboratory/Room/index', '实验室列表', 1, 'service_laboratory', 1, 492, '', '', 1, 'left', 0, 99, '2019-01-21 14:20:57', '2019-01-21 14:20:57', 1);
+INSERT INTO `qnn_auth_rule` VALUES (494, 'service_laboratory/Room/edit', '添加实验室', 1, 'service_laboratory', 1, 492, '', '', 0, 'left', 0, 99, '2019-01-21 14:20:57', '2019-01-21 14:20:57', 1);
+INSERT INTO `qnn_auth_rule` VALUES (495, 'service_laboratory/Room/delete', '删除实验室', 1, 'service_laboratory', 1, 492, '', '', 0, 'left', 0, 99, '2019-01-21 14:20:57', '2019-01-21 14:20:57', 1);
+INSERT INTO `qnn_auth_rule` VALUES (496, 'service_laboratory/Booking/index', '预约管理', 1, 'service_laboratory', 1, 492, '', '', 1, 'left', 0, 99, '2019-01-21 14:20:57', '2019-01-21 14:20:57', 1);
+INSERT INTO `qnn_auth_rule` VALUES (497, 'service_laboratory/Booking/edit', '添加预约', 1, 'service_laboratory', 1, 492, '', '', 0, 'left', 0, 99, '2019-01-21 14:20:57', '2019-01-21 14:20:57', 1);
+INSERT INTO `qnn_auth_rule` VALUES (498, 'service_laboratory/Booking/delete', '删除预约', 1, 'service_laboratory', 1, 492, '', '', 0, 'left', 0, 99, '2019-01-21 14:20:57', '2019-01-21 14:20:57', 1);
 
 -- ----------------------------
 -- Table structure for qnn_carousel_list
@@ -773,7 +788,7 @@ CREATE TABLE `qnn_modules`  (
   `sort` tinyint(3) UNSIGNED NOT NULL DEFAULT 99 COMMENT '排序，值越小越靠前',
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '状态。0禁用，1启用',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 84 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '模块功能表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 88 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '模块功能表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qnn_modules
@@ -800,7 +815,9 @@ INSERT INTO `qnn_modules` VALUES (69, 'tech_project', '智慧园区--科技项�
 INSERT INTO `qnn_modules` VALUES (71, 'high_tech_project', '智慧园区--高新技术成果', '智慧园区的高新技术成果转化管理模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-18 10:57:18', '2019-01-18 10:57:18', 99, 1);
 INSERT INTO `qnn_modules` VALUES (75, 'parking_space', '智慧园区--停车位模块', '智慧园区的停车位管理模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-18 14:29:51', '2019-01-18 14:29:51', 99, 1);
 INSERT INTO `qnn_modules` VALUES (81, 'cost_management', '智慧园区--费用账单管理', '智慧园区的费用账单管理模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-19 11:36:00', '2019-01-19 11:36:00', 99, 1);
-INSERT INTO `qnn_modules` VALUES (83, 'service_repair', '智慧园区--报修管理', '智慧园区的报修管理模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-19 14:25:51', '2019-01-19 14:25:51', 99, 1);
+INSERT INTO `qnn_modules` VALUES (84, 'service_repair', '智慧园区--报修管理', '智慧园区的报修管理模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-19 17:29:15', '2019-01-19 17:29:15', 99, 1);
+INSERT INTO `qnn_modules` VALUES (86, 'service_meeting_room', '智慧园区--会议室管理', '智慧园区的会议室管理,添加会议室,会议预约管理', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-21 09:47:10', '2019-01-21 09:47:10', 99, 1);
+INSERT INTO `qnn_modules` VALUES (87, 'service_laboratory', '智慧园区--实验室管理', '智慧园区的实验室添加,租赁管理模块', 'xpwsg', '1.0.0', '', 0, '', '', '2019-01-21 14:20:57', '2019-01-21 14:20:57', 99, 1);
 
 -- ----------------------------
 -- Table structure for qnn_nav
@@ -1651,6 +1668,99 @@ CREATE TABLE `qnn_rewrite`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '伪静态表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for qnn_service_laboratory_booking_list
+-- ----------------------------
+DROP TABLE IF EXISTS `qnn_service_laboratory_booking_list`;
+CREATE TABLE `qnn_service_laboratory_booking_list`  (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `laboratory_id` int(11) NULL DEFAULT NULL COMMENT '实验室ID',
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '预约人姓名',
+  `phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '预约人电话',
+  `s_time` datetime(0) NOT NULL COMMENT '开始时间',
+  `e_time` datetime(0) NOT NULL COMMENT '结束时间',
+  `create_time` datetime(0) NOT NULL COMMENT '申请时间',
+  `status` tinyint(1) NULL DEFAULT 0 COMMENT '0=待处理,1=已通过,2=已拒绝',
+  `marks` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `handler_id` int(11) NULL DEFAULT NULL COMMENT '操作人id',
+  `hand_time` datetime(0) NULL DEFAULT NULL COMMENT '操作时间',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of qnn_service_laboratory_booking_list
+-- ----------------------------
+INSERT INTO `qnn_service_laboratory_booking_list` VALUES (1, 2, '柯南', '18899999999', '2019-01-21 15:26:32', '2019-01-21 17:26:34', '2019-01-21 15:26:43', 2, '没时间', 1, '2019-01-21 15:41:28', '2019-01-21 15:41:28');
+
+-- ----------------------------
+-- Table structure for qnn_service_laboratory_list
+-- ----------------------------
+DROP TABLE IF EXISTS `qnn_service_laboratory_list`;
+CREATE TABLE `qnn_service_laboratory_list`  (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `building_id` int(11) NULL DEFAULT NULL COMMENT '楼宇ID',
+  `room_number` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '房间号',
+  `type` tinyint(1) NULL DEFAULT NULL COMMENT '实验室类型,见对应config文件',
+  `equipment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '实验室配备',
+  `capacity` int(11) NULL DEFAULT NULL COMMENT '可容纳人数',
+  `status` tinyint(1) NULL DEFAULT 1 COMMENT '1=启用,2=禁用',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of qnn_service_laboratory_list
+-- ----------------------------
+INSERT INTO `qnn_service_laboratory_list` VALUES (1, 3, '3001', 1, '话筒,大屏幕', 50, 1, '2019-01-21 14:46:02', '2019-01-21 14:49:38');
+INSERT INTO `qnn_service_laboratory_list` VALUES (2, 3, '3002', 2, '话筒,大屏幕', 50, 2, '2019-01-21 14:47:25', '2019-01-21 14:49:31');
+
+-- ----------------------------
+-- Table structure for qnn_service_meeting_room_booking_list
+-- ----------------------------
+DROP TABLE IF EXISTS `qnn_service_meeting_room_booking_list`;
+CREATE TABLE `qnn_service_meeting_room_booking_list`  (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `meetingroom_id` int(11) NOT NULL COMMENT '会议室id',
+  `user_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '申请人姓名',
+  `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '申请人手机号',
+  `s_time` datetime(0) NOT NULL COMMENT '开始时间',
+  `e_time` datetime(0) NOT NULL COMMENT '结束时间',
+  `create_time` datetime(0) NOT NULL COMMENT '申请时间',
+  `status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0=待审核,1=已通过,2已拒绝',
+  `handler_id` int(11) NULL DEFAULT NULL COMMENT '处理人id',
+  `handle_time` datetime(0) NULL DEFAULT NULL COMMENT '处理时间',
+  `marks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '会议室申请表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for qnn_service_meeting_room_list
+-- ----------------------------
+DROP TABLE IF EXISTS `qnn_service_meeting_room_list`;
+CREATE TABLE `qnn_service_meeting_room_list`  (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `phase` tinyint(1) NULL DEFAULT NULL COMMENT '期数',
+  `room_number` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '房间号',
+  `area` double(10, 2) NOT NULL COMMENT '面积',
+  `capacity` int(10) NOT NULL DEFAULT 0 COMMENT '可容纳人数',
+  `equipment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '设备',
+  `room_img` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '封面图片',
+  `content` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '介绍',
+  `listorder` int(11) NULL DEFAULT 50 COMMENT '排序',
+  `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '1=启用,0禁用',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '添加时间',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of qnn_service_meeting_room_list
+-- ----------------------------
+INSERT INTO `qnn_service_meeting_room_list` VALUES (7, 3, '2001', 100.00, 50, '大屏幕,投影仪', '14,', '<p></p><p>哈哈哈</p><p></p><p><br></p>', 50, 1, '2019-01-21 11:00:55', '2019-01-21 11:01:22');
+
+-- ----------------------------
 -- Table structure for qnn_service_repair_list
 -- ----------------------------
 DROP TABLE IF EXISTS `qnn_service_repair_list`;
@@ -1674,12 +1784,7 @@ CREATE TABLE `qnn_service_repair_list`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '报修列表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of qnn_service_repair_list
--- ----------------------------
-INSERT INTO `qnn_service_repair_list` VALUES (1, 1, '上海小菊花网络科技', 1, '17867678789', '3号楼101|102室', 3, '打印机坏了', '如题', 'https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjr3quLovnfAhWMKnwKHTH1CC4QjRx6BAgBEAU&url=https%3A%2F%2Fbaike.baidu.com%2Fitem%2F%25E6%2589%2593%25E5%258D%25B0%25E6%259C%25BA&psig=AOvVaw22eV9DOZQVgSpuSFLqkY0J&ust=1547967402053433', '2019-01-19 14:57:00', 2, 3, 50.00, '师傅很棒棒', '', '2019-01-19 14:57:13', '2019-01-19 16:25:23');
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '报修列表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for qnn_student_innovation
