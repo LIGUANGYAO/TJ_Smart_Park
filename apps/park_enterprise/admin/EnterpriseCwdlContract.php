@@ -64,6 +64,7 @@ class EnterpriseCwdlContract extends Admin
         list($data_list, $total) = $this->cwdlModel
             ->getListByPage([], true, 'create_time desc');
         $content = (new BuilderList())
+            ->addTopButton('addnew')
             ->addTopButton('delete', ['model' => 'ParkEnterpriseKuaijiContract'])
             ->keyListItem('id', 'ID')
             ->keyListItem('enterprise_id', '公司名', 'callback', 'getEnterpriseNameByEnterpriseId')
@@ -77,7 +78,7 @@ class EnterpriseCwdlContract extends Admin
             ->setListData($data_list)
             ->setListPage($total)
             ->addRightButton('edit')
-            ->addRightButton('delete',['model'=>'ParkEnterpriseKuaijiContract'])
+            ->addRightButton('delete', ['model' => 'ParkEnterpriseKuaijiContract'])
             ->fetch();
         return $content;
     }
@@ -94,6 +95,7 @@ class EnterpriseCwdlContract extends Admin
         $title = $id > 0 ? '编辑' : '添加';
         if (IS_POST) {
             $data = \input();
+            $data['numbering'] = \getKuaijiContractNumbering();
             if ($this->cwdlModel->editData($data)) {
                 $this->success($title . '成功', \url('index'));
             } else {
@@ -110,9 +112,9 @@ class EnterpriseCwdlContract extends Admin
             ->addFormItem('id', 'hidden', 'ID')
             ->addFormItem('enterprise_id', 'select', '公司名称', '请选择公司', $this->enterpriseList)
             ->addFormItem('kjdlfy', 'text', '代理费用')
-            ->addFormItem('numbering', 'text', '合同编号')
-            ->addFormItem('kjdl_s_day', 'text', '开始日期')
-            ->addFormItem('kjdl_e_day', 'text', '结束日期')
+            ->addFormItem('numbering', 'text', '合同编号','自动生成，无需人工输入','','readonly')
+            ->addFormItem('kjdl_s_day', 'datetime', '开始日期')
+            ->addFormItem('kjdl_e_day', 'datetime', '结束日期')
             ->setFormData($info)
             ->addButton('submit')
             ->addButton('back')
