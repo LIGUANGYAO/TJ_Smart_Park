@@ -4,6 +4,34 @@
 {/block}
 
 {block name="main"}
+<style>
+
+    .lqz-index{
+        margin-left: 27px;
+        padding-left: 50px;
+    }
+    .form-group-Stock{
+        margin-left: 50px!important;
+    }
+    .form-group-Stock .col-sm-3{
+        width: 27%;
+    }
+    .form-gd-value{
+        margin-left: 100px!important;
+    }
+    #Stockul .col-sm-3{
+        width: 28%;
+        margin-left: 22px
+    }
+    #Stockul input{
+        margin: 5px 0;
+    }
+    #Employeesul input{
+        margin: 5px 0;
+    }
+</style>
+
+
 <section class="content pt-5">
     <div class="box box-solid eacoo-box">
         <!-- Tab导航 -->
@@ -41,7 +69,7 @@
                                                     <!--如果开启企查查功能则出现该按钮-->
                                                     {notempty name="$qcc_config"}
                                                     <button type="button" class="btn btn-info pull-left" id="qcc">
-                                                        从企查查获取基本数据
+                                                        从企查查获取数据
                                                     </button>
                                                     {/notempty}
                                                 </div>
@@ -112,70 +140,49 @@
                                             </div>
 
                                             {empty name="stock_info"}
-                                            <div class="form-group">
-                                                <label for="StockName" class="col-sm-2 control-label">
-                                                    股东:
+                                            <div class="form-group form-group-Stock" >
+
+                                                <label for="StockName" class="col-sm-3 control-label" >
+                                                    股东
                                                 </label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="StockName"
-                                                           name="stock_name[]"
-                                                           placeholder="" value="">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="StockType" class="col-sm-2 control-label">
-                                                    股东类型:
+                                                <label for="StockType" class="col-sm-3 control-label" >
+                                                    股东类型
                                                 </label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="StockType"
-                                                           name="stock_type[]"
-                                                           placeholder="" value="">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="StockPercent" class="col-sm-2 control-label">
-                                                    出资比例:
+                                                <label for="StockPercent" class="col-sm-3 control-label">
+                                                    出资比例
                                                 </label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="StockPercent"
-                                                           name="stock_percent[]"
-                                                           placeholder="" value="">
-                                                </div>
+                                                <button type="button" id="addStock" style="margin-left: 70px">+</button>
                                             </div>
+                                            <div class="form-group form-gd-value" >
+                                                <ul id="Stockul">
+
+                                                </ul>
+
+                                            </div>
+
                                             {else /}
                                             {foreach $stock_info as $si}
-                                            <div id="stock_info_div">
-                                                <div class="form-group">
-                                                    <label for="StockName" class="col-sm-2 control-label">
-                                                        股东:
-                                                    </label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="StockName"
-                                                               name="stock_name[]"
-                                                               placeholder="" value="{$si.stock_name}">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="StockType" class="col-sm-2 control-label">
-                                                        股东类型:
-                                                    </label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="StockType"
-                                                               name="stock_type[]"
-                                                               placeholder="" value="{$si.stock_type}">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="StockPercent" class="col-sm-2 control-label">
-                                                        出资比例:
-                                                    </label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="StockPercent"
-                                                               name="stock_percent[]"
-                                                               placeholder="" value="{$si.stock_percent}">
-                                                    </div>
-                                                </div>
+                                                <div class="form-group form-group-Stock" >
+
+                                                <label for="StockName" class="col-sm-3 control-label" >
+                                                    股东
+                                                </label>
+                                                <label for="StockType" class="col-sm-3 control-label" >
+                                                    股东类型
+                                                </label>
+                                                <label for="StockPercent" class="col-sm-3 control-label">
+                                                    出资比例
+                                                </label>
+                                                    <button type="button" id="addStock" style="margin-left: 70px">+</button>
                                             </div>
+                                                <div class="form-group form-gd-value" >
+                                                <ul id="Stockul">
+
+                                                </ul>
+
+                                            </div>
+
+
                                             {/foreach}
                                             {/empty}
 
@@ -184,16 +191,14 @@
                                             <div class="form-group">
                                                 <label for="Employees" class="col-sm-2 control-label">
                                                     主要人员:
+                                                    <button type="button" id="addEmployees">+</button>
                                                 </label>
+
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="Employees"
-                                                           name="employees[]"
-                                                           placeholder="姓名" value="{$ei.employee_name}"
-                                                           style="width: 30%;">
-                                                    <input type="text" class="form-control" id="Employees_job"
-                                                           name="employees_job[]"
-                                                           placeholder="职务" value="{$ei.employees_job}"
-                                                           style="width: 30%;">
+                                                    <ul id="Employeesul">
+
+                                                    </ul>
+
                                                 </div>
                                             </div>
                                             {/foreach}
@@ -201,14 +206,12 @@
                                             <div class="form-group">
                                                 <label for="Employees" class="col-sm-2 control-label">
                                                     主要人员:
+                                                    <button type="button" id="addEmployees">+</button>
                                                 </label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="Employees"
-                                                           name="employees[]"
-                                                           placeholder="姓名" value="" style="width: 30%;">
-                                                    <input type="text" class="form-control" id="Employees_job"
-                                                           name="employees_job[]"
-                                                           placeholder="职务" value="" style="width: 30%;">
+                                                    <ul id="Employeesul">
+
+                                                    </ul>
                                                 </div>
                                             </div>
                                             {/notempty}
@@ -218,8 +221,8 @@
                                                     经营范围:
                                                 </label>
                                                 <div class="col-sm-10">
-                                    <textarea type="text" class="form-control" id="Scope" name="scope"
-                                              placeholder="" value="">{$basic_info.scope ?? ''}</textarea>
+                                                    <textarea  rows="6" type="text" class="form-control" id="Scope" name="scope"
+                                              placeholder="" value="1234">{$basic_info.scope ?? ''}</textarea>
                                                 </div>
                                             </div>
 
@@ -1073,29 +1076,21 @@
                                             </label>
                                             <div class="col-sm-10">
                                                 {empty name="entry_info"}
-                                                <label>
-                                                    <input type="radio" name="kuaiji_daili" value="1"
-                                                           class="minimal kjdl_radio" checked>
-                                                    是
-                                                </label>
-                                                <label>
+                                                    <input type="radio" name="kuaiji_daili" onchange="showtoggle()" value="1"
+                                                           class="minimal kjdl_radio" checked="checked">
+                                                <label>是</label>
                                                     <input type="radio" name="kuaiji_daili" value="0"
                                                            class="minimal kjdl_radio">
-                                                    否
-                                                </label>
+                                                <label>否</label>
                                                 {else /}
-                                                <label>
                                                     <input type="radio" name="kuaiji_daili" value="1"
                                                            class="minimal kjdl_radio"
-                                                           {$entry_info.kuaiji_daili==1?'checked':''}>
-                                                    是
-                                                </label>
-                                                <label>
+                                                           {$entry_info.kuaiji_daili==1?'checked="checked"':''}>
+                                                <label>是</label>
                                                     <input type="radio" name="kuaiji_daili" value="0"
                                                            class="minimal kjdl_radio"
-                                                           {$entry_info.kuaiji_daili==0?'checked':''}>
-                                                    否
-                                                </label>
+                                                           {$entry_info.kuaiji_daili==0?'checked="checked"':''}>
+                                                <label>否</label>
                                                 {/empty}
                                             </div>
                                         </div>
@@ -1169,8 +1164,559 @@
 
 {block name="script"}
 <script type="text/javascript">
+
+
+    //手动添加股东信息
+    $("#addStock").click(function () {
+
+        $("#Stockul").append(`
+                <li>
+                    <div class="col-sm-3">
+                         <input  type="text" class="form-control" id="StockName" name="stock_name[]">
+                    </div>
+                    <div class="col-sm-3">
+                         <input type="text" class="form-control" id="StockType" name="stock_type[]">
+                    </div>
+                    <div class="col-sm-3">
+                         <input type="text" class="form-control" id="StockPercent" name="stock_percent[]">
+                    </div>
+                </li>
+
+            `);
+
+
+    });
+    //手动添加主要成员信息
+    $("#addEmployees").click(function () {
+        $("#Employeesul").append(`
+                <li>
+                    <input type="text" class="form-control" id="Employees" name="employees[]"
+                           placeholder="姓名" value="" style="width: 30%;">
+                    <input type="text" class="form-control" id="Employees_job" name="employees_job[]"
+                           placeholder="职务" value="" style="width: 30%;">
+                </li>
+            `);
+    })
+
+
     // 从企查查接口获取数据
     $('#qcc').click(function () {
+
+
+        /*let json = {
+            "JobId":null,
+            "OrderNumber":"ECI2019011109425348964786",
+            "Result":{
+                "Partners":[
+                    {
+                        "StockName":"马化腾",
+                        "StockType":"自然人股东",
+                        "StockPercent":"54.29%",
+                        "ShouldCapi":"3528.5705",
+                        "ShoudDate":null,
+                        "InvestType":"",
+                        "InvestName":null,
+                        "RealCapi":null,
+                        "CapiDate":null
+                    },
+                    {
+                        "StockName":"张志东",
+                        "StockType":"自然人股东",
+                        "StockPercent":"22.86%",
+                        "ShouldCapi":"1485.7115",
+                        "ShoudDate":null,
+                        "InvestType":"",
+                        "InvestName":null,
+                        "RealCapi":null,
+                        "CapiDate":null
+                    },
+                    {
+                        "StockName":"许晨晔",
+                        "StockType":"自然人股东",
+                        "StockPercent":"11.43%",
+                        "ShouldCapi":"742.859",
+                        "ShoudDate":null,
+                        "InvestType":"",
+                        "InvestName":null,
+                        "RealCapi":null,
+                        "CapiDate":null
+                    },
+                    {
+                        "StockName":"陈一丹",
+                        "StockType":"自然人股东",
+                        "StockPercent":"11.43%",
+                        "ShouldCapi":"742.859",
+                        "ShoudDate":null,
+                        "InvestType":"",
+                        "InvestName":null,
+                        "RealCapi":null,
+                        "CapiDate":null
+                    }
+                ],
+                "Employees":[
+                    {
+                        "Name":"谢晴华",
+                        "Job":"监事"
+                    },
+                    {
+                        "Name":"奚丹",
+                        "Job":"董事"
+                    },
+                    {
+                        "Name":"卢山",
+                        "Job":"董事"
+                    },
+                    {
+                        "Name":"马化腾",
+                        "Job":"董事长"
+                    },
+                    {
+                        "Name":"马化腾",
+                        "Job":"总经理"
+                    },
+                    {
+                        "Name":"周昭钦",
+                        "Job":"监事"
+                    },
+                    {
+                        "Name":"许晨晔",
+                        "Job":"董事"
+                    },
+                    {
+                        "Name":"黄秋华",
+                        "Job":"监事"
+                    }
+                ],
+                "Branches":[
+                    {
+                        "CompanyId":"836451074da73b6da6b14c47a3f7ae74",
+                        "RegNo":"912301995719366978",
+                        "Name":"深圳市腾讯计算机系统有限公司哈尔滨分公司",
+                        "BelongOrg":"哈尔滨市市场监督管理局开发区分局",
+                        "CreditCode":null,
+                        "OperName":null
+                    },
+                    {
+                        "CompanyId":"ca2fefb2f093a70e6bf1e41177c8827a",
+                        "RegNo":"360100220008563",
+                        "Name":"深圳市腾讯计算机系统有限公司驻南昌办事处",
+                        "BelongOrg":"南昌市市场和质量监督管理局",
+                        "CreditCode":null,
+                        "OperName":null
+                    },
+                    {
+                        "CompanyId":"c965a3f1cce9aca314ab1f0ea9869eea",
+                        "RegNo":"2201012005453",
+                        "Name":"深圳市腾讯计算机系统有限公司长春办事处",
+                        "BelongOrg":"长春市工商行政管理局",
+                        "CreditCode":null,
+                        "OperName":null
+                    },
+                    {
+                        "CompanyId":"b2768f09aa137b9de60021fe7761c2d9",
+                        "RegNo":"2101022281047",
+                        "Name":"深圳市腾讯计算机系统有限公司沈阳分公司",
+                        "BelongOrg":"沈阳市和平区市场监督管理局",
+                        "CreditCode":null,
+                        "OperName":null
+                    },
+                    {
+                        "CompanyId":"825b57525596917a54073fe9ef1af1d7",
+                        "RegNo":"915101047653588133",
+                        "Name":"深圳市腾讯计算机系统有限公司成都分公司",
+                        "BelongOrg":"锦江工商局",
+                        "CreditCode":null,
+                        "OperName":null
+                    },
+                    {
+                        "CompanyId":"4940867d8fbeb84368dfc9a4d60f2f7e",
+                        "RegNo":"330103000073820",
+                        "Name":"深圳市腾讯计算机系统有限公司杭州分公司",
+                        "BelongOrg":"杭州市下城区市场监督管理局",
+                        "CreditCode":null,
+                        "OperName":null
+                    },
+                    {
+                        "CompanyId":"18923815caa586cc10f0a513e09f426f",
+                        "RegNo":"420103000153654",
+                        "Name":"深圳市腾讯计算机系统有限公司武汉分公司",
+                        "BelongOrg":"武汉市江汉区工商行政管理局（质量技术监督局）",
+                        "CreditCode":null,
+                        "OperName":null
+                    },
+                    {
+                        "CompanyId":"1ebde559859dffdefddbbfeb426b0dec",
+                        "RegNo":"440106000158334",
+                        "Name":"深圳市腾讯计算机系统有限公司广州分公司",
+                        "BelongOrg":"广州市天河区工商行政管理局",
+                        "CreditCode":null,
+                        "OperName":null
+                    },
+                    {
+                        "CompanyId":"8448a1dc85a3143afdefbddc7f7ecda5",
+                        "RegNo":"91610131757841362F",
+                        "Name":"深圳市腾讯计算机系统有限公司西安分公司",
+                        "BelongOrg":"西安市工商行政管理局高新分局",
+                        "CreditCode":null,
+                        "OperName":null
+                    },
+                    {
+                        "CompanyId":"6336b20955ba940ae9d896265f58c98e",
+                        "RegNo":"320106000108411",
+                        "Name":"深圳市腾讯计算机系统有限公司南京分公司",
+                        "BelongOrg":"南京市鼓楼区市场监督管理局",
+                        "CreditCode":null,
+                        "OperName":null
+                    },
+                    {
+                        "CompanyId":"2cd40a659b8b86171a7a4e73044c62d9",
+                        "RegNo":"410105300002118",
+                        "Name":"深圳市腾讯计算机系统有限公司郑州分公司",
+                        "BelongOrg":"郑州市工商行政管理局金水分局",
+                        "CreditCode":null,
+                        "OperName":null
+                    },
+                    {
+                        "CompanyId":"6cb851c9b0210ebbf313b59793895b77",
+                        "RegNo":"913101047575798354",
+                        "Name":"深圳市腾讯计算机系统有限公司上海分公司",
+                        "BelongOrg":"徐汇区市场监督管理局",
+                        "CreditCode":null,
+                        "OperName":null
+                    },
+                    {
+                        "CompanyId":"c1269701ae6f45a9b249ec0073c7546e",
+                        "RegNo":"91110108757709011K",
+                        "Name":"深圳市腾讯计算机系统有限公司北京分公司",
+                        "BelongOrg":"北京市工商行政管理局海淀分局",
+                        "CreditCode":null,
+                        "OperName":null
+                    }
+                ],
+                "ChangeRecords":[
+                    {
+                        "ProjectName":"章程备案",
+                        "BeforeContent":"1900-01-01",
+                        "AfterContent":"2018-08-15",
+                        "ChangeDate":"2018-08-17"
+                    },
+                    {
+                        "ProjectName":"期限变更（经营期限、营业期限、驻在期限等变更）",
+                        "BeforeContent":"1998-11-11,2018-11-11,20",
+                        "AfterContent":"1998-11-11,,",
+                        "ChangeDate":"2018-08-17"
+                    },
+                    {
+                        "ProjectName":"其他事项备案",
+                        "BeforeContent":"",
+                        "AfterContent":"91440300708461136T",
+                        "ChangeDate":"2016-01-19"
+                    },
+                    {
+                        "ProjectName":"实收资本变更",
+                        "BeforeContent":"3000",
+                        "AfterContent":"6500（+116.67%）",
+                        "ChangeDate":"2015-01-09"
+                    },
+                    {
+                        "ProjectName":"注册资本变更（注册资金、资金数额等变更）",
+                        "BeforeContent":"3000",
+                        "AfterContent":"6500（+116.67%）",
+                        "ChangeDate":"2014-12-05"
+                    },
+                    {
+                        "ProjectName":"期限变更（经营期限、营业期限、驻在期限等变更）",
+                        "BeforeContent":"",
+                        "AfterContent":"2",
+                        "ChangeDate":"2014-12-05"
+                    },
+                    {
+                        "ProjectName":"期限变更（经营期限、营业期限、驻在期限等变更）",
+                        "BeforeContent":"从1998-11-11至2018-11-11",
+                        "AfterContent":"永续经营",
+                        "ChangeDate":"2018-08-17"
+                    },
+                    {
+                        "ProjectName":"监事信息",
+                        "BeforeContent":"黄惠卿(监事)【退出】；林壮秋(监事)【退出】；周昭钦(监事)",
+                        "AfterContent":"黄秋华(监事)【新增】；谢晴华(监事)【新增】；周昭钦(监事)",
+                        "ChangeDate":"2016-11-11"
+                    },
+                    {
+                        "ProjectName":"监事信息",
+                        "BeforeContent":"徐钢武(监事)黄惠卿(监事)林壮秋(监事)【退出】",
+                        "AfterContent":"黄惠卿(监事)【新增】；周昭钦(监事)【新增】；林壮秋(监事)【新增】",
+                        "ChangeDate":"2015-08-26"
+                    },
+                    {
+                        "ProjectName":"投资人变更（包括出资额、出资方式、出资日期、投资人名称等）",
+                        "BeforeContent":"名称:许晨晔,出资额:342.858,出资比例:11.4286；名称:张志东,出资额:685.713,出资比例:22.8571；名称:马化腾*,出资额:1628.571,出资比例:54.2857；名称:陈一丹,出资额:342.858,出资比例:11.4286",
+                        "AfterContent":"名称:许晨晔,出资额:742.859（+400.001）,出资比例:11.4286；名称:陈一丹,出资额:742.859（+400.001）,出资比例:11.4286；名称:马化腾*,出资额:3528.5705（+1900）,出资比例:54.2857；名称:张志东,出资额:1485.7115（+799.998）",
+                        "ChangeDate":"2014-12-05"
+                    },
+                    {
+                        "ProjectName":"注册资本变更（注册资金、资金数额等变更）",
+                        "BeforeContent":"2000",
+                        "AfterContent":"3000（+50%）",
+                        "ChangeDate":"2011-07-21"
+                    },
+                    {
+                        "ProjectName":"证照有效期限",
+                        "BeforeContent":"2018-11-11",
+                        "AfterContent":"2018-11-11",
+                        "ChangeDate":"2011-07-21"
+                    },
+                    {
+                        "ProjectName":"投资人变更（包括出资额、出资方式、出资日期、投资人名称等）",
+                        "BeforeContent":"名称:张志东,出资额:457.142,出资比例:22.8571；名称:许晨晔,出资额:228.572,出资比例:11.4286；名称:陈一丹,出资额:228.572,出资比例:11.4286；名称:马化腾*,出资额:1085.714,出资比例:54.2857",
+                        "AfterContent":"名称:许晨晔,出资额:342.858（+114.286）,出资比例:11.4286；名称:张志东,出资额:685.713（+228.571）,出资比例:22.8571；名称:马化腾*,出资额:1628.571（+542.857）,出资比例:54.2857；名称:陈一丹,出资额:342.858（+114.286）,出资比例:11.4286",
+                        "ChangeDate":"2011-07-21"
+                    },
+                    {
+                        "ProjectName":"经营范围变更（含业务范围变更）",
+                        "BeforeContent":"计算机软、硬件的设计、技术开发、销售(不含专营、专控、专卖商品及限制项目)；数据库及计算机网络服务；国内商业、物资供销业(不含专营、专控、专卖商品)；第二类增值电信业务中的信息服务(不含固定网电话信息服务并按许可B2-******1号文办)；从事广告业务(法律、行政法规规定应进行广告经营审批登记的,另行办理审批登记后方可经营)；网络游戏出版运营(凭有效的新出网证(粤)字010号互联网出版许可证经营)；货物及技术进出口。",
+                        "AfterContent":"计算机软、硬件的设计、技术开发、销售(不含专营、专控、专卖商品及限制项目)；数据库及计算机网络服务；国内商业、物资供销业(不含专营、专控、专卖商品)；第二类增值电信业务中的信息服务业务(不含固定网电话信息服务和互联网信息服务,并按许可证B2-******8号文办)；信息服务业务(仅限互联网信息服务业务,并按许可证粤B2-******9号文办)；从事广告业务(法律、行政法规规定应进行广告经营审批等级的,另行办理审批登记后方可经营)；网络游戏出版运营(凭有效的新出网证(粤)字010号互联网出版许可证经营)；货物及技术进出口。",
+                        "ChangeDate":"2009-07-24"
+                    },
+                    {
+                        "ProjectName":"经营范围变更（含业务范围变更）",
+                        "BeforeContent":"计算机软、硬件的设计、技术开发、销售(不含专营、专控、专卖商品及限制项目)；数据库及计算机网络服务；国内商业、物资供销业(不含专营、专控、专卖商品)；第二类增值电信业务中的信息服务(不含固定网电话信息服务并按许可B2-******1号文办)；从事广告业务(法律、行政法规规定应进行广告经营审批登记的,另行办理审批登记后方可经营)；网络游戏出版运营(凭有效的新出网证(粤)字010号互联网出版许可证经营)。",
+                        "AfterContent":"计算机软、硬件的设计、技术开发、销售(不含专营、专控、专卖商品及限制项目)；数据库及计算机网络服务；国内商业、物资供销业(不含专营、专控、专卖商品)；第二类增值电信业务中的信息服务(不含固定网电话信息服务并按许可B2-******1号文办)；从事广告业务(法律、行政法规规定应进行广告经营审批登记的,另行办理审批登记后方可经营)；网络游戏出版运营(凭有效的新出网证(粤)字010号互联网出版许可证经营)；货物及技术进出口。",
+                        "ChangeDate":"2009-04-22"
+                    },
+                    {
+                        "ProjectName":"经营范围变更（含业务范围变更）",
+                        "BeforeContent":"计算机软、硬件的设计、技术开发、销售(不含专营、专控、专卖商品及限制项目)；数据库及计算机网络服务；国内商业、物资供销业(不含专营、专控、专卖商品)；第二类增值电信业务中的信息服务(不含固定网电话信息服务并按许可B2-******1号文办)；从事广告业务(法律、行政法规规定应进行广告经营审批登记的,另行办理审批登记后方可经营)。",
+                        "AfterContent":"计算机软、硬件的设计、技术开发、销售(不含专营、专控、专卖商品及限制项目)；数据库及计算机网络服务；国内商业、物资供销业(不含专营、专控、专卖商品)；第二类增值电信业务中的信息服务(不含固定网电话信息服务并按许可B2-******1号文办)；从事广告业务(法律、行政法规规定应进行广告经营审批登记的,另行办理审批登记后方可经营)；网络游戏出版运营(凭有效的新出网证(粤)字010号互联网出版许可证经营)。",
+                        "ChangeDate":"2008-08-01"
+                    },
+                    {
+                        "ProjectName":"注册号/注册号升级",
+                        "BeforeContent":"4403012010489",
+                        "AfterContent":"440301103448669",
+                        "ChangeDate":"2008-06-24"
+                    },
+                    {
+                        "ProjectName":"经营范围变更（含业务范围变更）",
+                        "BeforeContent":"计算机软、硬件的设计、技术开发、销售(不含专营、专控、专卖商品及限制项目)；数据库及计算机网络服务；国内商业、物资供销业(不含专营、专控、专卖商品)；第二类增值电信业务中的信息服务(不含固定网电话信息服务并按许可B2-******1号文办)；广告业务。",
+                        "AfterContent":"计算机软、硬件的设计、技术开发、销售(不含专营、专控、专卖商品及限制项目)；数据库及计算机网络服务；国内商业、物资供销业(不含专营、专控、专卖商品)；第二类增值电信业务中的信息服务(不含固定网电话信息服务并按许可B2-******1号文办)；从事广告业务(法律、行政法规规定应进行广告经营审批登记的,另行办理审批登记后方可经营)。",
+                        "ChangeDate":"2005-03-02"
+                    },
+                    {
+                        "ProjectName":"地址变更（住所地址、经营场所、驻在地址等变更）",
+                        "BeforeContent":"深圳市福田区赛格科技园2栋410室",
+                        "AfterContent":"深圳市南山区高新区高新南一路飞亚达大厦5-10楼",
+                        "ChangeDate":"2005-03-02"
+                    },
+                    {
+                        "ProjectName":"经营范围变更（含业务范围变更）",
+                        "BeforeContent":"计算机软、硬件的设计、技术开发、销售(不含专营、专控、专卖商品及限制项目)；数据库及计算机网络服务；国内商业、物资供销业(不含专营、专控、专卖商品)；因特网信息服务(按广东省通信管理局文件和许可证执行)。",
+                        "AfterContent":"计算机软、硬件的设计、技术开发、销售(不含专营、专控、专卖商品及限制项目)；数据库及计算机网络服务；国内商业、物资供销业(不含专营、专控、专卖商品)；第二类增值电信业务中的信息服务(不含固定网电话信息服务并按许可B2-******1号文办)；广告业务。",
+                        "ChangeDate":"2004-09-24"
+                    },
+                    {
+                        "ProjectName":"投资人变更（包括出资额、出资方式、出资日期、投资人名称等）",
+                        "BeforeContent":"名称:曾李青,出资额:12.5,出资比例:12.5；名称:马化腾*,出资额:47.5,出资比例:47.5；名称:张志东,出资额:20,出资比例:20；名称:陈一丹,出资额:10,出资比例:10；名称:许晨晔,出资额:10,出资比例:10",
+                        "AfterContent":"名称:曾李青,出资额:250（+237.5）,出资比例:12.5；名称:马化腾*,出资额:950（+902.5）,出资比例:47.5；名称:陈一丹,出资额:200（+190）,出资比例:10；名称:张志东,出资额:400（+380）,出资比例:20；名称:许晨晔,出资额:200（+190）,出资比例:10",
+                        "ChangeDate":"2003-12-17"
+                    },
+                    {
+                        "ProjectName":"注册资本变更（注册资金、资金数额等变更）",
+                        "BeforeContent":"100",
+                        "AfterContent":"2000（+1900%）",
+                        "ChangeDate":"2003-12-17"
+                    },
+                    {
+                        "ProjectName":"监事成员",
+                        "BeforeContent":"马化腾*(董事)；周昭钦(监事)；马化腾*(总经理)；黄惠卿(监事)【退出】；许晨晔(董事)；任宇昕(董事)；奚丹(董事)；林壮秋(监事)【退出】",
+                        "AfterContent":"马化腾*(董事)；任宇昕(董事)；奚丹(董事)；谢晴华(监事)【新增】；周昭钦(监事)；许晨晔(董事)；黄秋华(监事)【新增】；马化腾*(总经理)",
+                        "ChangeDate":"2016-11-11"
+                    },
+                    {
+                        "ProjectName":"监事成员",
+                        "BeforeContent":"任宇昕(董事)；徐钢武(监事)【退出】；奚丹(董事)；马化腾*(总经理)；黄惠卿(监事)；马化腾*(董事)；林壮秋(监事)；许晨晔(董事)",
+                        "AfterContent":"马化腾*(董事)；周昭钦(监事)【新增】；马化腾*(总经理)；黄惠卿(监事)；许晨晔(董事)；任宇昕(董事)；奚丹(董事)；林壮秋(监事)",
+                        "ChangeDate":"2015-08-26"
+                    },
+                    {
+                        "ProjectName":"董事成员",
+                        "BeforeContent":"徐钢武(监事)；马化腾*(总经理)；马化腾*(董事)；张志东(董事)【退出】；陈一丹(董事)【退出】；许晨晔(董事)；林壮秋(监事)；黄惠卿(监事)",
+                        "AfterContent":"任宇昕(董事)【新增】；徐钢武(监事)；奚丹(董事)【新增】；马化腾*(总经理)；黄惠卿(监事)；马化腾*(董事)；林壮秋(监事)；许晨晔(董事)",
+                        "ChangeDate":"2015-02-10"
+                    },
+                    {
+                        "ProjectName":"实收资本",
+                        "BeforeContent":"人民币3000.0000万元",
+                        "AfterContent":"人民币6500.0000万元（+116.67%）",
+                        "ChangeDate":"2015-01-09"
+                    }
+                ],
+                "ContactInfo":{
+                    "WebSite":[
+                        {
+                            "Name":null,
+                            "Url":"http://www.qq.com"
+                        }
+                    ],
+                    "PhoneNumber":"0755-86013388",
+                    "Email":"landyzhang@tencent.com"
+                },
+                "Industry":{
+                    "IndustryCode":"I",
+                    "Industry":"信息传输、软件和信息技术服务业",
+                    "SubIndustryCode":"65",
+                    "SubIndustry":"软件和信息技术服务业",
+                    "MiddleCategoryCode":"651",
+                    "MiddleCategory":"软件开发",
+                    "SmallCategoryCode":null,
+                    "SmallCategory":null
+                },
+                "KeyNo":"f1c5372005e04ba99175d5fd3db7b8fc",
+                "Name":"深圳市腾讯计算机系统有限公司",
+                "No":"440301103448669",
+                "BelongOrg":"南山局",
+                "OperName":"马化腾",
+                "StartDate":"1998-11-11 00:00:00",
+                "EndDate":"",
+                "Status":"存续（在营、开业、在册）",
+                "Province":"GD",
+                "UpdatedDate":"2019-01-10 10:25:38",
+                "CreditCode":"91440300708461136T",
+                "RegistCapi":"6500万元人民币",
+                "EconKind":"有限责任公司",
+                "Address":"深圳市南山区高新区高新南一路飞亚达大厦5-10楼",
+                "Scope":"计算机软、硬件的设计、技术开发、销售(不含专营、专控、专卖商品及限制项目);数据库及计算机网络服务;国内商业、物资供销业(不含专营、专控、专卖商品);第二类增值电信业务中的信息服务业务(不含固定网电话信息服务和互联网信息服务,并按许可证B2-20090028号文办);信息服务业务(仅限互联网信息服务业务,并按许可证粤B2-20090059号文办);从事广告业务(法律、行政法规规定应进行广告经营审批等级的,另行办理审批登记后方可经营);网络游戏出版运营(凭有效的新出网证(粤)字010号互联网出版许可证经营);货物及技术进出口。^",
+                "TermStart":"1998-11-11 00:00:00",
+                "TeamEnd":"",
+                "CheckDate":"2018-12-12 00:00:00",
+                "OrgNo":"70846113-6",
+                "IsOnStock":"0",
+                "StockNumber":null,
+                "StockType":null,
+                "OriginalName":[
+
+                ],
+                "ImageUrl":"https://co-image.qichacha.com/CompanyImage/f1c5372005e04ba99175d5fd3db7b8fc.jpg"
+            },
+            "Status":"200",
+            "Message":"查询成功"
+        }
+
+        //社会统一信用代码
+        let CreditCode = json.Result.CreditCode;
+
+        $("#CreditCode").val() == ''?$("#CreditCode").attr('value',CreditCode):$("#CreditCode").val();
+
+        //注册资本
+        let RegistCapi = json.Result.RegistCapi;
+
+        $("#RegistCapi").attr('value',RegistCapi);
+
+        //营业开始时间
+        let StartDate = json.Result.TermStart;
+
+        $("#TermStart").attr('value',StartDate);
+
+        //营业结束时间
+
+        let EndDate = json.Result.TeamEnd;
+
+        $("#TeamEnd").attr('value',EndDate);
+
+
+        //注册地址
+        let Address = json.Result.Address;
+
+        $("#Address").attr('value',Address);
+        //法人名
+        let OperName = json.Result.OperName;
+
+        $("#OperName").attr('value',OperName);
+        //股东对象集合
+        let Partners = json.Result.Partners;
+
+        //存放股东姓名
+        let PartnersName = [];
+        //存放股东类型
+        let PartnersType = [];
+        //存放股东比例
+        let PartnersPercent = [];
+        //遍历内容
+        for (let item of Partners){
+            PartnersName.push(item.StockName);
+            PartnersType.push(item.StockType);
+            PartnersPercent.push(item.StockPercent);
+            $("#Stockul").append(`
+               <li>
+                    <div class="col-sm-3">
+                         <input  type="text" class="form-control" id="StockName"
+                         name="stock_name[]" placeholder="" value="${item.StockName}">
+                    </div>
+                    <div class="col-sm-3">
+                         <input type="text" class="form-control" id="StockType"
+                         name="stock_type[]" placeholder="" value="${item.StockType}">
+                    </div>
+                    <div class="col-sm-3">
+                         <input type="text" class="form-control" id="StockPercent"
+                         name="stock_percent[]" placeholder="" value="${item.StockPercent}">
+                    </div>
+              </li>
+
+        `);
+        }
+
+        //主要成员
+        let Employees = json.Result.Employees;
+        //成员姓名
+        let EmployeesName = [];
+        //成员职位
+        let EmployeesJob = [];
+        //遍历内容
+        for(let item of Employees){
+            EmployeesName.push(item.Name);
+            EmployeesJob.push(item.Job);
+            $("#Employeesul").append(`
+                <li>
+                    <input type="text" class="form-control" id="Employees" name="employees[]"
+                           placeholder="姓名" value="${item.Name}" style="width: 30%;">
+                    <input type="text" class="form-control" id="Employees_job" name="employees_job[]"
+                           placeholder="职务" value="${item.Job}" style="width: 30%;">
+                </li>
+            `);
+        }
+
+
+
+
+
+        //业务介绍
+        let Scope = json.Result.Scope;
+
+
+        $("#Scope").val(Scope);
+
+        //企业logo
+
+        let ImageUrl = json.Result.ImageUrl;
+
+        $(".each img").eq(0).attr('src',ImageUrl);
+
+        //联系电话
+
+        let Phone = json.Result.ContactInfo.PhoneNumber;
+
+        $("#phone").attr('value',Phone);
+
+        //邮箱
+
+        let Email = json.Result.ContactInfo.Email;
+        $("#email").attr('value',Email);
+
+        //联系地址
+        $("#contact_address").attr('value',Address);*/
+
+
+
         var name = $("#Name").val();
         $.ajax({
             type: "POST",
@@ -1180,8 +1726,111 @@
                 keyword: name
             },
             success: function (data) {
+                //因为上面dataType已经指明类型为json，所以不需要再进行反序列化
+
+                //将json字符串转换为对象
                 var data = JSON.parse(data);
+                console.log(data);
                 if (data.Status == 200) {
+
+                    //社会统一信用代码
+                    let CreditCode = data.Result.CreditCode;
+                    $("#CreditCode").val() == ''?$("#CreditCode").attr('value',CreditCode):$("#CreditCode").val();
+
+                    //注册资本
+                    let RegistCapi = data.Result.RegistCapi;
+                    $("#RegistCapi").attr('value',RegistCapi);
+
+                    //营业开始时间
+                    let StartDate = data.Result.TermStart;
+                    $("#TermStart").attr('value',StartDate);
+
+                    //营业结束时间
+                    let EndDate = data.Result.TeamEnd;
+                    $("#TeamEnd").attr('value',EndDate);
+
+
+                    //注册地址
+                    let Address = data.Result.Address;
+                    $("#Address").attr('value',Address);
+
+                    //法人名
+                    let OperName = data.Result.OperName;
+                    $("#OperName").attr('value',OperName);
+
+                    //股东对象集合
+                    let Partners = data.Result.Partners;
+                    //存放股东姓名
+                    let PartnersName = [];
+                    //存放股东类型
+                    let PartnersType = [];
+                    //存放股东比例
+                    let PartnersPercent = [];
+                    //遍历内容
+                    for (let item of Partners){
+                        PartnersName.push(item.StockName);
+                        PartnersType.push(item.StockType);
+                        PartnersPercent.push(item.StockPercent);
+                        $("#Stockul").append(`
+               <li>
+                    <div class="col-sm-3">
+                         <input  type="text" class="form-control" id="StockName"
+                         name="stock_name[]" placeholder="" value="${item.StockName}">
+                    </div>
+                    <div class="col-sm-3">
+                         <input type="text" class="form-control" id="StockType"
+                         name="stock_type[]" placeholder="" value="${item.StockType}">
+                    </div>
+                    <div class="col-sm-3">
+                         <input type="text" class="form-control" id="StockPercent"
+                         name="stock_percent[]" placeholder="" value="${item.StockPercent}">
+                    </div>
+              </li>
+
+        `);
+                    }
+
+                    //主要成员
+                    let Employees = data.Result.Employees;
+                    //成员姓名
+                    let EmployeesName = [];
+                    //成员职位
+                    let EmployeesJob = [];
+                    //遍历内容
+                    for(let item of Employees){
+                        EmployeesName.push(item.Name);
+                        EmployeesJob.push(item.Job);
+                        $("#Employeesul").append(`
+                <li>
+                    <input type="text" class="form-control" id="Employees" name="employees[]"
+                           placeholder="姓名" value="${item.Name}" style="width: 30%;">
+                    <input type="text" class="form-control" id="Employees_job" name="employees_job[]"
+                           placeholder="职务" value="${item.Job}" style="width: 30%;">
+                </li>
+            `);
+                    }
+
+                    //业务介绍
+                    let Scope = data.Result.Scope;
+                    $("#Scope").val(Scope);
+
+                    //企业logo
+                    let ImageUrl = data.Result.ImageUrl;
+                    $(".each img").eq(0).attr('src',ImageUrl);
+
+                    //联系电话
+                    let Phone = data.Result.ContactInfo.PhoneNumber;
+                    $("#phone").attr('value',Phone);
+
+                    //邮箱
+                    let Email = data.Result.ContactInfo.Email;
+                    $("#email").attr('value',Email);
+
+                    //联系地址
+                    $("#contact_address").attr('value',Address);
+
+
+
                     console.log(data);
                     //填充页面数据
                 } else {
@@ -1189,10 +1838,43 @@
                 }
             }
         })
+
     });
+
+    //使用ifChecked对radio进行监听
+    $('input[type=radio][name=kuaiji_daili]').on('ifChecked',function () {
+        if (this.value == '1') {
+
+            $("#kjdl").show();
+        } else if (this.value == '0') {
+            $("#kjdl").hide();
+
+        }
+    })
+
+
+    //使用change()和click()都无法监听到radio的改变
+    //使用ifChecked()时可以监听radio改变
+
+    //console.log($('input[type=radio][name=kuaiji_daili]'));
+
+       /* $('input[type=radio][name=kuaiji_daili]').click(function () {
+
+            alert(111);
+            if (this.value == '1') {
+                console.log(this.value);
+                $("#kjdl").show();
+            } else if (this.value == '0') {
+                $("#kjdl").hide();
+                console.log(this.value);
+            }
+        });*/
+
+/*
 
     //会计代理div的默认值
     var KjdlValue = $('input[name="kuaiji_daili"]:checked').val();
+    console.log(KjdlValue);
     if (KjdlValue == 0) {
         $("#kjdl").hide();
     }
@@ -1211,6 +1893,7 @@
             $("#kjdl").hide();
         }
     });
+*/
 
 
     //修改input框长度
