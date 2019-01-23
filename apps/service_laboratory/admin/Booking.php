@@ -88,6 +88,12 @@ class Booking extends Admin
             ->content($content);
     }
 
+    /**
+     * @param int $id
+     * @return \app\common\layout\Content
+     * @throws \think\exception\DbException
+     * 编辑预约
+     */
     public function edit($id = 0)
     {
         $info = ServiceLaboratoryBookingList::get($id);
