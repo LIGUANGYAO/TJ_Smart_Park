@@ -129,9 +129,7 @@ class Room extends Admin
             ->addRightButton('delete', ['model' => 'ParkRoom'])
             ->fetch();
 
-        return Iframe()
-            ->setMetaTitle('房间管理')
-            ->content($content);
+        return $content;
     }
 
     /**
