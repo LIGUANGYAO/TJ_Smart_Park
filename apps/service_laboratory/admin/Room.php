@@ -71,7 +71,7 @@ class Room extends Admin
             ->keyListItem('status', '状态', 'array', [1 => '启用', 2 => '禁用'])
             ->keyListItem('right_button', '操作', 'btn')
             ->addRightButton('edit')
-            ->addRightButton('delete', ['model' => $this->laboModel])
+            ->addRightButton('delete', ['model' => 'ServiceLaboratoryList'])
             ->setListData($data_list)
             ->setListPage($total)
             ->fetch();
