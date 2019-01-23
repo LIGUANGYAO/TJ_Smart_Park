@@ -65,7 +65,7 @@ class Booking extends Admin
         $content = (new BuilderList())
             ->addTopButton('delete')
             ->keyListItem('id', 'ID')
-            ->keyListItem('laboratory_id', '实验室','callback','getLaboratoryAddress')
+            ->keyListItem('laboratory_id', '实验室', 'callback', 'getLaboratoryAddress')
             ->keyListItem('username', '预约人')
             ->keyListItem('phone', '联系方式')
             ->keyListItem('s_time', '开始时间')
@@ -77,7 +77,7 @@ class Booking extends Admin
             ->keyListItem('marks', '备注')
             ->keyListItem('right_button', '操作', 'btn')
             ->addRightButton('edit')
-            ->addRightButton('delete', ['model' => $this->bookModel])
+            ->addRightButton('delete', ['model' => 'ServiceLaboratoryBookingList'])
             ->setListData($data_list)
             ->setListPage($total)
             ->fetch();
