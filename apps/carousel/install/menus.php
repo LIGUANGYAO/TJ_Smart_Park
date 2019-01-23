@@ -25,11 +25,25 @@ return [
                     'is_menu' => 1,
                 ],
                 [
+                    'title' => '添加、编辑轮播位',
+                    'name' => 'carousel/carousel_position/edit',
+                    'icon' => 'fa fa-th-large',
+                    'is_menu' => 0,
+                ],
+
+                [
                     'title' => '轮播图列表',
                     'name' => 'carousel/carousel_list/index',
                     'icon' => 'fa fa-file-image-o',
                     'is_menu' => 1,
                 ],
+                [
+                    'title' => '添加、编辑轮播图',
+                    'name' => 'carousel/carousel_list/edit',
+                    'icon' => 'fa fa-file-image-o',
+                    'is_menu' => 0,
+                ],
+
             ],
         ],
     ]
