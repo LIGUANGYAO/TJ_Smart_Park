@@ -115,8 +115,8 @@
                                 <img src="{$current_user.avatar|root_full_path|default='/static/assets/img/default-avatar.png'}"
                                      class="img-circle" alt="User Image">
                                 <p>
-                                    {$current_user.nickname} - {/*$current_user.role_name*/}
-                                    <small>注册时间：{$current_user.create_time}</small>
+                                    {$current_user.nickname} - {$current_user.auth_group[1]}
+                                    <small>上次登录时间：{$current_user.last_login_time}</small>
                                 </p>
                             </li>
                             <!-- Menu Body -->
