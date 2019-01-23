@@ -87,7 +87,7 @@ class Room extends Admin
         return (new Iframe())
             ->setMetaTitle('房源列表')
             ->search([
-                ['name' => 'status', 'type' => 'select', 'title' => '租赁状态', 'options' => $this->statusType],
+                ['name' => 'room_status', 'type' => 'select', 'title' => '租赁状态', 'options' => $this->statusType],
                 ['name' => 'building_id', 'type' => 'select', 'title' => '楼宇', 'options' => $this->buildData],
                 ['name' => 'floor', 'type' => 'select', 'title' => '楼层', 'options' => $this->floors]
             ])
@@ -102,7 +102,7 @@ class Room extends Admin
     public function grid()
     {
         list($data_list, $total) = $this->roomModel
-            ->search('status,building_id,floor')
+            ->search('room_status,building_id,floor')
             ->getListByPage([], true, 'create_time desc');
 
         $content = builder('list')
