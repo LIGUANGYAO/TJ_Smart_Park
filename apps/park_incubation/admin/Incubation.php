@@ -118,7 +118,7 @@ class Incubation extends Admin
                 ->addFormItem('entry_time', 'text', '入孵时间')
                 ->addFormItem('enterprise_status', 'select', '状态', '', [1 => '毕业', 2 => '在孵'])
                 ->addFormItem('out_time', 'text', '退出时间')
-                ->addFormItem('liaison', 'select', '联络员', '', $liaison)
+                ->addFormItem('liaison', 'select', '联络员', '需在权限管理->管理员中添加', $liaison)
                 ->addFormItem('counselor', 'text', '辅导员')
                 ->addFormItem('entrepreneurship_tutor', 'text', '创业导师')
                 ->setFormData($info)
