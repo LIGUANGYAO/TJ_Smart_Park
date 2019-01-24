@@ -98,7 +98,7 @@ class Index extends Admin
             }
         } else {
             $info = [
-
+                'is_expire' => 2,
             ];
             if ($id > 0) {
                 $info = HighTechEnterpriseList::get($id);
