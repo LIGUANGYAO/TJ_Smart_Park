@@ -162,9 +162,7 @@ class EnterpriseContract extends Admin
 //            ->addRightButton('self', $renew)
             ->fetch();
 
-        return (new Iframe())
-            ->setMetaTitle('合同列表')
-            ->content($content);
+        return $content;
     }
 
     /**
