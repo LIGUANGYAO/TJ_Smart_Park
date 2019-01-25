@@ -68,11 +68,18 @@ class Bill extends Admin
             'class' => 'btn btn-default btn-sm',
             'href' => url('import')
         ];
+        $export = [
+            'icon' => 'fa fa-folder-open',
+            'title' => '导出',
+            'class' => 'btn btn-warning btn-sm',
+            'href' => url('export')
+        ];
         list($data_list, $total) = $this->billModel->search(['keyword_condition' => 'enterprise_name',])->getListByPage([], true, 'create_time desc');
         $content = (new BuilderList())
             ->addTopButton('addnew')
             ->addTopButton('delete', ['model' => 'CostBillList'])
             ->addTopButton('self', $import)
+            ->addTopButton('self', $export)
             ->keyListItem('id', 'ID')
             ->keyListItem('bill_type', '费用类型', 'array', $this->billType)
             ->keyListItem('enterprise_name', '企业名称')
@@ -173,6 +180,52 @@ class Bill extends Admin
             } else {
                 return json(['state' => 0, 'msg' => '处理错误']);
             }
+        }
+    }
+
+    /**
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     * 表格导出示例
+     */
+    public function export()
+    {
+        $Excel['fileName'] = "表格导出示例-" . date('Y年m月d日-His', time());
+        $Excel['cellName'] = ['A', 'B', 'C', 'D'];
+        $Excel['H'] = ['A' => 12, 'B' => 20, 'C' => 14, 'D' => 16];//横向水平宽度
+        $Excel['V'] = ['1' => 40, '2' => 23];//纵向垂直高度
+        $Excel['sheetTitle'] = "钩子列表";//大标题，自定义
+        $Excel['xlsCell'] = [
+            ['id', '序号'],
+            ['name', '钩子名称'],
+            ['type', '类型'],
+            ['status', '状态']
+        ];
+        $sqldata = Db::name('Hooks')->select();
+        $outData = [];
+        foreach ($sqldata as $k => $v) {
+            $outData[$k] = [
+                'id' => $v['id'],
+                'name' => $v['name'],
+                'type' => $this->getTypeText($v['type']),
+                'status' => $v['status']
+            ];
+
+        }
+        $param = [
+            'Excel' => $Excel,
+            'expTableData' => $outData
+        ];
+        hook('exportToTable', $param);
+    }
+
+    protected function getTypeText($type)
+    {
+        if ($type == 1) {
+            return '系统';
+        } else {
+            return '自定义';
         }
     }
 }
