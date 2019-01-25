@@ -21,8 +21,8 @@ class Index extends Plugin
      * @var array 插件钩子
      */
     public $hooks = [
-        'import',
-        'export'
+        'importFromTable',
+        'exportToTable'
     ];
 
     /**
@@ -56,7 +56,7 @@ class Index extends Plugin
      * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
      * 导入表格
      */
-    public function import($url = '')
+    public function importFromTable($url = '')
     {
         if (\request()->file("file")) {
             $file = \request()->file('file');
@@ -77,7 +77,7 @@ class Index extends Plugin
         return $this->fetch('import');
     }
 
-    public function export()
+    public function exportToTable()
     {
         return \view();
     }
