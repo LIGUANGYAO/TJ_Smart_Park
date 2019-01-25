@@ -21,3 +21,21 @@ if (!function_exists('getEnterpriseNameByEnterpriseId')) {
         }
     }
 }
+if (!function_exists('getEnterpriseIdByEnterpriseName')) {
+    /**
+     * @param $enterpriseName
+     * @return mixed|null
+     * 根据企业名称获取企业ID
+     */
+    function getEnterpriseIdByEnterpriseName($enterpriseName)
+    {
+        $id = Db::name('ParkEnterpriseQichachaBasicInfo')
+            ->where('enterprise_name', 'eq', trim($enterpriseName))
+            ->value('id');
+        if (empty($id)) {
+            return null;
+        } else {
+            return $id;
+        }
+    }
+}

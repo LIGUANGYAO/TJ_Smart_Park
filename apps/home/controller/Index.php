@@ -23,6 +23,7 @@ class Index extends Home {
      */
     public function index()
     {
+        \halt("你好啊！");
         $this->pageInfo('首页','home');
     	return $this->fetch();
     }
