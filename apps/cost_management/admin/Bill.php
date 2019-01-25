@@ -14,7 +14,6 @@ use app\common\builder\BuilderForm;
 use app\common\builder\BuilderList;
 use app\common\layout\Iframe;
 use app\cost_management\model\CostBillList;
-use PhpOffice\PhpSpreadsheet\IOFactory;
 use think\Db;
 
 /**
@@ -72,7 +71,7 @@ class Bill extends Admin
         list($data_list, $total) = $this->billModel->search(['keyword_condition' => 'enterprise_name',])->getListByPage([], true, 'create_time desc');
         $content = (new BuilderList())
             ->addTopButton('addnew')
-            ->addTopButton('delete')
+            ->addTopButton('delete', ['model' => 'CostBillList'])
             ->addTopButton('self', $import)
             ->keyListItem('id', 'ID')
             ->keyListItem('bill_type', '费用类型', 'array', $this->billType)
@@ -150,10 +149,10 @@ class Bill extends Admin
     public function import()
     {
         $url = '/admin.php/cost_management/bill/import';
-        $Data = hook('import', $url, true);
+        $Data = hook('importFromTable', $url, true);
         if (!empty($Data[0])) {
 
-            //在这里组装需要入库的数组，从Data中取值
+            //组装需要入库的数组，从Data中取值
             //todo
             $sqlData = [
                 'bill_type' => 1,
@@ -166,6 +165,8 @@ class Bill extends Admin
                 'marks' => '表格导入测试',
             ];
 
+            //校验数据完整性
+            //todo
             $res = Db::name('CostBillList')->insert($sqlData);
             if ($res > 0) {
                 return json(['state' => 1, 'msg' => '处理成功']);
