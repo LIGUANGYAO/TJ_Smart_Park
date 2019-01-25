@@ -14,6 +14,7 @@ use app\common\builder\BuilderForm;
 use app\common\builder\BuilderList;
 use app\common\layout\Iframe;
 use app\cost_management\model\CostBillList;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 use think\Db;
 
 /**
@@ -62,10 +63,17 @@ class Bill extends Admin
      */
     public function index()
     {
+        $import = [
+            'icon' => 'fa fa-folder-open-o',
+            'title' => '导入',
+            'class' => 'btn btn-default btn-sm',
+            'href' => url('import')
+        ];
         list($data_list, $total) = $this->billModel->search(['keyword_condition' => 'enterprise_name',])->getListByPage([], true, 'create_time desc');
         $content = (new BuilderList())
             ->addTopButton('addnew')
             ->addTopButton('delete')
+            ->addTopButton('self', $import)
             ->keyListItem('id', 'ID')
             ->keyListItem('bill_type', '费用类型', 'array', $this->billType)
             ->keyListItem('enterprise_name', '企业名称')
@@ -132,6 +140,38 @@ class Bill extends Admin
             return (new Iframe())
                 ->setMetaTitle($title . '账单')
                 ->content($content);
+        }
+    }
+
+    /**
+     * @return \think\response\Json
+     * 表格导入示例
+     */
+    public function import()
+    {
+        $url = '/admin.php/cost_management/bill/import';
+        $Data = hook('import', $url, true);
+        if (!empty($Data[0])) {
+
+            //在这里组装需要入库的数组，从Data中取值
+            //todo
+            $sqlData = [
+                'bill_type' => 1,
+                'enterprise_id' => \getEnterpriseIdByEnterpriseName($Data[0][1][2]),
+                'enterprise_name' => \trim($Data[0][1][2]),
+                'bill_time' => \date('Y-m-d H:i:s'),
+                'bill_status' => 1,
+                'amount' => 200,
+                'real_amount' => 180,
+                'marks' => '表格导入测试',
+            ];
+
+            $res = Db::name('CostBillList')->insert($sqlData);
+            if ($res > 0) {
+                return json(['state' => 1, 'msg' => '处理成功']);
+            } else {
+                return json(['state' => 0, 'msg' => '处理错误']);
+            }
         }
     }
 }
