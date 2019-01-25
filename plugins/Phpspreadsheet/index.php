@@ -19,6 +19,8 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
  * Class Index
  * @package plugins\Phpspreadsheet
  * PHPspreadsheet控制器
+ * 表格导入：读取表格数据，生成数组，处理数组
+ * 表格导出：构建表格结构，构建表格数据，输出数据至表格，浏览器下载
  */
 class Index extends Plugin
 {
