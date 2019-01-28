@@ -34,7 +34,7 @@
             <i class="fa fa-circle text-success"></i> [<span class="loginout f12">退出</span>]
           </div>
         </div>-->
-        {assign name="role" value="$current_user.auth_group" /}
+        {assign name="role" value="$current_user.uid|get_admin_group_name_by_uid" /}
         {if condition="$role[1] eq '超级管理员'"}
         <ul class="sidebar-menu" id="sidebar-menusaa">
             <li class="header">
@@ -59,7 +59,7 @@
                     </li>
                     <li><a href="/admin.php/park_enterprise/enterprise_cwdl_contract/index.html">财务代理合同</a>
                     </li>
-                    <li><a href="">知识产权管理</a>
+                    <li><a href="#">知识产权管理</a>
                         <ul>
                             <li>
                                 <a href="/admin.php/park_enterprise_intellectual/trademark/index.html">商标信息列表</a>
@@ -86,14 +86,14 @@
                     </li>
                     <li><a href="/admin.php/park_investment/investment/index.html">投融资信息管理</a></li>
                     <li><a href="/admin.php/tech_project/project/index.html">科技项目资金管理</a></li>
-                    <li><a href="">孵化企业管理</a>
+                    <li><a href="#">孵化企业管理</a>
                         <ul>
                             <li><a href="/admin.php/park_incubation/incubation/index.html">孵化企业列表</a></li>
                             <li><a href="/admin.php/park_incubation/incubation_visit/index.html">走访记录</a></li>
                         </ul>
                     </li>
                     <li><a href="/admin.php/student_innovation/innovation/index.html">大学生创业</a></li>
-                    <li><a href="">软件企业</a>
+                    <li><a href="#">软件企业</a>
                         <ul>
                             <li><a href="/admin.php/software_enterprise/enterprise_list/index.html">企业列表</a></li>
                             <li><a href="/admin.php/software_enterprise/soft_list/index.html">项目列表</a></li>
@@ -166,14 +166,14 @@
                 </ul>
             </li>
 
-            <li><a href="">管理员管理</a>
+            <li><a href="#">管理员管理</a>
                 <ul>
                     <li><a href="http://www.tongji.gov/admin.php/admin/auth_group/index.html">角色组</a></li>
                     <li><a href="http://www.tongji.gov/admin.php/admin/admin_user/index.html">管理员</a></li>
                 </ul>
             </li>
 
-            <li><a href="">用户管理</a>
+            <li><a href="#">用户管理</a>
                 <ul>
                     <li><a href="http://www.tongji.gov/admin.php/user/user/index.html">用户列表</a></li>
                     <li><a href="http://www.tongji.gov/admin.php/user/tongji/analyze.html">会员统计</a></li>
@@ -209,7 +209,7 @@
     </section>
 </aside>
 <script>
-    //让菜单在iframe中打开
+    //让菜单在iframe中打开，没有链接的a标签href属性必须是#
     $.each($("#sidebar-menusaa li a[href!='#']"), function () {
         var index = $("#sidebar-menusaa li a[href!='#']").index(this) + 100;
         $(this).attr({"class": "opentab", "tab-name": "navtab-collapse-" + index});
