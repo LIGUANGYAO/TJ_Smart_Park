@@ -1,13 +1,5 @@
 <?php
-// 用户
-// +----------------------------------------------------------------------
-// | Copyright (c) 2016-2018 https://www.eacoophp.com, All rights reserved.         
-// +----------------------------------------------------------------------
-// | [EacooPHP] 并不是自由软件,可免费使用,未经许可不能去掉EacooPHP相关版权。
-// | 禁止在EacooPHP整体或任何部分基础上发展任何派生、修改或第三方版本用于重新分发
-// +----------------------------------------------------------------------
-// | Author:  心云间、凝听 <981248356@qq.com>
-// +----------------------------------------------------------------------
+
 use app\admin\logic\AdminUser as AdminUserLogic;
 use app\admin\logic\AuthGroupAccess as AuthGroupAccessLogic;
 use think\Db;
@@ -103,12 +95,8 @@ function get_admin_role($field = 'id')
                         $role_info[] = db('AuthGroup')->where(['id' => $key])->field($field)->find();
                     }
                 }
-
-
             }
-
         }
-
     }
     return $role_info;
 }
