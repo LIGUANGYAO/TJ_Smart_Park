@@ -1,71 +1,271 @@
-  <aside class="main-sidebar sidebar-wrapper">
+<style>
+    #sidebar-menusaa li {
+        margin: 10px 0;
+    }
+
+    #sidebar-menusaa li ul {
+        display: none;
+    }
+
+    #sidebar-menusaa li ul li {
+
+        text-align: left;
+        margin-left: 40px;
+    }
+
+    #sidebar-menusaa li:hover ul {
+        display: block;
+    }
+
+    #sidebar-menusaa li ul li:hover {
+        color: white;
+    }
+</style>
+
+<aside class="main-sidebar  sidebar-wrapper">
     <section class="sidebar" id="sidebar">
-      <!-- Sidebar user panel -->
-      <!--<div class="user-panel">
-        <div class="pull-left image">
-         <a href="{:url('admin/AdminUser/profile',['uid'=>$current_user['uid']])}" class="opentab" tab-name="navtab-collapse-profile" data-selftabhtml="个人资料"><img src="{$current_user.avatar|root_full_path|default='/static/assets/img/default-avatar.svg'}" class="img-circle" style="width: 100%;max-width: 45px;height: auto;" alt=""></a>
-        </div>
-        <div class="pull-left info">
-          <p><a href="{:url('user/User/profile',['uid'=>$current_user['uid']])}" class="opentab" tab-title='个人资料' tab-name="navtab-collapse-profile">{$current_user.nickname}</a></p>
-          <i class="fa fa-circle text-success"></i> [<span class="loginout f12">退出</span>]
-        </div>
-      </div>-->
-      <ul class="sidebar-menu" id="sidebar-menus">
-
-      </ul>
-    </section>
-  </aside>
-
-  <script id="sidebar_menus" type="text/html">
-    <li class="header">菜单栏</li>
-    <% for (var i = 0; i < data.length; i ++) { %>
-        <% var vo = data[i]; %>
-        <% var child = data[i]._child; %>
-        <li class="<% if(child){ %> treeview <% }else{ %>no_tree<% } %>">
-          <a href="<% if(child){ %>#<% }else{ %> <%=vo.url %> <% } %>" <% if(!child){ %> class="opentab" tab-name="navtab-collapse-<%=vo.id %>" <% } %> >
-              <i class="fa <% if(vo.icon){ %> {{vo.icon}} <% }else{ %>fa-circle-o <% } %>"></i>
-                <span>{{vo.title}}</span>
-                <% if(child){ %><i class="fa fa-angle-left pull-right"></i> <% } %>
-            </a>
-          <% if(child){ %>
-          <ul class="treeview-menu">
-            <% for (var j = 0; j < child.length; j ++) { %>
-                <% var v = child[j]; %>
-                <% var _child = child[j]._child; %>
-                <% if(!_child){ %>
-                  <li ><a href="{{v.url}}" class="opentab" tab-name="navtab-collapse-<%=v.id %>"><i class="fa <% if(v.icon){ %> {{v.icon}} <% }else{ %>fa-circle-o <% } %>"></i> <%=v.title %></a> </li>
-                  <% }else{ %>
-                   <li ><a href="{{v.url}}" class="opentab" tab-name="navtab-collapse-<%=v.id %>"><i class="fa <% if(v.icon){ %> {{v.icon}} <% }else{ %>fa-circle-o <% } %>"></i> <%=v.title %> <i class="fa fa-angle-left pull-right"></i></a>
-                     <ul class="treeview-menu">
-                        <% for (var k = 0; k < _child.length; k ++) { %>
-                            <% var _v = child[j]; %>
-                            <li><a href="{{_v.url}}" class="opentab" tab-name="navtab-collapse-<%=v.id %>"><i class="fa f<% if(_v.icon){ %> {{_v.icon}} <% }else{ %>fa-circle-o <% } %>"></i> <%=_v.title %></a></li>
-                        <% } %>
-
-                   </ul>
-                    </li>
-                <% } %>
-            <% } %>
-         </ul>
-         <% } %>
-      </li>
-    <% } %>
-    <!--交流社区-->
-    <!--<li class="header">LABELS</li>
-    <li><a href="https://forum.eacoophp.com" target="_blank"><i class="fa fa-circle-o text-red"></i> <span>交流社区</span></a></li>
-    <li><a href="https://www.kancloud.cn/youpzt/eacoo" target="_blank"><i class="fa fa-circle-o text-yellow"></i> <span>开发文档</span></a></li>
-    <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>联系我们</span></a></li>-->
-
-    <% if (data.length==0) { %>
-        <div class="no-data-div">
-          <div class="no-data-icon">
-            <i class="iconfont">&#xe612;</i>
+        <!-- Sidebar user panel -->
+        <!--<div class="user-panel">
+          <div class="pull-left image">
+           <a href="{:url('admin/AdminUser/profile',['uid'=>$current_user['uid']])}" class="opentab" tab-name="navtab-collapse-profile" data-selftabhtml="个人资料"><img src="{$current_user.avatar|root_full_path|default='/static/assets/img/default-avatar.svg'}" class="img-circle" style="width: 100%;max-width: 45px;height: auto;" alt=""></a>
           </div>
-          <dl>
-            <dt>暂无菜单</dt>
-            <dd>数据出错</dd>
-          </dl>
+          <div class="pull-left info">
+            <p><a href="{:url('user/User/profile',['uid'=>$current_user['uid']])}" class="opentab" tab-title='个人资料' tab-name="navtab-collapse-profile">{$current_user.nickname}</a></p>
+            <i class="fa fa-circle text-success"></i> [<span class="loginout f12">退出</span>]
+          </div>
+        </div>-->
+        {assign name="role" value="$current_user.auth_group" /}
+        {if condition="$role[1] eq '超级管理员'"}
+        <ul class="sidebar-menu" id="sidebar-menusaa">
+            <li class="header">
+                <span>菜单栏</span>
+            </li>
 
-        </div>
-    <% } %>
+            <li>
+                <a href="#">房源管理</a>
+                <ul>
+                    <li><a href="/admin.php/park_building/building/index.html">楼宇列表</a></li>
+                    <li><a href="/admin.php/park_building/room/index.html">房源列表</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">企业管理</a>
+                <ul>
+                    <li><a href="/admin.php/park_enterprise/enterprise_basic/index.html">企业列表</a>
+                    </li>
+                    <li>
+                        <a href="/admin.php/park_enterprise/enterprise_contract/index.html">租房合同</a>
+                    </li>
+                    <li><a href="/admin.php/park_enterprise/enterprise_cwdl_contract/index.html">财务代理合同</a>
+                    </li>
+                    <li><a href="">知识产权管理</a>
+                        <ul>
+                            <li>
+                                <a href="/admin.php/park_enterprise_intellectual/trademark/index.html">商标信息列表</a>
+                            </li>
+                            <li>
+                                <a href="/admin.php/park_enterprise_intellectual/patent/index.html">专利信息列表</a>
+                            </li>
+                            <li>
+                                <a href="/admin.php/park_enterprise_intellectual/certificate/index.html">企业证书列表</a>
+                            </li>
+                            <li>
+                                <a href="/admin.php/park_enterprise_intellectual/wcopyright/index.html">作品著作权列表</a>
+                            </li>
+                            <li>
+                                <a href="/admin.php/park_enterprise_intellectual/scopyright/index.html">软件著作权列表</a>
+                            </li>
+                            <li>
+                                <a href="/admin.php/park_enterprise_intellectual/website/index.html">网站信息列表</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/admin.php/park_enterprise_finance_info/finance/index.html">公司财务信息</a>
+                    </li>
+                    <li><a href="/admin.php/park_investment/investment/index.html">投融资信息管理</a></li>
+                    <li><a href="/admin.php/tech_project/project/index.html">科技项目资金管理</a></li>
+                    <li><a href="">孵化企业管理</a>
+                        <ul>
+                            <li><a href="/admin.php/park_incubation/incubation/index.html">孵化企业列表</a></li>
+                            <li><a href="/admin.php/park_incubation/incubation_visit/index.html">走访记录</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/admin.php/student_innovation/innovation/index.html">大学生创业</a></li>
+                    <li><a href="">软件企业</a>
+                        <ul>
+                            <li><a href="/admin.php/software_enterprise/enterprise_list/index.html">企业列表</a></li>
+                            <li><a href="/admin.php/software_enterprise/soft_list/index.html">项目列表</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/admin.php/high_tech_enterprise/index/index.html">高新技术企业管理</a></li>
+                    <li><a href="/admin.php/high_tech_project/index/index.html">高新技术成果转化管理</a></li>
+                    <li><a href="/admin.php/park_financial_support/index/index.html">财政扶持管理</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">创业苗圃</a>
+                <ul>
+                    <li><a href="/admin.php/park_nursery/nursery/index.html">苗圃工位管理</a></li>
+                    <li><a href="/admin.php/park_nursery/team/index.html">苗圃团队管理</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">费用管理</a>
+                <ul>
+                    <li><a href="/admin.php/cost_management/category/index.html">收费项目</a></li>
+                    <li><a href="/admin.php/cost_management/bill/index.html">账单管理</a></li>
+                    <li><a href="/admin.php/park_project_budget/budget/index.html">项目预算管理</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">停车位管理</a>
+                <ul>
+                    <li><a href="/admin.php/parking_space/space/index.html">车位列表</a></li>
+                    <li><a href="/admin.php/parking_space/lease/index.html">租赁管理</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">物业服务</a>
+                <ul>
+                    <li><a href="#">会议室管理</a>
+                        <ul>
+                            <li><a href="/admin.php/service_meeting_room/room/index.html">会议室列表</a></li>
+                            <li><a href="/admin.php/service_meeting_room/booking/index.html">预约管理</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">实验室管理</a>
+                        <ul>
+                            <li><a href="/admin.php/service_laboratory/room/index.html">实验室列表</a></li>
+                            <li><a href="/admin.php/service_laboratory/booking/index.html">预约管理</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/admin.php/service_repair/index/index.html">报修管理</a></li>
+                    <li><a href="#">活动管理</a>
+                        <ul>
+                            <li><a href="/admin.php/park_activity/activity/index.html">活动列表</a></li>
+                            <li><a href="/admin.php/park_activity/apply/index.html">报名列表</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">微信管理</a>
+                <ul>
+                    <li><a href="/admin.php/wechat/wechat/index.html">公众号管理</a></li>
+                    <li><a href="/admin.php/wechat/reply/keyword.html">自动回复</a></li>
+                    <li><a href="/admin.php/wechat/material/text.html">素材管理</a></li>
+                    <li><a href="/admin.php/wechat/menu/index.html">自定义菜单</a></li>
+                    <li><a href="/admin.php/wechat/wechat_user/index.html">微信用户列表</a></li>
+                    <li><a href="/admin.php/wechat/message/index.html">消息列表</a></li>
+                </ul>
+            </li>
+
+            <li><a href="">管理员管理</a>
+                <ul>
+                    <li><a href="http://www.tongji.gov/admin.php/admin/auth_group/index.html">角色组</a></li>
+                    <li><a href="http://www.tongji.gov/admin.php/admin/admin_user/index.html">管理员</a></li>
+                </ul>
+            </li>
+
+            <li><a href="">用户管理</a>
+                <ul>
+                    <li><a href="http://www.tongji.gov/admin.php/user/user/index.html">用户列表</a></li>
+                    <li><a href="http://www.tongji.gov/admin.php/user/tongji/analyze.html">会员统计</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">数据统计</a>
+            </li>
+            <li>
+                <a href="#">系统设置</a>
+                <ul>
+                    <li><a href="/admin.php/admin/config/group.html">系统设置</a></li>
+                    <li><a href="/admin.php/admin/config/website.html">网站设置</a></li>
+                    <!--<li><a href="/admin.php/admin/config/index.html">配置管理</a></li>-->
+                </ul>
+            </li>
+            <li>
+                <a href="#">应用中心</a>
+                <ul>
+                    <!--<li><a href="/admin.php/admin/modules/index.html">模块管理</a></li>-->
+                    <li><a href="/admin.php/admin/plugins/config/name/Qichacha.html">企查查</a>
+                    <li><a href="/admin.php/admin/plugins/config/name/Alisms.html">阿里云短信</a></li>
+                    <!--<li><a href="/admin.php/admin/plugins/config/name/qiniuoss.html">七牛云储存</a></li>-->
+                    <li>
+                        <a href="/admin.php/home/plugin/execute/_plugin/DataDictionary/_controller/Index/_action/index.html">数据库字典</a>
+                    </li>
+                    <li><a href="/admin.php/admin/attachment/index.html">附件管理</a></li>
+                </ul>
+            </li>
+        </ul>
+        {/if}
+    </section>
+</aside>
+<script>
+    //让菜单在iframe中打开
+    $.each($("#sidebar-menusaa li a"), function () {
+        var index = $("#sidebar-menusaa li a").index(this) + 100;
+        $(this).attr({"class": "opentab", "tab-name": "navtab-collapse-" + index});
+    })
+
 </script>
+<!--<script id="sidebar_menus" type="text/html">
+  <li class="header">菜单栏</li>
+  <% for (var i = 0; i < data.length; i ++) { %>
+      <% var vo = data[i]; %>
+      <% var child = data[i]._child; %>
+      <li class="<% if(child){ %> treeview <% }else{ %>no_tree<% } %>">
+        <a href="<% if(child){ %>#<% }else{ %> <%=vo.url %> <% } %>" <% if(!child){ %> class="opentab" tab-name="navtab-collapse-<%=vo.id %>" <% } %> >
+            <i class="fa <% if(vo.icon){ %> {{vo.icon}} <% }else{ %>fa-circle-o <% } %>"></i>
+              <span>{{vo.title}}</span>
+              <% if(child){ %><i class="fa fa-angle-left pull-right"></i> <% } %>
+          </a>
+        <% if(child){ %>
+        <ul class="treeview-menu">
+          <% for (var j = 0; j < child.length; j ++) { %>
+              <% var v = child[j]; %>
+              <% var _child = child[j]._child; %>
+              <% if(!_child){ %>
+                <li ><a href="{{v.url}}" class="opentab" tab-name="navtab-collapse-<%=v.id %>"><i class="fa <% if(v.icon){ %> {{v.icon}} <% }else{ %>fa-circle-o <% } %>"></i> <%=v.title %></a> </li>
+                <% }else{ %>
+                 <li ><a href="{{v.url}}" class="opentab" tab-name="navtab-collapse-<%=v.id %>"><i class="fa <% if(v.icon){ %> {{v.icon}} <% }else{ %>fa-circle-o <% } %>"></i> <%=v.title %> <i class="fa fa-angle-left pull-right"></i></a>
+                   <ul class="treeview-menu">
+                      <% for (var k = 0; k < _child.length; k ++) { %>
+                          <% var _v = child[j]; %>
+                          <li><a href="{{_v.url}}" class="opentab" tab-name="navtab-collapse-<%=v.id %>"><i class="fa f<% if(_v.icon){ %> {{_v.icon}} <% }else{ %>fa-circle-o <% } %>"></i> <%=_v.title %></a></li>
+                      <% } %>
+
+                 </ul>
+                  </li>
+              <% } %>
+          <% } %>
+       </ul>
+       <% } %>
+    </li>
+  <% } %>
+  &lt;!&ndash;交流社区&ndash;&gt;
+  &lt;!&ndash;<li class="header">LABELS</li>
+  <li><a href="https://forum.eacoophp.com" target="_blank"><i class="fa fa-circle-o text-red"></i> <span>交流社区</span></a></li>
+  <li><a href="https://www.kancloud.cn/youpzt/eacoo" target="_blank"><i class="fa fa-circle-o text-yellow"></i> <span>开发文档</span></a></li>
+  <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>联系我们</span></a></li>&ndash;&gt;
+
+  <% if (data.length==0) { %>
+      <div class="no-data-div">
+        <div class="no-data-icon">
+          <i class="iconfont">&#xe612;</i>
+        </div>
+        <dl>
+          <dt>暂无菜单</dt>
+          <dd>数据出错</dd>
+        </dl>
+
+      </div>
+  <% } %>
+</script>-->
