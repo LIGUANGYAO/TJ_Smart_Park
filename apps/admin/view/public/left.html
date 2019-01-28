@@ -211,7 +211,7 @@
 <script>
     //让菜单在iframe中打开
     $.each($("#sidebar-menusaa li a[href!='#']"), function () {
-        var index = $("#sidebar-menusaa li a").index(this) + 100;
+        var index = $("#sidebar-menusaa li a[href!='#']").index(this) + 100;
         $(this).attr({"class": "opentab", "tab-name": "navtab-collapse-" + index});
     })
 
