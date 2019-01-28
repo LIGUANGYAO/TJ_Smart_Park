@@ -10,7 +10,7 @@
 // +----------------------------------------------------------------------
 use app\admin\logic\AdminUser as AdminUserLogic;
 use app\admin\logic\AuthGroupAccess as AuthGroupAccessLogic;
-use app\common\logic\Action as ActionLogic;
+use think\Db;
 
 /**
  * 检测用户是否登录
@@ -113,3 +113,16 @@ function get_admin_role($field = 'id')
     return $role_info;
 }
 
+if (!function_exists('get_admin_group_name_by_uid')) {
+    /**
+     * @param $uid
+     * @return mixed
+     * 根据管理员id获取角色组名称
+     */
+    function get_admin_group_name_by_uid($uid)
+    {
+        $group_id = Db::name('AuthGroupAccess')->where('uid', $uid)->value('group_id');
+        $group_name = Db::name('AuthGroup')->where('id', $group_id)->value('title');
+        return $group_name;
+    }
+}
