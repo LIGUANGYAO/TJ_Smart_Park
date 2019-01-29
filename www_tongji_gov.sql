@@ -3,15 +3,15 @@
 
  Source Server         : WSL服务器
  Source Server Type    : MySQL
- Source Server Version : 50724
+ Source Server Version : 50725
  Source Host           : 127.0.0.1:3306
  Source Schema         : www_tongji_gov
 
  Target Server Type    : MySQL
- Target Server Version : 50724
+ Target Server Version : 50725
  File Encoding         : 65001
 
- Date: 22/01/2019 11:31:13
+ Date: 29/01/2019 10:39:46
 */
 
 SET NAMES utf8mb4;
@@ -77,43 +77,12 @@ CREATE TABLE `qnn_action_log`  (
   `create_time` datetime(0) NOT NULL DEFAULT '0001-01-01 00:00:00' COMMENT '操作时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_uid`(`uid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统行为日志表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统行为日志表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qnn_action_log
 -- ----------------------------
-INSERT INTO `qnn_action_log` VALUES (1, 1, 1, 1, 'admin', 'GET', '/admin.php?s=/admin/login/index', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2018-12-17 14:00:57');
-INSERT INTO `qnn_action_log` VALUES (2, 1, 1, 1, 'admin', 'GET', '/admin.php?s=/admin/login/index', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2018-12-17 15:08:43');
-INSERT INTO `qnn_action_log` VALUES (3, 1, 1, 1, 'admin', 'GET', '/admin.php?s=/admin/login/index', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2018-12-17 15:38:30');
-INSERT INTO `qnn_action_log` VALUES (4, 1, 1, 1, 'admin', 'POST', '/admin.php?s=/admin/login/index.html', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2018-12-18 14:43:41');
-INSERT INTO `qnn_action_log` VALUES (5, 1, 1, 1, 'admin', 'POST', '/admin.php?s=/admin/login/index.html', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2018-12-18 16:08:00');
-INSERT INTO `qnn_action_log` VALUES (6, 1, 1, 1, 'admin', 'GET', '/admin.php?s=/admin/login/index', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2018-12-18 16:09:34');
-INSERT INTO `qnn_action_log` VALUES (7, 1, 1, 1, 'admin', 'POST', '/admin.php?s=/admin/login/index.html', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2018-12-19 10:29:50');
-INSERT INTO `qnn_action_log` VALUES (8, 1, 1, 1, 'admin', 'POST', '/admin.php?s=/admin/login/index.html', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2018-12-20 09:02:35');
-INSERT INTO `qnn_action_log` VALUES (9, 13, 1, 1, 'admin', 'GET', '/admin.php?s=/admin/action/edit.html', '{\"param\":[]}', '127.0.0.1', '编辑用户行为', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2018-12-21 11:02:01');
-INSERT INTO `qnn_action_log` VALUES (10, 1, 1, 1, 'admin', 'GET', '/admin.php?s=/admin/login/index', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2018-12-22 09:07:50');
-INSERT INTO `qnn_action_log` VALUES (11, 1, 1, 1, 'admin', 'GET', '/admin.php?s=/admin/login/index', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2018-12-22 11:45:46');
-INSERT INTO `qnn_action_log` VALUES (12, 1, 1, 1, 'admin', 'GET', '/admin.php?s=/admin/login/index', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2018-12-24 08:31:08');
-INSERT INTO `qnn_action_log` VALUES (13, 1, 1, 1, 'admin', 'GET', '/admin.php?s=/admin/login/index', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2018-12-25 09:16:35');
-INSERT INTO `qnn_action_log` VALUES (14, 1, 1, 1, 'admin', 'GET', '/admin.php?s=/admin/login/index', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2018-12-25 13:44:57');
-INSERT INTO `qnn_action_log` VALUES (15, 1, 1, 1, 'admin', 'GET', '/admin.php?s=/admin/login/index', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2018-12-26 08:34:03');
-INSERT INTO `qnn_action_log` VALUES (16, 1, 1, 1, 'admin', 'GET', '/admin.php?s=/admin/login/index', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2018-12-27 08:51:50');
-INSERT INTO `qnn_action_log` VALUES (17, 1, 1, 1, 'admin', 'POST', '/admin.php?s=/admin/login/index.html', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2018-12-29 13:57:12');
-INSERT INTO `qnn_action_log` VALUES (18, 1, 1, 1, 'admin', 'POST', '/admin.php?s=/admin/login/index.html', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2019-01-02 09:02:36');
-INSERT INTO `qnn_action_log` VALUES (19, 15, 1, 1, 'admin', 'POST', '/admin.php?s=/admin/attachment/setstatus/status/delete/model/attachment.html', '{\"param\":[]}', '127.0.0.1', '改变数据状态', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2019-01-02 16:38:44');
-INSERT INTO `qnn_action_log` VALUES (20, 1, 1, 1, 'admin', 'GET', '/admin.php?', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2019-01-02 17:05:00');
-INSERT INTO `qnn_action_log` VALUES (21, 1, 1, 1, 'admin', 'GET', '/admin.php', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2019-01-04 16:33:06');
-INSERT INTO `qnn_action_log` VALUES (22, 1, 1, 1, 'admin', 'POST', '/admin.php/admin/login/index.html', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2019-01-07 08:46:58');
-INSERT INTO `qnn_action_log` VALUES (23, 1, 1, 1, 'admin', 'GET', '/admin.php?s=/admin/login/index', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2019-01-08 14:36:57');
-INSERT INTO `qnn_action_log` VALUES (24, 16, 1, 1, 'admin', 'GET', '/admin.php/admin/modules/delapp/name/gift_manager.html', '{\"param\":[]}', '127.0.0.1', '删除模块', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2019-01-09 10:48:37');
-INSERT INTO `qnn_action_log` VALUES (25, 1, 1, 1, 'admin', 'GET', '/admin.php', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2019-01-11 08:45:09');
-INSERT INTO `qnn_action_log` VALUES (26, 1, 1, 1, 'admin', 'GET', '/admin.php?s=/admin/login/index', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2019-01-14 08:43:50');
-INSERT INTO `qnn_action_log` VALUES (27, 1, 1, 1, 'admin', 'GET', '/admin.php?s=/admin/login/index', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2019-01-15 08:49:57');
-INSERT INTO `qnn_action_log` VALUES (28, 1, 1, 1, 'admin', 'GET', '/admin.php?s=/admin/login/index', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2019-01-16 08:39:32');
-INSERT INTO `qnn_action_log` VALUES (29, 15, 1, 1, 'admin', 'GET', '/admin.php/admin/plugins/setstatus/status/forbid/ids/10.html', '{\"param\":[]}', '127.0.0.1', '改变数据状态', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2019-01-16 16:59:19');
-INSERT INTO `qnn_action_log` VALUES (30, 1, 1, 1, 'admin', 'GET', '/admin.php?s=/admin/login/index', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2019-01-17 09:04:11');
-INSERT INTO `qnn_action_log` VALUES (31, 16, 1, 1, 'admin', 'GET', '/admin.php/admin/modules/delapp/name/park_enterprise_intellectual_property.html', '{\"param\":[]}', '127.0.0.1', '删除模块', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2019-01-17 17:20:29');
-INSERT INTO `qnn_action_log` VALUES (32, 1, 1, 1, 'admin', 'GET', '/admin.php?s=/admin/login/index', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2019-01-21 08:31:52');
+INSERT INTO `qnn_action_log` VALUES (1, 1, 1, 1, 'admin', 'POST', '/admin.php/admin/login/index.html', '{\"param\":[]}', '127.0.0.1', '登录后台', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', '2019-01-29 08:51:26');
 
 -- ----------------------------
 -- Table structure for qnn_activity_apply_list
@@ -183,9 +152,9 @@ CREATE TABLE `qnn_admin`  (
 -- ----------------------------
 -- Records of qnn_admin
 -- ----------------------------
-INSERT INTO `qnn_admin` VALUES (1, 'admin', '31b836d289cdfb8b6e20c2bab2b78756', '创始人', 'xpwsgg@163.com', '', 'http://cdn.eacoo.xin/attachment/static/assets/img/default-avatar.png', 2, '我很帅', 0, '127.0.0.1', '2019-01-21 08:31:51', '3d3b4ab61b9c70ded38a759b5f95793544ec7cf3', 1, '2018-11-26 17:15:57', '2018-11-28 16:21:29', 1);
+INSERT INTO `qnn_admin` VALUES (1, 'admin', '31b836d289cdfb8b6e20c2bab2b78756', '创始人', 'xpwsgg@163.com', '17849759601', 'http://cdn.eacoo.xin/attachment/static/assets/img/default-avatar.png', 1, '我很帅', 0, '127.0.0.1', '2019-01-29 08:51:26', '11f8658114aa3b10dcfa1db893144985a501290a', 1, '2018-11-26 17:15:57', '2019-01-23 15:45:34', 1);
 INSERT INTO `qnn_admin` VALUES (2, 'dtt123', '31b836d289cdfb8b6e20c2bab2b78756', '段婷婷', 'dtt@163.com', '17889898989', '', 0, '', 0, '127.0.0.1', '0001-01-01 00:00:00', '', 0, '2019-01-11 10:05:24', '2019-01-11 10:05:33', 1);
-INSERT INTO `qnn_admin` VALUES (3, 'lichao', '31b836d289cdfb8b6e20c2bab2b78756', '李超', 'lc@126.com', '17888888888', '', 1, '', 0, '127.0.0.1', '0001-01-01 00:00:00', '', 0, '2019-01-19 15:57:46', '2019-01-19 15:57:46', 1);
+INSERT INTO `qnn_admin` VALUES (3, 'lichao', '31b836d289cdfb8b6e20c2bab2b78756', '李超', 'lc@126.com', '17888888888', '', 1, '', 0, '127.0.0.1', '2019-01-28 15:25:14', 'fecdb9705de2d66e6da0945974556215f7df4a9a', 0, '2019-01-19 15:57:46', '2019-01-19 15:57:46', 1);
 
 -- ----------------------------
 -- Table structure for qnn_attachment
@@ -247,7 +216,7 @@ INSERT INTO `qnn_auth_group` VALUES (2, '管理员', '授权管理员', '1,6,18,
 INSERT INTO `qnn_auth_group` VALUES (3, '普通用户', '这是普通用户的权限', '1,3,8,10,11,94,95,96,97,98,99,41,42,43,44,38,39,40', 1);
 INSERT INTO `qnn_auth_group` VALUES (4, '客服', '客服处理订单发货', '1,27,28,29,7,4,52,53,54,55', 1);
 INSERT INTO `qnn_auth_group` VALUES (5, '孵化企业联络员', '孵化企业联络员', '198,199,200,201,202,203,204', 1);
-INSERT INTO `qnn_auth_group` VALUES (6, '维修部门', '负责处理入驻企业的报修', '', 1);
+INSERT INTO `qnn_auth_group` VALUES (6, '维修部门', '负责处理入驻企业的报修', '474,475,476,477', 1);
 
 -- ----------------------------
 -- Table structure for qnn_auth_group_access
@@ -290,13 +259,13 @@ CREATE TABLE `qnn_auth_rule`  (
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '是否有效(0:无效,1:有效)',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uniq_name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 500 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '规则表（后台菜单）' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 518 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '规则表（后台菜单）' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qnn_auth_rule
 -- ----------------------------
-INSERT INTO `qnn_auth_rule` VALUES (1, 'admin/dashboard/index', '仪表盘', 1, 'admin', 1, 0, 'fa fa-tachometer', NULL, 1, 'left', 0, 3, '2018-09-30 22:32:26', '2018-09-30 22:32:26', 1);
-INSERT INTO `qnn_auth_rule` VALUES (2, 'admin', '系统设置', 1, 'admin', 1, 0, 'fa fa-cog', NULL, 1, 'left', 0, 18, '2018-09-30 22:32:26', '2018-09-30 22:32:26', 1);
+INSERT INTO `qnn_auth_rule` VALUES (1, 'admin/dashboard/index', '仪表盘', 1, 'admin', 1, 0, 'fa fa-tachometer', NULL, 1, 'left', 0, 1, '2018-09-30 22:32:26', '2018-09-30 22:32:26', 1);
+INSERT INTO `qnn_auth_rule` VALUES (2, 'admin', '系统设置', 1, 'admin', 1, 0, 'fa fa-cog', NULL, 1, 'left', 0, 3, '2018-09-30 22:32:26', '2018-09-30 22:32:26', 1);
 INSERT INTO `qnn_auth_rule` VALUES (3, 'user/user/', '会员管理', 1, 'user', 1, 0, 'fa fa-users', NULL, 1, 'left', 0, 28, '2018-09-30 22:32:26', '2018-09-30 22:32:26', 1);
 INSERT INTO `qnn_auth_rule` VALUES (4, 'admin/attachment/index', '附件空间', 1, 'admin', 1, 0, 'fa fa-picture-o', NULL, 1, 'left', 0, 34, '2018-09-30 22:32:26', '2018-09-30 22:32:26', 1);
 INSERT INTO `qnn_auth_rule` VALUES (5, 'admin/extend/index', '应用中心', 1, 'admin', 1, 0, 'fa fa-cloud', NULL, 1, 'left', 0, 35, '2018-09-30 22:32:26', '2018-09-30 22:32:26', 1);
@@ -354,13 +323,13 @@ INSERT INTO `qnn_auth_rule` VALUES (86, 'cms/Document/trash', '回收站', 1, 'c
 INSERT INTO `qnn_auth_rule` VALUES (90, 'admin/plugins/config?name=ImageGallery', '图片轮播', 2, 'ImageGallery', 1, 10, 'fa fa-file-text', '', 1, 'left', 0, 63, '2018-11-28 17:41:10', '2018-11-28 17:41:10', 1);
 INSERT INTO `qnn_auth_rule` VALUES (92, 'admin/plugins/config?name=Alisms', '阿里云短信', 2, 'Alisms', 1, 10, 'fa fa-paper-plane-o', '', 1, 'left', 0, 64, '2018-11-28 17:55:55', '2018-11-28 17:55:55', 1);
 INSERT INTO `qnn_auth_rule` VALUES (94, 'admin/plugins/config?name=qiniuoss', '七牛云储存', 2, 'qiniuoss', 1, 10, 'fa fa-file-text', '', 1, 'left', 0, 65, '2018-11-29 15:05:31', '2018-11-29 15:05:31', 1);
-INSERT INTO `qnn_auth_rule` VALUES (132, 'park/building', '房源管理', 1, 'park_building', 1, 0, 'fa fa-institution', '', 1, 'left', 0, 99, '2018-12-17 09:43:31', '2018-12-17 09:43:31', 1);
+INSERT INTO `qnn_auth_rule` VALUES (132, 'park/building', '房源管理', 1, 'park_building', 1, 0, 'fa fa-institution', '', 1, 'left', 0, 5, '2018-12-17 09:43:31', '2018-12-17 09:43:31', 1);
 INSERT INTO `qnn_auth_rule` VALUES (133, 'park_building/building/index', '楼宇列表', 1, 'park_building', 1, 132, 'fa fa-institution', '', 1, 'left', 0, 99, '2018-12-17 09:43:31', '2018-12-17 09:43:31', 1);
 INSERT INTO `qnn_auth_rule` VALUES (134, 'park_building/room/index', '房源列表', 1, 'park_building', 1, 132, '', '', 1, 'left', 0, 99, '2018-12-17 09:43:31', '2018-12-17 09:43:31', 1);
 INSERT INTO `qnn_auth_rule` VALUES (152, 'park/activity', '活动管理', 1, 'park_activity', 1, 0, 'fa fa-soccer-ball-o', '', 1, 'left', 0, 99, '2018-12-22 14:36:29', '2018-12-22 14:36:29', 1);
 INSERT INTO `qnn_auth_rule` VALUES (153, 'park_activity/activity/index', '活动列表', 1, 'park_activity', 1, 152, '', '', 1, 'left', 0, 99, '2018-12-22 14:36:29', '2018-12-22 14:36:29', 1);
 INSERT INTO `qnn_auth_rule` VALUES (154, 'park_activity/apply/index', '报名列表', 1, 'park_activity', 1, 152, '', '', 1, 'left', 0, 99, '2018-12-22 14:36:29', '2018-12-22 14:36:29', 1);
-INSERT INTO `qnn_auth_rule` VALUES (189, 'park/enterprise', '企业管理', 1, 'park_enterprise', 1, 0, '', '', 1, 'left', 0, 99, '2019-01-08 14:54:34', '2019-01-08 14:54:34', 1);
+INSERT INTO `qnn_auth_rule` VALUES (189, 'park/enterprise', '企业管理', 1, 'park_enterprise', 1, 0, '', '', 1, 'left', 0, 7, '2019-01-08 14:54:34', '2019-01-08 14:54:34', 1);
 INSERT INTO `qnn_auth_rule` VALUES (190, 'park_enterprise/EnterpriseBasic/index', '企业列表', 1, 'park_enterprise', 1, 189, '', '', 1, 'left', 0, 99, '2019-01-08 14:54:34', '2019-01-08 14:54:34', 1);
 INSERT INTO `qnn_auth_rule` VALUES (191, 'park_enterprise/EnterpriseBasic/edit', '添加企业', 1, 'park_enterprise', 1, 189, '', '', 0, 'left', 0, 99, '2019-01-08 14:54:34', '2019-01-08 14:54:34', 1);
 INSERT INTO `qnn_auth_rule` VALUES (192, 'park_enterprise/EnterpriseBasic/del', '删除企业', 1, 'park_enterprise', 1, 189, '', '', 0, 'left', 0, 99, '2019-01-08 14:54:34', '2019-01-08 14:54:34', 1);
@@ -369,7 +338,7 @@ INSERT INTO `qnn_auth_rule` VALUES (194, 'park_enterprise/EnterpriseContract/edi
 INSERT INTO `qnn_auth_rule` VALUES (195, 'park_enterprise/EnterpriseContract/del', '删除租房合同', 1, 'park_enterprise', 1, 189, '', '', 0, 'left', 0, 99, '2019-01-08 14:54:34', '2019-01-08 14:54:34', 1);
 INSERT INTO `qnn_auth_rule` VALUES (196, 'park_enterprise/EnterpriseCwdlContract/index', '财务代理合同', 1, 'park_enterprise', 1, 189, '', '', 1, 'left', 0, 99, '2019-01-08 14:54:34', '2019-01-08 14:54:34', 1);
 INSERT INTO `qnn_auth_rule` VALUES (197, 'park_enterprise/EnterpriseCwdlContract/edit', '添加财务代理合同', 1, 'park_enterprise', 1, 189, '', '', 0, 'left', 0, 99, '2019-01-08 14:54:34', '2019-01-08 14:54:34', 1);
-INSERT INTO `qnn_auth_rule` VALUES (198, 'park/incubation', '孵化企业管理', 1, 'park_incubation', 1, 0, '', '', 1, 'left', 0, 99, '2019-01-18 10:30:59', '2019-01-09 15:32:13', 1);
+INSERT INTO `qnn_auth_rule` VALUES (198, 'park/incubation', '孵化企业管理', 1, 'park_incubation', 1, 0, '', '', 1, 'left', 0, 9, '2019-01-18 10:30:59', '2019-01-09 15:32:13', 1);
 INSERT INTO `qnn_auth_rule` VALUES (199, 'park_incubation/Incubation/index', '孵化企业列表', 1, 'park_incubation', 1, 198, '', '', 1, 'left', 0, 99, '2019-01-09 15:32:13', '2019-01-09 15:32:13', 1);
 INSERT INTO `qnn_auth_rule` VALUES (200, 'park_incubation/Incubation/edit', '添加孵化企业', 1, 'park_incubation', 1, 198, '', '', 0, 'left', 0, 99, '2019-01-09 15:32:13', '2019-01-09 15:32:13', 1);
 INSERT INTO `qnn_auth_rule` VALUES (201, 'park_incubation/Incubation/del', '删除孵化企业', 1, 'park_incubation', 1, 198, '', '', 0, 'left', 0, 99, '2019-01-09 15:32:13', '2019-01-09 15:32:13', 1);
@@ -380,14 +349,14 @@ INSERT INTO `qnn_auth_rule` VALUES (205, 'carousel/index', '轮播图管理', 1,
 INSERT INTO `qnn_auth_rule` VALUES (206, 'admin/modules/config?name=carousel', '轮播图配置', 1, 'carousel', 1, 205, 'fa fa-cog ', '', 1, 'left', 0, 99, '2019-01-11 13:32:07', '2019-01-11 13:32:07', 1);
 INSERT INTO `qnn_auth_rule` VALUES (207, 'carousel/carousel_position/index', '轮播位设置', 1, 'carousel', 1, 205, 'fa fa-th-large', '', 1, 'left', 0, 99, '2019-01-11 13:32:07', '2019-01-11 13:32:07', 1);
 INSERT INTO `qnn_auth_rule` VALUES (208, 'carousel/carousel_list/index', '轮播图列表', 1, 'carousel', 1, 205, 'fa fa-file-image-o', '', 1, 'left', 0, 99, '2019-01-11 13:32:07', '2019-01-11 13:32:07', 1);
-INSERT INTO `qnn_auth_rule` VALUES (223, 'park/software_enterprise', '软件企业', 1, 'software_enterprise', 1, 0, '', '', 1, 'left', 0, 99, '2019-01-11 14:31:15', '2019-01-11 14:31:15', 1);
+INSERT INTO `qnn_auth_rule` VALUES (223, 'park/software_enterprise', '软件企业', 1, 'software_enterprise', 1, 0, '', '', 1, 'left', 0, 11, '2019-01-11 14:31:15', '2019-01-11 14:31:15', 1);
 INSERT INTO `qnn_auth_rule` VALUES (224, 'software_enterprise/EnterpriseList/index', '企业列表', 1, 'software_enterprise', 1, 223, '', '', 1, 'left', 0, 99, '2019-01-11 14:31:16', '2019-01-11 14:31:16', 1);
 INSERT INTO `qnn_auth_rule` VALUES (225, 'software_enterprise/EnterpriseList/edit', '新增企业', 1, 'software_enterprise', 1, 223, '', '', 0, 'left', 0, 99, '2019-01-11 14:31:16', '2019-01-11 14:31:16', 1);
 INSERT INTO `qnn_auth_rule` VALUES (226, 'software_enterprise/EnterpriseList/delete', '删除企业', 1, 'software_enterprise', 1, 223, '', '', 0, 'left', 0, 99, '2019-01-11 14:31:16', '2019-01-11 14:31:16', 1);
 INSERT INTO `qnn_auth_rule` VALUES (227, 'software_enterprise/SoftList/index', '项目列表', 1, 'software_enterprise', 1, 223, '', '', 1, 'left', 0, 99, '2019-01-11 14:31:16', '2019-01-11 14:31:16', 1);
 INSERT INTO `qnn_auth_rule` VALUES (228, 'software_enterprise/SoftList/edit', '新增项目', 1, 'software_enterprise', 1, 223, '', '', 0, 'left', 0, 99, '2019-01-11 14:31:16', '2019-01-11 14:31:16', 1);
 INSERT INTO `qnn_auth_rule` VALUES (229, 'software_enterprise/SoftList/delete', '删除项目', 1, 'software_enterprise', 1, 223, '', '', 0, 'left', 0, 99, '2019-01-11 14:31:16', '2019-01-11 14:31:16', 1);
-INSERT INTO `qnn_auth_rule` VALUES (231, 'high-tech/index', '高新企业管理', 1, 'high_tech_enterprise', 1, 0, '', '', 1, 'left', 0, 99, '2019-01-14 10:14:34', '2019-01-14 10:14:34', 1);
+INSERT INTO `qnn_auth_rule` VALUES (231, 'high-tech/index', '高新企业管理', 1, 'high_tech_enterprise', 1, 0, '', '', 1, 'left', 0, 13, '2019-01-14 10:14:34', '2019-01-14 10:14:34', 1);
 INSERT INTO `qnn_auth_rule` VALUES (232, 'high_tech_enterprise/Index/index', '企业列表', 1, 'high_tech_enterprise', 1, 231, '', '', 1, 'left', 0, 99, '2019-01-14 10:14:34', '2019-01-14 10:14:34', 1);
 INSERT INTO `qnn_auth_rule` VALUES (233, 'high_tech_enterprise/Index/edit', '添加企业', 1, 'high_tech_enterprise', 1, 231, '', '', 0, 'left', 0, 99, '2019-01-14 10:14:34', '2019-01-14 10:14:34', 1);
 INSERT INTO `qnn_auth_rule` VALUES (234, 'high_tech_enterprise/Index/delete', '删除企业', 1, 'high_tech_enterprise', 1, 231, '', '', 0, 'left', 0, 99, '2019-01-14 10:14:34', '2019-01-14 10:14:34', 1);
@@ -415,26 +384,7 @@ INSERT INTO `qnn_auth_rule` VALUES (283, 'park/park_financial_support', '财政�
 INSERT INTO `qnn_auth_rule` VALUES (284, 'park_financial_support/Index/index', '扶持列表', 1, 'park_financial_support', 1, 283, '', '', 1, 'left', 0, 99, '2019-01-17 17:14:50', '2019-01-17 17:14:50', 1);
 INSERT INTO `qnn_auth_rule` VALUES (285, 'park_financial_support/Index/edit', '添加扶持', 1, 'park_financial_support', 1, 283, '', '', 0, 'left', 0, 99, '2019-01-17 17:14:50', '2019-01-17 17:14:50', 1);
 INSERT INTO `qnn_auth_rule` VALUES (286, 'park_financial_support/Index/delete', '删除扶持', 1, 'park_financial_support', 1, 283, '', '', 0, 'left', 0, 99, '2019-01-17 17:14:50', '2019-01-17 17:14:50', 1);
-INSERT INTO `qnn_auth_rule` VALUES (350, 'park/intellectual', '知识产权管理', 1, 'park_enterprise_intellectual', 1, 0, '', '', 1, 'left', 0, 99, '2019-01-17 17:33:17', '2019-01-17 17:33:17', 1);
-INSERT INTO `qnn_auth_rule` VALUES (351, 'park_enterprise_intellectual/Trademark/index', '商标信息列表', 1, 'park_enterprise_intellectual', 1, 350, '', '', 1, 'left', 0, 99, '2019-01-17 17:33:17', '2019-01-17 17:33:17', 1);
-INSERT INTO `qnn_auth_rule` VALUES (352, 'park_enterprise_intellectual/Trademark/edit', '添加商标', 1, 'park_enterprise_intellectual', 1, 350, '', '', 0, 'left', 0, 99, '2019-01-17 17:33:17', '2019-01-17 17:33:17', 1);
-INSERT INTO `qnn_auth_rule` VALUES (353, 'park_enterprise_intellectual/Trademark/delete', '删除商标', 1, 'park_enterprise_intellectual', 1, 350, '', '', 0, 'left', 0, 99, '2019-01-17 17:33:17', '2019-01-17 17:33:17', 1);
-INSERT INTO `qnn_auth_rule` VALUES (354, 'park_enterprise_intellectual/Patent/index', '专利信息列表', 1, 'park_enterprise_intellectual', 1, 350, '', '', 1, 'left', 0, 99, '2019-01-17 17:33:17', '2019-01-17 17:33:17', 1);
-INSERT INTO `qnn_auth_rule` VALUES (355, 'park_enterprise_intellectual/Patent/edit', '添加专利', 1, 'park_enterprise_intellectual', 1, 350, '', '', 0, 'left', 0, 99, '2019-01-17 17:33:17', '2019-01-17 17:33:17', 1);
-INSERT INTO `qnn_auth_rule` VALUES (356, 'park_enterprise_intellectual/Patent/delete', '删除专利', 1, 'park_enterprise_intellectual', 1, 350, '', '', 0, 'left', 0, 99, '2019-01-17 17:33:17', '2019-01-17 17:33:17', 1);
-INSERT INTO `qnn_auth_rule` VALUES (357, 'park_enterprise_intellectual/Certificate/index', '企业证书列表', 1, 'park_enterprise_intellectual', 1, 350, '', '', 1, 'left', 0, 99, '2019-01-17 17:33:17', '2019-01-17 17:33:17', 1);
-INSERT INTO `qnn_auth_rule` VALUES (358, 'park_enterprise_intellectual/Certificate/edit', '添加证书', 1, 'park_enterprise_intellectual', 1, 350, '', '', 0, 'left', 0, 99, '2019-01-17 17:33:17', '2019-01-17 17:33:17', 1);
-INSERT INTO `qnn_auth_rule` VALUES (359, 'park_enterprise_intellectual/Certificate/delete', '删除证书', 1, 'park_enterprise_intellectual', 1, 350, '', '', 0, 'left', 0, 99, '2019-01-17 17:33:17', '2019-01-17 17:33:17', 1);
-INSERT INTO `qnn_auth_rule` VALUES (360, 'park_enterprise_intellectual/Wcopyright/index', '作品著作权列表', 1, 'park_enterprise_intellectual', 1, 350, '', '', 1, 'left', 0, 99, '2019-01-17 17:33:17', '2019-01-17 17:33:17', 1);
-INSERT INTO `qnn_auth_rule` VALUES (361, 'park_enterprise_intellectual/Wcopyright/edit', '添加作品著作权', 1, 'park_enterprise_intellectual', 1, 350, '', '', 0, 'left', 0, 99, '2019-01-17 17:33:17', '2019-01-17 17:33:17', 1);
-INSERT INTO `qnn_auth_rule` VALUES (362, 'park_enterprise_intellectual/Wcopyright/delete', '删除作品著作权', 1, 'park_enterprise_intellectual', 1, 350, '', '', 0, 'left', 0, 99, '2019-01-17 17:33:17', '2019-01-17 17:33:17', 1);
-INSERT INTO `qnn_auth_rule` VALUES (363, 'park_enterprise_intellectual/Scopyright/index', '软件著作权列表', 1, 'park_enterprise_intellectual', 1, 350, '', '', 1, 'left', 0, 99, '2019-01-17 17:33:17', '2019-01-17 17:33:17', 1);
-INSERT INTO `qnn_auth_rule` VALUES (364, 'park_enterprise_intellectual/Scopyright/edit', '添加软件著作权', 1, 'park_enterprise_intellectual', 1, 350, '', '', 0, 'left', 0, 99, '2019-01-17 17:33:18', '2019-01-17 17:33:18', 1);
-INSERT INTO `qnn_auth_rule` VALUES (365, 'park_enterprise_intellectual/Scopyright/delete', '删除软件著作权', 1, 'park_enterprise_intellectual', 1, 350, '', '', 0, 'left', 0, 99, '2019-01-17 17:33:18', '2019-01-17 17:33:18', 1);
-INSERT INTO `qnn_auth_rule` VALUES (366, 'park_enterprise_intellectual/Website/index', '网站信息列表', 1, 'park_enterprise_intellectual', 1, 350, '', '', 1, 'left', 0, 99, '2019-01-17 17:33:18', '2019-01-17 17:33:18', 1);
-INSERT INTO `qnn_auth_rule` VALUES (367, 'park_enterprise_intellectual/Website/edit', '添加网站信息', 1, 'park_enterprise_intellectual', 1, 350, '', '', 0, 'left', 0, 99, '2019-01-17 17:33:18', '2019-01-17 17:33:18', 1);
-INSERT INTO `qnn_auth_rule` VALUES (368, 'park_enterprise_intellectual/Website/delete', '删除网站信息', 1, 'park_enterprise_intellectual', 1, 350, '', '', 0, 'left', 0, 99, '2019-01-17 17:33:18', '2019-01-17 17:33:18', 1);
-INSERT INTO `qnn_auth_rule` VALUES (369, 'student_innovation/innovation', '大学生创业', 1, 'student_innovation', 1, 0, 'fa fa-mortar-board', '', 1, 'left', 0, 99, '2019-01-18 08:34:32', '2019-01-18 08:34:32', 1);
+INSERT INTO `qnn_auth_rule` VALUES (369, 'student_innovation/innovation', '大学生创业', 1, 'student_innovation', 1, 0, 'fa fa-mortar-board', '', 1, 'left', 0, 11, '2019-01-18 08:34:32', '2019-01-18 08:34:32', 1);
 INSERT INTO `qnn_auth_rule` VALUES (370, 'student_innovation/innovation/index', '项目列表', 1, 'student_innovation', 1, 369, '', '', 1, 'left', 0, 99, '2019-01-18 08:34:32', '2019-01-18 08:34:32', 1);
 INSERT INTO `qnn_auth_rule` VALUES (371, 'student_innovation/innovation/edit', '添加/编辑项目', 1, 'student_innovation', 1, 369, '', '', 0, 'left', 0, 99, '2019-01-18 08:34:32', '2019-01-18 08:34:32', 1);
 INSERT INTO `qnn_auth_rule` VALUES (372, 'student_innovation/innovation/delete', '删除项目', 1, 'student_innovation', 1, 369, '', '', 0, 'left', 0, 99, '2019-01-18 08:34:32', '2019-01-18 08:34:32', 1);
@@ -479,6 +429,25 @@ INSERT INTO `qnn_auth_rule` VALUES (495, 'service_laboratory/Room/delete', '删�
 INSERT INTO `qnn_auth_rule` VALUES (496, 'service_laboratory/Booking/index', '预约管理', 1, 'service_laboratory', 1, 492, '', '', 1, 'left', 0, 99, '2019-01-21 14:20:57', '2019-01-21 14:20:57', 1);
 INSERT INTO `qnn_auth_rule` VALUES (497, 'service_laboratory/Booking/edit', '添加预约', 1, 'service_laboratory', 1, 492, '', '', 0, 'left', 0, 99, '2019-01-21 14:20:57', '2019-01-21 14:20:57', 1);
 INSERT INTO `qnn_auth_rule` VALUES (498, 'service_laboratory/Booking/delete', '删除预约', 1, 'service_laboratory', 1, 492, '', '', 0, 'left', 0, 99, '2019-01-21 14:20:57', '2019-01-21 14:20:57', 1);
+INSERT INTO `qnn_auth_rule` VALUES (499, 'park/intellectual', '知识产权管理', 1, 'park_enterprise_intellectual', 1, 0, '', '', 1, 'left', 0, 99, '2019-01-29 10:14:44', '2019-01-29 10:14:44', 1);
+INSERT INTO `qnn_auth_rule` VALUES (500, 'park_enterprise_intellectual/Trademark/index', '商标信息列表', 1, 'park_enterprise_intellectual', 1, 499, '', '', 1, 'left', 0, 99, '2019-01-29 10:14:44', '2019-01-29 10:14:44', 1);
+INSERT INTO `qnn_auth_rule` VALUES (501, 'park_enterprise_intellectual/Trademark/edit', '添加商标', 1, 'park_enterprise_intellectual', 1, 499, '', '', 0, 'left', 0, 99, '2019-01-29 10:14:44', '2019-01-29 10:14:44', 1);
+INSERT INTO `qnn_auth_rule` VALUES (502, 'park_enterprise_intellectual/Trademark/delete', '删除商标', 1, 'park_enterprise_intellectual', 1, 499, '', '', 0, 'left', 0, 99, '2019-01-29 10:14:44', '2019-01-29 10:14:44', 1);
+INSERT INTO `qnn_auth_rule` VALUES (503, 'park_enterprise_intellectual/Patent/index', '专利信息列表', 1, 'park_enterprise_intellectual', 1, 499, '', '', 1, 'left', 0, 99, '2019-01-29 10:14:44', '2019-01-29 10:14:44', 1);
+INSERT INTO `qnn_auth_rule` VALUES (504, 'park_enterprise_intellectual/Patent/edit', '添加专利', 1, 'park_enterprise_intellectual', 1, 499, '', '', 0, 'left', 0, 99, '2019-01-29 10:14:44', '2019-01-29 10:14:44', 1);
+INSERT INTO `qnn_auth_rule` VALUES (505, 'park_enterprise_intellectual/Patent/delete', '删除专利', 1, 'park_enterprise_intellectual', 1, 499, '', '', 0, 'left', 0, 99, '2019-01-29 10:14:44', '2019-01-29 10:14:44', 1);
+INSERT INTO `qnn_auth_rule` VALUES (506, 'park_enterprise_intellectual/Certificate/index', '企业证书列表', 1, 'park_enterprise_intellectual', 1, 499, '', '', 1, 'left', 0, 99, '2019-01-29 10:14:44', '2019-01-29 10:14:44', 1);
+INSERT INTO `qnn_auth_rule` VALUES (507, 'park_enterprise_intellectual/Certificate/edit', '添加证书', 1, 'park_enterprise_intellectual', 1, 499, '', '', 0, 'left', 0, 99, '2019-01-29 10:14:45', '2019-01-29 10:14:45', 1);
+INSERT INTO `qnn_auth_rule` VALUES (508, 'park_enterprise_intellectual/Certificate/delete', '删除证书', 1, 'park_enterprise_intellectual', 1, 499, '', '', 0, 'left', 0, 99, '2019-01-29 10:14:45', '2019-01-29 10:14:45', 1);
+INSERT INTO `qnn_auth_rule` VALUES (509, 'park_enterprise_intellectual/Wcopyright/index', '作品著作权列表', 1, 'park_enterprise_intellectual', 1, 499, '', '', 1, 'left', 0, 99, '2019-01-29 10:14:45', '2019-01-29 10:14:45', 1);
+INSERT INTO `qnn_auth_rule` VALUES (510, 'park_enterprise_intellectual/Wcopyright/edit', '添加作品著作权', 1, 'park_enterprise_intellectual', 1, 499, '', '', 0, 'left', 0, 99, '2019-01-29 10:14:45', '2019-01-29 10:14:45', 1);
+INSERT INTO `qnn_auth_rule` VALUES (511, 'park_enterprise_intellectual/Wcopyright/delete', '删除作品著作权', 1, 'park_enterprise_intellectual', 1, 499, '', '', 0, 'left', 0, 99, '2019-01-29 10:14:45', '2019-01-29 10:14:45', 1);
+INSERT INTO `qnn_auth_rule` VALUES (512, 'park_enterprise_intellectual/Scopyright/index', '软件著作权列表', 1, 'park_enterprise_intellectual', 1, 499, '', '', 1, 'left', 0, 99, '2019-01-29 10:14:45', '2019-01-29 10:14:45', 1);
+INSERT INTO `qnn_auth_rule` VALUES (513, 'park_enterprise_intellectual/Scopyright/edit', '添加软件著作权', 1, 'park_enterprise_intellectual', 1, 499, '', '', 0, 'left', 0, 99, '2019-01-29 10:14:45', '2019-01-29 10:14:45', 1);
+INSERT INTO `qnn_auth_rule` VALUES (514, 'park_enterprise_intellectual/Scopyright/delete', '删除软件著作权', 1, 'park_enterprise_intellectual', 1, 499, '', '', 0, 'left', 0, 99, '2019-01-29 10:14:45', '2019-01-29 10:14:45', 1);
+INSERT INTO `qnn_auth_rule` VALUES (515, 'park_enterprise_intellectual/Website/index', '网站信息列表', 1, 'park_enterprise_intellectual', 1, 499, '', '', 1, 'left', 0, 99, '2019-01-29 10:14:45', '2019-01-29 10:14:45', 1);
+INSERT INTO `qnn_auth_rule` VALUES (516, 'park_enterprise_intellectual/Website/edit', '添加网站信息', 1, 'park_enterprise_intellectual', 1, 499, '', '', 0, 'left', 0, 99, '2019-01-29 10:14:45', '2019-01-29 10:14:45', 1);
+INSERT INTO `qnn_auth_rule` VALUES (517, 'park_enterprise_intellectual/Website/delete', '删除网站信息', 1, 'park_enterprise_intellectual', 1, 499, '', '', 0, 'left', 0, 99, '2019-01-29 10:14:45', '2019-01-29 10:14:45', 1);
 
 -- ----------------------------
 -- Table structure for qnn_carousel_list
@@ -578,9 +547,9 @@ INSERT INTO `qnn_config` VALUES (48, 'cookie', 'Cookie配置', '{\"path\":\"\\/\
 INSERT INTO `qnn_config` VALUES (49, 'reg_default_roleid', '注册默认角色', '4', '', 7, 0, 'select', '', '2018-09-30 22:32:26', '2018-09-30 22:32:26', 0, 1);
 INSERT INTO `qnn_config` VALUES (50, 'open_register', '开放注册', '0', '1:是\r\n0:否', 7, 0, 'radio', '', '2018-09-30 22:32:26', '2018-09-30 22:32:26', 0, 1);
 INSERT INTO `qnn_config` VALUES (56, 'meanwhile_user_online', '允许同时登录', '1', '1:是\r\n0:否', 7, 0, 'radio', '是否允许同一帐号在不同地方同时登录', '2018-09-30 22:32:26', '2018-09-30 22:32:26', 0, 1);
-INSERT INTO `qnn_config` VALUES (57, 'admin_collect_menus', '后台收藏菜单', '', '', 2, 0, 'json', '在后台顶部菜单栏展示，可以方便快速菜单入口', '2018-09-30 22:32:26', '2018-09-30 22:32:26', 99, 1);
+INSERT INTO `qnn_config` VALUES (57, 'admin_collect_menus', '后台收藏菜单', '[]', '', 2, 0, 'json', '在后台顶部菜单栏展示，可以方便快速菜单入口', '2018-09-30 22:32:26', '2018-09-30 22:32:26', 99, 1);
 INSERT INTO `qnn_config` VALUES (58, 'minify_status', '开启minify', '1', '1:开启\r\n0:关闭', 2, 0, 'radio', '开启minify会压缩合并js、css文件，可以减少资源请求次数，如果不支持minify，可关闭', '2018-09-30 22:32:26', '2018-09-30 22:32:26', 99, 1);
-INSERT INTO `qnn_config` VALUES (59, 'admin_allow_login_many', '同账号多人登录后台', '0', '0:不允许\r\n1:允许', 4, 0, 'radio', '允许多个人使用同一个账号登录后台。默认：不允许', '2018-09-30 22:32:26', '2018-09-30 22:32:26', 99, 1);
+INSERT INTO `qnn_config` VALUES (59, 'admin_allow_login_many', '同账号多人登录后台', '1', '0:不允许\r\n1:允许', 4, 0, 'radio', '允许多个人使用同一个账号登录后台。默认：不允许', '2018-09-30 22:32:26', '2018-09-30 22:32:26', 99, 1);
 INSERT INTO `qnn_config` VALUES (60, 'admin_allow_ip', '仅限登录后台IP', '', '', 4, 0, 'textarea', '填写IP地址，多个IP用英文逗号隔开。默认为空，允许所有IP', '2018-09-30 22:32:26', '2018-09-30 22:32:26', 99, 1);
 INSERT INTO `qnn_config` VALUES (61, 'redis', 'Redis配置', '{\"host\":\"127.0.0.1\",\"port\":\"6979\"}', '', 9, 0, 'json', '以JSON格式保存', '2018-09-30 22:32:26', '2018-09-30 22:32:26', 99, 1);
 INSERT INTO `qnn_config` VALUES (62, 'memcache', 'Memcache配置', '{\"host\":\"127.0.0.1\",\"port\":\"11211\"}', '', 9, 0, 'json', '以JSON格式保存', '2018-09-30 22:32:26', '2018-09-30 22:32:26', 99, 1);
@@ -602,13 +571,7 @@ CREATE TABLE `qnn_cost_bill_list`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '水电等费用的账单列表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of qnn_cost_bill_list
--- ----------------------------
-INSERT INTO `qnn_cost_bill_list` VALUES (1, 1, 1, '上海小炬华科技', '2019-01-19 00:00:00', 2, 2000.00, 1890.00, '啦啦啦', '2019-01-19 11:38:12', '2019-01-19 11:38:12');
-INSERT INTO `qnn_cost_bill_list` VALUES (2, 2, 0, '其他企业', '2019-01-18 00:00:00', 1, 1000.00, 1000.00, '会议室租借', '2019-01-19 11:41:15', '2019-01-19 11:41:48');
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '水电等费用的账单列表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for qnn_cost_category_list
@@ -681,7 +644,7 @@ CREATE TABLE `qnn_hooks`  (
   `update_time` datetime(0) NOT NULL DEFAULT '0001-01-01 00:00:00' COMMENT '更新时间',
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '状态。1启用，0禁用',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '钩子表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '钩子表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qnn_hooks
@@ -711,6 +674,8 @@ INSERT INTO `qnn_hooks` VALUES (24, 'qichachaCertificate', '通过企查查获�
 INSERT INTO `qnn_hooks` VALUES (25, 'qichachaWcopyright', '通过企查查获取企业Master数据,商标,专利,著作权,网站,企业证书数据官网http://www.yjapi.cn', 1, '2019-01-16 17:16:52', '2019-01-16 17:16:52', 1);
 INSERT INTO `qnn_hooks` VALUES (26, 'qichachaScopyright', '通过企查查获取企业Master数据,商标,专利,著作权,网站,企业证书数据官网http://www.yjapi.cn', 1, '2019-01-16 17:16:52', '2019-01-16 17:16:52', 1);
 INSERT INTO `qnn_hooks` VALUES (27, 'qichachaWebsite', '通过企查查获取企业Master数据,商标,专利,著作权,网站,企业证书数据官网http://www.yjapi.cn', 1, '2019-01-16 17:16:52', '2019-01-16 17:16:52', 1);
+INSERT INTO `qnn_hooks` VALUES (30, 'importFromTable', '用于表格数据的导入和导出', 1, '2019-01-25 15:32:08', '2019-01-25 15:32:08', 1);
+INSERT INTO `qnn_hooks` VALUES (31, 'exportToTable', '用于表格数据的导入和导出', 1, '2019-01-25 15:32:09', '2019-01-25 15:32:09', 1);
 
 -- ----------------------------
 -- Table structure for qnn_hooks_extra
@@ -727,7 +692,7 @@ CREATE TABLE `qnn_hooks_extra`  (
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '状态。0禁用，1正常',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_hookid_depend`(`hook_id`, `depend_flag`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '钩子应用依赖表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '钩子应用依赖表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qnn_hooks_extra
@@ -743,6 +708,8 @@ INSERT INTO `qnn_hooks_extra` VALUES (16, 24, 2, 'Qichacha', 99, '2019-01-16 17:
 INSERT INTO `qnn_hooks_extra` VALUES (17, 25, 2, 'Qichacha', 99, '2019-01-16 17:16:52', '2019-01-16 17:16:52', 1);
 INSERT INTO `qnn_hooks_extra` VALUES (18, 26, 2, 'Qichacha', 99, '2019-01-16 17:16:52', '2019-01-16 17:16:52', 1);
 INSERT INTO `qnn_hooks_extra` VALUES (19, 27, 2, 'Qichacha', 99, '2019-01-16 17:16:52', '2019-01-16 17:16:52', 1);
+INSERT INTO `qnn_hooks_extra` VALUES (22, 30, 2, 'Phpspreadsheet', 99, '2019-01-25 15:32:09', '2019-01-25 15:32:09', 1);
+INSERT INTO `qnn_hooks_extra` VALUES (23, 31, 2, 'Phpspreadsheet', 99, '2019-01-25 15:32:09', '2019-01-25 15:32:09', 1);
 
 -- ----------------------------
 -- Table structure for qnn_links
@@ -788,7 +755,7 @@ CREATE TABLE `qnn_modules`  (
   `sort` tinyint(3) UNSIGNED NOT NULL DEFAULT 99 COMMENT '排序，值越小越靠前',
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '状态。0禁用，1启用',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 88 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '模块功能表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 89 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '模块功能表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qnn_modules
@@ -809,7 +776,6 @@ INSERT INTO `qnn_modules` VALUES (54, 'park_investment', '智慧园区--投资�
 INSERT INTO `qnn_modules` VALUES (57, 'park_project_budget', '智慧园区--项目预算管理', '智慧园区的项目预算管理模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-16 09:46:34', '2019-01-16 09:46:34', 99, 1);
 INSERT INTO `qnn_modules` VALUES (58, 'park_enterprise_finance_info', '智慧园区--公司财务信息', '智慧园区的公司财务信息管理模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-16 11:11:49', '2019-01-16 11:11:49', 99, 1);
 INSERT INTO `qnn_modules` VALUES (60, 'park_financial_support', '智慧园区--财政扶持', '智慧园区的财政扶持管理模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-17 17:14:50', '2019-01-17 17:14:50', 99, 1);
-INSERT INTO `qnn_modules` VALUES (66, 'park_enterprise_intellectual', '智慧园区--企业知识产品', '智慧园区的企业知识产品管理模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-17 17:33:17', '2019-01-17 17:33:17', 99, 1);
 INSERT INTO `qnn_modules` VALUES (67, 'student_innovation', '智慧园区--大学生创业', '智慧园区大学生创业模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-18 08:34:32', '2019-01-18 08:34:32', 99, 1);
 INSERT INTO `qnn_modules` VALUES (69, 'tech_project', '智慧园区--科技项目投资模块', '智慧园区的科技项目投资管理模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-18 10:54:02', '2019-01-18 10:54:02', 99, 1);
 INSERT INTO `qnn_modules` VALUES (71, 'high_tech_project', '智慧园区--高新技术成果', '智慧园区的高新技术成果转化管理模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-18 10:57:18', '2019-01-18 10:57:18', 99, 1);
@@ -818,6 +784,7 @@ INSERT INTO `qnn_modules` VALUES (81, 'cost_management', '智慧园区--费用�
 INSERT INTO `qnn_modules` VALUES (84, 'service_repair', '智慧园区--报修管理', '智慧园区的报修管理模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-19 17:29:15', '2019-01-19 17:29:15', 99, 1);
 INSERT INTO `qnn_modules` VALUES (86, 'service_meeting_room', '智慧园区--会议室管理', '智慧园区的会议室管理,添加会议室,会议预约管理', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-21 09:47:10', '2019-01-21 09:47:10', 99, 1);
 INSERT INTO `qnn_modules` VALUES (87, 'service_laboratory', '智慧园区--实验室管理', '智慧园区的实验室添加,租赁管理模块', 'xpwsg', '1.0.0', '', 0, '', '', '2019-01-21 14:20:57', '2019-01-21 14:20:57', 99, 1);
+INSERT INTO `qnn_modules` VALUES (88, 'park_enterprise_intellectual', '智慧园区--企业知识产权', '智慧园区的企业知识产权管理模块', 'xpwsgg', '1.0.0', '', 0, '', '', '2019-01-29 10:14:44', '2019-01-29 10:14:44', 99, 1);
 
 -- ----------------------------
 -- Table structure for qnn_nav
@@ -957,13 +924,12 @@ CREATE TABLE `qnn_park_enterprise_contract`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '租房合同' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '租房合同' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qnn_park_enterprise_contract
 -- ----------------------------
 INSERT INTO `qnn_park_enterprise_contract` VALUES (1, 1, '上海小炬华科技', '03HT2019001', 3, '101|102', NULL, 1, 5999.00, '2019-01-27', '2019-02-03', NULL, 1, 0, 3, 0, 0, 0.00, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-09 16:46:31', '2019-01-09 16:46:31');
-INSERT INTO `qnn_park_enterprise_contract` VALUES (2, 1, '上海小炬华科技', '03HT2019002', 3, '101|102', NULL, 1, NULL, '2019-12-18 16:57:25', '2019-12-18 16:57:25', '2019/1/10', 1, 0, 1, 0, 0, 0.00, 1, 20000.00, 18000.00, '14,', NULL, '香飘飘', '17888888888', '香飘飘', '香飘飘', '香飘飘', '续租合同', '2019-01-10 13:56:01', '2019-01-10 13:56:01');
 
 -- ----------------------------
 -- Table structure for qnn_park_enterprise_ecicertification_list
@@ -1084,13 +1050,13 @@ CREATE TABLE `qnn_park_enterprise_kuaiji_contract`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qnn_park_enterprise_kuaiji_contract
 -- ----------------------------
-INSERT INTO `qnn_park_enterprise_kuaiji_contract` VALUES (1, 1, 2000.00, 'CWDL2019001', '2019-01-09', '2019-01-27', NULL, NULL, '2019-01-09 16:46:31', '2019-01-09 16:46:31');
-INSERT INTO `qnn_park_enterprise_kuaiji_contract` VALUES (2, 1, 2000.00, 'CWDL2019002', '2019-1-10', '2020-1-10', '14,', '财务代理', '2019-01-10 14:16:20', '2019-01-10 14:16:20');
+INSERT INTO `qnn_park_enterprise_kuaiji_contract` VALUES (1, 1, 2000.00, 'CWDL2019003', '2019-01-09', '2019-01-27', NULL, NULL, '2019-01-09 16:46:31', '2019-01-22 17:29:26');
+INSERT INTO `qnn_park_enterprise_kuaiji_contract` VALUES (3, 1, 2500.00, 'CWDL2019001', '2019-01-22 17:20:53', '2019-02-09 18:00:53', NULL, NULL, '2019-01-22 17:25:10', '2019-01-22 17:30:22');
 
 -- ----------------------------
 -- Table structure for qnn_park_enterprise_other_info
@@ -1338,7 +1304,7 @@ CREATE TABLE `qnn_park_incubation_list`  (
 -- ----------------------------
 -- Records of qnn_park_incubation_list
 -- ----------------------------
-INSERT INTO `qnn_park_incubation_list` VALUES (1, 1, '上海小炬华科技', '2017-10-10', '', 2, '1', '马画藤', '马小云', '2019-01-09 16:46:31', '2019-01-11 10:26:39');
+INSERT INTO `qnn_park_incubation_list` VALUES (1, 1, '上海小炬华科技', '2017-10-10', '', 2, '2', '马画藤', '马小云', '2019-01-09 16:46:31', '2019-01-23 11:57:23');
 
 -- ----------------------------
 -- Table structure for qnn_park_incubation_visit_log
@@ -1359,7 +1325,7 @@ CREATE TABLE `qnn_park_incubation_visit_log`  (
 -- ----------------------------
 -- Records of qnn_park_incubation_visit_log
 -- ----------------------------
-INSERT INTO `qnn_park_incubation_visit_log` VALUES (1, 1, '上海小炬华科技', 1, '2019-01-11 11:25:53', '小菊花的记录', '2019-01-11 11:26:32', '2019-01-11 11:39:25');
+INSERT INTO `qnn_park_incubation_visit_log` VALUES (1, 1, '上海小炬华科技', 2, '2019-01-11 11:25:53', '小菊花的记录', '2019-01-11 11:26:32', '2019-01-11 11:39:25');
 
 -- ----------------------------
 -- Table structure for qnn_park_investment_list
@@ -1584,7 +1550,7 @@ CREATE TABLE `qnn_plugins`  (
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '状态',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '插件表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '插件表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qnn_plugins
@@ -1594,6 +1560,7 @@ INSERT INTO `qnn_plugins` VALUES (5, 'Alisms', '阿里云短信', '通过阿里�
 INSERT INTO `qnn_plugins` VALUES (7, 'qiniuoss', '七牛云储存', '实现七牛云存储，管理附件', '{\"enable\":1,\"bucket\":\"eacoomall-qiniu\",\"access_key_id\":\"\",\"access_key_secret\":\"\",\"root_path\":\"images\",\"domain\":\"http:\\/\\/img.eacoomall.com\",\"endpoint\":\"http:\\/\\/pamlntz0m.bkt.clouddn.com\",\"style\":[{\"name\":\"wap-thumb\"},{\"name\":\"small\"},{\"name\":\"medium\"},{\"name\":\"large\"}]}', 'yyyvy', '1.0.0', '', 1, '2018-11-29 15:05:31', '2018-11-29 15:05:31', 99, 1);
 INSERT INTO `qnn_plugins` VALUES (12, 'Qichacha', '企查查', '通过企查查获取企业Master数据,商标,专利,著作权,网站,企业证书数据官网http://www.yjapi.cn', '{\"status\":\"1\",\"appKey\":\"1768454120694ddba498dfd1c95d16a1\",\"secretKey\":\"002E95B913D601221F01AC7F2DDF99C6\"}', 'xpwsgg', '1.1.0', '', 1, '2019-01-16 17:16:51', '2019-01-16 17:18:15', 99, 1);
 INSERT INTO `qnn_plugins` VALUES (20, 'DataDictionary', '数据库字典', '数据库字典,丑是丑了点,又不是不能用!', '', 'xpwsgg', '1.0.0', '', 1, '2019-01-18 16:16:08', '2019-01-18 16:16:08', 99, 1);
+INSERT INTO `qnn_plugins` VALUES (22, 'Phpspreadsheet', '表格导入导出', '用于表格数据的导入和导出', '', 'xpwsgg', '1.0.0', '', 1, '2019-01-25 15:32:08', '2019-01-25 15:32:08', 99, 1);
 
 -- ----------------------------
 -- Table structure for qnn_postmeta
@@ -1685,12 +1652,7 @@ CREATE TABLE `qnn_service_laboratory_booking_list`  (
   `hand_time` datetime(0) NULL DEFAULT NULL COMMENT '操作时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of qnn_service_laboratory_booking_list
--- ----------------------------
-INSERT INTO `qnn_service_laboratory_booking_list` VALUES (1, 2, '柯南', '18899999999', '2019-01-21 15:26:32', '2019-01-21 17:26:34', '2019-01-21 15:26:43', 2, '没时间', 1, '2019-01-21 15:41:28', '2019-01-21 15:41:28');
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for qnn_service_laboratory_list
