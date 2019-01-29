@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 本地Linux
+ Source Server         : WSL服务器
  Source Server Type    : MySQL
- Source Server Version : 50724
+ Source Server Version : 50725
  Source Host           : 127.0.0.1:3306
- Source Schema         : eacoo
+ Source Schema         : www_tongji_gov
 
  Target Server Type    : MySQL
- Target Server Version : 50724
+ Target Server Version : 50725
  File Encoding         : 65001
 
- Date: 18/12/2018 17:06:30
+ Date: 29/01/2019 11:05:47
 */
 
 SET NAMES utf8mb4;
@@ -23,6 +23,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `qnn_student_innovation`;
 CREATE TABLE `qnn_student_innovation`  (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `enterprise_id` int(11) NULL DEFAULT NULL COMMENT '企业id',
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '公司名称',
   `principal` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '负责人',
   `telephone` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '联系电话',
