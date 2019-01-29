@@ -336,7 +336,7 @@ class EnterpriseBasic extends Admin
                     HighTechEnterpriseList::create($techData);
                 }
                 //8,添加企业的商标数据
-                $isZxcqInstall = \check_install_module_my('park_enterprise_intellectual_property');
+                $isZxcqInstall = \check_install_module_my('park_enterprise_intellectual');
                 if ($isZxcqInstall) {
                     $qccReturn = hook('qichachaTm', $data['enterprise_name'], true);
                     $qccData = \json_decode($qccReturn[0], true);
