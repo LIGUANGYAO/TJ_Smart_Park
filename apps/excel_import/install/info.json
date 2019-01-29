@@ -1,0 +1,18 @@
+{
+  "name": "excel_import",
+  "title": "智慧园区--费用管理",
+  "description": "用于入驻企业的水电费导入导出管理",
+  "author": "xpwsgg",
+  "admin_manage_into": "",
+  "version": "1.0.0",
+  "dependences": {
+    "core": "1.3.0",
+    "plugins": {
+      "Phpspreadsheet": "1.0.0"
+    },
+    "modules": {
+      "park_enterprise": "1.0.0"
+    }
+  },
+  "database_prefix": "qnn_"
+}

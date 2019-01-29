@@ -157,6 +157,7 @@ class Bill extends Admin
     {
         $url = '/admin.php/cost_management/bill/import';
         $Data = hook('importFromTable', $url, true);
+        \halt($Data);
         if (!empty($Data[0])) {
 
             //组装需要入库的数组，从Data中取值
