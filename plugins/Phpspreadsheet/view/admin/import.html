@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
     <meta charset="utf-8">
     <title>导入Excel</title>
@@ -39,9 +39,9 @@
             , done: function (res) {
                 //如果上传失败
                 layer.close(load);
-                if (res.state == 1) {
+                if (res.code == 1) {
                     layer.alert("处理成功", {icon: 1}, function () {
-                        self.location = document.referrer;
+                        self.location = res.url;
                     });
                 } else {
                     layer.alert("抱歉，数据处理失败！", {icon: 2});
