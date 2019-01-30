@@ -4,7 +4,7 @@
     "description":"用于表格数据的导入和导出",
     "author":"xpwsgg",
     "admin_manage_into":"",
-    "version":"1.0.0",
+    "version":"1.0.1",
     "dependences":{
         "core":"1.2.4",
         "plugins":{
