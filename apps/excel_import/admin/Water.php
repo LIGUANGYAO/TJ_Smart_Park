@@ -24,6 +24,7 @@ class Water extends Admin
 {
     protected $db;
     protected $buildList;
+
     /**
      *初始化
      */
@@ -112,8 +113,18 @@ class Water extends Admin
 
             }
             $waterModel = new CostWaterList();
-            $waterModel->saveAll($sqlData);
-            $this->success('操作成功', \url('index'));
+            $map = [
+                'enterprise_name' => $sqlData[0]['enterprise_name'],
+                'year' => $sqlData[0]['year'],
+                'month' => $sqlData[0]['month'],
+            ];
+            $count = $waterModel::where($map)->count();
+            if ($count > 0) {
+                $this->error('请勿重复导入');
+            } else {
+                $waterModel->saveAll($sqlData);
+                $this->success('导入成功', \url('index'));
+            }
         }
     }
 }
