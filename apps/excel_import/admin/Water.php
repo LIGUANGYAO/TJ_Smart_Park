@@ -14,13 +14,25 @@ use app\common\builder\BuilderList;
 use app\common\layout\Iframe;
 use app\excel_import\model\CostWaterList;
 
+/**
+ * Class Water
+ * @package app\excel_import\admin
+ * 导入水费控制器
+ */
 class Water extends Admin
 {
+    /**
+     *初始化
+     */
     public function _initialize()
     {
         parent::_initialize();
     }
 
+    /**
+     * @return \app\common\layout\Content
+     * 列表
+     */
     public function index()
     {
         $import = [
@@ -63,6 +75,10 @@ class Water extends Admin
             ->content($content);
     }
 
+    /**
+     * @throws \Exception
+     * 导入
+     */
     public function import()
     {
         $url = '/admin.php/excel_import/water/import.html';
