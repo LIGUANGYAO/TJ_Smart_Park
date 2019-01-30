@@ -13,6 +13,7 @@ use app\admin\controller\Admin;
 use app\common\builder\BuilderList;
 use app\common\layout\Iframe;
 use app\excel_import\model\CostWaterList;
+use think\Db;
 
 /**
  * Class Water
@@ -21,12 +22,17 @@ use app\excel_import\model\CostWaterList;
  */
 class Water extends Admin
 {
+    protected $buildList;
+
     /**
      *初始化
      */
     public function _initialize()
     {
         parent::_initialize();
+        $this->buildList = Db::name('ParkBuilding')
+            ->where('status', 1)
+            ->column('id,title');
     }
 
     /**
@@ -47,7 +53,8 @@ class Water extends Admin
             ->addTopButton('self', $import)
             ->keyListItem('id', 'ID')
             ->keyListItem('enterprise_name', '企业名称')
-            ->keyListItem('build_id', '楼宇')
+            ->keyListItem('park', '园区名称')
+            ->keyListItem('build_id', '楼宇', 'array', $this->buildList)
             ->keyListItem('floor', '楼层')
             ->keyListItem('room_number', '房间号')
             ->keyListItem('area', '面积')
@@ -55,7 +62,7 @@ class Water extends Admin
             ->keyListItem('e_date', '租赁结束日期')
             ->keyListItem('meter_number', '水表号')
             ->keyListItem('last_number', '上月抄见数')
-            ->keyListItem('this_numner', '本月抄见数')
+            ->keyListItem('this_number', '本月抄见数')
             ->keyListItem('year', '年份')
             ->keyListItem('month', '月份')
             ->keyListItem('marks', '备注')
@@ -83,13 +90,15 @@ class Water extends Admin
     {
         $url = '/admin.php/excel_import/water/import.html';
         $Data = hook('importFromTable', $url, true);
+//        \halt($Data);
         if (!empty($Data[0])) {
             $newData = \array_slice($Data[0], 4);
             $sqlData = [];
             foreach ($newData as $k => $v) {
                 $sqlData[$k]['enterprise_id'] = \getEnterpriseIdByEnterpriseName($v[0]);
                 $sqlData[$k]['enterprise_name'] = $v[0];
-                $sqlData[$k]['build_id'] = \getBuildIdByBuildName($Data[0][0][0]);
+                $sqlData[$k]['park'] = $Data[0][0][0];
+                $sqlData[$k]['build_id'] = \getBuildIdByBuildName($Data[0][0][0], $Data[0][1][5]);
                 $sqlData[$k]['year'] = $Data[0][1][6];
                 $sqlData[$k]['month'] = $Data[0][1][7];
                 $sqlData[$k]['floor'] = \substr($v[1], 2, 1);

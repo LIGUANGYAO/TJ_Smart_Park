@@ -3,10 +3,20 @@
 use think\Db;
 
 if (!function_exists('getBuildNameByBuildId')) {
-    function getBuildIdByBuildName($name)
+    /**
+     * @param $parkName
+     * @param $buildName
+     * @return mixed
+     * 根据园区名称获取园区ID，再获取该园区内的楼宇id
+     */
+    function getBuildIdByBuildName($parkName, $buildName)
     {
+        if ($parkName == '同济科技园沪西园区') {
+            $parkId = 1;
+        }
         $id = Db::name('ParkBuilding')
-            ->where('title', 'eq', $name)
+            ->where('park', $parkId)
+            ->where('title', 'eq', $buildName)
             ->value('id');
         return $id;
     }
