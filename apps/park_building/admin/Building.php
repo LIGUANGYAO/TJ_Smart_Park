@@ -27,6 +27,7 @@ class Building extends Admin
      * @var status键值
      */
     protected $statusType;
+    protected $parkList;
 
     /**
      * 初始化
@@ -40,6 +41,7 @@ class Building extends Admin
             1 => '启用',
             2 => '禁用',
         ];
+        $this->parkList = \config('park_list');
     }
 
     /**
@@ -59,6 +61,7 @@ class Building extends Admin
             ->setSearch('请输入关键字')
             ->keyListItem('id', 'ID')
             ->keyListItem('image', '图标', 'picture')
+            ->keyListItem('park', '所属园区', 'array', $this->parkList)
             ->keyListItem('title', '楼宇名称')
             ->keyListItem('status', '状态', 'status')
             ->keyListItem('sort', '排序')
@@ -97,6 +100,7 @@ class Building extends Admin
             $info = [
                 'sort' => 50,
                 'status' => 1,
+                'park' => 1,
             ];
             if ($id > 0) {
                 $info = ParkBuilding::get($id);
@@ -107,6 +111,7 @@ class Building extends Admin
 
             $return = builder('Form')
                 ->addFormItem('id', 'hidden', 'ID', 'ID')
+                ->addFormItem('park', 'select', '所在园区', '请选择所在园区', $this->parkList)
                 ->addFormItem('title', 'text', '楼宇名称', '请输入楼宇名称')
                 ->addFormItem('image', 'picture', '图标', '上传楼宇的图片')
                 ->addFormItem('status', 'radio', '状态', '默认启用', $this->statusType)
