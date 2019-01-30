@@ -67,16 +67,29 @@ class Water extends Admin
     {
         $url = '/admin.php/excel_import/water/import.html';
         $Data = hook('importFromTable', $url, true);
-//        \halt($Data);
-        //需要取出楼宇，年份，月份等公用信息后删除这个再组成新数组再通过foreach组成新数组
-        $sqlData = [];
-        foreach ($Data as $k => $v) {
-            $sqlData[$k]['enterprise_id'] = \getEnterpriseIdByEnterpriseName($v[3][0]);
-            $sqlData[$k]['enterprise_name'] = $v[3][0];
-            $sqlData[$k]['build_id'] = \getBuildIdByBuildName($v[0][0]);
-            $sqlData[$k]['year'] = $v[1][6];
-            $sqlData[$k]['month'] = $v[1][7];
+        if (!empty($Data[0])) {
+            $newData = \array_slice($Data[0], 4);
+            $sqlData = [];
+            foreach ($newData as $k => $v) {
+                $sqlData[$k]['enterprise_id'] = \getEnterpriseIdByEnterpriseName($v[0]);
+                $sqlData[$k]['enterprise_name'] = $v[0];
+                $sqlData[$k]['build_id'] = \getBuildIdByBuildName($Data[0][0][0]);
+                $sqlData[$k]['year'] = $Data[0][1][6];
+                $sqlData[$k]['month'] = $Data[0][1][7];
+                $sqlData[$k]['floor'] = \substr($v[1], 2, 1);
+                $sqlData[$k]['room_number'] = \substr($v[1], 4);
+                $sqlData[$k]['area'] = $v[2];
+                $sqlData[$k]['s_date'] = \substr($v[3], 0, 10);
+                $sqlData[$k]['e_date'] = \substr($v[3], 11);
+                $sqlData[$k]['meter_number'] = $v[4];
+                $sqlData[$k]['last_number'] = $v[5];
+                $sqlData[$k]['this_number'] = $v[6];
+                $sqlData[$k]['marks'] = $v[7];
+
+            }
+            $waterModel = new CostWaterList();
+            $waterModel->saveAll($sqlData);
+            $this->success('操作成功', \url('index'));
         }
-        \halt($sqlData);
     }
 }
