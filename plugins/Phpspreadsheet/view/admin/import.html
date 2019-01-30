@@ -40,11 +40,13 @@
                 //如果上传失败
                 layer.close(load);
                 if (res.code == 1) {
-                    layer.alert("处理成功", {icon: 1}, function () {
+                    layer.alert(res.msg, {icon: 1}, function () {
                         self.location = res.url;
                     });
                 } else {
-                    layer.alert("抱歉，数据处理失败！", {icon: 2});
+                    layer.alert(res.msg, {icon: 2}, function () {
+                        self.location = res.url;
+                    });
                 }
                 //上传成功
             }
