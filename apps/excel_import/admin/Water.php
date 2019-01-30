@@ -22,14 +22,15 @@ use think\Db;
  */
 class Water extends Admin
 {
+    protected $db;
     protected $buildList;
-
     /**
      *初始化
      */
     public function _initialize()
     {
         parent::_initialize();
+        $this->db = Db::name('CostWaterList');
         $this->buildList = Db::name('ParkBuilding')
             ->where('status', 1)
             ->column('id,title');
@@ -74,10 +75,8 @@ class Water extends Admin
         return (new Iframe())
             ->setMetaTitle('水费账单列表')
             ->search([
-                ['name' => 'keyword',
-                    'type' => 'text',
-                    'extra_attr' => 'placeholder="请输入企业名"',
-                ]
+                ['name' => 'keyword', 'type' => 'text', 'extra_attr' => 'placeholder="请输入企业名"',],
+                ['name' => 'build_id', 'type' => 'select', 'title' => '按楼宇', 'options' => $this->buildList],
             ])
             ->content($content);
     }
