@@ -13,7 +13,7 @@
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
     <legend>说明：请上传Excel文件</legend>
 </fieldset>
-
+<blockquote class="layui-elem-quote">使用说明：XXXXXXXX</blockquote>
 <div class="layui-upload">
     <button type="button" class="layui-btn layui-btn-radius" id="xls-upload">上传Excel文件</button>
     <button class="layui-btn layui-btn-primary layui-btn-radius" onclick="javascript:history.back(-1);return false">返回
@@ -29,7 +29,7 @@
         //上传
         var load;
         var uploadInst = upload.render({
-            elem: '#test1'
+            elem: '#xls-upload'
             , url: "{$url}"
             , accept: 'file'
             , before: function (obj) {
