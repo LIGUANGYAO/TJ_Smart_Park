@@ -161,7 +161,6 @@ class Bill extends Admin
         if (!empty($Data[0])) {
 
             //组装需要入库的数组，从Data中取值
-            //todo
             $sqlData = [
                 'bill_type' => 1,
                 'enterprise_id' => \getEnterpriseIdByEnterpriseName($Data[0][1][2]),
@@ -174,7 +173,6 @@ class Bill extends Admin
             ];
 
             //校验数据完整性
-            //todo
             $res = Db::name('CostBillList')->insert($sqlData);
             if ($res > 0) {
                 return json(['state' => 1, 'msg' => '处理成功']);
