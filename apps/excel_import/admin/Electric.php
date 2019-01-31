@@ -15,10 +15,22 @@ use app\common\layout\Iframe;
 use app\excel_import\model\CostElectricList;
 use think\Db;
 
+/**
+ * Class Electric
+ * @package app\excel_import\admin
+ * 导入电费控制器
+ */
 class Electric extends Admin
 {
+    /**
+     * @var
+     * 大楼列表
+     */
     protected $buildList;
 
+    /**
+     *初始化
+     */
     public function _initialize()
     {
         parent::_initialize();
@@ -27,6 +39,10 @@ class Electric extends Admin
             ->column('id,title');
     }
 
+    /**
+     * @return \app\common\layout\Content
+     * 列表页
+     */
     public function index()
     {
         $import = [
@@ -75,6 +91,10 @@ class Electric extends Admin
             ->content($content);
     }
 
+    /**
+     * @throws \think\Exception
+     * 导入表格
+     */
     public function import()
     {
         $url = '/admin.php/excel_import/electric/import.html';
