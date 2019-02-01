@@ -1,7 +1,7 @@
 <?php
 // 菜单
 // +----------------------------------------------------------------------
-// | Copyright (c) 2016-2018 https://www.eacoophp.com, All rights reserved.         
+// | Copyright (c) 2016-2018 https://www.eacoophp.com, All rights reserved.
 // +----------------------------------------------------------------------
 // | [EacooPHP] 并不是自由软件,可免费使用,未经许可不能去掉EacooPHP相关版权。
 // | 禁止在EacooPHP整体或任何部分基础上发展任何派生、修改或第三方版本用于重新分发
@@ -13,27 +13,29 @@ namespace app\wechat\admin;
 use app\wechat\model\Menus as MenusModel;
 use EasyWeChat\Factory;
 
-class Menu extends Base {
+class Menu extends Base
+{
 
     protected $app;
     protected $menusModel;
+
     function _initialize()
     {
         parent::_initialize();
         $wechat_option = get_wechat_info($this->wxid);
         $options = [
-           /**
+            /**
              * Debug 模式，bool 值：true/false
              *
              * 当值为 false 时，所有的日志都不会记录
              */
-            'debug'  => false,
+            'debug' => true,
             /**
              * 账号基本信息，请从微信公众平台/开放平台获取
              */
-            'app_id'  => $wechat_option['appid'],         // AppID
-            'secret'  => $wechat_option['appsecret'],     // AppSecret
-            'token'   => $wechat_option['valid_token'],   // Token
+            'app_id' => $wechat_option['appid'],         // AppID
+            'secret' => $wechat_option['appsecret'],     // AppSecret
+            'token' => $wechat_option['valid_token'],   // Token
             'aes_key' => $wechat_option['encodingaeskey'],  // EncodingAESKey，安全模式下请一定要填写！！！
             /**
              * 日志配置
@@ -44,9 +46,9 @@ class Menu extends Base {
              * file：日志文件位置(绝对路径!!!)，要求可写权限
              */
             'log' => [
-                'level'      => 'debug',
+                'level' => 'debug',
                 'permission' => 0777,
-                'file'       => 'runtime/log/wechat/easywechat.logs',
+                'file' => 'runtime/log/wechat/easywechat.logs',
             ],
         ];//dump($options);
         $this->app = Factory::officialAccount($options);
@@ -67,8 +69,8 @@ class Menu extends Base {
             $this->sycGetMenu();
         }
 
-        $this->assign('meta_title','自定义菜单');
-        $this->assign('data_list',$data_list);
+        $this->assign('meta_title', '自定义菜单');
+        $this->assign('data_list', $data_list);
         return $this->fetch();
     }
 
@@ -77,12 +79,13 @@ class Menu extends Base {
      * @date   2017-12-11
      * @author 心云间、凝听 <981248356@qq.com>
      */
-    public function add() {
+    public function add()
+    {
         if (IS_POST) {
             $data = input('post.');
             //验证数据
             //$this->validateData($data,'Menu');
-            $data['wxid']=$this->wxid;
+            $data['wxid'] = $this->wxid;
             if ($this->menusModel->editData($data)) {
                 $this->success('添加成功', url('index'));
             } else {
@@ -92,12 +95,12 @@ class Menu extends Base {
         } else {
             $info = [];
             $menu_cats = $this->menusModel->where([
-                'status'=>1,
-                'wxid'=>$this->wxid,
-                'pid'=>0])->field('id,name')->select();
-            $this->assign('menu_cats',$menu_cats);
-            $this->assign('meta_title','添加菜单');
-            $this->assign('info',$info);
+                'status' => 1,
+                'wxid' => $this->wxid,
+                'pid' => 0])->field('id,name')->select();
+            $this->assign('menu_cats', $menu_cats);
+            $this->assign('meta_title', '添加菜单');
+            $this->assign('info', $info);
             return $this->fetch('edit');
         }
     }
@@ -109,31 +112,32 @@ class Menu extends Base {
      * @date   2017-12-11
      * @author 心云间、凝听 <981248356@qq.com>
      */
-    public function edit($id=0) {
-        $title = $id>0 ? "编辑":"新增";
+    public function edit($id = 0)
+    {
+        $title = $id > 0 ? "编辑" : "新增";
         if (IS_POST) {
             $data = input('post.');
             //验证数据
             //$this->validateData($data,'Menu');
             $data['wxid'] = $this->wxid;
             if ($this->menusModel->editData($data)) {
-                $this->success($title.'成功', url('index'));
+                $this->success($title . '成功', url('index'));
             } else {
                 $this->error($this->menusModel->getError());
             }
 
         } else {
             $info = [];
-            if ($id>0) {
+            if ($id > 0) {
                 $info = $this->menusModel->get($id);
             }
             $menu_cats = $this->menusModel->where([
-                'status'=>1,
-                'wxid'=>$this->wxid,
-                'pid'=>0])->field('id,name')->select(); 
-            $this->assign('menu_cats',$menu_cats);
-            $this->assign('meta_title','编辑菜单');
-            $this->assign('info',$info);
+                'status' => 1,
+                'wxid' => $this->wxid,
+                'pid' => 0])->field('id,name')->select();
+            $this->assign('menu_cats', $menu_cats);
+            $this->assign('meta_title', '编辑菜单');
+            $this->assign('info', $info);
             return $this->fetch();
         }
     }
@@ -155,15 +159,15 @@ class Menu extends Base {
                 foreach ($sortids as $key => $id) {
                     $sort_id = $id;
                     $sort_v = $sorts[$key];
-                    $wechat_menus_db->where('id',$sort_id)->setField('sort',$sort_v);
+                    $wechat_menus_db->where('id', $sort_id)->setField('sort', $sort_v);
                 }
                 $this->success('排序成功');
-            } else{
+            } else {
                 $this->error('排序失败');
             }
 
         }
-    
+
     }
 
     /**
@@ -178,15 +182,15 @@ class Menu extends Base {
         $menus = $menu->current();
         if (!empty($menus['selfmenu_info']['button'])) {
             //删除本地菜单
-            $this->menusModel->where('wxid',$this->wxid)->delete();
+            $this->menusModel->where('wxid', $this->wxid)->delete();
             $menus_button = $menus['selfmenu_info']['button'];
             foreach ($menus_button as $key => $row) {
                 $menu = [
-                    'wxid' =>$this->wxid,
-                    'name' =>$row['name'],
-                    'type' =>isset($row['type']) ? $row['type'] : '',
-                    'key'  =>isset($row['key']) ? $row['key'] : '',
-                    'url'  =>isset($row['url']) ? $row['url'] : '',
+                    'wxid' => $this->wxid,
+                    'name' => $row['name'],
+                    'type' => isset($row['type']) ? $row['type'] : '',
+                    'key' => isset($row['key']) ? $row['key'] : '',
+                    'url' => isset($row['url']) ? $row['url'] : '',
                 ];
                 $result = $this->menusModel->allowField(true)->isUpdate(false)->data($menu)->save();
                 if (!empty($row['sub_button']['list'])) {
@@ -194,24 +198,24 @@ class Menu extends Base {
                     $sub_button = $row['sub_button']['list'];
                     foreach ($sub_button as $key => $vo) {
                         $submenu = [
-                            'wxid'=>$this->wxid,
-                            'name'=>$vo['name'],
-                            'type'=>$vo['type'],
-                            'pid'=>$pid,
-                            'key'=>isset($vo['key']) ? $vo['key'] : '',
-                            'url'=>isset($vo['url']) ? $vo['url'] : '',
+                            'wxid' => $this->wxid,
+                            'name' => $vo['name'],
+                            'type' => $vo['type'],
+                            'pid' => $pid,
+                            'key' => isset($vo['key']) ? $vo['key'] : '',
+                            'url' => isset($vo['url']) ? $vo['url'] : '',
                         ];
                         $this->menusModel->allowField(true)->isUpdate(false)->data($submenu)->save();
                     }
                 }
             }
-            
-            $this->success('获取菜单成功!',url('index'));
-        } else{
-            $errmsg = !empty($menus['errmsg']) ? $menus['errmsg']:'';
+
+            $this->success('获取菜单成功!', url('index'));
+        } else {
+            $errmsg = !empty($menus['errmsg']) ? $menus['errmsg'] : '';
             $this->error($errmsg);
         }
-        
+
     }
 
     /**
@@ -227,9 +231,9 @@ class Menu extends Base {
         $buttons = list_to_tree($buttons);
         if (!empty($buttons)) {
             foreach ($buttons as $key => &$val) {
-                if ($val['type']=='view') {
+                if ($val['type'] == 'view') {
                     unset($val['key']);
-                } elseif ($val['type']=='click') {
+                } elseif ($val['type'] == 'click') {
                     unset($val['url']);
                 }
 
@@ -237,15 +241,15 @@ class Menu extends Base {
                 unset($val['pid']);
                 if (!empty($val['_child'])) {
                     foreach ($val['_child'] as $k => &$button) {
-                        if ($button['type']=='view') {
+                        if ($button['type'] == 'view') {
                             unset($button['key']);
-                        } elseif ($button['type']=='click') {
+                        } elseif ($button['type'] == 'click') {
                             unset($button['url']);
                         }
                         unset($button['id']);
                         unset($button['pid']);
                     }
-                    $val['sub_button']=$val['_child'];
+                    $val['sub_button'] = $val['_child'];
                     unset($val['_child']);
                     unset($val['type']);
                     unset($val['key']);
@@ -255,11 +259,11 @@ class Menu extends Base {
         }
 
         $result = $this->app->menu->create($buttons);
-        if ($result['errcode']==0) {
+        if ($result['errcode'] == 0) {
             $this->success('同步成功');
-        } else{
+        } else {
             $this->error($result->msg);
         }
-        
+
     }
 }
