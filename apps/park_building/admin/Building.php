@@ -9,6 +9,7 @@
 namespace app\park_building\admin;
 
 use app\admin\controller\Admin;
+use app\common\builder\BuilderList;
 use app\park_building\model\ParkBuilding;
 
 /**
@@ -53,14 +54,14 @@ class Building extends Admin
         list($data_list, $total) = $this->buildingModel->search('title')
             ->getListByPage([], true, 'sort,create_time desc');
 
-        $content = builder('list')
+        $content = (new BuilderList())
             ->addTopButton('addnew', ['model' => 'ParkBuilding'])
             ->addTopButton('resume', ['model' => 'ParkBuilding'])
             ->addTopButton('forbid', ['model' => 'ParkBuilding'])
             ->addTopButton('sort', ['model' => 'ParkBuilding'])
             ->setSearch('请输入关键字')
             ->keyListItem('id', 'ID')
-            ->keyListItem('image', '图标', 'picture')
+            ->keyListItem('image', '图标', 'picture', ['width' => 60])
             ->keyListItem('park', '所属园区', 'array', $this->parkList)
             ->keyListItem('title', '楼宇名称')
             ->keyListItem('status', '状态', 'status')
