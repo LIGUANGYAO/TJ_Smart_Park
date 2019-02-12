@@ -73,12 +73,12 @@ class Index extends Plugin
 
 
     /**
-     * @param string $touser    接收方openid
-     * @param string $template_id   模板消息id
-     * @param string $url   链接地址
-     * @param array $data   消息内容
+     * @param string $touser 接收方openid
+     * @param string $template_id 模板消息id
+     * @param string $url 链接地址
+     * @param array $data 消息内容
      */
-    public function SendWxTemplateMsg($touser = '', $template_id = '', $url = '', $data = [])
+    public function SendWxTemplateMsg(string $touser, string $template_id, string $url, array $data)
     {
         $this->app->template_message->send([
             'touser' => $touser,
