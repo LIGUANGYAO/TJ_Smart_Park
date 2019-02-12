@@ -1,0 +1,131 @@
+{extend name="$_theme_public_layout"/}
+{block name="style"}
+<style type="text/css">
+  .register-box{}
+  .register-box-body{padding-top: 0;}
+  .login-box, .register-box{width:400px;}
+  .register-logo a{color:#e0e0e0;}
+  .form-group .control-label{padding-left: 0;padding-right: 0;}
+</style>
+{/block}
+
+{block name="main"}
+  <div class="content-wrapper bg-color-fff">
+  <!-- Full Width Column -->
+   <section class="register-box">
+
+  <!-- /.login-logo -->
+    <div class="register-box-body">
+      <form action="" method="post" class="form-horizontal" id="register-form">
+      <div class="box-body">
+        <img class="profile-user-img img-responsive img-circle" src="{$third_oauth_info.avatar|default='__PUBLIC__/img/default-avatar.svg'}" alt="User profile picture">
+        <input type="hidden" name="avatar" id="avatar" value="{$third_oauth_info.avatar|default=''}">
+        <div class="text-center mb-20 mt-20">
+          <p>信息来源于{switch name="third_oauth_info.platform"}
+            {case value="github"}GitHub{/case}
+            {case value="gitee"}码云{/case}
+            {case value="qq"}QQ互联{/case}
+            {case value="sina"}新浪微博{/case}
+          {/switch}授权</p>
+        </div>
+        <div class="form-group has-nickname">
+          <label for="inputEmail" class="col-sm-2 control-label">邮箱</label>
+          <div class="col-sm-10">
+              <input type="email" name="email" id="email" value="{$third_oauth_info.email|default=''}" class="form-control" placeholder="必须填写">
+          </div>
+        </div>
+        <div class="form-group has-username">
+            <label for="inputUsername" class="col-sm-2 control-label">用户名</label>
+            <div class="col-sm-10">
+                <input type="text" name="username" id="username" class="form-control" value="{$third_oauth_info.username|default=''}" placeholder="仅限英文字母、数字、下划线">
+            </div>
+            
+        </div>
+        <div class="form-group has-nickname">
+          <label for="inputNickname" class="col-sm-2 control-label">昵称</label>
+          <div class="col-sm-10">
+              <input type="text" name="nickname" id="nickname" value="{$third_oauth_info.nickname|default=''}" class="form-control" placeholder="可选：允许中文">
+          </div>
+        </div>
+        
+        <div class="text-center mb-20 mt-20">
+          <p>您可以同时登录 EacooPHP交流社区 账户</p>
+        </div>
+        
+        <div class="row">
+          <!-- /.col -->
+          <div class="center-block text-center">
+            <button type="button" class="btn btn-primary btn-block btn-flat" id="register">注册</button>
+          </div>
+          <p class="text-center lh-36 mt-20"><a href="/register" class="color-6 btn btn-default btn-block btn-flat" title="上一步">上一步</a></p>
+        </div>
+        </div>
+      </form>
+  </div>
+  </section>
+  <!-- /.content -->
+     
+  </div>
+  <!-- /.content-wrapper -->
+
+  {/block}
+
+{block name="script"}
+<script type="text/javascript" src="__STATIC__/libs/layer/layer.js"></script>
+<script type="text/javascript">
+function BindEnter(obj)
+{
+    if(obj.keyCode == 13)
+      {
+          $("#register").click()
+      }
+}
+$(function(){
+    //同步输入
+    // $('#username').bind('input propertychange', function() {
+    //     $('#nickname').val($(this).val());
+    // });
+
+    $("#register").click(function(){
+        var email = $("input[name='email']");
+        var username = $("input[name='username']");
+        var nickname = $("input[name='nickname']");
+
+        if(email.val()==''){
+            email.focus();
+            return false
+        }
+        if(username.val()==''){
+            username.focus();
+            return false
+        }
+
+        $.ajax({
+          type: 'POST',
+          url: '/plugin_execute/_plugin/ThirdLogin/_controller/Login/_action/register.html',
+          data: {
+            email:email.val(),
+            avatar:$("#avatar").val(),
+            username:username.val(),
+            nickname:$("#nickname").val(),
+          },
+          beforeSend:function(){
+            layer.load(2,{shade: [0.1,'#fff']});
+          },
+
+          success:function(result){
+            layer.closeAll();
+            if(result.code==1){
+              window.location.href = result.url; 
+            } else{
+              layer.msg(result.msg, {icon:5});
+            }
+
+          }
+      });
+
+    })
+});
+
+</script>
+{/block}

@@ -1,0 +1,33 @@
+{php}if(!empty($config['platforms'])){{/php}
+    <div class="thirdlogin">
+        <div class="text-center h20 hide"><label class="item-label">第三方快速登录<span class="check-tips"></span></label></div>
+        <div class="oh">
+            {php}if(in_array('Weixin',$config['platforms'])):{/php}
+                <a class="btn btn-success" href="{php}echo plugin_url('ThirdLogin/Login/login', array('platform'=>'weixin'));{/php}">
+                    <i class="fa fa-weixin"></i> 微信登录
+                </a>
+            {php} endif;{/php}
+            {php}if(in_array('Qq',$config['platforms'])):{/php}
+                <a class="btn btn-default" style="color:#12b7f5" href="{php}echo plugin_url('ThirdLogin/Login/login', array('platform'=>'qq'));{/php}">
+                    <i class="fa fa-qq"></i> QQ登录
+                </a>
+            {php} endif;{/php}
+            {php}if(in_array('Sina',$config['platforms'])):{/php}
+                <a class="btn btn-default" style="color:#F30002" href="{php}echo plugin_url('ThirdLogin/Login/login', array('platform'=>'sina'));{/php}">
+                    <i class="fa fa-weibo"></i> 新浪微博
+                </a>
+            {php} endif;{/php}
+            {php}if(in_array('Github',$config['platforms'])):{/php}
+                <a class="btn btn-default" style="color:#666" href="{php}echo plugin_url('ThirdLogin/Login/login', array('platform'=>'github'));{/php}">
+                    <i class="fa fa-github"></i> GitHub登录
+                </a>
+            {php} endif;{/php}
+            {php}if(in_array('Gitee',$config['platforms'])):{/php}
+                <a class="btn btn-default" style="color:#333" href="{php}echo plugin_url('ThirdLogin/Login/login', array('platform'=>'gitee'));{/php}">
+                    <i class="fa fa-github"></i> 码云登录
+                </a>
+            {php} endif;{/php}
+        </div>
+        
+        </div>
+{php}}{/php}

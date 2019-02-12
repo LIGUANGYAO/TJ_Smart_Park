@@ -1,0 +1,17 @@
+{
+  "name": "WxTemplateMessage",
+  "title": "微信模板消息",
+  "description": "可用于其他模块调用发送微信模板消息",
+  "author": "xpwsgg",
+  "admin_manage_into": "",
+  "version": "1.0.0",
+  "dependences": {
+    "core": "1.2.4",
+    "plugins": {
+    },
+    "modules": {
+      "wechat": "1.0.6"
+    }
+  },
+  "database_prefix": "qnn_"
+}

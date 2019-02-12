@@ -89,10 +89,10 @@ class Activity extends Admin
             ->getListByPage($map, true, 'create_time desc');
 
         return (new BuilderList())
-            ->addTopButton('addnew',['model'=>'ActivityList'])
-            ->addTopButton('resume',['model'=>'ActivityList'])
-            ->addTopButton('forbid',['model'=>'ActivityList'])
-            ->addTopButton('delete',['model'=>'ActivityList'])
+            ->addTopButton('addnew', ['model' => 'ActivityList'])
+            ->addTopButton('resume', ['model' => 'ActivityList'])
+            ->addTopButton('forbid', ['model' => 'ActivityList'])
+            ->addTopButton('delete', ['model' => 'ActivityList'])
             ->setSearch('请输入关键字')
             ->keyListItem('id', 'ID')
             ->keyListItem('title', '标题')
@@ -103,7 +103,7 @@ class Activity extends Admin
             ->keyListItem('max_apply', '单人最多报名人数')
             ->keyListItem('max_number', '活动最大报名人数')
             ->keyListItem('price', '预付定金')
-            ->keyListItem('activity_status', '活动标记','callback','getActivityStatusName')
+            ->keyListItem('activity_status', '活动标记', 'callback', 'getActivityStatusName')
             ->keyListItem('status', '状态', 'status')
             ->keyListItem('create_time', '创建时间')
             ->keyListItem('right_button', '操作', 'btn')
@@ -111,9 +111,9 @@ class Activity extends Admin
             ->setListData($data_list)
             ->setListPage($total)
 //            ->addRightButton('self', ['title' => '查看', 'class' => 'btn btn-info btn-xs', 'href' => url('detail', ['id' => '__data_id__'])])
-            ->addRightButton('edit',['model'=>'ActivityList'])
-            ->addRightButton('forbid',['model'=>'ActivityList'])
-            ->addRightButton('delete',['model'=>'ActivityList'])
+            ->addRightButton('edit', ['model' => 'ActivityList'])
+            ->addRightButton('forbid', ['model' => 'ActivityList'])
+            ->addRightButton('delete', ['model' => 'ActivityList'])
             ->fetch();
     }
 
@@ -162,6 +162,9 @@ class Activity extends Admin
             //todo数据校验
 
             if ($this->activityModel->editData($param)) {
+                if ($param['wx_msg']==1){
+                    //todo 微信模板消息
+                }
                 $this->success($title . '成功', \url('index'));
             } else {
                 $this->error($this->module->getError());
@@ -170,6 +173,7 @@ class Activity extends Admin
             $info = [
                 'price' => '0.00',
                 'status' => 1,
+                'wx_msg' => 1
             ];
 
             if ($id > 0) {
@@ -189,9 +193,10 @@ class Activity extends Admin
                 ->addFormItem('max_apply', 'number', '单人最大报名人数')
                 ->addFormItem('max_number', 'number', '活动最大报名人数')
                 ->addFormItem('price', 'text', '预付定金')
-                ->addFormItem('activity_status', 'select', '活动标记', '',$this->activityStatusType)
+                ->addFormItem('activity_status', 'select', '活动标记', '', $this->activityStatusType)
                 ->addFormItem('content', 'wangeditor', '详情内容')
                 ->addFormItem('status', 'radio', '状态', '', [1 => '正常', 0 => '禁用'])
+                ->addFormItem('wx_msg', 'radio', '发送微信模板消息', '需要安装微信模板消息插件！', [1 => '是', 0 => '否'])
                 ->setFormData($info)
                 ->addButton('submit')
                 ->addButton('back')

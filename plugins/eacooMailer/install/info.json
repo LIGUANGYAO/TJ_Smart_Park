@@ -1,0 +1,17 @@
+{
+	"name":"eacooMailer",
+	"title":"邮件Mailer",
+	"description":"EacooPHP整合swiftmailer实现邮件发送",
+	"author":"心云间、凝听",
+	"admin_manage_into":"",
+	"version":"1.0.0",
+	"dependences":{
+		"plugins":{
+
+		},
+		"modules":{
+
+		}
+	},
+	"database_prefix":"eacoo_"
+}
