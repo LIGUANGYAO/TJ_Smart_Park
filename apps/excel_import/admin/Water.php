@@ -71,7 +71,7 @@ class Water extends Admin
             ->keyListItem('right_button', '操作', 'btn')
             ->addRightButton('delete', ['model' => 'CostWaterList'])
             ->setListData($data_list)
-            ->setListPage($total,10)
+            ->setListPage($total, 10)
             ->fetch();
         return (new Iframe())
             ->setMetaTitle('水费账单列表')
@@ -96,19 +96,19 @@ class Water extends Admin
             $sqlData = [];
             foreach ($newData as $k => $v) {
                 $sqlData[$k]['enterprise_id'] = \getEnterpriseIdByEnterpriseName($v[0]);
-                $sqlData[$k]['enterprise_name'] = $v[0];
-                $sqlData[$k]['park'] = $Data[0][0][0];
+                $sqlData[$k]['enterprise_name'] = \trim($v[0]);
+                $sqlData[$k]['park'] = \trim($Data[0][0][0]);
                 $sqlData[$k]['build_id'] = \getBuildIdByBuildName($Data[0][0][0], $Data[0][1][5]);
-                $sqlData[$k]['year'] = $Data[0][1][6];
-                $sqlData[$k]['month'] = $Data[0][1][7];
+                $sqlData[$k]['year'] = \trim($Data[0][1][6]);
+                $sqlData[$k]['month'] = \trim($Data[0][1][7]);
                 $sqlData[$k]['floor'] = \substr($v[1], 2, 1);
                 $sqlData[$k]['room_number'] = \substr($v[1], 4);
-                $sqlData[$k]['area'] = $v[2];
+                $sqlData[$k]['area'] = \trim($v[2]);
                 $sqlData[$k]['s_date'] = \substr($v[3], 0, 10);
                 $sqlData[$k]['e_date'] = \substr($v[3], 11);
-                $sqlData[$k]['meter_number'] = $v[4];
-                $sqlData[$k]['last_number'] = $v[5];
-                $sqlData[$k]['this_number'] = $v[6];
+                $sqlData[$k]['meter_number'] = \trim($v[4]);
+                $sqlData[$k]['last_number'] = \trim($v[5]);
+                $sqlData[$k]['this_number'] = \trim($v[6]);
                 $sqlData[$k]['marks'] = $v[7];
 
             }
@@ -126,5 +126,18 @@ class Water extends Admin
                 $this->success('导入成功', \url('index'));
             }
         }
+    }
+
+    public function export()
+    {
+        $map = [
+            'enterprise_name' => '上海铠寻信息科技有限公司',
+            'year' => '2018',
+            'month' => '3-4'
+        ];
+        $var = Db::name('CostWaterList')
+            ->where($map)
+            ->sum('last_number');
+        \halt($var);
     }
 }

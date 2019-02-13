@@ -100,15 +100,15 @@ class Electric extends Admin
         $url = '/admin.php/excel_import/electric/import.html';
         $sheetData = hook('importFromTable', $url, true);
         if (!empty($sheetData[0])) {
-            $parkName = $sheetData[0][0][0];
-            $buildName = $sheetData[0][1][10];
-            $year = $sheetData[0][1][11];
-            $month = $sheetData[0][1][12];
+            $parkName = \trim($sheetData[0][0][0]);
+            $buildName = \trim($sheetData[0][1][10]);
+            $year = \trim($sheetData[0][1][11]);
+            $month = \trim($sheetData[0][1][12]);
             $newData = \array_slice($sheetData[0], 3);
             $sqlData = [];
             foreach ($newData as $k => $v) {
                 $sqlData[$k]['enterprise_id'] = \getEnterpriseIdByEnterpriseName($v[0]);
-                $sqlData[$k]['enterprise_name'] = $v[0];
+                $sqlData[$k]['enterprise_name'] = \trim($v[0]);
                 $sqlData[$k]['year'] = $year;
                 $sqlData[$k]['month'] = $month;
                 $sqlData[$k]['park'] = $parkName;
