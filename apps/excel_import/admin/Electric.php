@@ -22,11 +22,14 @@ use think\Db;
  */
 class Electric extends Admin
 {
+    protected $db;
     /**
      * @var
      * 大楼列表
      */
     protected $buildList;
+    protected $monthGroup;
+    protected $yearList;
 
     /**
      *初始化
@@ -34,9 +37,27 @@ class Electric extends Admin
     public function _initialize()
     {
         parent::_initialize();
+        $this->db = Db::name('CostElectricList');
         $this->buildList = Db::name('ParkBuilding')
             ->where('status', 1)
             ->column('id,title');
+        $this->monthGroup = [
+            '1' => '1',
+            '2' => '2',
+            '3' => '3',
+            '4' => '4',
+            '5' => '5',
+            '6' => '6',
+            '7' => '7',
+            '8' => '8',
+            '9' => '9',
+            '10' => '10',
+            '11' => '11',
+            '12' => '12',
+        ];
+        $this->yearList = $this->db->field('year')->group('year')->select();
+        $this->yearList = \arrToOne($this->yearList);
+        $this->yearList = \array_combine($this->yearList, $this->yearList);
     }
 
     /**
@@ -51,9 +72,17 @@ class Electric extends Admin
             'class' => 'btn btn-default btn-sm',
             'href' => url('import')
         ];
+        $payState = [
+            'icon' => 'fa fa-rmb',
+            'title' => '修改缴费状态',
+            'class' => 'btn btn-warning ajax-table-btn confirm btn-sm',
+            'confirm-info' => '该操作会切换缴费状态',
+            'href' => url('payState')
+        ];
         list($data_list, $total) = (new CostElectricList())->search(['keyword_condition' => 'enterprise_name',])->getListByPage([], true, 'create_time desc');
         $content = (new BuilderList())
             ->addTopButton('self', $import)
+            ->addTopButton('self', $payState)
             ->keyListItem('id', 'ID')
             ->keyListItem('enterprise_name', '企业名称')
             ->keyListItem('year', '年份')
@@ -78,6 +107,7 @@ class Electric extends Admin
             ->keyListItem('round_aki_share_amount', '四舍五入空置均摊')
             ->keyListItem('tongpu_pay', '同普应付四舍五入金额')
             ->keyListItem('marks', '备注')
+            ->keyListItem('pay_status', '是否缴费', 'array', [1 => '已缴费', 2 => '未缴费'])
             ->keyListItem('right_button', '操作', 'btn')
             ->addRightButton('delete', ['model' => 'CostElectricList'])
             ->setListData($data_list)
@@ -86,6 +116,9 @@ class Electric extends Admin
         return (new Iframe())
             ->search([
                 ['name' => 'keyword', 'type' => 'text', 'extra_attr' => 'placeholder="请输入企业名"',],
+                ['name' => 'pay_status', 'type' => 'select', 'title' => '按缴费状态', 'options' => [1 => '已缴费', 2 => '未缴费']],
+                ['name' => 'year', 'type' => 'select', 'title' => '按年份', 'options' => $this->yearList],
+                ['name' => 'month', 'type' => 'select', 'title' => '按月份', 'options' => $this->monthGroup],
                 ['name' => 'build_id', 'type' => 'select', 'title' => '按楼宇', 'options' => $this->buildList],
             ])
             ->content($content);
@@ -147,5 +180,25 @@ class Electric extends Admin
                 $this->success('导入成功', \url('index'));
             }
         }
+    }
+
+    /**
+     *切换缴费状态
+     */
+    public function payState()
+    {
+        $params = $this->request->param();
+        $ids = $params['ids'];
+        foreach ($ids as $id) {
+            $nowStatus = $this->db
+                ->where('id', 'eq', $id)
+                ->value('pay_status');
+            if ($nowStatus == 1) {
+                $this->db->where('id', 'eq', $id)->setField('pay_status', 2);
+            } else {
+                $this->db->where('id', 'eq', $id)->setField('pay_status', 1);
+            }
+        }
+        $this->success('操作成功');
     }
 }
