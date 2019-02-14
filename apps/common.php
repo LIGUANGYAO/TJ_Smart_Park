@@ -1,4 +1,4 @@
-<?php 
+<?php
 use think\Route;
 use app\common\builder\Builder;
 use app\common\layout\Iframe;
@@ -13,9 +13,9 @@ function get_sington_object($object_name = '', $class = null)
 {
 
     $request = \think\Request::instance();
-    
+
     $request->__isset($object_name) ?: $request->bind($object_name, new $class());
-    
+
     return $request->__get($object_name);
 
 }
@@ -138,7 +138,7 @@ function get_plugin_config($name)
             return [];
         }
     }
-    
+
 }
 
 if (!function_exists('plugin_url')) {
@@ -172,7 +172,7 @@ if (!function_exists('plugin_url')) {
         $params = array_merge($params, $param);
 
         return url("home/plugin/execute", $params);
-        
+
     }
 }
 
@@ -203,7 +203,7 @@ function eacoo_url($url, $param=[],$type=1)
     } else{
         if($url=='' || !$url || strpos($url, 'http://')!==false || strpos($url, 'https://')!==false){
             return $url;
-        } 
+        }
         return url($url,$param);
     }
 }
@@ -279,4 +279,20 @@ function setAppLog($content='',$level='info', $action_name='', $scene_name='', $
     file_put_contents($file,$log_content,FILE_APPEND|LOCK_EX);
     return true;
 }
-
+/**
+ * @param $multi
+ * @return array
+ * 多维数组降为一维数组
+ */
+function arrToOne($multi)
+{
+    $arr = array();
+    foreach ($multi as $key => $val) {
+        if (is_array($val)) {
+            $arr = array_merge($arr, arrToOne($val));
+        } else {
+            $arr[] = $val;
+        }
+    }
+    return $arr;
+}
