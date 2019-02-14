@@ -77,7 +77,7 @@ class Electric extends Admin
             'title' => '修改缴费状态',
             'class' => 'btn btn-warning ajax-table-btn confirm btn-sm',
             'confirm-info' => '该操作会切换缴费状态',
-            'href' => url('payState')
+            'href' => url('pay_state')
         ];
         list($data_list, $total) = (new CostElectricList())->search(['keyword_condition' => 'enterprise_name',])->getListByPage([], true, 'create_time desc');
         $content = (new BuilderList())
@@ -185,7 +185,7 @@ class Electric extends Admin
     /**
      *切换缴费状态
      */
-    public function payState()
+    public function pay_state()
     {
         $params = $this->request->param();
         $ids = $params['ids'];
