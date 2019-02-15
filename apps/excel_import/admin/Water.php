@@ -32,7 +32,15 @@ class Water extends Admin
      * 楼宇列表
      */
     protected $buildList;
+    /**
+     * @var
+     * 月份数组
+     */
     protected $monthGroup;
+    /**
+     * @var
+     * 年份数组
+     */
     protected $yearList;
 
     /**
