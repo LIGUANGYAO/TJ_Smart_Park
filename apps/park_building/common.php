@@ -59,9 +59,9 @@ if (!function_exists('getRoomDecorationText')) {
      */
     function getRoomDecorationText($decoration)
     {
-        if ($decoration==1){
+        if ($decoration == 1) {
             return '毛坯';
-        }else{
+        } else {
             return '简装';
         }
     }
@@ -94,9 +94,9 @@ if (!function_exists('getEnterpriseNameByEnterpriseId')) {
         $name = Db::name('ParkEnterpriseQichachaBasicInfo')
             ->where('id', 'eq', $enterprise_id)
             ->value('enterprise_name');
-        if (empty($name)){
+        if (empty($name)) {
             return '暂无企业';
-        }else{
+        } else {
             return $name;
         }
     }
@@ -110,16 +110,19 @@ if (!function_exists('getRoomStatusText')) {
      */
     function getRoomStatusText($room_status)
     {
-        switch ($room_status) {
-            case 1:
-                return '未租';
-                break;
-            case 2:
-                return '已租';
-                break;
-            default:
-                return '未知状态';
-                break;
-        }
+        $status_array = config('room_status');
+        return $status_array[$room_status];
+    }
+}
+if (!function_exists('getParkNameByParkId')) {
+    /**
+     * @param $park_id
+     * @return mixed
+     * 根据园区id获取园区名称
+     */
+    function getParkNameByParkId($park_id)
+    {
+        $park_list = config('park_list');
+        return $park_list[$park_id];
     }
 }
