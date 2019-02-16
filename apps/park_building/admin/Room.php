@@ -9,6 +9,7 @@
 namespace app\park_building\admin;
 
 use app\admin\controller\Admin;
+use app\common\builder\BuilderForm;
 use app\common\layout\Iframe;
 use app\park_building\model\ParkRoom;
 use think\Db;
@@ -24,6 +25,7 @@ class Room extends Admin
      * 楼宇数据
      */
     protected $buildData;
+    protected $newBuildData;
     /**
      * @var
      * 租赁状态
@@ -53,10 +55,7 @@ class Room extends Admin
     public function _initialize()
     {
         parent::_initialize();
-        $this->statusType = [
-            1 => '未租',
-            2 => '已租',
-        ];
+        $this->statusType = \config('room_status');
         $this->roomType = [
             1 => '办公',
             2 => '商铺',
@@ -153,7 +152,7 @@ class Room extends Admin
             //设置默认值
             $info = [
                 'decoration' => 1,
-                'status' => 1
+                'room_status' => 1
             ];
 
             if ($id > 0) {
@@ -163,7 +162,7 @@ class Room extends Admin
                 }
             }
 
-            $return = builder('form')
+            $return = (new BuilderForm())
                 ->addFormItem('id', 'hidden', 'ID', 'ID')
                 ->addFormItem('building_id', 'select', '楼宇', '请选择楼宇', $this->buildData)
                 ->addFormItem('floor', 'text', '楼层', '请输入数字', '', 'data-rule="number" data-tip="请输入数字"')
@@ -174,7 +173,7 @@ class Room extends Admin
                 ->addFormItem('aircon_price', 'text', '空调费', '*元/平方米')
                 ->addFormItem('type', 'select', '房间类型', '', $this->roomType)
                 ->addFormItem('decoration', 'radio', '装修', '', $this->decoration)
-                ->addFormItem('room_status', 'radio', '状态', '', [1 => '未租', 2 => '已租'])
+                ->addFormItem('room_status', 'radio', '状态', '', $this->statusType)
                 ->addFormItem('room_img', 'picture', '封面', '上传房间的图片')
                 ->addFormItem('content', 'wangeditor', '详情内容', '房间详情')
                 ->setFormData($info)
