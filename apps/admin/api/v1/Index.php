@@ -37,7 +37,7 @@ class Index extends Api
         $rentedRoom = Db::name('ParkRoom')->where('room_status', 'eq', 2)->count();
         //入驻企业数量=企业总数-退出企业数
         $enterpriseNum = (Db::name('ParkEnterpriseQichachaBasicInfo')->count()) - (Db::name('ParkEnterpriseOutList')->count());
-        //注册用户
+        //前台用户数量
         $userNum = Db::name('Users')->count();
         //房源总数
         $roomNum = Db::name('ParkRoom')->count();
