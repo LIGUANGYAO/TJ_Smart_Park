@@ -79,6 +79,10 @@ class Team extends Admin
             ->keyListItem('aircon_fee', '空调费')
             ->keyListItem('entry_time', '入驻时间')
             ->keyListItem('end_time', '到期时间')
+            ->keyListItem('contractor', '联系人姓名')
+            ->keyListItem('idcard', '身份证')
+            ->keyListItem('phone', '手机号')
+            ->keyListItem('email', '邮箱')
             ->keyListItem('marks', '备注')
             ->keyListItem('right_button', '操作', 'btn')
             ->setListData($data_list)
@@ -115,7 +119,7 @@ class Team extends Admin
             $teamNameCount = Db::name('ParkNurseryTeamList')
                 ->where('name', 'eq', $param['name'])
                 ->count();
-            if ($teamNameCount>0){
+            if ($teamNameCount > 0) {
                 $this->error('该团队名称已存在');
             }
             //2,检查工位是否已被占用todo
@@ -150,13 +154,18 @@ class Team extends Admin
                 ->addFormItem('aircon_fee', 'text', '空调费')
                 ->addFormItem('entry_time', 'datetime', '入驻时间')
                 ->addFormItem('end_time', 'datetime', '到期时间')
+                ->addFormItem('contractor', 'text', '联系人姓名')
+                ->addFormItem('idcard', 'text', '身份证号')
+                ->addFormItem('phone', 'number', '手机号')
+                ->addFormItem('email', 'email', '邮箱')
                 ->addFormItem('marks', 'textarea', '备注')
+                ->addFormItem('fujian', 'file', '附件')
                 ->setFormData($info)
                 ->addButton('submit')
                 ->addButton('back')
                 ->fetch();
             return (new Iframe())
-                ->setMetaTitle($title . '团队')
+                ->setMetaTitle($title . '项目')
                 ->content($content);
         }
     }
