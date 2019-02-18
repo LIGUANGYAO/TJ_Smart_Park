@@ -80,7 +80,7 @@ class EnterpriseBasic extends Admin
             ->search([
                 'keyword_condition' => 'enterprise_name',
             ])
-            ->getListByPage([], true, 'create_time desc');
+            ->getListByPage(['yqzc'=>1], true, 'create_time desc');
         //删除按钮属性
         $del = [
             'icon' => 'fa fa-remove',
