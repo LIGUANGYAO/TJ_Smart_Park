@@ -80,7 +80,7 @@ class EnterpriseBasic extends Admin
             ->search([
                 'keyword_condition' => 'enterprise_name',
             ])
-            ->getListByPage(['yqzc'=>1], true, 'create_time desc');
+            ->getListByPage([], true, 'create_time desc');
         //删除按钮属性
         $del = [
             'icon' => 'fa fa-remove',
@@ -110,7 +110,14 @@ class EnterpriseBasic extends Admin
         return (new Iframe())
             ->setMetaTitle('企业列表')
             ->search([
-                ['name' => 'keyword',
+                [
+                    'name' => 'yqzc',
+                    'type' => 'select',
+                    'title' => '是否园区注册',
+                    'options' => ['1' => '是', '0' => '否']
+                ],
+                [
+                    'name' => 'keyword',
                     'type' => 'text',
                     'extra_attr' => 'placeholder="请输入企业名"',
                 ]
