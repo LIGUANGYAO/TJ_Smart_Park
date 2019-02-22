@@ -1,5 +1,5 @@
 {assign name="role" value="$current_user.uid|get_admin_group_name_by_uid" /}
-{if condition="$role eq '超级管理员0'"}
+{if condition="$role eq '超级管理员'"}
 <style>
     *{
         margin: 0;
@@ -139,8 +139,12 @@
                 <ul>
                     <li><a href="/admin.php/excel_import/water/index.html"><span class="fa fa-circle-thin "></span>水费管理</a></li>
                     <li><a href="/admin.php/excel_import/electric/index.html"><span class="fa fa-circle-thin "></span>电费管理</a></li>
-                    <li><a href="/admin.php/park_project_budget/budget/index.html"><span class="fa fa-circle-thin "></span>项目预算管理</a></li>
+                    <li><a href=""><span class="fa fa-circle-thin "></span>其他费用</a></li>
                 </ul>
+            </li>
+
+            <li>
+                <a href="/admin.php/park_project_budget/budget/index.html"><span class="fa fa-circle-thin "></span>项目预算管理</a>
             </li>
 
             <li>
