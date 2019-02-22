@@ -2,27 +2,33 @@
 {block name="style"}
 <style>
 
-    .lqz-index{
+    .lqz-index {
         margin-left: 27px;
         padding-left: 50px;
     }
-    .form-group-Stock{
-        margin-left: 50px!important;
+
+    .form-group-Stock {
+        margin-left: 50px !important;
     }
-    .form-group-Stock .col-sm-3{
+
+    .form-group-Stock .col-sm-3 {
         width: 27%;
     }
-    .form-gd-value{
-        margin-left: 100px!important;
+
+    .form-gd-value {
+        margin-left: 100px !important;
     }
-    #Stockul .col-sm-3{
+
+    #Stockul .col-sm-3 {
         width: 28%;
         margin-left: 22px
     }
-    #Stockul input{
+
+    #Stockul input {
         margin: 5px 0;
     }
-    #Employeesul input{
+
+    #Employeesul input {
         margin: 5px 0;
     }
 </style>
@@ -69,6 +75,17 @@
                                                         从企查查获取数据
                                                     </button>
                                                     {/notempty}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="uniqcode" class="col-sm-2 control-label">
+                                                    企业编号:
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="uniqcode"
+                                                           name="uniqcode"
+                                                           placeholder="" value="{$basic_info.uniqcode ?? ''}">
                                                 </div>
                                             </div>
 
@@ -137,12 +154,12 @@
                                             </div>
 
                                             {empty name="stock_info"}
-                                            <div class="form-group form-group-Stock" >
+                                            <div class="form-group form-group-Stock">
 
-                                                <label for="StockName" class="col-sm-3 control-label" >
+                                                <label for="StockName" class="col-sm-3 control-label">
                                                     股东
                                                 </label>
-                                                <label for="StockType" class="col-sm-3 control-label" >
+                                                <label for="StockType" class="col-sm-3 control-label">
                                                     股东类型
                                                 </label>
                                                 <label for="StockPercent" class="col-sm-3 control-label">
@@ -150,7 +167,7 @@
                                                 </label>
                                                 <button type="button" id="addStock" style="margin-left: 70px">+</button>
                                             </div>
-                                            <div class="form-group form-gd-value" >
+                                            <div class="form-group form-gd-value">
                                                 <ul id="Stockul">
 
                                                 </ul>
@@ -159,20 +176,20 @@
 
                                             {else /}
                                             {foreach $stock_info as $si}
-                                                <div class="form-group form-group-Stock" >
+                                            <div class="form-group form-group-Stock">
 
-                                                <label for="StockName" class="col-sm-3 control-label" >
+                                                <label for="StockName" class="col-sm-3 control-label">
                                                     股东
                                                 </label>
-                                                <label for="StockType" class="col-sm-3 control-label" >
+                                                <label for="StockType" class="col-sm-3 control-label">
                                                     股东类型
                                                 </label>
                                                 <label for="StockPercent" class="col-sm-3 control-label">
                                                     出资比例
                                                 </label>
-                                                    <button type="button" id="addStock" style="margin-left: 70px">+</button>
+                                                <button type="button" id="addStock" style="margin-left: 70px">+</button>
                                             </div>
-                                                <div class="form-group form-gd-value" >
+                                            <div class="form-group form-gd-value">
                                                 <ul id="Stockul">
 
                                                 </ul>
@@ -218,8 +235,10 @@
                                                     经营范围:
                                                 </label>
                                                 <div class="col-sm-10">
-                                                    <textarea  rows="6" type="text" class="form-control" id="Scope" name="scope"
-                                              placeholder="" value="1234">{$basic_info.scope ?? ''}</textarea>
+                                                    <textarea rows="6" type="text" class="form-control" id="Scope"
+                                                              name="scope"
+                                                              placeholder=""
+                                                              value="1234">{$basic_info.scope ?? ''}</textarea>
                                                 </div>
                                             </div>
 
@@ -1102,20 +1121,21 @@
                                             </label>
                                             <div class="col-sm-10">
                                                 {empty name="entry_info"}
-                                                    <input type="radio" name="kuaiji_daili" onchange="showtoggle()" value="1"
-                                                           class="minimal kjdl_radio" checked="checked">
+                                                <input type="radio" name="kuaiji_daili" onchange="showtoggle()"
+                                                       value="1"
+                                                       class="minimal kjdl_radio" checked="checked">
                                                 <label>是</label>
-                                                    <input type="radio" name="kuaiji_daili" value="0"
-                                                           class="minimal kjdl_radio">
+                                                <input type="radio" name="kuaiji_daili" value="0"
+                                                       class="minimal kjdl_radio">
                                                 <label>否</label>
                                                 {else /}
-                                                    <input type="radio" name="kuaiji_daili" value="1"
-                                                           class="minimal kjdl_radio"
-                                                           {$entry_info.kuaiji_daili==1?'checked="checked"':''}>
+                                                <input type="radio" name="kuaiji_daili" value="1"
+                                                       class="minimal kjdl_radio"
+                                                       {$entry_info.kuaiji_daili==1?'checked="checked"':''}>
                                                 <label>是</label>
-                                                    <input type="radio" name="kuaiji_daili" value="0"
-                                                           class="minimal kjdl_radio"
-                                                           {$entry_info.kuaiji_daili==0?'checked="checked"':''}>
+                                                <input type="radio" name="kuaiji_daili" value="0"
+                                                       class="minimal kjdl_radio"
+                                                       {$entry_info.kuaiji_daili==0?'checked="checked"':''}>
                                                 <label>否</label>
                                                 {/empty}
                                             </div>
@@ -1161,7 +1181,8 @@
                                                 <!--添加企业后不给修改-->
                                                 {empty name="$entry_info.enterprise_id"}
                                                 <div class="col-md-3 col-xs-6">
-                                                    <button class="btn btn-block btn-primary submit" type="submit">确定</button>
+                                                    <button class="btn btn-block btn-primary submit" type="submit">确定
+                                                    </button>
                                                 </div>
                                                 {/empty}
                                                 <div class="col-md-3 col-xs-6">
@@ -1742,7 +1763,6 @@
         $("#contact_address").attr('value',Address);*/
 
 
-
         var name = $("#Name").val();
         $.ajax({
             type: "POST",
@@ -1761,28 +1781,28 @@
 
                     //社会统一信用代码
                     let CreditCode = data.Result.CreditCode;
-                    $("#CreditCode").val() == ''?$("#CreditCode").attr('value',CreditCode):$("#CreditCode").val();
+                    $("#CreditCode").val() == '' ? $("#CreditCode").attr('value', CreditCode) : $("#CreditCode").val();
 
                     //注册资本
                     let RegistCapi = data.Result.RegistCapi;
-                    $("#RegistCapi").attr('value',RegistCapi);
+                    $("#RegistCapi").attr('value', RegistCapi);
 
                     //营业开始时间
                     let StartDate = data.Result.TermStart;
-                    $("#TermStart").attr('value',StartDate);
+                    $("#TermStart").attr('value', StartDate);
 
                     //营业结束时间
                     let EndDate = data.Result.TeamEnd;
-                    $("#TeamEnd").attr('value',EndDate);
+                    $("#TeamEnd").attr('value', EndDate);
 
 
                     //注册地址
                     let Address = data.Result.Address;
-                    $("#Address").attr('value',Address);
+                    $("#Address").attr('value', Address);
 
                     //法人名
                     let OperName = data.Result.OperName;
-                    $("#OperName").attr('value',OperName);
+                    $("#OperName").attr('value', OperName);
 
                     //股东对象集合
                     let Partners = data.Result.Partners;
@@ -1793,7 +1813,7 @@
                     //存放股东比例
                     let PartnersPercent = [];
                     //遍历内容
-                    for (let item of Partners){
+                    for (let item of Partners) {
                         PartnersName.push(item.StockName);
                         PartnersType.push(item.StockType);
                         PartnersPercent.push(item.StockPercent);
@@ -1823,7 +1843,7 @@
                     //成员职位
                     let EmployeesJob = [];
                     //遍历内容
-                    for(let item of Employees){
+                    for (let item of Employees) {
                         EmployeesName.push(item.Name);
                         EmployeesJob.push(item.Job);
                         $("#Employeesul").append(`
@@ -1842,19 +1862,18 @@
 
                     //企业logo
                     let ImageUrl = data.Result.ImageUrl;
-                    $(".each img").eq(0).attr('src',ImageUrl);
+                    $(".each img").eq(0).attr('src', ImageUrl);
 
                     //联系电话
                     let Phone = data.Result.ContactInfo.PhoneNumber;
-                    $("#phone").attr('value',Phone);
+                    $("#phone").attr('value', Phone);
 
                     //邮箱
                     let Email = data.Result.ContactInfo.Email;
-                    $("#email").attr('value',Email);
+                    $("#email").attr('value', Email);
 
                     //联系地址
-                    $("#contact_address").attr('value',Address);
-
+                    $("#contact_address").attr('value', Address);
 
 
                     console.log(data);
@@ -1868,7 +1887,7 @@
     });
 
     //使用ifChecked对radio进行监听
-    $('input[type=radio][name=kuaiji_daili]').on('ifChecked',function () {
+    $('input[type=radio][name=kuaiji_daili]').on('ifChecked', function () {
         if (this.value == '1') {
 
             $("#kjdl").show();
@@ -1884,42 +1903,42 @@
 
     //console.log($('input[type=radio][name=kuaiji_daili]'));
 
-       /* $('input[type=radio][name=kuaiji_daili]').click(function () {
+    /* $('input[type=radio][name=kuaiji_daili]').click(function () {
 
-            alert(111);
-            if (this.value == '1') {
-                console.log(this.value);
-                $("#kjdl").show();
-            } else if (this.value == '0') {
-                $("#kjdl").hide();
-                console.log(this.value);
-            }
-        });*/
+         alert(111);
+         if (this.value == '1') {
+             console.log(this.value);
+             $("#kjdl").show();
+         } else if (this.value == '0') {
+             $("#kjdl").hide();
+             console.log(this.value);
+         }
+     });*/
 
-/*
+    /*
 
-    //会计代理div的默认值
-    var KjdlValue = $('input[name="kuaiji_daili"]:checked').val();
-    console.log(KjdlValue);
-    if (KjdlValue == 0) {
-        $("#kjdl").hide();
-    }
-    if (KjdlValue == 1) {
-        $("#kjdl").show();
-    }
-
-
-    //控制会计代理div的显示和隐藏
-    $(".kjdl_radio").click(function () {
+        //会计代理div的默认值
         var KjdlValue = $('input[name="kuaiji_daili"]:checked').val();
-        if (KjdlValue == 1) {
-            $("#kjdl").show();
-        }
+        console.log(KjdlValue);
         if (KjdlValue == 0) {
             $("#kjdl").hide();
         }
-    });
-*/
+        if (KjdlValue == 1) {
+            $("#kjdl").show();
+        }
+
+
+        //控制会计代理div的显示和隐藏
+        $(".kjdl_radio").click(function () {
+            var KjdlValue = $('input[name="kuaiji_daili"]:checked').val();
+            if (KjdlValue == 1) {
+                $("#kjdl").show();
+            }
+            if (KjdlValue == 0) {
+                $("#kjdl").hide();
+            }
+        });
+    */
 
 
     //修改input框长度
