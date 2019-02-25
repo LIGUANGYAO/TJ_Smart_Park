@@ -68,13 +68,14 @@ class Rentproperty extends Admin
             ->keyListItem('id', 'ID')
             ->keyListItem('enterprise_name', '企业名称')
             ->keyListItem('room_id', '房间号')
-            ->keyListItem('type', '类别', 'array', $this->feeType)
+            ->keyListItem('fee_type', '类别', 'array', $this->feeType)
             ->keyListItem('s_day', '起始日期')
             ->keyListItem('e_day', '结束日期')
             ->keyListItem('fee_amount', '总金额')
             ->keyListItem('pay_time', '缴费日期')
             ->keyListItem('pay_status', '是否已缴费', 'array', [1 => '已缴费', 2 => '未缴费'])
             ->keyListItem('right_button', '操作', 'btn')
+            ->addRightButton('edit')
             ->addRightButton('delete', ['model' => 'CostRentPropertyList'])
             ->setListData($data_list)
             ->setListPage($total, 10)
@@ -99,6 +100,7 @@ class Rentproperty extends Admin
         if (IS_POST) {
             $param = \input();
             $param['enterprise_name'] = \getEnterpriseNameByEnterpriseId($param['enterprise_id']);
+            $param['room_id'] = \getRoomIdByEnterpriseId($param['enterprise_id']);
             if ((new CostRentPropertyList())->editData($param)) {
                 $this->success($title . '成功', \url('index'));
             } else {
@@ -106,7 +108,7 @@ class Rentproperty extends Admin
             }
         } else {
             $info = [
-                'pay_status' => 1
+                'pay_status' => 1,
             ];
             if ($id > 0) {
                 $info = CostRentPropertyList::get($id);
@@ -114,8 +116,11 @@ class Rentproperty extends Admin
             $content = (new BuilderForm())
                 ->addFormItem('id', 'hidden', 'ID')
                 ->addFormItem('enterprise_id', 'select', '选择企业', '', $this->enterpriseList)
-                ->addFormItem('s_day', 'date', '起始日期')
-                ->addFormItem('e_day', 'date', '结束日期')
+                ->addFormItem('fee_type', 'select', '选择费用类型', '', $this->feeType)
+                ->addFormItem('fee_amount', 'text', '缴费金额')
+                ->addFormItem('pay_time', 'datetime', '缴费时间')
+                ->addFormItem('s_day', 'datetime', '起始日期')
+                ->addFormItem('e_day', 'datetime', '结束日期')
                 ->addFormItem('pay_status', 'radio', '缴费状态', '选择缴费状态', [1 => '已缴费', 0 => '未缴费'])
                 ->addFormItem('marks', 'textarea', '备注')
                 ->setFormData($info)

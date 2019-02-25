@@ -56,3 +56,13 @@ function getEnterpriseNameByEnterpriseId($enterprise_id)
         return $name;
     }
 }
+
+if (!function_exists('getRoomIdByEnterpriseId')) {
+    function getRoomIdByEnterpriseId($enterprise_id)
+    {
+        $room_id = Db::name('ParkEnterpriseEntryInfo')
+            ->where('enterprise_id', 'eq', $enterprise_id)
+            ->value('room_number');
+        return $room_id;
+    }
+}
