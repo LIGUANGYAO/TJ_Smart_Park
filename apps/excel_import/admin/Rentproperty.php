@@ -59,7 +59,7 @@ class Rentproperty extends Admin
             'icon' => 'fa fa-folder-open-o',
             'title' => '导出列表',
             'class' => 'btn btn-default btn-sm',
-            'href' => url('import')
+            'href' => url('excel_import/export/rent_property')
         ];
         list($data_list, $total) = (new CostRentPropertyList())->search()->getListByPage([], true, 'create_time desc');
         $content = (new BuilderList())
