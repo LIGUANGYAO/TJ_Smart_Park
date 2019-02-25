@@ -58,11 +58,31 @@ function getEnterpriseNameByEnterpriseId($enterprise_id)
 }
 
 if (!function_exists('getRoomIdByEnterpriseId')) {
+    /**
+     * @param $enterprise_id
+     * @return mixed
+     * 根据企业id获取房间id
+     */
     function getRoomIdByEnterpriseId($enterprise_id)
     {
         $room_id = Db::name('ParkEnterpriseEntryInfo')
             ->where('enterprise_id', 'eq', $enterprise_id)
             ->value('room_number');
         return $room_id;
+    }
+}
+
+if (!function_exists('getAdminNameByAdminId')) {
+    /**
+     * @param $admin_id
+     * @return mixed
+     * 根据管理员ID获取管理员用户名
+     */
+    function getAdminNameByAdminId($admin_id)
+    {
+        $admin_name = Db::name('Admin')
+            ->where('uid', $admin_id)
+            ->value('username');
+        return $admin_name;
     }
 }
