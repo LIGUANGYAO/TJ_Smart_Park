@@ -1,14 +1,16 @@
 {assign name="role" value="$current_user.uid|get_admin_group_name_by_uid" /}
 {if condition="$role eq '超级管理员'"}
 <style>
-    *{
+    * {
         margin: 0;
         padding: 0;
     }
+
     #sidebar-menusaa li {
-        margin:8px 0;
+        margin: 8px 0;
 
     }
+
     #sidebar-menusaa li ul {
         display: none;
     }
@@ -24,35 +26,36 @@
     }*/
 
 
-    #sidebar-menusaa li ul li a:hover{
+    #sidebar-menusaa li ul li a:hover {
         color: white;
 
     }
 
 
+    .title span {
+        margin-right: 1px;
+    }
 
-    .title span{
-       margin-right: 1px;
-   }
-    span{
+    span {
         margin-right: 6px;
     }
-    .aa{
-        margin-left:-24px;
-    }
-.second_list{
 
-   position: relative;
-    left: -8px
-}
-    a:active{
+    .aa {
+        margin-left: -24px;
+    }
+
+    .second_list {
+
+        position: relative;
+        left: -8px
+    }
+
+    a:active {
         color: red;
     }
 
 
-
 </style>
-
 
 
 <aside class="main-sidebar  sidebar-wrapper">
@@ -64,81 +67,109 @@
             </li>
 
             <li>
-                <a href="#" class="title xiala" > <span class="fa  fa fa-institution "></span>房源管理</a>
+                <a href="#" class="title xiala"> <span class="fa  fa fa-institution "></span>房源管理</a>
                 <ul id="show">
-                   <li  class="second_list"><a href="/admin.php/park_building/building/index.html"> <span class="fa  fa fa-institution "></span>楼宇列表</a></li>
-                    <li class="second_list"><a href="/admin.php/park_building/room/index.html"> <span class="fa fa-circle-thin "></span>房源列表</a></li>
+                    <li class="second_list"><a href="/admin.php/park_building/building/index.html"> <span
+                            class="fa  fa fa-institution "></span>楼宇列表</a></li>
+                    <li class="second_list"><a href="/admin.php/park_building/room/index.html"> <span
+                            class="fa fa-circle-thin "></span>房源列表</a></li>
                 </ul>
             </li>
 
             <li>
                 <a href="#" class="title xiala"><span class="fa fa-building"></span>企业管理</a>
-                <ul >
-                    <li class="second_list"><a href="/admin.php/park_enterprise/enterprise_basic/index.html"> <span class="fa  fa-list"></span>企业列表</a>
+                <ul>
+                    <li class="second_list"><a href="/admin.php/park_enterprise/enterprise_basic/index.html"> <span
+                            class="fa  fa-list"></span>企业列表</a>
                     </li>
                     <li class="second_list">
-                        <a href="/admin.php/park_enterprise/enterprise_contract/index.html">  <span class="fa fa-file-archive-o"></span>租房合同</a>
+                        <a href="/admin.php/park_enterprise/enterprise_contract/index.html"> <span
+                                class="fa fa-file-archive-o"></span>租房合同</a>
                     </li>
-                    <li class="second_list"><a href="/admin.php/park_enterprise/enterprise_cwdl_contract/index.html">  <span class="fa fa-file-archive-o"></span>财务代理合同</a>
+                    <li class="second_list"><a href="/admin.php/park_enterprise/enterprise_cwdl_contract/index.html">
+                        <span class="fa fa-file-archive-o"></span>财务代理合同</a>
                     </li>
                     <li class="second_list"><a href="#"><span class="fa fa-info"></span>知识产权管理</a>
                         <ul class="aa">
                             <li class="third_list">
-                                <a href="/admin.php/park_enterprise_intellectual/trademark/index.html"> <span class="fa fa-circle-thin "></span>商标信息列表</a>
+                                <a href="/admin.php/park_enterprise_intellectual/trademark/index.html"> <span
+                                        class="fa fa-circle-thin "></span>商标信息列表</a>
                             </li>
                             <li class="third_list">
-                                <a href="/admin.php/park_enterprise_intellectual/patent/index.html"> <span class="fa fa-circle-thin "></span>专利信息列表</a>
+                                <a href="/admin.php/park_enterprise_intellectual/patent/index.html"> <span
+                                        class="fa fa-circle-thin "></span>专利信息列表</a>
                             </li>
                             <li class="third_list">
-                                <a href="/admin.php/park_enterprise_intellectual/certificate/index.html"> <span class="fa fa-circle-thin "></span>企业证书列表</a>
+                                <a href="/admin.php/park_enterprise_intellectual/certificate/index.html"> <span
+                                        class="fa fa-circle-thin "></span>企业证书列表</a>
                             </li>
                             <li class="third_list">
-                                <a href="/admin.php/park_enterprise_intellectual/wcopyright/index.html">  <span class="fa fa-circle-thin "></span>作品著作权列表</a>
+                                <a href="/admin.php/park_enterprise_intellectual/wcopyright/index.html"> <span
+                                        class="fa fa-circle-thin "></span>作品著作权列表</a>
                             </li>
                             <li class="third_list">
-                                <a href="/admin.php/park_enterprise_intellectual/scopyright/index.html"> <span class="fa fa-circle-thin "></span>软件著作权列表</a>
+                                <a href="/admin.php/park_enterprise_intellectual/scopyright/index.html"> <span
+                                        class="fa fa-circle-thin "></span>软件著作权列表</a>
                             </li>
                             <li class="third_list">
-                                <a href="/admin.php/park_enterprise_intellectual/website/index.html">  <span class="fa fa-circle-thin "></span>网站信息列表</a>
+                                <a href="/admin.php/park_enterprise_intellectual/website/index.html"> <span
+                                        class="fa fa-circle-thin "></span>网站信息列表</a>
                             </li>
                         </ul>
                     </li>
                     <li class="second_list">
-                        <a href="/admin.php/park_enterprise_finance_info/finance/index.html"><span class="fa fa-money"></span>公司财务信息</a>
+                        <a href="/admin.php/park_enterprise_finance_info/finance/index.html"><span
+                                class="fa fa-money"></span>公司财务信息</a>
                     </li>
-                    <li class="second_list"><a href="/admin.php/park_investment/investment/index.html"><span class="fa fa-envelope-o"></span>投融资信息管理</a></li>
-                    <li class="second_list"><a href="/admin.php/tech_project/project/index.html"><span class="fa fa-globe"></span>科技项目资金管理</a></li>
+                    <li class="second_list"><a href="/admin.php/park_investment/investment/index.html"><span
+                            class="fa fa-envelope-o"></span>投融资信息管理</a></li>
+                    <li class="second_list"><a href="/admin.php/tech_project/project/index.html"><span
+                            class="fa fa-globe"></span>科技项目资金管理</a></li>
                     <li class="second_list"><a href="#"><span class="fa fa-globe"></span>孵化企业管理</a>
                         <ul class="aa">
-                            <li><a href="/admin.php/park_incubation/incubation/index.html"><span class="fa fa-circle-thin "></span>孵化企业列表</a></li>
-                            <li><a href="/admin.php/park_incubation/incubation_visit/index.html"><span class="fa fa-linode"></span>走访记录</a></li>
+                            <li><a href="/admin.php/park_incubation/incubation/index.html"><span
+                                    class="fa fa-circle-thin "></span>孵化企业列表</a></li>
+                            <li><a href="/admin.php/park_incubation/incubation_visit/index.html"><span
+                                    class="fa fa-linode"></span>走访记录</a></li>
                         </ul>
                     </li>
-                    <li class="second_list"><a href="/admin.php/student_innovation/innovation/index.html"><span class="fa fa-mortar-board"></span>大学生创业</a></li>
+                    <li class="second_list"><a href="/admin.php/student_innovation/innovation/index.html"><span
+                            class="fa fa-mortar-board"></span>大学生创业</a></li>
                     <li class="second_list"><a href="#"><span class="fa fa-globe"></span>软件企业</a>
                         <ul class="aa">
-                            <li><a href="/admin.php/software_enterprise/enterprise_list/index.html"><span class="fa fa-circle-thin "></span>企业列表</a></li>
-                            <li><a href="/admin.php/software_enterprise/soft_list/index.html"><span class="fa fa-circle-thin "></span>项目列表</a></li>
+                            <li><a href="/admin.php/software_enterprise/enterprise_list/index.html"><span
+                                    class="fa fa-circle-thin "></span>企业列表</a></li>
+                            <li><a href="/admin.php/software_enterprise/soft_list/index.html"><span
+                                    class="fa fa-circle-thin "></span>项目列表</a></li>
                         </ul>
                     </li>
-                    <li class="second_list"><a href="/admin.php/high_tech_enterprise/index/index.html"><span class="fa fa-globe"></span>高新技术企业管理</a></li>
-                    <li class="second_list"><a href="/admin.php/high_tech_project/index/index.html"><span class="fa fa-globe"></span>高新技术成果转化管理</a></li>
-                    <li class="second_list"><a href="/admin.php/park_financial_support/index/index.html"><span class="fa fa-globe"></span>财政扶持管理</a></li>
+                    <li class="second_list"><a href="/admin.php/high_tech_enterprise/index/index.html"><span
+                            class="fa fa-globe"></span>高新技术企业管理</a></li>
+                    <li class="second_list"><a href="/admin.php/high_tech_project/index/index.html"><span
+                            class="fa fa-globe"></span>高新技术成果转化管理</a></li>
+                    <li class="second_list"><a href="/admin.php/park_financial_support/index/index.html"><span
+                            class="fa fa-globe"></span>财政扶持管理</a></li>
                 </ul>
             </li>
 
             <li>
                 <a href="#" class="title xiala"><span class="fa fa-circle-thin "></span>创业苗圃</a>
                 <ul>
-                    <li><a href="/admin.php/park_nursery/nursery/index.html"><span class="fa fa-circle-thin "></span>苗圃工位管理</a></li>
-                    <li><a href="/admin.php/park_nursery/team/index.html"><span class="fa fa-circle-thin "></span>苗圃团队管理</a></li>
+                    <li><a href="/admin.php/park_nursery/nursery/index.html"><span class="fa fa-circle-thin "></span>苗圃工位管理</a>
+                    </li>
+                    <li><a href="/admin.php/park_nursery/team/index.html"><span class="fa fa-circle-thin "></span>苗圃团队管理</a>
+                    </li>
                 </ul>
             </li>
             <li>
                 <a href="#" class="title xiala"><span class="fa  fa fa-money "></span>费用管理</a>
                 <ul>
-                    <li><a href="/admin.php/excel_import/water/index.html"><span class="fa fa-circle-thin "></span>水费管理</a></li>
-                    <li><a href="/admin.php/excel_import/electric/index.html"><span class="fa fa-circle-thin "></span>电费管理</a></li>
+                    <li><a href="/admin.php/excel_import/water/index.html"><span class="fa fa-circle-thin "></span>水费管理</a>
+                    </li>
+                    <li><a href="/admin.php/excel_import/electric/index.html"><span class="fa fa-circle-thin "></span>电费管理</a>
+                    </li>
+                    <li><a href="/admin.php/excel_import/rentproperty/index.html"><span
+                            class="fa fa-circle-thin "></span>房租物业</a></li>
                     <li><a href=""><span class="fa fa-circle-thin "></span>其他费用</a></li>
                 </ul>
             </li>
@@ -150,8 +181,10 @@
             <li>
                 <a href="#" class="title xiala"><span class="fa fa-product-hunt"></span>停车位管理</a>
                 <ul>
-                    <li class="second_list"><a href="/admin.php/parking_space/space/index.html"><span class="fa fa-circle-thin "></span>车位列表</a></li>
-                    <li  class="second_list"><a href="/admin.php/parking_space/lease/index.html"><span class="fa fa-odnoklassniki"></span>租赁管理</a></li>
+                    <li class="second_list"><a href="/admin.php/parking_space/space/index.html"><span
+                            class="fa fa-circle-thin "></span>车位列表</a></li>
+                    <li class="second_list"><a href="/admin.php/parking_space/lease/index.html"><span
+                            class="fa fa-odnoklassniki"></span>租赁管理</a></li>
                 </ul>
             </li>
 
@@ -160,21 +193,28 @@
                 <ul>
                     <li class="second_list"><a href="#"><span class="fa fa-pencil-square"></span>会议室管理</a>
                         <ul class="aa">
-                            <li><a href="/admin.php/service_meeting_room/room/index.html"><span class="fa fa-circle-thin "></span>会议室列表</a></li>
-                            <li><a href="/admin.php/service_meeting_room/booking/index.html"><span class="fa fa-volume-control-phone"></span>预约管理</a></li>
+                            <li><a href="/admin.php/service_meeting_room/room/index.html"><span
+                                    class="fa fa-circle-thin "></span>会议室列表</a></li>
+                            <li><a href="/admin.php/service_meeting_room/booking/index.html"><span
+                                    class="fa fa-volume-control-phone"></span>预约管理</a></li>
                         </ul>
                     </li>
                     <li class="second_list"><a href="#"><span class="fa fa-sun-o"></span>实验室管理</a>
                         <ul class="aa">
-                            <li><a href="/admin.php/service_laboratory/room/index.html"><span class="fa fa-circle-thin "></span>实验室列表</a></li>
-                            <li><a href="/admin.php/service_laboratory/booking/index.html"><span class="fa fa-volume-control-phone"></span>预约管理</a></li>
+                            <li><a href="/admin.php/service_laboratory/room/index.html"><span
+                                    class="fa fa-circle-thin "></span>实验室列表</a></li>
+                            <li><a href="/admin.php/service_laboratory/booking/index.html"><span
+                                    class="fa fa-volume-control-phone"></span>预约管理</a></li>
                         </ul>
                     </li>
-                    <li class="second_list"><a href="/admin.php/service_repair/index/index.html"><span class="fa fa-wrench"></span>报修管理</a></li>
+                    <li class="second_list"><a href="/admin.php/service_repair/index/index.html"><span
+                            class="fa fa-wrench"></span>报修管理</a></li>
                     <li class="second_list"><a href="#"><span class="fa fa-life-ring"></span>活动管理</a>
                         <ul class="aa">
-                            <li><a href="/admin.php/park_activity/activity/index.html"><span class="fa fa-circle-thin "></span>活动列表</a></li>
-                            <li><a href="/admin.php/park_activity/apply/index.html"><span class="fa fa-circle-thin "></span>报名列表</a></li>
+                            <li><a href="/admin.php/park_activity/activity/index.html"><span
+                                    class="fa fa-circle-thin "></span>活动列表</a></li>
+                            <li><a href="/admin.php/park_activity/apply/index.html"><span
+                                    class="fa fa-circle-thin "></span>报名列表</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -183,25 +223,34 @@
             <li>
                 <a href="#" class="title xiala"><span class="fa fa-wechat"></span>微信管理</a>
                 <ul>
-                    <li class="second_list"><a href="/admin.php/wechat/wechat/index.html"><span class="fa fa-weixin"></span>公众号管理</a></li>
-                    <li class="second_list"> <a href="/admin.php/wechat/reply/keyword.html"><span class="fa fa-comments-o"></span>自动回复</a></li>
-                    <li class="second_list"><a href="/admin.php/wechat/material/text.html"><span class="fa fa-futbol-o"></span>素材管理</a></li>
-                    <li class="second_list"><a href="/admin.php/wechat/menu/index.html"><span class="fa fa-pencil fa-fw"></span>自定义菜单</a></li>
-                    <li class="second_list"><a href="/admin.php/wechat/wechat_user/index.html"><span class="fa fa-circle-thin "></span>微信用户列表</a></li>
-                    <li class="second_list"><a href="/admin.php/wechat/message/index.html"><span class="fa fa-circle-thin "></span>消息列表</a></li>
+                    <li class="second_list"><a href="/admin.php/wechat/wechat/index.html"><span
+                            class="fa fa-weixin"></span>公众号管理</a></li>
+                    <li class="second_list"><a href="/admin.php/wechat/reply/keyword.html"><span
+                            class="fa fa-comments-o"></span>自动回复</a></li>
+                    <li class="second_list"><a href="/admin.php/wechat/material/text.html"><span
+                            class="fa fa-futbol-o"></span>素材管理</a></li>
+                    <li class="second_list"><a href="/admin.php/wechat/menu/index.html"><span
+                            class="fa fa-pencil fa-fw"></span>自定义菜单</a></li>
+                    <li class="second_list"><a href="/admin.php/wechat/wechat_user/index.html"><span
+                            class="fa fa-circle-thin "></span>微信用户列表</a></li>
+                    <li class="second_list"><a href="/admin.php/wechat/message/index.html"><span
+                            class="fa fa-circle-thin "></span>消息列表</a></li>
                 </ul>
             </li>
 
             <li><a href="#" class="title xiala"> <span class="fa fa-user-plus"></span>管理员管理</a>
                 <ul>
-                    <li class="second_list"><a href="/admin.php/admin/auth_group/index.html"> <span class="fa fa-user-o"></span>角色组</a></li>
-                    <li class="second_list"><a href="/admin.php/admin/admin_user/index.html"><span class="fa fa-user-circle"></span>管理员</a></li>
+                    <li class="second_list"><a href="/admin.php/admin/auth_group/index.html"> <span
+                            class="fa fa-user-o"></span>角色组</a></li>
+                    <li class="second_list"><a href="/admin.php/admin/admin_user/index.html"><span
+                            class="fa fa-user-circle"></span>管理员</a></li>
                 </ul>
             </li>
 
             <li><a href="#" class="title xiala"><span class="fa fa-user-circle"></span>用户管理</a>
                 <ul>
-                    <li class="second_list"><a href="/admin.php/user/user/index.html"><span class="fa fa-circle-thin "></span>用户列表</a></li>
+                    <li class="second_list"><a href="/admin.php/user/user/index.html"><span
+                            class="fa fa-circle-thin "></span>用户列表</a></li>
                     <!--<li class="second_list"><a href="/admin.php/user/tongji/analyze.html"><span class="fa fa-user-o"></span>会员统计</a></li>-->
                 </ul>
             </li>
@@ -212,8 +261,10 @@
             <li>
                 <a href="#" class="title xiala"><span class="fa fa-cog fa-fw"></span>系统设置</a>
                 <ul>
-                    <li class="second_list"><a href="/admin.php/admin/config/group.html"><span class="fa fa-circle-thin "></span>系统设置</a></li>
-                    <li class="second_list"><a href="/admin.php/admin/config/website.html"><span class="fa fa-circle-thin "></span>网站设置</a></li>
+                    <li class="second_list"><a href="/admin.php/admin/config/group.html"><span
+                            class="fa fa-circle-thin "></span>系统设置</a></li>
+                    <li class="second_list"><a href="/admin.php/admin/config/website.html"><span
+                            class="fa fa-circle-thin "></span>网站设置</a></li>
                     <!--<li><a href="/admin.php/admin/config/index.html">配置管理</a></li>-->
                 </ul>
             </li>
@@ -221,13 +272,17 @@
                 <a href="#" class="title xiala"><span class="fa fa-server"></span>应用中心</a>
                 <ul>
                     <!--<li><a href="/admin.php/admin/modules/index.html">模块管理</a></li>-->
-                    <li class="second_list"><a href="/admin.php/admin/plugins/config/name/Qichacha.html"><span class=" fa fa-search-plus"></span>企查查</a>
-                    <li class="second_list"><a href="/admin.php/admin/plugins/config/name/Alisms.html"><span class="fa fa-commenting-o"></span>阿里云短信</a></li>
+                    <li class="second_list"><a href="/admin.php/admin/plugins/config/name/Qichacha.html"><span
+                            class=" fa fa-search-plus"></span>企查查</a>
+                    <li class="second_list"><a href="/admin.php/admin/plugins/config/name/Alisms.html"><span
+                            class="fa fa-commenting-o"></span>阿里云短信</a></li>
                     <!--<li><a href="/admin.php/admin/plugins/config/name/qiniuoss.html">七牛云储存</a></li>-->
                     <li class="second_list">
-                        <a href="/admin.php/home/plugin/execute/_plugin/DataDictionary/_controller/Index/_action/index.html"><span class="fa fa-database"></span>数据库字典</a>
+                        <a href="/admin.php/home/plugin/execute/_plugin/DataDictionary/_controller/Index/_action/index.html"><span
+                                class="fa fa-database"></span>数据库字典</a>
                     </li>
-                    <li class="second_list"><a href="/admin.php/admin/attachment/index.html"><span class="fa fa-chain"></span>附件管理</a></li>
+                    <li class="second_list"><a href="/admin.php/admin/attachment/index.html"><span
+                            class="fa fa-chain"></span>附件管理</a></li>
 
                 </ul>
             </li>
@@ -238,7 +293,7 @@
 
 <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
 <script>
-    var onXiala=$(".xiala");
+    var onXiala = $(".xiala");
 
     $(".xiala").click(function () {
         $(".xiala + ul").hide()
@@ -247,8 +302,6 @@
         $(".xiala+ul>li>ul").show()
 
     })
-
-
 
 
 </script>
@@ -278,7 +331,8 @@
     <% var vo = data[i]; %>
     <% var child = data[i]._child; %>
     <li class="<% if(child){ %> treeview <% }else{ %>no_tree<% } %>">
-        <a href="<% if(child){ %>#<% }else{ %> <%=vo.url %> <% } %>" <% if(!child){ %> class="opentab" tab-name="navtab-collapse-<%=vo.id %>" <% } %> >
+        <a href="<% if(child){ %>#<% }else{ %> <%=vo.url %> <% } %>" <% if(!child){ %> class="opentab"
+        tab-name="navtab-collapse-<%=vo.id %>" <% } %> >
         <i class="fa <% if(vo.icon){ %> {{vo.icon}} <% }else{ %>fa-circle-o <% } %>"></i>
         <span>{{vo.title}}</span>
         <% if(child){ %><i class="fa fa-angle-left pull-right"></i> <% } %>
@@ -289,13 +343,18 @@
             <% var v = child[j]; %>
             <% var _child = child[j]._child; %>
             <% if(!_child){ %>
-            <li ><a href="{{v.url}}" class="opentab" tab-name="navtab-collapse-<%=v.id %>"><i class="fa <% if(v.icon){ %> {{v.icon}} <% }else{ %>fa-circle-o <% } %>"></i> <%=v.title %></a> </li>
+            <li><a href="{{v.url}}" class="opentab" tab-name="navtab-collapse-<%=v.id %>"><i
+                    class="fa <% if(v.icon){ %> {{v.icon}} <% }else{ %>fa-circle-o <% } %>"></i> <%=v.title %></a></li>
             <% }else{ %>
-            <li ><a href="{{v.url}}" class="opentab" tab-name="navtab-collapse-<%=v.id %>"><i class="fa <% if(v.icon){ %> {{v.icon}} <% }else{ %>fa-circle-o <% } %>"></i> <%=v.title %> <i class="fa fa-angle-left pull-right"></i></a>
+            <li><a href="{{v.url}}" class="opentab" tab-name="navtab-collapse-<%=v.id %>"><i
+                    class="fa <% if(v.icon){ %> {{v.icon}} <% }else{ %>fa-circle-o <% } %>"></i> <%=v.title %> <i
+                    class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <% for (var k = 0; k < _child.length; k ++) { %>
                     <% var _v = child[j]; %>
-                    <li><a href="{{_v.url}}" class="opentab" tab-name="navtab-collapse-<%=v.id %>"><i class="fa f<% if(_v.icon){ %> {{_v.icon}} <% }else{ %>fa-circle-o <% } %>"></i> <%=_v.title %></a></li>
+                    <li><a href="{{_v.url}}" class="opentab" tab-name="navtab-collapse-<%=v.id %>"><i
+                            class="fa f<% if(_v.icon){ %> {{_v.icon}} <% }else{ %>fa-circle-o <% } %>"></i> <%=_v.title
+                        %></a></li>
                     <% } %>
 
                 </ul>
