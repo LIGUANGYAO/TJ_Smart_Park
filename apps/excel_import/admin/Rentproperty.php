@@ -85,6 +85,7 @@ class Rentproperty extends Admin
                 ['name' => 'keyword', 'type' => 'text', 'extra_attr' => 'placeholder="请输入企业名"',],
                 ['name' => 'pay_status', 'type' => 'select', 'title' => '按缴费状态', 'options' => [1 => '已缴费', 2 => '未缴费']],
             ])
+            ->setMetaTitle('房租物业费用')
             ->content($content);
     }
 
