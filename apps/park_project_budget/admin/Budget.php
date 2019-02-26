@@ -51,18 +51,26 @@ class Budget extends Admin
     {
         list($data_list, $total) = $this->budgetModel
             ->search([
-                'keyword_condition' => 'project',
+                ['name' => 'project_status', 'title' => '按照状态', 'type' => 'select', 'options' => [1 => '未执行', 2 => '执行中', 3 => '执行完毕']],
+                ['keyword_condition' => 'project'],
             ])
             ->getListByPage([], true, 'create_time desc');
         $content = (new BuilderList())
             ->addTopButton('addnew')
             ->addTopButton('delete')
             ->keyListItem('id', 'ID')
-            ->keyListItem('project', '项目名称')
-            ->keyListItem('type', '预算分类', 'array', $this->budgetType)
-            ->keyListItem('amount', '总预算(元)')
-            ->keyListItem('real_amount', '实际执行预算(元)')
-            ->keyListItem('confirmor', '确认人')
+            ->keyListItem('project_name', '项目名称')
+            ->keyListItem('project_number', '预算编号')
+            ->keyListItem('type', '项目类别', 'array', $this->budgetType)
+            ->keyListItem('s_time', '开始时间')
+            ->keyListItem('e_time', '结束时间')
+            ->keyListItem('mid_check_time', '中期验收时间')
+            ->keyListItem('spent_amount', '执行金额')
+            ->keyListItem('balance', '剩余金额')
+            ->keyListItem('remain_days', '剩余天数')
+            ->keyListItem('project_status', '项目状态', 'array', [1 => '未执行', 2 => '执行中', 3 => '执行完毕'])
+            ->keyListItem('marks', '备注')
+//            ->keyListItem('confirmor', '确认人')
             ->keyListItem('right_button', '操作', 'btn')
             ->setListData($data_list)
             ->setListPage($total)
@@ -91,6 +99,7 @@ class Budget extends Admin
         $title = $id > 0 ? '编辑' : '新增';
         if (IS_POST) {
             $param = \input();
+            $param['confirmor'] = \session('admin_login_auth.uid');
             if ($this->budgetModel->editData($param)) {
                 $this->success($title . '成功', \url('index'));
             } else {
@@ -98,20 +107,46 @@ class Budget extends Admin
             }
         } else {
             $info = [
-
+                'project_status' => 1,
+                'amount' => 0.00,
+                'equipment_cost' => 0.00,
+                'material_cost' => 0.00,
+                'test_processing_cost' => 0.00,
+                'fuel_cost' => 0.00,
+                'business_cost' => 0.00,
+                'knowledge_cost' => 0.00,
+                'service_cost' => 0.00,
+                'advisory_cost' => 0.00,
+                'other_cost' => 0.00,
             ];
             if ($id > 0) {
                 $info = ParkProjectBudgetList::get($id);
             }
+            $html = \logic('park_project_budget')->formExtraHtml();
             $content = (new BuilderForm())
                 ->addFormItem('id', 'hidden', 'ID')
+                ->addFormItem('project_name', 'text', '项目名称')
+                ->addFormItem('project_number', 'text', '预算编号')
                 ->addFormItem('type', 'select', '预算类型', '', $this->budgetType)
-                ->addFormItem('project', 'text', '项目名称')
-                ->addFormItem('amount', 'text', '总预算')
-                ->addFormItem('real_amount', 'text', '实际执行预算')
-                ->addFormItem('confirmor', 'text', '确认人')
+                ->addFormItem('project_status', 'radio', '项目状态', '', [1 => '未执行', 2 => '执行中', 3 => '执行完毕'])
+                ->addFormItem('s_time', 'datetime', '开始时间')
+                ->addFormItem('e_time', 'datetime', '结束时间')
+                ->addFormItem('mid_check_time', 'datetime', '中期验收时间')
+                ->addFormItem('amount', 'text', '执行总金额', '*单位:元')
+                ->addFormItem('balance', 'text', '剩余金额', '系统自动计算', '', 'readonly')
+                ->addFormItem('equipment_cost', 'test', '设备费', '*单位:元')
+                ->addFormItem('material_cost', 'text', '材料费', '*单位:元')
+                ->addFormItem('test_processing_cost', 'text', '测试化验加工费', '*单位:元')
+                ->addFormItem('fuel_cost', 'text', '燃料动力费', '*单位:元')
+                ->addFormItem('business_cost', 'text', '差旅/会议/国际合作与交流费', '*单位:元')
+                ->addFormItem('knowledge_cost', 'text', '出版/文献/信息传播/知识产权事务费', '*单位:元')
+                ->addFormItem('service_cost', 'text', '劳务费', '*单位:元')
+                ->addFormItem('advisory_cost', 'text', '专家咨询费', '*单位:元')
+                ->addFormItem('other_cost', 'text', '其他费用', '*单位:元')
+                ->addFormItem('remain_days', 'hidden', '剩余天数')
                 ->addFormItem('marks', 'textarea', '备注')
                 ->setFormData($info)
+                ->setExtraHtml($html)
                 ->addButton('submit')
                 ->addButton('back')
                 ->fetch();
@@ -119,5 +154,21 @@ class Budget extends Admin
                 ->setMetaTitle($title . '项目预算')
                 ->content($content);
         }
+    }
+
+    function calculateBalance()
+    {
+
+    }
+
+    /**
+     *计算两个日期的相隔天数
+     */
+    function calculateDays()
+    {
+        $sd = \input('start_day');
+        $ed = \input('end_day');
+        $days = \date_diff(\date_create($sd), \date_create($ed))->days;
+        \halt($days);
     }
 }
