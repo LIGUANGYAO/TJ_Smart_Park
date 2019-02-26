@@ -100,6 +100,7 @@ class Budget extends Admin
         if (IS_POST) {
             $param = \input();
             $param['confirmor'] = \session('admin_login_auth.uid');
+            $param['spent_amount'] = $param['amount'] - $param['balance'];
             if ($this->budgetModel->editData($param)) {
                 $this->success($title . '成功', \url('index'));
             } else {
