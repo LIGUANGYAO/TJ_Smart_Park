@@ -70,7 +70,7 @@ class Other extends Admin
             ->keyListItem('room', '房间号')
             ->keyListItem('fee_type', '费用类型', 'array', $this->feeType)
             ->keyListItem('amount', '应缴金额')
-            ->keyListItem('is_paid', '是否缴费')
+            ->keyListItem('is_paid', '是否缴费', 'array', [1 => '是', 0 => '否'])
             ->keyListItem('pay_time', '缴费时间')
             ->keyListItem('real_amount', '实际缴费')
             ->keyListItem('handler', '操作人', 'callback', 'getAdminNameByAdminId')
@@ -81,7 +81,7 @@ class Other extends Admin
         return (new Iframe())
             ->search([
                 ['name' => 'keyword', 'type' => 'text', 'extra_attr' => 'placeholder="请输入企业名"',],
-                ['name' => 'pay_status', 'type' => 'select', 'title' => '按缴费状态', 'options' => [1 => '已缴费', 2 => '未缴费']],
+                ['name' => 'is_paid', 'type' => 'select', 'title' => '按缴费状态', 'options' => [1 => '已缴费', 2 => '未缴费']],
             ])
             ->setMetaTitle('其他费用管理')
             ->content($content);
@@ -117,7 +117,7 @@ class Other extends Admin
                 ->addFormItem('enterprise_id', 'select', '选择企业', '非园区入驻企业请选择其他企业', $this->enterpriseList)
                 ->addFormItem('enterprise_name', 'text', '企业名称', '非园区入驻企业请手动输入')
                 ->addFormItem('fee_type', 'select', '选择费用类型', '', $this->feeType)
-                ->addFormItem('room', 'text', '房间号')
+                ->addFormItem('room', 'text', '房间号','非园区入驻企业需手动输入')
                 ->addFormItem('amount', 'text', '缴费金额')
                 ->addFormItem('real_amount', 'text', '实缴金额')
                 ->addFormItem('is_paid', 'radio', '是否缴费', '', [1 => '是', 0 => '否'])
