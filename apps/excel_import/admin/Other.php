@@ -61,7 +61,9 @@ class Other extends Admin
      */
     public function index()
     {
-        list($data_list, $total) = $this->otherModel->search()->getListByPage([], true, 'create_time desc');
+        list($data_list, $total) = $this->otherModel
+            ->search(['keyword_condition' => 'enterprise_name'])
+            ->getListByPage([], true, 'create_time desc');
         $content = (new BuilderList())
             ->addTopButton('addnew')
             ->addTopButton('delete')
@@ -117,7 +119,7 @@ class Other extends Admin
                 ->addFormItem('enterprise_id', 'select', '选择企业', '非园区入驻企业请选择其他企业', $this->enterpriseList)
                 ->addFormItem('enterprise_name', 'text', '企业名称', '非园区入驻企业请手动输入')
                 ->addFormItem('fee_type', 'select', '选择费用类型', '', $this->feeType)
-                ->addFormItem('room', 'text', '房间号','非园区入驻企业需手动输入')
+                ->addFormItem('room', 'text', '房间号', '非园区入驻企业需手动输入')
                 ->addFormItem('amount', 'text', '缴费金额')
                 ->addFormItem('real_amount', 'text', '实缴金额')
                 ->addFormItem('is_paid', 'radio', '是否缴费', '', [1 => '是', 0 => '否'])
