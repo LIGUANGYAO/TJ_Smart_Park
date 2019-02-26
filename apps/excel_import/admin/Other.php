@@ -79,6 +79,9 @@ class Other extends Admin
             ->keyListItem('marks', '备注')
             ->setListData($data_list)
             ->setListPage($total, 10)
+            ->keyListItem('right_button', '操作', 'btn')
+            ->addRightButton('edit')
+            ->addRightButton('delete', ['model' => 'CostOtherFeeList'])
             ->fetch();
         return (new Iframe())
             ->search([
@@ -89,6 +92,12 @@ class Other extends Admin
             ->content($content);
     }
 
+    /**
+     * @param int $id
+     * @return \app\common\layout\Content
+     * @throws \think\exception\DbException
+     * 新增/编辑
+     */
     public function edit($id = 0)
     {
         $title = $id > 0 ? '编辑' : '新增';
