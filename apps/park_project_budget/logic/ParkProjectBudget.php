@@ -5,8 +5,17 @@ namespace app\park_project_budget\logic;
 
 use app\common\logic\Base as BaseLogic;
 
+/**
+ * Class ParkProjectBudget
+ * @package app\park_project_budget\logic
+ * 项目预算逻辑层
+ */
 class ParkProjectBudget extends BaseLogic
 {
+    /**
+     * @return string
+     * 返回计算余额的js代码
+     */
     public function formExtraHtml()
     {
         return <<<EOF
@@ -17,7 +26,7 @@ class ParkProjectBudget extends BaseLogic
                   })
                 });
                 function sum() {
-                  var num9=$("[name=amount]").val();
+                   var num9=$("[name=amount]").val();
                    var num10=$("[name=material_cost]").val();
                    var num11=$("[name=test_processing_cost]").val();
                    var num12=$("[name=fuel_cost]").val();
