@@ -38,10 +38,11 @@ class ParkProjectBudget extends BaseLogic
                    var num17=parseFloat($("[name=other_cost]").val()).toFixed(2);
                    var num18 = parseFloat($("[name=equipment_cost]").val()).toFixed(2);
                    var reslut = math.format(math.chain(math.bignumber(num9)).subtract(math.bignumber(num10)).subtract(math.bignumber(num11)).subtract(math.bignumber(num12)).subtract(math.bignumber(num13)).subtract(math.bignumber(num14)).subtract(math.bignumber(num15)).subtract(math.bignumber(num16)).subtract(math.bignumber(num17)).subtract(math.bignumber(num18)).done());
-                   if (isNaN(reslut)){
-                       reslut=0;
+                   let num = new Number(reslut);
+                   if (isNaN(num)){
+                       num=0;
                    } 
-                   $("[name=balance]").css('color','red').val(reslut);
+                   $("[name=balance]").css('color','red').val(num);
                 };
             </script>
 EOF;
