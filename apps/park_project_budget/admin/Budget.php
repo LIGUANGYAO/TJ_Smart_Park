@@ -14,6 +14,7 @@ use app\common\builder\BuilderForm;
 use app\common\builder\BuilderList;
 use app\common\layout\Iframe;
 use app\park_project_budget\model\ParkProjectBudgetList;
+use think\Db;
 
 /**
  * Class Budget
@@ -40,7 +41,9 @@ class Budget extends Admin
     {
         parent::_initialize();
         $this->budgetModel = new ParkProjectBudgetList();
-        $this->budgetType = \config('budget_type');
+        $this->budgetType = Db::name('ParkProjectBudgetCategory')
+            ->where('type', 'eq', 1)
+            ->column('id,name');
     }
 
     /**
@@ -169,8 +172,6 @@ class Budget extends Admin
      */
     function calculateDays($sd, $ed)
     {
-//        $sd = \input('start_day');
-//        $ed = \input('end_day');
         $days = \date_diff(\date_create($sd), \date_create($ed))->days;
         return $days;
     }
