@@ -29,9 +29,7 @@ class ParkProjectBudget extends BaseLogic
                    //var sum = parseInt(num9)-parseInt(num10)-parseInt(num11)-parseInt(num12)-parseInt(num13)-parseInt(num14)-parseInt(num15)-parseInt(num16)-parseInt(num17);
                    var sum = num9-num10-num11-num12-num13-num14-num15-num16-num17;
                    $("[name=balance]").css('color','red').val(sum);
-                }
-               
-                
+                };
             </script>
 EOF;
 
