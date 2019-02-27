@@ -35,6 +35,31 @@ class Budget extends Admin
     protected $budgetType;
 
     /**
+     * @var array
+     * 前置操作
+     */
+    protected $beforeActionList = [
+        'changeRemainDays' => ['only' => 'index']
+    ];
+
+    /**
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     * 执行index之前需要先计算剩余天数
+     */
+    protected function changeRemainDays()
+    {
+        $list = Db::name('ParkProjectBudgetList')->select();
+        foreach ($list as $v) {
+            $remain_days = $this->calculateDays($v['e_time'], \date('Y-m-d H:i:s'));
+            Db::name('ParkProjectBudgetList')
+                ->where('id', 'eq', $v['id'])
+                ->setField('remain_days', $remain_days);
+        }
+    }
+
+    /**
      *初始化
      */
     public function _initialize()
@@ -73,7 +98,7 @@ class Budget extends Admin
             ->keyListItem('remain_days', '剩余天数')
             ->keyListItem('project_status', '项目状态', 'array', [1 => '未执行', 2 => '执行中', 3 => '执行完毕'])
             ->keyListItem('marks', '备注')
-//            ->keyListItem('confirmor', '确认人')
+//            ->keyListItem('confirmor', '确认人', 'callback', 'getAdminNameByAdminId')
             ->keyListItem('right_button', '操作', 'btn')
             ->setListData($data_list)
             ->setListPage($total)
@@ -104,7 +129,6 @@ class Budget extends Admin
             $param = \input();
             $param['confirmor'] = \session('admin_login_auth.uid');
             $param['spent_amount'] = $param['amount'] - $param['balance'];
-            $param['remain_days'] = $this->calculateDays($param['s_time'], $param['e_time']);
             if ($this->budgetModel->editData($param)) {
                 $this->success($title . '成功', \url('index'));
             } else {
@@ -140,7 +164,7 @@ class Budget extends Admin
                 ->addFormItem('mid_check_time', 'datetime', '中期验收时间')
                 ->addFormItem('amount', 'text', '执行总金额', '*单位:元')
                 ->addFormItem('balance', 'text', '剩余金额', '系统自动计算', '', 'readonly')
-                ->addFormItem('equipment_cost', 'test', '设备费', '*单位:元')
+                ->addFormItem('equipment_cost', 'text', '设备费', '*单位:元')
                 ->addFormItem('material_cost', 'text', '材料费', '*单位:元')
                 ->addFormItem('test_processing_cost', 'text', '测试化验加工费', '*单位:元')
                 ->addFormItem('fuel_cost', 'text', '燃料动力费', '*单位:元')
@@ -149,7 +173,6 @@ class Budget extends Admin
                 ->addFormItem('service_cost', 'text', '劳务费', '*单位:元')
                 ->addFormItem('advisory_cost', 'text', '专家咨询费', '*单位:元')
                 ->addFormItem('other_cost', 'text', '其他费用', '*单位:元')
-                ->addFormItem('remain_days', 'hidden', '剩余天数')
                 ->addFormItem('marks', 'textarea', '备注')
                 ->setFormData($info)
                 ->setExtraHtml($html)
@@ -162,13 +185,11 @@ class Budget extends Admin
         }
     }
 
-    function calculateBalance()
-    {
-
-    }
-
     /**
-     *计算两个日期的相隔天数
+     * @param $sd   开始时间
+     * @param $ed   结束时间
+     * @return mixed
+     * 计算两个时间的相差天数
      */
     function calculateDays($sd, $ed)
     {
