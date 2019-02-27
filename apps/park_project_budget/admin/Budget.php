@@ -138,7 +138,7 @@ class Budget extends Admin
             $info = [
                 'project_status' => 1,
                 'amount' => 0.00,
-                'balance' => 0,
+                'balance' => 0.00,
                 'equipment_cost' => 0.00,
                 'material_cost' => 0.00,
                 'test_processing_cost' => 0.00,
