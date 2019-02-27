@@ -101,6 +101,7 @@ class Budget extends Admin
             $param = \input();
             $param['confirmor'] = \session('admin_login_auth.uid');
             $param['spent_amount'] = $param['amount'] - $param['balance'];
+            $param['remain_days'] = $this->calculateDays($param['s_time'], $param['e_time']);
             if ($this->budgetModel->editData($param)) {
                 $this->success($title . '成功', \url('index'));
             } else {
@@ -110,6 +111,7 @@ class Budget extends Admin
             $info = [
                 'project_status' => 1,
                 'amount' => 0.00,
+                'balance' => 0,
                 'equipment_cost' => 0.00,
                 'material_cost' => 0.00,
                 'test_processing_cost' => 0.00,
@@ -165,11 +167,11 @@ class Budget extends Admin
     /**
      *计算两个日期的相隔天数
      */
-    function calculateDays()
+    function calculateDays($sd, $ed)
     {
-        $sd = \input('start_day');
-        $ed = \input('end_day');
+//        $sd = \input('start_day');
+//        $ed = \input('end_day');
         $days = \date_diff(\date_create($sd), \date_create($ed))->days;
-        \halt($days);
+        return $days;
     }
 }
