@@ -48,7 +48,7 @@ class Category extends Admin
             ->addTopButton('addnew')
             ->addTopButton('delete')
             ->keyListItem('id', 'ID')
-            ->keyListItem('type', '类别', 'array', [1 => '项目', 2 => '预算'])
+            ->keyListItem('type', '类别', 'array', [1 => '项目类别', 2 => '预算类别'])
             ->keyListItem('name', '名称')
             ->keyListItem('right_button', '操作', 'btn')
             ->addRightButton('edit')
@@ -84,7 +84,7 @@ class Category extends Admin
             }
             $content = (new BuilderForm())
                 ->addFormItem('id', 'hidden', 'ID')
-                ->addFormItem('type', 'radio', '类别', '', [1 => '项目', 2 => '预算'])
+                ->addFormItem('type', 'radio', '类别', '', [1 => '项目类别', 2 => '预算类别'])
                 ->addFormItem('name', 'text', '名称')
                 ->setFormData($info)
                 ->addButton('submit')
