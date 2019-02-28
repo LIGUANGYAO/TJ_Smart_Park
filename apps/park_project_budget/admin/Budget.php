@@ -93,6 +93,7 @@ class Budget extends Admin
             ->keyListItem('s_time', '开始时间')
             ->keyListItem('e_time', '结束时间')
             ->keyListItem('mid_check_time', '中期验收时间')
+            ->keyListItem('amount', '项目总额')
             ->keyListItem('spent_amount', '执行金额')
             ->keyListItem('balance', '剩余金额')
             ->keyListItem('remain_days', '剩余天数')
