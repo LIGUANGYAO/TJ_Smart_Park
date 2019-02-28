@@ -198,6 +198,11 @@ class Budget extends Admin
         return $days;
     }
 
+    /**
+     * @return \think\response\Json
+     * @throws \think\exception\DbException
+     * 返回项目详情
+     */
     function projectInfo()
     {
         $project_id = \input('project_id');
