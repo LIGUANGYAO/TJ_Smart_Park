@@ -76,6 +76,13 @@ class Comply extends Admin
         $title = $id > 0 ? '编辑' : '新增';
         if (IS_POST) {
             $param = \input();
+            if ($param['project_status'] == '未执行') {
+                $param['project_status'] = 1;
+            } elseif ($param['project_status'] == '执行中') {
+                $param['project_status'] = 2;
+            } else {
+                $param['project_status'] = 3;
+            }
             if ($this->complyModel->editData($param)) {
                 $this->success($title . '成功', \url('index'));
             } else {
