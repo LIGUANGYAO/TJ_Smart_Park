@@ -48,4 +48,73 @@ class ParkProjectBudget extends BaseLogic
 EOF;
 
     }
+
+    /**
+     * @return string
+     * 动态返回新增预算执行页面需要的数据
+     */
+    public function getProjectInfo()
+    {
+        return <<<EEE
+<script type="text/javascript">
+$("#project_name").change(function() {
+  var project_id = $(this).val();
+  var url = "/admin.php/park_project_budget/budget/projectInfo";
+  $.ajax({
+  url:url,
+  type:'POST',
+  dataType:'json',
+  data:{
+      project_id:project_id
+  },
+  success:function(data) {
+      var obj = data.data;
+      obj=JSON.stringify(obj);
+      localStorage.setItem('projectData',obj);
+      var pData = JSON.parse(localStorage.getItem('projectData'));
+    $("[name=project_numbering]").val(pData.project_number);
+    $("[name=project_category]").val(pData.type);
+    $("[name=project_status]").val(pData.project_status);
+  }
+  })
+});
+
+$("#category").change(function() {
+     var pData = JSON.parse(localStorage.getItem('projectData'));
+     var cid = parseInt($(this).val());
+    switch (cid) {
+      case 1:
+          $("[name=amount]").val(pData.equipment_cost);
+          break;
+      case 3:
+          $("[name=amount]").val(pData.material_cost);
+          break;
+      case 4:
+          $("[name=amount]").val(pData.test_processing_cost);
+          break;
+      case 5:
+          $("[name=amount]").val(pData.fuel_cost);
+          break;
+      case 6:
+          $("[name=amount]").val(pData.business_cost);
+          break;
+      case 7:
+          $("[name=amount]").val(pData.knowledge_cost);
+          break;
+      case 8:
+          $("[name=amount]").val(pData.service_cost);
+          break;
+      case 9:
+          $("[name=amount]").val(pData.advisory_cost);
+          break;
+      case 10:
+          $("[name=amount]").val(pData.other_cost);
+          break;
+      default:
+          $("[name=amount]").val(0.00);
+    };
+})
+</script>
+EEE;
+    }
 }
