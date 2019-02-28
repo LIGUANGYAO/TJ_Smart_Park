@@ -151,7 +151,7 @@ class Budget extends Admin
                 'other_cost' => 0.00,
             ];
             if ($id > 0) {
-                $info = ParkProjectBudgetList::get($id);
+                $info = ParkProjectBudgetList::get($id)->getData();
             }
             $html = \logic('park_project_budget')->formExtraHtml();
             $content = (new BuilderForm())
