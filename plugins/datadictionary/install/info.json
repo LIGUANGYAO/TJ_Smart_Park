@@ -4,7 +4,7 @@
     "description":"数据库字典,丑是丑了点,又不是不能用!",
     "author":"xpwsgg",
     "admin_manage_into":"",
-    "version":"1.0.0",
+    "version":"1.0.1",
     "dependences":{
         "core":"1.2.4",
         "plugins":{
