@@ -1,5 +1,5 @@
 <?php
-// 后台公共控制器       
+// 后台公共控制器
 
 namespace app\admin\controller;
 
@@ -43,7 +43,7 @@ class Admin extends Base
                 $this->error('您的帐号正在别的地方登录!', url('admin/login/logout'));
             }
         }
-
+//        \var_dump($this->currentUser);
         if (!IS_AJAX) {
             $this->assign('current_user', $this->currentUser);
 
