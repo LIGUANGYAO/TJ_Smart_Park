@@ -89,7 +89,7 @@ class Budget extends Admin
             ->keyListItem('id', 'ID')
             ->keyListItem('project_name', '项目名称')
             ->keyListItem('project_number', '预算编号')
-            ->keyListItem('type', '项目类别', 'array', $this->budgetType)
+            ->keyListItem('type', '项目类别')
             ->keyListItem('s_time', '开始时间')
             ->keyListItem('e_time', '结束时间')
             ->keyListItem('mid_check_time', '中期验收时间')
@@ -97,7 +97,7 @@ class Budget extends Admin
             ->keyListItem('spent_amount', '执行金额')
             ->keyListItem('balance', '剩余金额')
             ->keyListItem('remain_days', '剩余天数')
-            ->keyListItem('project_status', '项目状态', 'array', [1 => '未执行', 2 => '执行中', 3 => '执行完毕'])
+            ->keyListItem('project_status', '项目状态')
             ->keyListItem('marks', '备注')
 //            ->keyListItem('confirmor', '确认人', 'callback', 'getAdminNameByAdminId')
             ->keyListItem('right_button', '操作', 'btn')
@@ -196,5 +196,17 @@ class Budget extends Admin
     {
         $days = \date_diff(\date_create($sd), \date_create($ed))->days;
         return $days;
+    }
+
+    function projectInfo()
+    {
+        $project_id = \input('project_id');
+        $info = ParkProjectBudgetList::get($project_id);
+        $res = [
+            'code' => 1,
+            'data' => $info,
+            'msg' => 'OK',
+        ];
+        return \json($res);
     }
 }
